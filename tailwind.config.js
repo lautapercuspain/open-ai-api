@@ -1,5 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  corePlugins: {
+    gap: true,
+    border: true,
+  },
   future: {
     hoverOnlyWhenSupported: true,
   },

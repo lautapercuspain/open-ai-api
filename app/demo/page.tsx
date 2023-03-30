@@ -1,23 +1,31 @@
 "use client"
 
-export default function Demo() {
+import PaymentModal from "app/components/modals/PaymentModal"
+import { useState } from "react";
 
+export default function Demo() {
+    const [open, setOpen] = useState<boolean>(false);
     return (
-        <div className="flex flex-row">
-            <div className="basis-1/3"></div>
-            <div className="basis-1/3">
+        <>
+            <PaymentModal 
+                isOpen={open}
+                setIsOpen={setOpen}
+            />
+            <div className="flex items-center mx-auto">
                 <button 
                     className={
                     `
-                    text-sm inline-flex min-w-[145px] justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 
+                    text-sm inline-flex min-w-[145px] justify-center rounded-md 
+                    border border-transparent bg-blue-100 px-4 py-2 font-medium 
+                    text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 
+                    focus-visible:ring-blue-500 focus-visible:ring-offset-2 
                     `
                     }
+                    onClick={() => setOpen(true)}
                 >
                     HIT ME
                 </button>
             </div>
-            <div className="basis-1/3"></div>
-        </div>
+        </>
     )
-
 };
