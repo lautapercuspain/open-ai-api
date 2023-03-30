@@ -30,6 +30,14 @@ module.exports = {
           letterSpacing: "1.5px",
         },
       ],
+      "3xl": [
+        "32px",
+        {
+          lineHeight: "38px",
+          fontWeight: "500",
+          letterSpacing: "1.8px",
+        },
+      ],
       "5xl": [
         "44px",
         {

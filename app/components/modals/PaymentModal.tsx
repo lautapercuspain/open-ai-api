@@ -58,13 +58,13 @@ export default function PaymentModal({isOpen, setIsOpen }: Props) {
                         >
                             <Dialog.Panel
                                 className={
-                                    "transform xl:w-1/3 sm:w-1/2 overflow-hidden rounded-2xl bg-purple-400 p-4 text-left shadow-xl h-5/6 transition-all"
+                                    "transform xl:w-1/3 lg:w-1/2 md:w-1/2 sm:w-1/2 sm:mt-8 overflow-hidden rounded-2xl bg-purple-400 p-4 text-left shadow-xl h-5/6 transition-all"
                                 }
                             >
                                 <div className="flex flex-col justify-start justify-items-start content-center gap-8 p-16">
                                     <Dialog.Title
                                         as="h1"
-                                        className="text-lg leading-6 text-white text-left text-5xl font-rubik"
+                                        className="xl:text-5xl lg:text-5xl md:text-5xl sm:text-3xl leading-6 text-white text-left font-rubik"
                                     >
                                         Add Payment
                                     </Dialog.Title>
@@ -82,7 +82,6 @@ export default function PaymentModal({isOpen, setIsOpen }: Props) {
                                                 Card Number
                                             </label>
                                             <input
-                                                type="tel"
                                                 name="cardNumber"
                                                 id="cardNumber"
                                                 className="bg-purple-500 text-white focus:ring-purple-400 focus:border-purple-500 block w-full p-3 rounded-md"
@@ -99,7 +98,6 @@ export default function PaymentModal({isOpen, setIsOpen }: Props) {
                                                     Expires
                                                 </label>
                                                 <input
-                                                    type="text"
                                                     name="expires"
                                                     id="expires"
                                                     className="bg-purple-500 text-white focus:ring-purple-400 focus:border-purple-500 block w-full p-3 rounded-md"
@@ -115,7 +113,6 @@ export default function PaymentModal({isOpen, setIsOpen }: Props) {
                                                     CVC
                                                 </label>
                                                 <input
-                                                    type="number"
                                                     name="cvc"
                                                     id="cvc"
                                                     className="bg-purple-500 text-white focus:ring-purple-400 focus:border-purple-500 block w-full p-3 rounded-md"
@@ -127,16 +124,15 @@ export default function PaymentModal({isOpen, setIsOpen }: Props) {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="flex flex-row gap-4 mt-4">
-                                            <div className="basis-1/3">
-                                            </div>
+                                        <div className="flex flex-row gap-4 mt-4 items-center">
+                                            <div className="basis-1/3"/>
                                             <div className="basis-1/3">
                                             <button className="w-full bg-transparent border-2 border-purple-500 text-white py-3 rounded-md">
                                                 Cancel
                                             </button>
                                             </div>
                                             <div className="basis-1/3">
-                                            <button type="submit" className="w-full text-black bg-mint text-white py-3 rounded-md">
+                                            <button type="submit" className="w-full text-black bg-mint border-2 border-transparent text-white py-3 rounded-md">
                                                 Continue
                                             </button>
                                             </div>
