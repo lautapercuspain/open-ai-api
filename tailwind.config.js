@@ -38,6 +38,14 @@ module.exports = {
           letterSpacing: "1.8px",
         },
       ],
+      "4xl": [
+        "36px",
+        {
+          lineHeight: "42px",
+          fontWeight: "600",
+          letterSpacing: "2.2px",
+        },
+      ],
       "5xl": [
         "44px",
         {
