@@ -1,8 +1,12 @@
-import { HomeIcon, Code } from "lucide-react"
+"use client"
+
+import { Code } from "lucide-react"
 import Image from "next/image"
+import { useState } from "react"
 import SearchBar from "./SearchBar"
 
-export default function SideBar({ sidebarOpen, setSidebarOpen }) {
+export default function SideBar() {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   return (
     <div
       id="sidebar"
@@ -10,14 +14,8 @@ export default function SideBar({ sidebarOpen, setSidebarOpen }) {
         sidebarOpen ? "w-68" : "w-[65px]"
       } bg-purple-700 px-5 pt-3`}
     >
-      {/* <HomeIcon
-        size={26}
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-        color="white"
-        className="cursor-pointer border-purple-300 text-purple-400"
-      /> */}
       <Image
-        alt="React JS"
+        alt="Code Genius"
         src={"/logo.svg"}
         width={24}
         height={24}
