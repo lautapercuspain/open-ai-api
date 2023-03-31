@@ -1,149 +1,177 @@
 "use client"
 
 import { Dialog, Transition } from "@headlessui/react"
-import { ChangeEventHandler, Fragment, useState } from "react"
+import { Poppins } from "next/font/google"
+import { Fragment, useState } from "react"
 
 interface Props {
-    isOpen: boolean;
-    setIsOpen: (arg: boolean) => void;
-};
+  isOpen: boolean
+  setIsOpen: (arg: boolean) => void
+}
 
 type FormValues = {
-    cardNumber: string;
-    expires: string;
-    cvc: string;
-};
+  cardNumber: string
+  expires: string
+  cvc: string
+}
 
 const initialFormValues: FormValues = {
-    cardNumber: "",
-    expires: "",
-    cvc: "",
-};
+  cardNumber: "",
+  expires: "",
+  cvc: "",
+}
 
-export default function PaymentModal({isOpen, setIsOpen }: Props) {
-    const [formValues, setFormValues] = useState<FormValues>(initialFormValues);
+const popins = Poppins({
+  variable: "--font-popins",
+  weight: ["100", "300", "600"],
+})
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormValues((prevValues) => ({
-            ...prevValues,
-            [name]: value,
-        }));
-    };
-    
-    return (
-        <Transition appear show={isOpen} as={Fragment}>
-            <Dialog as="div" className="relative z-10" onClose={() => setIsOpen(false)}>
-                <Transition.Child
-                    as={Fragment}
-                    enter="ease-out duration-300"
-                    enterFrom="opacity-0"
-                    enterTo="opacity-100"
-                    leave="ease-in duration-200"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0"
-                >
-                    <div className="fixed inset-0 bg-black bg-opacity-25" />
-                </Transition.Child>
-                <div className="fixed inset-0 overflow-y-auto">
-                    <div className="flex min-h-full items-center justify-center p-4 text-center">
-                        <Transition.Child
-                            as={Fragment}
-                            enter="ease-out duration-300"
-                            enterFrom="opacity-0 scale-95"
-                            enterTo="opacity-100 scale-100"
-                            leave="ease-in duration-200"
-                            leaveFrom="opacity-100 scale-100"
-                            leaveTo="opacity-0 scale-95"
-                        >
-                            <Dialog.Panel
-                                className={
-                                    "transform xl:w-1/3 lg:w-1/2 md:w-1/2 sm:w-1/2 sm:mt-8 overflow-hidden rounded-2xl bg-purple-400 p-4 text-left shadow-xl h-5/6 transition-all"
-                                }
-                            >
-                                <div className="flex flex-col justify-start justify-items-start content-center gap-8 p-16">
-                                    <Dialog.Title
-                                        as="h1"
-                                        className="xl:text-5xl lg:text-5xl md:text-5xl sm:text-3xl leading-6 text-white text-left font-rubik"
-                                    >
-                                        Add Payment
-                                    </Dialog.Title>
-                                    <Dialog.Title
-                                        as="h1"
-                                        className="text-2xl font-sm leading-10 text-gray-200"
-                                    >
-                                        Add your Card Information to continue:
-                                    </Dialog.Title>
-                                    <hr className="border-1 border-purple-500"/>
-                                    {/* Credit Card Info Form */}
-                                    <form className="flex flex-col gap-4">
-                                        <div className="flex flex-col gap-4">
-                                            <label htmlFor="cardNumber" className="text-purple-300 font-sm">
-                                                Card Number
-                                            </label>
-                                            <input
-                                                name="cardNumber"
-                                                id="cardNumber"
-                                                className="bg-purple-500 text-white focus:ring-purple-400 focus:border-purple-500 block w-full p-3 rounded-md"
-                                                placeholder="1234 1234 1234 1234"
-                                                maxLength={16}
-                                                value={formValues.cardNumber}
-                                                onChange={handleChange}
-                                                required
-                                            />
-                                        </div>
-                                        <div className="flex flex-col md:flex-row gap-4">
-                                            <div className="flex flex-col flex-grow-1 gap-4">
-                                                <label htmlFor="expires"  className="text-purple-300 font-sm">
-                                                    Expires
-                                                </label>
-                                                <input
-                                                    name="expires"
-                                                    id="expires"
-                                                    className="bg-purple-500 text-white focus:ring-purple-400 focus:border-purple-500 block w-full p-3 rounded-md"
-                                                    placeholder="MM/YY"
-                                                    maxLength={5}
-                                                    value={formValues.expires}
-                                                    onChange={handleChange}
-                                                    required
-                                                />
-                                            </div>
-                                            <div className="flex flex-col flex-grow-1 gap-4">
-                                                <label htmlFor="cvc" className="text-purple-300 font-sm">
-                                                    CVC
-                                                </label>
-                                                <input
-                                                    name="cvc"
-                                                    id="cvc"
-                                                    className="bg-purple-500 text-white focus:ring-purple-400 focus:border-purple-500 block w-full p-3 rounded-md"
-                                                    placeholder="123"
-                                                    maxLength={3}
-                                                    value={formValues.cvc}
-                                                    onChange={handleChange}
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="flex flex-row gap-4 mt-4 items-center">
-                                            <div className="basis-1/3"/>
-                                            <div className="basis-1/3">
-                                            <button className="w-full bg-transparent border-2 border-purple-500 text-white py-3 rounded-md">
-                                                Cancel
-                                            </button>
-                                            </div>
-                                            <div className="basis-1/3">
-                                            <button type="submit" className="w-full text-black bg-mint border-2 border-transparent text-white py-3 rounded-md">
-                                                Continue
-                                            </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </Dialog.Panel>
-                        </Transition.Child>
+// const roboto = Roboto_Mono({
+//   variable: "--font-roboto",
+// })
+
+export default function PaymentModal({ isOpen, setIsOpen }: Props) {
+  const [formValues, setFormValues] = useState<FormValues>(initialFormValues)
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setFormValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }))
+  }
+
+  return (
+    <Transition appear show={isOpen} as={Fragment}>
+      <Dialog
+        as="div"
+        className="relative z-10"
+        onClose={() => setIsOpen(false)}
+      >
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="fixed inset-0 bg-black bg-opacity-25" />
+        </Transition.Child>
+        <div
+          className={`${popins.variable} fixed inset-0 overflow-y-auto font-popins`}
+        >
+          <div className="flex min-h-full items-center justify-center p-4 text-center">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-95"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-95"
+            >
+              <Dialog.Panel
+                className={
+                  "h-5/6 transform overflow-hidden rounded-2xl bg-purple-400 p-4 text-left shadow-xl transition-all sm:mt-8 sm:w-1/2 md:w-1/2 lg:w-1/2 xl:w-1/3"
+                }
+              >
+                <div className="flex flex-col content-center justify-start justify-items-start gap-8 p-16">
+                  <Dialog.Title
+                    as="h1"
+                    className="text-left leading-6 text-white sm:text-3xl md:text-5xl lg:text-5xl xl:text-5xl"
+                  >
+                    Add Payment
+                  </Dialog.Title>
+                  <Dialog.Title
+                    as="h1"
+                    className={`font-sm  font-mono text-2xl leading-10 text-gray-200`}
+                  >
+                    Add your Card Information to continue:
+                  </Dialog.Title>
+                  <hr className="border-1 border-purple-500" />
+                  {/* Credit Card Info Form */}
+                  <form className="flex flex-col gap-4">
+                    <div className="flex flex-col gap-4">
+                      <label
+                        htmlFor="cardNumber"
+                        className="font-sm  text-purple-300"
+                      >
+                        Card Number
+                      </label>
+                      <input
+                        name="cardNumber"
+                        id="cardNumber"
+                        className="w-full rounded-md bg-purple-500 p-3 text-white placeholder:text-purple-300 focus:border-purple-500 focus:ring-purple-400"
+                        placeholder="1234 1234 1234 1234"
+                        maxLength={16}
+                        value={formValues.cardNumber}
+                        onChange={handleChange}
+                        required
+                      />
                     </div>
+                    <div className="flex flex-col gap-4 md:flex-row">
+                      <div className="flex-grow-1 flex flex-col gap-4">
+                        <label
+                          htmlFor="expires"
+                          className="font-sm font-mono text-purple-300"
+                        >
+                          Expires
+                        </label>
+                        <input
+                          name="expires"
+                          id="expires"
+                          className="block w-full rounded-md bg-purple-500 p-3 font-mono text-white placeholder:text-purple-300 focus:border-purple-500 focus:ring-purple-400"
+                          placeholder="MM/YY"
+                          maxLength={5}
+                          value={formValues.expires}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+                      <div className="flex-grow-1 flex flex-col gap-4">
+                        <label
+                          htmlFor="cvc"
+                          className="font-sm font-mono text-purple-300"
+                        >
+                          CVC
+                        </label>
+                        <input
+                          name="cvc"
+                          id="cvc"
+                          className="block w-full rounded-md bg-purple-500 p-3 text-white placeholder:text-purple-300 focus:border-purple-500 focus:ring-purple-400"
+                          placeholder="123"
+                          maxLength={3}
+                          value={formValues.cvc}
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="mt-4 flex flex-row items-center gap-4">
+                      <div className="basis-1/3" />
+                      <div className="basis-1/3">
+                        <button className="w-full rounded-md border-2 border-purple-500 bg-transparent py-3 font-mono text-white">
+                          Cancel
+                        </button>
+                      </div>
+                      <div className="basis-1/3">
+                        <button
+                          type="submit"
+                          className="w-full rounded-md border-2 border-transparent bg-mint py-3 font-mono text-black"
+                        >
+                          Continue
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
-            </Dialog>
-        </Transition>
-    );
-};
+              </Dialog.Panel>
+            </Transition.Child>
+          </div>
+        </div>
+      </Dialog>
+    </Transition>
+  )
+}
