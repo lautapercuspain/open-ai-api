@@ -79,13 +79,15 @@ export default function Feature() {
       <section className={`mt-8 text-white ${popins.variable} font-popins`}>
         <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
           <motion.div
+            whileHover={{ scale: 1.5 }}
+            transition={{ type: "spring", velocity: 1 }}
             animate={{
               x:
                 verticalScroll < 500
                   ? 350
                   : verticalScroll >= 500 && verticalScroll < 1200
-                  ? -120
-                  : verticalScroll - 850,
+                  ? verticalScroll - window.screen.height
+                  : verticalScroll - window.screen.height,
             }}
             className={`fixed top-[500px] mx-auto -ml-[50px] hidden ${
               verticalScroll > 0 ? "sm:block" : "hidden"

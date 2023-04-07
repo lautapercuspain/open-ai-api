@@ -1,12 +1,8 @@
 "use client"
 
 import Image from "next/image"
-import { motion, useScroll, useTransform } from "framer-motion"
 
 export default function Hero() {
-  const { scrollYProgress, scrollY } = useScroll()
-  const scale = useTransform(scrollYProgress, [0, 1], [0.7, 2])
-
   return (
     <div className="mt-18">
       <section className="relative mx-auto mt-12 flex flex-col items-center justify-center">
