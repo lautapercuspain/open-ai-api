@@ -12,17 +12,17 @@ export default function Hero() {
           width={100}
           height={100}
         />
-        <h3 className="block w-full px-1 py-3 text-center text-2xl text-white sm:mx-auto sm:w-2/4 sm:text-4xl">
+        <h3 className="block w-full px-1 py-3 text-center font-popins text-2xl text-white sm:mx-auto sm:w-2/4 sm:text-4xl">
           The AI programming assistant that helps you coding faster, easier, and
-          more efficient!
+          more efficient.
         </h3>
-        <p className="mx-auto mt-3 w-full px-3 text-center text-2xl text-white sm:mb-[200px] sm:w-1/2">
-          Writing great code can be a challenging and time-consuming task, but
-          with Code Genius you can take your skills to the next level! Explore
-          the possibilities!
+        <p className="mx-auto mt-3 w-full px-3 text-center font-popins text-2xl text-white sm:mb-[200px] sm:w-1/2">
+          Writing great code can be a challenging and time-consuming task. With
+          Code Genius you can take your skills to the next level. Explore the
+          possibilities!
         </p>
       </section>
-      <section className="mx-auto flex justify-center gap-1 sm:mt-[20px] sm:gap-3 ">
+      {/* <section className="z-40 mx-auto flex justify-center gap-1 sm:mt-[20px] sm:gap-3 ">
         <Image
           className="rounded-md"
           src="/libs/react.svg"
@@ -47,7 +47,7 @@ export default function Hero() {
           width="143"
           height="197"
         />
-      </section>
+      </section> */}
     </div>
   )
 }

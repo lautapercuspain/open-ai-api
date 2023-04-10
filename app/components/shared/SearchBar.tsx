@@ -1,8 +1,17 @@
 import { Search } from "lucide-react"
-import { useEffect, useRef } from "react"
+import tailwindConfig from "tailwind.config.js"
+import { useEffect, useRef, useState } from "react"
 
-export default function SearchBar({ sidebarOpen, setSidebarOpen }) {
+const colors: any = tailwindConfig.theme?.extend?.colors
+
+export default function SearchBar({
+  sidebarOpen,
+  setSidebarOpen,
+  searchTerm,
+  setSearchTerm,
+}) {
   const searchRef = useRef<any>(null)
+
   useEffect(() => {
     if (searchRef && searchRef.current && sidebarOpen) {
       searchRef.current.focus()
@@ -18,12 +27,14 @@ export default function SearchBar({ sidebarOpen, setSidebarOpen }) {
       <Search
         size={22}
         onClick={() => setSidebarOpen(!sidebarOpen)}
-        color={sidebarOpen ? "#2F2E49" : "white"}
-        className={`my-1 cursor-pointer ${sidebarOpen && `mx-2`}`}
+        color={sidebarOpen ? colors.gray[600] : "white"}
+        className={`my-1 cursor-pointer ${sidebarOpen && `mx-2`} `}
       />
       {sidebarOpen && (
         <input
           ref={searchRef}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
           type={"search"}
           placeholder="Search"
           className="duration-600 flex cursor-default rounded-md border-none bg-transparent text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-200 focus-visible:ring-offset-neutral-50 sm:bg-purple-200"

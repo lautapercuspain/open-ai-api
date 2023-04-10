@@ -2,11 +2,9 @@
 
 import {
   motion,
-  useMotionTemplate,
   useMotionValue,
   useMotionValueEvent,
   useScroll,
-  useSpring,
   useTransform,
 } from "framer-motion"
 import suggestions from "../../animations/suggestions.json"
@@ -58,22 +56,12 @@ const BugDetection = () => {
 
 export default function Feature() {
   const [verticalScroll, setVerticalScroll] = useState(0)
-  const [horizontallScroll, setHorizontalScroll] = useState(0)
   const { scrollYProgress, scrollY, scrollX } = useScroll()
 
-  // const scaleX = useSpring(scrollYProgress, {
-  //   stiffness: 100,
-  //   damping: 30,
-  //   restDelta: 0.001,
-  // })
   useMotionValueEvent(scrollY, "change", (latest) => {
-    console.log("Page Y scroll: ", latest)
     setVerticalScroll(latest)
   })
-  const x = useMotionValue(0)
-  const input = [-200, 0, 200]
-  const output = [0, 1, 0]
-  const opacity = useTransform(x, input, output)
+
   return (
     <>
       <section className={`mt-8 text-white ${popins.variable} font-popins`}>
@@ -84,18 +72,17 @@ export default function Feature() {
             animate={{
               x:
                 verticalScroll < 500
-                  ? 350
+                  ? -150
                   : verticalScroll >= 500 && verticalScroll < 1200
                   ? verticalScroll - window.screen.height
                   : verticalScroll - window.screen.height,
             }}
-            className={`fixed top-[500px] mx-auto -ml-[50px] hidden ${
+            className={`fixed top-[500px] z-0 mx-auto -ml-[50px] hidden ${
               verticalScroll > 0 ? "sm:block" : "hidden"
-            }  h-[550px] w-[850px] bg-gradient-radial from-gradient-dark/80 via-transparent to-transparent brightness-${
-              verticalScroll > 600 ? "25" : "50"
-            } `}
+            }  } brightness-25 h-[550px] w-[850px] bg-gradient-radial from-gradient-dark/80 via-transparent
+            to-transparent `}
           ></motion.div>
-          <div className="mx-auto mb-24 flex w-96 items-start justify-start sm:ml-40 sm:w-full">
+          <div className="mx-auto mb-2 flex w-96 items-start justify-start sm:ml-40 sm:w-full">
             <AISuggestions />
             {/* <div className="brightness-25 absolute left-[-316px] -top-8 h-[750px] w-[750px] rounded-full bg-gradient-radial from-gradient-dark/90 via-transparent to-transparent pb-9" /> */}
           </div>
@@ -110,7 +97,7 @@ export default function Feature() {
               resulting in increased productivity and faster development cycles.
             </p>
           </div>
-          <div className="mx-auto mb-24 flex w-96 items-start justify-start sm:ml-40 sm:w-full">
+          <div className="mx-auto mb-2 flex w-96 items-start justify-start sm:ml-40 sm:w-full">
             <BugDetection />
           </div>
           <div className="mt-0 p-2 sm:mt-20">

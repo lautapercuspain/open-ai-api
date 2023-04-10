@@ -4,9 +4,12 @@ import { Code } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
 import SearchBar from "./SearchBar"
+import UserCodeSnippets from "./UserCodeSnippets"
 
 export default function SideBar() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [searchTerm, setSearchTerm] = useState("")
+  const userIsSearching = searchTerm !== ""
   return (
     <div
       id="sidebar"
@@ -21,13 +24,25 @@ export default function SideBar() {
         height={24}
         className="mb-8"
       />
-      <SearchBar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <Code
-        size={26}
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-        color="white"
-        className="my-6 cursor-pointer border-purple-300 text-purple-400"
+      <SearchBar
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
       />
+      {/* <UserCodeSnippets
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        sidebarOpen={sidebarOpen}
+        userIsSearching={userIsSearching}
+      /> */}
+
+      {/* <Code
+         size={26}
+         onClick={() => setSidebarOpen(!sidebarOpen)}
+         color="white"
+         className="my-6 cursor-pointer border-purple-300 text-purple-400"
+       /> */}
     </div>
   )
 }
