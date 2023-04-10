@@ -33,7 +33,7 @@ export default function GenerateCode({
 
           .map((generated) => {
             return (
-              <div className="w-full text-left">
+              <div className="max-w-[80%] text-left">
                 <CopyBlock
                   showLineNumbers
                   customStyle={{ borderRadius: "0.625rem" }}

@@ -26,7 +26,7 @@ export default function ChatContainer({ messages }: any) {
   return (
     <div
       ref={chatContainerRef}
-      className="mt-3 max-h-80 w-[100%] overflow-hidden overflow-y-scroll rounded-md bg-purple-400 px-3 font-mono text-white sm:w-[800px]"
+      className="mt-3 max-h-80 w-[95%] overflow-hidden overflow-y-scroll rounded-md bg-purple-400 px-3 font-mono text-white sm:w-[800px]"
     >
       {messages}
     </div>

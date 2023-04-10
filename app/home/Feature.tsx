@@ -65,25 +65,25 @@ export default function Feature() {
   return (
     <>
       <section className={`mt-8 text-white ${popins.variable} font-popins`}>
-        <div className="grid grid-cols-1 gap-1 sm:grid-cols-2">
-          <motion.div
+        <div className="mb-24 grid grid-cols-1 gap-1 sm:grid-cols-2">
+          {/* <motion.div
             whileHover={{ scale: 1.5 }}
             transition={{ type: "spring", velocity: 1 }}
             animate={{
               x:
                 verticalScroll < 500
-                  ? -150
+                  ? 320
                   : verticalScroll >= 500 && verticalScroll < 1200
                   ? verticalScroll - window.screen.height
                   : verticalScroll - window.screen.height,
             }}
-            className={`fixed top-[500px] z-0 mx-auto -ml-[50px] hidden ${
+            className={`-ml-50 fixed top-[500px] z-0 mx-auto hidden ${
               verticalScroll > 0 ? "sm:block" : "hidden"
-            }  } brightness-25 h-[550px] w-[850px] bg-gradient-radial from-gradient-dark/80 via-transparent
+            }  } brightness-25 h-[550px] w-[1250px] bg-gradient-radial from-gradient-dark/40 via-transparent
             to-transparent `}
-          ></motion.div>
+          ></motion.div> */}
           <div className="mx-auto mb-2 flex w-96 items-start justify-start sm:ml-40 sm:w-full">
-            <AISuggestions />
+            <BugDetection />
             {/* <div className="brightness-25 absolute left-[-316px] -top-8 h-[750px] w-[750px] rounded-full bg-gradient-radial from-gradient-dark/90 via-transparent to-transparent pb-9" /> */}
           </div>
           <div className="mt-0 p-2 sm:mt-20">
@@ -113,7 +113,7 @@ export default function Feature() {
             </p>
           </div>
           <div className="mx-auto flex w-96 items-center justify-start sm:ml-40 sm:w-full">
-            <AIGeneration />
+            <BugDetection />
           </div>
           <div className="mt-0 p-2 sm:mt-20">
             <h1 className="pl-3 text-center text-5xl font-bold sm:text-left">

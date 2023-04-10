@@ -12,6 +12,10 @@ import { LSConfig, promptResponseTimeout } from "@/lib/constants"
 import SideBar from "app/components/shared/SideBar"
 
 export default function Page() {
+  const [smartSelected, setSmartSelected] = useState(true)
+  const [testSelected, setTestSelected] = useState(false)
+  const [bugSelected, setBugSelected] = useState(false)
+  const [docSelected, setDocSelected] = useState(false)
   const [loading, setLoading] = useState(false)
   const [modaIsOpen, setModaIsOpen] = useState(false)
   const [showSavePromptModal, setShowSavePromptModal] = useState(false)
@@ -149,6 +153,18 @@ export default function Page() {
     setQuestionName(event.target.value)
   }
 
+  function getCodeGeniusMode(): import("react").ReactNode {
+    if (smartSelected) {
+      return "SMART SUGGESTIONS"
+    } else if (testSelected) {
+      return "TEST MODE"
+    } else if (bugSelected) {
+      return "BUG MODE"
+    } else if (docSelected) {
+      return "DOCUMENTATION MODE"
+    }
+  }
+
   return (
     <>
       <Modal
@@ -170,16 +186,24 @@ export default function Page() {
         setIsOpen={setShowSavePromptModal}
       />
       <main className="flex w-full flex-row items-start justify-start bg-purple-800  font-mono">
-        <SideBar />
+        <SideBar
+          smartSelected={smartSelected}
+          setSmartSelected={setSmartSelected}
+          testSelected={testSelected}
+          setTestSelected={setTestSelected}
+          bugSelected={bugSelected}
+          setBugSelected={setBugSelected}
+          docSelected={docSelected}
+          setDocSelected={setDocSelected}
+        />
 
         <div id="container" className="relative mx-2 w-full sm:mx-12">
-          <div className="text-1xl left-2 my-4 mt-24 w-full text-center text-purple-300 sm:text-left">
-            CODE COMPLEMENTATIONS AND SUGGESTIONS
+          <div className="text-1xl left-2 my-4 mt-24 w-full text-center uppercase text-purple-300 sm:text-left">
+            SET YOUR PREFERENCE IN THE SIDEBAR, MODE: {getCodeGeniusMode()}
           </div>
-          {/* <hr className="border-1  h-px w-full border-purple-400" /> */}
 
-          <p className="text-md hidden h-8 w-full rounded-t-md bg-purple-700 pl-3 pt-2 font-popins font-bold leading-7 text-white sm:block sm:text-left">
-            Paste your code and look for code suggestions
+          <p className="text-md hidden h-8 w-full rounded-t-md bg-purple-700 pl-3 pt-2 font-popins font-bold capitalize leading-7 text-mint text-white sm:block sm:text-left">
+            {getCodeGeniusMode()}
           </p>
           <div className="h-60 rounded-md">
             <textarea

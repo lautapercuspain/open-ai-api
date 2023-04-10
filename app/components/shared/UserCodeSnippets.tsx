@@ -38,7 +38,7 @@ export default function UserCodeSnippets({
       }`}
     >
       <ul
-        className={`h-72 cursor-pointer overflow-auto p-0 ${
+        className={`hidden h-72 cursor-pointer overflow-auto p-0 ${
           userIsSearching ? "hidden" : "block"
         }`}
       >

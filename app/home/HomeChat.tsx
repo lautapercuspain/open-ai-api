@@ -88,7 +88,7 @@ export default function HomeChat() {
                 if (item.hasOwnProperty("text")) {
                   return (
                     <Message
-                      className="my-2 text-left"
+                      className="my-2 text-left leading-7"
                       model={{
                         message: item.text,
                         direction: "incoming",
@@ -118,15 +118,13 @@ export default function HomeChat() {
         <div className="relative mt-2 max-h-12 w-full text-center sm:w-[800px]">
           <input
             ref={textareaRef}
-            className="md:placeholder:text-sm font-sm w-[95%] resize-none rounded-lg bg-purple-400 
+            className="md:placeholder:text-md font-sm w-[95%] resize-none rounded-lg bg-purple-400 
              py-2.5 pl-3 font-mono text-white outline-0 placeholder:pl-2 placeholder:pt-1  placeholder:font-popins placeholder:text-[13px] placeholder:text-white hover:outline-0 focus:border-transparent focus:ring-black/30 active:outline-0 sm:w-[800px]"
             value={codeSentence}
             onChange={(e) => setCodeSentence(e.target.value)}
             onKeyDown={(e) => onCodeGeneration(e)}
             placeholder={
-              generatedMessages.length <= 0
-                ? "What do you want to build today?"
-                : ""
+              generatedMessages.length <= 0 ? "What is your code idea?" : ""
             }
           />
           <button className="absolute right-4 top-1  rounded-lg bg-gray-900 p-1 disabled:hover:bg-transparent sm:right-1">
