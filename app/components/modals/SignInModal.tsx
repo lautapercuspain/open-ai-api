@@ -1,18 +1,19 @@
 "use client"
 
-import { signIn } from "next-auth/react";
-import { useState, Dispatch, SetStateAction, useCallback, useMemo } from "react";
-import Image from "next/image";
-import BaseModal from "app/components/modals/BaseModal";
-import { Poppins } from "next/font/google";
-import GithubLogo from 'public/icons/github.svg';
-import GmailLogo from 'public/icons/gmail.svg';
-import useWindowSize from "hooks/use-window-size";
+import { signIn } from "next-auth/react"
+import { useState, Dispatch, SetStateAction, useCallback, useMemo } from "react"
+import Image from "next/image"
+import BaseModal from "app/components/modals/BaseModal"
+import { Poppins } from "next/font/google"
+import GithubLogo from "public/icons/github.svg"
+import GmailLogo from "public/icons/gmail.svg"
+import useWindowSize from "hooks/use-window-size"
 
 const popins = Poppins({
   variable: "--font-popins",
+  subsets: ["latin"],
   weight: ["100", "300", "600"],
-});
+})
 
 const SignInModal = ({
   showSignInModal,
@@ -21,33 +22,41 @@ const SignInModal = ({
   showSignInModal: boolean
   setShowSignInModal: Dispatch<SetStateAction<boolean>>
 }) => {
-  const [signInClickedGitHub, setSignInClickedGitHub] = useState<boolean>(false);
-  const [signInClickedGoogle, setSignInClickedGoogle] = useState<boolean>(false);
-  const { windowSize, isMobile, isDesktop } = useWindowSize();
+  const [signInClickedGitHub, setSignInClickedGitHub] = useState<boolean>(false)
+  const [signInClickedGoogle, setSignInClickedGoogle] = useState<boolean>(false)
+  const { windowSize, isMobile, isDesktop } = useWindowSize()
 
   return (
     <BaseModal showModal={showSignInModal} setShowModal={setShowSignInModal}>
       {/* MAIN DIV - BACKGROUND*/}
-      <div className="rounded-2xl sm:h-[487px] sm:w-[504.01px] bg-purple-700 p-4">
+      <div className="rounded-2xl bg-purple-700 p-4 sm:h-[487px] sm:w-[504.01px]">
         {/* INNER DIV - FLEX CONTAINER */}
-        { /* TITLE + SUBTITLE */ }
+        {/* TITLE + SUBTITLE */}
         <div className="flex flex-col content-center justify-start justify-items-start gap-4 sm:p-12">
-          <div className="flex flex-col content-center justify-start justify-items-start gap-4 mb-4 sm:mb-8 mt-8 sm:mt-0">
-            <h1 className={`${popins.variable} text-center text-[28px] sm:text-[30px] font-[700] leading-6 text-white sm:text-left`}>
+          <div className="mb-4 mt-8 flex flex-col content-center justify-start justify-items-start gap-4 sm:mb-8 sm:mt-0">
+            <h1
+              className={`${popins.variable} text-center text-[28px] font-[700] leading-6 text-white sm:text-left sm:text-[30px]`}
+            >
               Create your Account
             </h1>
-            <h6 className="text-[16px] sm:text-[20px] font-[400] font-mono leading-10 text-gray-200 text-center sm:text-left">
+            <h6 className="text-center font-mono text-[16px] font-[400] leading-10 text-gray-200 sm:text-left sm:text-[20px]">
               Start coding with Code Genius
             </h6>
           </div>
           {/* DIVIDER */}
           <hr className="border-1 border-purple-500 sm:w-[384.01px]" />
           {/* BUTTONS */}
-          <div className={`flex ${isMobile ? 'flex-row' : 'flex-col'} content-center justify-start justify-items-start gap-4 mb-8`}>
+          <div
+            className={`flex ${
+              isMobile ? "flex-row" : "flex-col"
+            } mb-8 content-center justify-start justify-items-start gap-4`}
+          >
             {/* GITHUB BUTTON */}
             <button
               disabled={signInClickedGitHub}
-              className={"h-[40px] w-full sm:h-[80px] sm:w-[380px] bg-black rounded-lg"}
+              className={
+                "h-[40px] w-full rounded-lg bg-black sm:h-[80px] sm:w-[380px]"
+              }
               onClick={() => {
                 setSignInClickedGitHub(true)
                 signIn("github", {
@@ -55,25 +64,27 @@ const SignInModal = ({
                 })
               }}
             >
-              {
-                signInClickedGitHub ? 
-                <p className="text-white text-[28px] font-[700]">Loading...</p> : 
+              {signInClickedGitHub ? (
+                <p className="text-[28px] font-[700] text-white">Loading...</p>
+              ) : (
                 <div className="flex inline-flex content-center justify-center justify-items-center gap-2">
                   <Image
                     width={32}
                     height={32}
                     alt="Github Logo"
                     src={GithubLogo.src} // Should use a logo that includes company font
-                    className="h-[25.51px] w-[26.15px] flex self-center"
+                    className="flex h-[25.51px] w-[26.15px] self-center"
                   />
-                  <p className="text-white text-[28px] font-[700]">GitHub</p>
+                  <p className="text-[28px] font-[700] text-white">GitHub</p>
                 </div>
-              }
+              )}
             </button>
             {/* GOOGLE BUTTON */}
             <button
               disabled={signInClickedGoogle}
-              className={"h-[40px] w-full sm:h-[80px] sm:w-[380px] bg-white rounded-lg"}
+              className={
+                "h-[40px] w-full rounded-lg bg-white sm:h-[80px] sm:w-[380px]"
+              }
               onClick={() => {
                 setSignInClickedGoogle(true)
                 signIn("google", {
@@ -81,20 +92,22 @@ const SignInModal = ({
                 })
               }}
             >
-              {
-                signInClickedGoogle ? 
-                <p className="text-gray-800 text-[28px] font-[700]">Loading...</p> : 
+              {signInClickedGoogle ? (
+                <p className="text-[28px] font-[700] text-gray-800">
+                  Loading...
+                </p>
+              ) : (
                 <div className="flex inline-flex content-center justify-center justify-items-center gap-2">
                   <Image
                     width={32}
                     height={32}
                     alt="Gmail Logo"
                     src={GmailLogo.src} // Should use a logo that includes company font
-                    className="h-[38px] w-[38x] flex self-center"
+                    className="flex h-[38px] w-[38x] self-center"
                   />
-                  <p className="text-gray-500 text-[28px] font-[700]">Gmail</p>
+                  <p className="text-[28px] font-[700] text-gray-500">Gmail</p>
                 </div>
-              }
+              )}
             </button>
           </div>
         </div>

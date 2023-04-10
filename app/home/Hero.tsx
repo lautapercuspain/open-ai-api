@@ -5,6 +5,7 @@ import Image from "next/image"
 
 const popins = Poppins({
   variable: "--font-popins",
+  subsets: ["latin"],
   weight: ["100", "300", "600"],
 })
 

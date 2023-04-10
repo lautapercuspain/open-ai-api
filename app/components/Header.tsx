@@ -11,6 +11,7 @@ import { Rubik } from "next/font/google"
 
 const rubik = Rubik({
   variable: "--font-rubik",
+  subsets: ["latin"],
   weight: ["400", "300", "600"],
 })
 

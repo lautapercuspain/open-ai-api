@@ -6,6 +6,7 @@ import HomeChat from "./HomeChat"
 
 const popins = Poppins({
   variable: "--font-popins",
+  subsets: ["latin"],
   weight: ["100", "300", "600"],
 })
 

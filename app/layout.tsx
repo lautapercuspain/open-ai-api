@@ -6,12 +6,9 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "pages/api/auth/[...nextauth]"
 import { Poppins } from "next/font/google"
 
-// const roboto = Roboto_Mono({
-//   variable: "--font-roboto",
-// })
-
 const popins = Poppins({
   variable: "--font-popins",
+  subsets: ["latin"],
   weight: ["100", "300", "600"],
 })
 export default async function RootLayout({
