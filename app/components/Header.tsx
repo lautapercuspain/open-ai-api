@@ -21,8 +21,10 @@ export default function Header({ session }) {
   const [userId, setUserId] = useLocalStorage(LSConfig.user.userId, "")
 
   useEffect(() => {
-    setUserId(session?.user?.id)
-  }, [userId, setUserId])
+    if (session?.user?.id) {
+      setUserId(session?.user?.id)
+    }
+  }, [session, setUserId])
   return (
     <>
       <SignInModal />
@@ -48,9 +50,9 @@ export default function Header({ session }) {
             </Link>
           </div>
           <div className="flex h-10 items-end">
-            <div className="text-lg  hidden cursor-pointer font-mono font-bold text-white sm:block">
+            {/* <div className="text-lg  hidden cursor-pointer font-mono font-bold text-white sm:block">
               Pricing
-            </div>
+            </div> */}
             <div className="my-auto mx-2 mt-2 flex cursor-pointer flex-row items-start justify-center rounded-lg  bg-mint p-2 font-mono">
               <Image
                 src={"/icons/code-blocks.svg"}
@@ -64,7 +66,7 @@ export default function Header({ session }) {
                   className="text-sm  font-bold text-purple-800"
                   onClick={() => setShowSignInModal(true)}
                 >
-                  Create Account
+                  {userId ? "Login" : "Create Account"}
                 </div>
               ) : (
                 <UserDropdown />
