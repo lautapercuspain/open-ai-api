@@ -3,7 +3,7 @@
 import DropDown, { ElementType } from "app/components/DropDown"
 import { ChangeEvent, useEffect, useRef, useState } from "react"
 import ResizablePanel from "app/components/ResizablePanel"
-import Button, { StopButton } from "app/components/Button"
+import Button from "app/components/Button"
 import GenerateCode from "app/components/GenerateCode"
 import Modal from "app/components/Modal"
 import useLocalStorage from "hooks/use-localstorage"

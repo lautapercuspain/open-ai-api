@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "./auth/[...nextauth]"
 
-import requestIp from "request-ip"
 import { harperClient } from "@/lib/harperdb"
 
 export default async function handler(
