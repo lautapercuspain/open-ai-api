@@ -23,6 +23,7 @@ const initialFormValues: FormValues = {
 
 const popins = Poppins({
   variable: "--font-popins",
+  subsets: ["latin"],
   weight: ["100", "300", "600"],
 })
 

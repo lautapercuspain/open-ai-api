@@ -5,7 +5,7 @@ import {
   BugIcon,
   Lightbulb,
   StickyNote,
-  ChevronRightIcon,
+  ChevronRight,
 } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
@@ -36,13 +36,15 @@ export default function SideBar({
         sidebarOpen ? "w-68" : "w-[65px]"
       } bg-purple-700 px-5 pt-3`}
     >
-      <Image
-        alt="Code Genius"
-        src={"/logo.svg"}
-        width={24}
-        height={24}
-        className="mb-8"
-      />
+      <div className={`${sidebarOpen ? "ml-8 mt-1" : "rigth-1"} mb-6`}>
+        <Image
+          src={"/code-genius.svg"}
+          width={38}
+          height={38}
+          alt="Code Genius"
+        />
+      </div>
+
       <SearchBar
         userIsSearching={userIsSearching}
         sidebarOpen={sidebarOpen}
@@ -112,7 +114,7 @@ export default function SideBar({
           setDocSelected(false)
         }}
       >
-        <ChevronRightIcon
+        <ChevronRight
           size={26}
           color={testSelected ? colors.mint : "white"}
           className="mt-2 cursor-pointer border-purple-300 "

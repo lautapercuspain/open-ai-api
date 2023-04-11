@@ -8,6 +8,7 @@ import { useEffect } from "react"
 import useLocalStorage from "hooks/use-localstorage"
 import Image from "next/image"
 import { Rubik } from "next/font/google"
+import { usePathname } from "next/navigation"
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -31,16 +32,16 @@ export default function Header({ session }) {
         <div className="mx-0 flex items-center justify-between md:mx-10">
           <div className="ml-2 sm:ml-7">
             <Link href="/" className="mx-auto mt-5 ml-12 flex sm:mx-0">
-              <Image
+              {/* <Image
                 src={"/code-genius.svg"}
                 width={38}
                 height={38}
                 className={" mr-1"}
                 alt="Code Genius"
-              />
+              /> */}
 
               <h1
-                className={`${rubik.variable} text-lg sm:text-xl sm:text-xl mt-2  ml-2 bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text font-rubik text-2xl font-bold tracking-tight text-transparent max-md:pt-4 max-sm:pt-0 sm:leading-6`}
+                className={`${rubik.variable} text-lg sm:text-xl sm:text-xl mt-2  ml-11 bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text font-rubik text-2xl font-bold tracking-tight text-transparent max-md:pt-4 max-sm:pt-0 sm:leading-6`}
               >
                 Code Genius
               </h1>
