@@ -8,7 +8,6 @@ import { useEffect } from "react"
 import useLocalStorage from "hooks/use-localstorage"
 import Image from "next/image"
 import { Rubik } from "next/font/google"
-import { usePathname } from "next/navigation"
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -20,6 +19,7 @@ export default function Header({ session }) {
   // const pathname = usePathname()
   const { SignInModal, setShowSignInModal } = useSignInModal()
   const [userId, setUserId] = useLocalStorage(LSConfig.user.userId, "")
+
   useEffect(() => {
     setUserId(session?.user?.id)
   }, [userId, setUserId])

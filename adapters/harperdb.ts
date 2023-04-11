@@ -11,19 +11,31 @@ export function HarperDBAdapter(): Adapter {
 
       if (existing && existing[0]) return existing[0]
 
+      //Define a new user with the initial credits gifted.
+      const newUser = {
+        ...user,
+        credits: 10,
+      }
+
       const result = await harperClient({
         operation: "insert",
         schema: "Auth",
         table: "Users",
-        records: [user],
+        records: [newUser],
       })
 
       if (result.error) {
         console.log(`Failed to create User: ${result.error}`)
         throw new Error("Failed to create User")
       }
+      const userId = result?.inserted_hashes[0]
+      const userLogged = await harperClient({
+        operation: "sql",
+        sql: `SELECT * FROM Auth.Users WHERE id = "${userId}"`,
+      })
 
-      return result
+      //Huston we have a new USER!!
+      return userLogged && userLogged[0]
     },
     async createVerificationToken({ identifier, expires, token }) {
       const data = { identifier, expires, token }
@@ -115,8 +127,6 @@ export function HarperDBAdapter(): Adapter {
     },
 
     async linkAccount(account) {
-      console.log("🚀 - account::", account)
-
       const userExist = await harperClient({
         operation: "sql",
         sql: `SELECT * FROM Auth.Users WHERE id = "${account.userId}"`,

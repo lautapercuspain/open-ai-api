@@ -20,8 +20,8 @@ export const authOptions: AuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
-      return true
+    async signIn({ user }) {
+      return user && user.name ? true : false
     },
     async session({ session, user, token }) {
       if (user && user.id) {
@@ -37,10 +37,6 @@ export const authOptions: AuthOptions = {
       return session
     },
     async jwt({ token, user, account, profile, isNewUser }) {
-      console.log("🚀 - account", account)
-      console.log("🚀 - token", token)
-      console.log("🚀 - user", user)
-
       return token
     },
     async redirect({ url, baseUrl }) {

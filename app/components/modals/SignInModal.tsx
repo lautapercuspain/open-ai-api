@@ -67,7 +67,7 @@ const SignInModal = ({
               {signInClickedGitHub ? (
                 <p className="text-[28px] font-[700] text-white">Loading...</p>
               ) : (
-                <div className="flex inline-flex content-center justify-center justify-items-center gap-2">
+                <div className="inline-flex content-center justify-center justify-items-center gap-2">
                   <Image
                     width={32}
                     height={32}
@@ -97,7 +97,7 @@ const SignInModal = ({
                   Loading...
                 </p>
               ) : (
-                <div className="flex inline-flex content-center justify-center justify-items-center gap-2">
+                <div className="inline-flex content-center justify-center justify-items-center gap-2">
                   <Image
                     width={32}
                     height={32}

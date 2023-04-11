@@ -27,10 +27,6 @@ const popins = Poppins({
   weight: ["100", "300", "600"],
 })
 
-// const roboto = Roboto_Mono({
-//   variable: "--font-roboto",
-// })
-
 export default function PaymentModal({ isOpen, setIsOpen }: Props) {
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues)
 
