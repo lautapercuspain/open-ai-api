@@ -10,12 +10,14 @@ import useLocalStorage from "hooks/use-localstorage"
 import { AnimatePresence, motion } from "framer-motion"
 import { LSConfig, promptResponseTimeout } from "@/lib/constants"
 import SideBar from "app/components/shared/SideBar"
+import SecondaryNavBar from "app/components/shared/SecondaryNavBar"
 
 let libElements: ElementType[] = ["React", "Vue", "Angular"]
 let langElements: ElementType[] = ["Typescript", "Javascript"]
 
 export default function Page() {
   const [smartSelected, setSmartSelected] = useState(true)
+  const [openSecondayNavBar, setOpenSecondayNavBar] = useState(false)
   const [testSelected, setTestSelected] = useState(false)
   const [improveSelected, setImproveSelected] = useState(false)
   const [bugSelected, setBugSelected] = useState(false)
@@ -60,7 +62,7 @@ export default function Page() {
     }
     if (docSelected) {
       setPrompt(
-        `Create documentation for the provided code: \`${codeSentence}\`. Make sure to use Markdown syntax for the documented code.`,
+        `Create documentation for the provided code: "${codeSentence}". Use Markdown syntax for the documented code or add the documentation as a comments above the code.`,
       )
     }
   }, [
@@ -87,12 +89,12 @@ export default function Page() {
   const generateCode = async () => {
     setLoading(true)
 
-    const id = setTimeout(() => {
-      controller.abort()
-      setLoading(false)
-      setModaIsOpen(true)
-      // setCodeSentence("");
-    }, promptResponseTimeout)
+    // const id = setTimeout(() => {
+    //   controller.abort()
+    //   setLoading(false)
+    //   setModaIsOpen(true)
+    //   // setCodeSentence("");
+    // }, promptResponseTimeout)
 
     setGeneratedCode("")
 
@@ -108,7 +110,7 @@ export default function Page() {
 
     // console.log("response", response);
     // clear timeout
-    clearTimeout(id)
+    // clearTimeout(id)
 
     if (!response.ok) {
       setLoading(false)
@@ -201,8 +203,8 @@ export default function Page() {
       return (
         <>
           <p>
-            <strong>Tip</strong>: paste the function that you would like
-            generate a test from
+            <strong>Tip</strong>: Add the function that you would like to
+            generate a test.
           </p>
         </>
       )
@@ -241,18 +243,22 @@ export default function Page() {
         setIsOpen={setShowSavePromptModal}
       />
       <main className="flex w-full flex-row items-start justify-start bg-purple-800  font-mono">
-        <SideBar
-          improveSelected={improveSelected}
-          setImproveSelected={setImproveSelected}
-          smartSelected={smartSelected}
-          setSmartSelected={setSmartSelected}
-          testSelected={testSelected}
-          setTestSelected={setTestSelected}
-          bugSelected={bugSelected}
-          setBugSelected={setBugSelected}
-          docSelected={docSelected}
-          setDocSelected={setDocSelected}
-        />
+        <SideBar setOpenSecondayNavBar={setOpenSecondayNavBar} />
+        {openSecondayNavBar && (
+          <SecondaryNavBar
+            openSecondayNavBar={openSecondayNavBar}
+            improveSelected={improveSelected}
+            setImproveSelected={setImproveSelected}
+            smartSelected={smartSelected}
+            setSmartSelected={setSmartSelected}
+            testSelected={testSelected}
+            setTestSelected={setTestSelected}
+            bugSelected={bugSelected}
+            setBugSelected={setBugSelected}
+            docSelected={docSelected}
+            setDocSelected={setDocSelected}
+          />
+        )}
 
         <div id="container" className="relative mx-2 w-full sm:mx-12">
           <div className="text-1xl left-2 my-4 mt-24 w-full text-center uppercase text-purple-300 sm:text-left">
