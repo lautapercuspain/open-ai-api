@@ -16,7 +16,7 @@ const rubik = Rubik({
   weight: ["400", "300", "600"],
 })
 
-export default function Header({ session }) {
+export default function Header({ session, userHasAccount }) {
   const pathname = usePathname()
   const { SignInModal, setShowSignInModal } = useSignInModal()
   const [userId, setUserId] = useLocalStorage(LSConfig.user.userId, "")
@@ -26,7 +26,6 @@ export default function Header({ session }) {
       setUserId(session?.user?.id)
     }
   }, [session, setUserId])
-  console.log("pathname", pathname)
 
   return (
     <>
@@ -85,7 +84,7 @@ export default function Header({ session }) {
                   className="text-sm  font-bold text-purple-800"
                   onClick={() => setShowSignInModal(true)}
                 >
-                  {userId ? "Login" : "Create Account"}
+                  {userHasAccount ? "Login" : "Create Account"}
                 </div>
               ) : (
                 <UserDropdown />

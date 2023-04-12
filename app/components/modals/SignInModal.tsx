@@ -87,9 +87,7 @@ const SignInModal = ({
               }
               onClick={() => {
                 setSignInClickedGoogle(true)
-                signIn("google", {
-                  callbackUrl: process.env.NEXTAUTH_URL,
-                })
+                signIn("google")
               }}
             >
               {signInClickedGoogle ? (

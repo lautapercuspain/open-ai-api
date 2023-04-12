@@ -5,6 +5,7 @@ import Footer from "app/components/Footer"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "pages/api/auth/[...nextauth]"
 import { Poppins } from "next/font/google"
+import { cookies } from "next/headers"
 
 const popins = Poppins({
   variable: "--font-popins",
@@ -17,6 +18,9 @@ export default async function RootLayout({
   children: React.ReactNode
 }) {
   const session = await getServerSession(authOptions)
+  const cookieStore = cookies()
+  const userHasAccount =
+    cookieStore.get("next-auth.session-token")?.value !== ""
 
   return (
     <>
@@ -26,7 +30,7 @@ export default async function RootLayout({
         </head>
         <body className="bg-purple-800">
           <SessionProvider>
-            <Header session={session} />
+            <Header session={session} userHasAccount={userHasAccount} />
             <div className="flex min-h-screen flex-nowrap">{children}</div>
             {/* <Footer /> */}
           </SessionProvider>
