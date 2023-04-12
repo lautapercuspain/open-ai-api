@@ -11,9 +11,13 @@ import { AnimatePresence, motion } from "framer-motion"
 import { LSConfig, promptResponseTimeout } from "@/lib/constants"
 import SideBar from "app/components/shared/SideBar"
 
+let libElements: ElementType[] = ["React", "Vue", "Angular"]
+let langElements: ElementType[] = ["Typescript", "Javascript"]
+
 export default function Page() {
   const [smartSelected, setSmartSelected] = useState(true)
   const [testSelected, setTestSelected] = useState(false)
+  const [improveSelected, setImproveSelected] = useState(false)
   const [bugSelected, setBugSelected] = useState(false)
   const [docSelected, setDocSelected] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -22,6 +26,7 @@ export default function Page() {
   const [reader, setReader] =
     useState<ReadableStreamDefaultReader<Uint8Array> | null>(null)
   const [codeSentence, setCodeSentence] = useState("")
+  const [prompt, setPrompt] = useState("")
   const [questionName, setQuestionName] = useState("")
   const [langElement, setLangElement] = useState<ElementType>("Typescript")
   const [lib, setLib] = useState<ElementType>("React")
@@ -32,18 +37,48 @@ export default function Page() {
   const textareaRef = useRef<any>(null)
 
   useEffect(() => {
+    if (smartSelected) {
+      setPrompt(`Generate code written in ${langElement} and ${lib}, clearly labeled "**::", "// 1.", "// 2.", "// 3." and "// 4.". 
+      Context: ${codeSentence}${
+        codeSentence.slice(-1) === "." ? "" : "."
+      } Requirements: Make sure to comment on the folder and file structure at the end and to export default the Application component in the last step.`)
+    }
+    if (testSelected) {
+      setPrompt(
+        `Write unit tests for the following function: \`${codeSentence}\` `,
+      )
+    }
+    if (bugSelected) {
+      setPrompt(
+        `Improve and propose performance boost based on the provided code: \`${codeSentence}\`. Make sure to comment on the improvements at the end, in short code comments.`,
+      )
+    }
+    if (improveSelected) {
+      setPrompt(
+        `Improve and propose performance boost based on the provided code: \`${codeSentence}\`. Make sure to comment on the improvements at the end, in short code comments.`,
+      )
+    }
+    if (docSelected) {
+      setPrompt(
+        `Create documentation for the provided code: \`${codeSentence}\`. Make sure to use Markdown syntax for the documented code.`,
+      )
+    }
+  }, [
+    smartSelected,
+    testSelected,
+    bugSelected,
+    docSelected,
+    codeSentence,
+    improveSelected,
+  ])
+
+  useEffect(() => {
     if (textareaRef && textareaRef.current) {
       textareaRef.current.focus()
     }
   }, [])
 
-  let libElements: ElementType[] = ["React", "Vue", "Angular"]
-  let langElements: ElementType[] = ["Typescript", "Javascript"]
-
-  const prompt = `Generate code written in ${langElement} and ${lib}, clearly labeled "**::", "// 1.", "// 2.", "// 3." and "// 4.". 
-  Context: ${codeSentence}${
-    codeSentence.slice(-1) === "." ? "" : "."
-  } Requirements: Make sure to comment on the folder and file structure at the end and to export default the Application component in the last step.`
+  console.log("prompt: ", prompt)
 
   const onCodeGeneration = () => {
     generateCode()
@@ -155,11 +190,31 @@ export default function Page() {
 
   function getCodeGeniusMode(): import("react").ReactNode {
     if (smartSelected) {
-      return "SMART SUGGESTIONS"
+      return (
+        <>
+          <p>
+            <strong>Tip</strong>: type a code idea that you want to implement
+          </p>
+        </>
+      )
     } else if (testSelected) {
-      return "TEST MODE"
+      return (
+        <>
+          <p>
+            <strong>Tip</strong>: paste the function that you would like
+            generate a test from
+          </p>
+        </>
+      )
     } else if (bugSelected) {
-      return "BUG MODE"
+      return (
+        <>
+          <p>
+            <strong>Tip</strong>: paste the function with the bug and Code
+            Genius will try to help
+          </p>
+        </>
+      )
     } else if (docSelected) {
       return "DOCUMENTATION MODE"
     }
@@ -187,6 +242,8 @@ export default function Page() {
       />
       <main className="flex w-full flex-row items-start justify-start bg-purple-800  font-mono">
         <SideBar
+          improveSelected={improveSelected}
+          setImproveSelected={setImproveSelected}
           smartSelected={smartSelected}
           setSmartSelected={setSmartSelected}
           testSelected={testSelected}
@@ -199,10 +256,9 @@ export default function Page() {
 
         <div id="container" className="relative mx-2 w-full sm:mx-12">
           <div className="text-1xl left-2 my-4 mt-24 w-full text-center uppercase text-purple-300 sm:text-left">
-            SET YOUR PREFERENCE IN THE SIDEBAR, MODE: {getCodeGeniusMode()}
+            SET YOUR PREFERENCE MODE IN THE SIDEBAR.
           </div>
-
-          <p className="text-md hidden h-8 w-full rounded-t-md bg-purple-700 pl-3 pt-2 font-popins font-bold capitalize leading-7 text-mint sm:block sm:text-left">
+          <p className="text-md hidden h-8 w-full rounded-t-md bg-purple-700 pl-3 pt-2 font-popins leading-4 text-mint text-white sm:block sm:text-left ">
             {getCodeGeniusMode()}
           </p>
           <div className="h-60 rounded-md">

@@ -126,10 +126,6 @@ export async function OpenAITurboStream(payload: OpenAITurboPayload) {
       const parser = createParser(onParse)
       // https://web.dev/streams/#asynchronous-iteration
       for await (const chunk of res.body as any) {
-        if (chunk == "```") {
-          console.log("🚀 - chunk:", chunk)
-          console.log("WAEEEEE")
-        }
         parser.feed(decoder.decode(chunk))
       }
     },

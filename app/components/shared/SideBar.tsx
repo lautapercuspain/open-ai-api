@@ -1,12 +1,6 @@
 "use client"
 
-import {
-  Code,
-  BugIcon,
-  Lightbulb,
-  StickyNote,
-  ChevronRight,
-} from "lucide-react"
+import { Code, Rocket, BugIcon, FileCode, CurlyBraces } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
 import tailwindConfig from "tailwind.config"
@@ -15,6 +9,8 @@ import SearchBar from "./SearchBar"
 const colors: any = tailwindConfig.theme?.extend?.colors
 
 export default function SideBar({
+  improveSelected,
+  setImproveSelected,
   smartSelected,
   setSmartSelected,
   docSelected,
@@ -62,19 +58,20 @@ export default function SideBar({
           setBugSelected(false)
           setTestSelected(false)
           setDocSelected(false)
+          setImproveSelected(false)
         }}
       >
-        <Lightbulb
+        <Code
           size={26}
           color={smartSelected ? colors.mint : "white"}
           className="mt-2 cursor-pointer border-purple-300"
         />
         <p
-          className={`ml-4 w-56 text-white ${
-            sidebarOpen ? "block" : "hidden"
+          className={`ml-4 w-56 ${sidebarOpen ? "block" : "hidden"} ${
+            smartSelected ? "text-mint" : "text-white"
           } cursor-pointer rounded-md p-2 hover:bg-purple-500`}
         >
-          Smart Suggestions
+          Code Suggestions
         </p>
       </div>
       <div
@@ -87,6 +84,7 @@ export default function SideBar({
           setSmartSelected(false)
           setTestSelected(false)
           setDocSelected(false)
+          setImproveSelected(false)
         }}
       >
         <BugIcon
@@ -95,11 +93,37 @@ export default function SideBar({
           className="mt-2 cursor-pointer border-purple-300 "
         />
         <p
-          className={`ml-4 w-56 text-white ${
+          className={`ml-4 w-56 ${bugSelected ? "text-mint" : "text-white"} ${
             sidebarOpen ? "block" : "hidden"
-          } cursor-pointer rounded-md p-2 hover:bg-purple-500`}
+          } cursor-pointer rounded-md p-2 hover:bg-purple-500 `}
         >
           Bug Fixing
+        </p>
+      </div>
+      <div
+        className="mt-2 inline-flex h-12"
+        onClick={() => {
+          setSidebarOpen(!sidebarOpen)
+          if (!improveSelected) {
+            setImproveSelected(!improveSelected)
+          }
+          setBugSelected(false)
+          setSmartSelected(false)
+          setTestSelected(false)
+          setDocSelected(false)
+        }}
+      >
+        <Rocket
+          size={26}
+          color={improveSelected ? colors.mint : "white"}
+          className="mt-2 cursor-pointer border-purple-300 "
+        />
+        <p
+          className={`ml-4 w-56 ${sidebarOpen ? "block" : "hidden"}  ${
+            improveSelected ? "text-mint" : "text-white"
+          } cursor-pointer rounded-md p-2 hover:bg-purple-500`}
+        >
+          Improve Code
         </p>
       </div>
       <div
@@ -112,16 +136,17 @@ export default function SideBar({
           setSmartSelected(false)
           setBugSelected(false)
           setDocSelected(false)
+          setImproveSelected(false)
         }}
       >
-        <ChevronRight
+        <CurlyBraces
           size={26}
           color={testSelected ? colors.mint : "white"}
           className="mt-2 cursor-pointer border-purple-300 "
         />
         <p
-          className={`ml-4 w-56 text-white ${
-            sidebarOpen ? "block" : "hidden"
+          className={`ml-4 w-56  ${sidebarOpen ? "block" : "hidden"} ${
+            testSelected ? "text-mint" : "text-white"
           } cursor-pointer rounded-md p-2 hover:bg-purple-500`}
         >
           Test Generation
@@ -137,15 +162,16 @@ export default function SideBar({
           setSmartSelected(false)
           setBugSelected(false)
           setTestSelected(false)
+          setImproveSelected(false)
         }}
       >
-        <StickyNote
+        <FileCode
           size={26}
           color={docSelected ? colors.mint : "white"}
           className="mt-2 cursor-pointer border-purple-300"
         />
         <p
-          className={`ml-4 w-56  text-white ${
+          className={`ml-4 w-56 ${docSelected ? "text-mint" : "text-white"} ${
             sidebarOpen ? "block" : "hidden"
           } cursor-pointer rounded-md p-2 hover:bg-purple-500 `}
         >
