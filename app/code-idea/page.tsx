@@ -202,7 +202,7 @@ export default function Page() {
             SET YOUR PREFERENCE IN THE SIDEBAR, MODE: {getCodeGeniusMode()}
           </div>
 
-          <p className="text-md hidden h-8 w-full rounded-t-md bg-purple-700 pl-3 pt-2 font-popins font-bold capitalize leading-7 text-mint text-white sm:block sm:text-left">
+          <p className="text-md hidden h-8 w-full rounded-t-md bg-purple-700 pl-3 pt-2 font-popins font-bold capitalize leading-7 text-mint sm:block sm:text-left">
             {getCodeGeniusMode()}
           </p>
           <div className="h-60 rounded-md">

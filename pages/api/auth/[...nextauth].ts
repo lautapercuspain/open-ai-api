@@ -3,6 +3,10 @@ import NextAuth, { AuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import GitHubProvider from "next-auth/providers/github"
 import { HarperDBAdapter } from "adapters/harperdb"
+import { sendWelcomeEmail } from "utils/sendEmail"
+
+const server = process.env.EMAIL_SERVER
+const from = process.env.EMAIL_FROM
 
 export const authOptions: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -19,11 +23,24 @@ export const authOptions: AuthOptions = {
       allowDangerousEmailAccountLinking: true,
     }),
   ],
-  callbacks: {
+  events: {
     async signIn({ user }) {
+      //@ts-ignore
+      if (user.registered) {
+        await sendWelcomeEmail({
+          name: user.name,
+          identifier: user.email,
+          provider: { server, from },
+        })
+      }
+    },
+  },
+
+  callbacks: {
+    async signIn({ user, account, ...rest }) {
       return user && user.name ? true : false
     },
-    async session({ session, user, token }) {
+    async session({ session, user, ...rest }) {
       if (user && user.id) {
         const newSession = {
           ...session,
@@ -36,7 +53,7 @@ export const authOptions: AuthOptions = {
       }
       return session
     },
-    async jwt({ token, user, account, profile, isNewUser }) {
+    async jwt({ token, user, account, profile }) {
       return token
     },
     async redirect({ url, baseUrl }) {

@@ -35,7 +35,7 @@ export function HarperDBAdapter(): Adapter {
       })
 
       //Huston we have a new USER!!
-      return userLogged && userLogged[0]
+      return userLogged && { ...userLogged[0], registered: true }
     },
     async createVerificationToken({ identifier, expires, token }) {
       const data = { identifier, expires, token }
