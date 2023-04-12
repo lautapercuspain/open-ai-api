@@ -53,12 +53,16 @@ export default function Header({ session }) {
             {/* <div className="text-lg  hidden cursor-pointer font-mono font-bold text-white sm:block">
               Pricing
             </div> */}
-            <div className="my-auto mx-2 mt-2 flex cursor-pointer flex-row items-start justify-center rounded-lg  bg-mint p-2 font-mono">
+            <div
+              className={`my-auto mx-2 mt-2 flex cursor-pointer flex-row items-start justify-center rounded-lg ${
+                !session ? "bg-mint" : "bg-transparent"
+              }   p-2 font-mono`}
+            >
               <Image
                 src={"/icons/code-blocks.svg"}
                 width={15}
                 height={15}
-                className={"mt-1 mr-1"}
+                className={`mt-1 mr-1 ${session ? "hidden" : "block"}`}
                 alt="Code Blocks"
               />
               {!session ? (
