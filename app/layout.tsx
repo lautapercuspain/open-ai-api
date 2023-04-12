@@ -19,8 +19,9 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession(authOptions)
   const cookieStore = cookies()
-  const userHasAccount =
-    cookieStore.get("next-auth.session-token")?.value !== ""
+  const csrfTokenValue = cookieStore.get("next-auth.csrf-token")?.value
+
+  const userHasAccount = csrfTokenValue !== "" && csrfTokenValue !== undefined
 
   return (
     <>
