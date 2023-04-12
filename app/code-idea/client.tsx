@@ -263,7 +263,7 @@ export default function Client() {
         <div className="text-1xl left-2 my-4 mt-24 w-full text-center uppercase text-purple-300 sm:text-left">
           SET YOUR PREFERENCE MODE IN THE SIDEBAR.
         </div>
-        <p className="text-md hidden h-8 w-full rounded-t-md bg-purple-700 pl-3 pt-2 font-popins leading-4 text-mint text-white sm:block sm:text-left ">
+        <p className="text-md hidden h-8 w-full rounded-t-md bg-purple-700 pl-3 pt-2 font-popins leading-4 text-mint  sm:block sm:text-left ">
           {getCodeGeniusMode()}
         </p>
         <div className="h-60 rounded-md">
