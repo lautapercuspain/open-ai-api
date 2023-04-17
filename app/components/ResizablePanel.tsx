@@ -8,10 +8,12 @@ export default function ResizablePanel({
 }) {
   let [ref, { height }] = useMeasure()
 
+  console.log("height:", height)
+
   return (
     <motion.div
       animate={height ? { height } : {}}
-      style={height ? { height } : {}}
+      style={height ? { height, marginBottom: 50 } : {}}
       className="relative w-full overflow-hidden"
       transition={{ type: "tween", duration: 0.5 }}
     >

@@ -22,7 +22,7 @@ export default function GenerateCode({
   return (
     <>
       <div
-        className={`my-2 flex flex-col items-${align} md:items-${align} lg:items-${align}`}
+        className={`my-2 mb-10 flex flex-col items-${align} md:items-${align} lg:items-${align} `}
       >
         {generatedCode
           .substring(generatedCode.indexOf("**") + 0)
@@ -42,7 +42,8 @@ export default function GenerateCode({
                   codeBlock
                   theme={{
                     ...dracula,
-                    backgroundColor: blackBackground ? "#000000" : "#28273D",
+                    lineNumberColor: colors.lineNumbers,
+                    backgroundColor: blackBackground ? "#000000" : "#101018",
                     metaColor: colors.mint,
                   }}
                 />

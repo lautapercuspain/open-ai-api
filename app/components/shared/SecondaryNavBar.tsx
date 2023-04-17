@@ -1,8 +1,6 @@
 "use client"
 
-import { Code, Rocket, Bug, FileCode, CurlyBraces, Home } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+import { Code, Rocket, FileCode, CurlyBraces, Home } from "lucide-react"
 import { useState } from "react"
 import tailwindConfig from "tailwind.config"
 
@@ -28,7 +26,8 @@ export default function SecondaryNavBar({
   return (
     <div
       id="secondary-sidebar"
-      className={`"absolute top-0 left-0 hidden h-full -translate-x-full flex-col items-start border-r border-purple-400 bg-purple-700 
+      className={`"fixed top-0 left-[64px] z-20 hidden h-full flex-col items-start
+        border-r-[1px]  border-purple-700 bg-purple-900 
       px-5 transition-transform duration-700 
        sm:relative sm:flex sm:translate-x-0`}
     >

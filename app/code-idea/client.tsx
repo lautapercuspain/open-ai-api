@@ -1,86 +1,51 @@
 "use client"
 
 import { LSConfig } from "@/lib/constants"
-import { AnimatePresence, motion } from "framer-motion"
-import SideBar from "app/components/shared/SideBar"
-import SecondaryNavBar from "app/components/shared/SecondaryNavBar"
+import { AnimatePresence } from "framer-motion"
+import Editor from "react-simple-code-editor"
+import { highlight, languages } from "prismjs/components/prism-core"
+import "prismjs/components/prism-clike"
+import "prismjs/components/prism-javascript"
+// import "prismjs/themes/prism.css" //Example style, you can use another
+
 import Modal from "app/components/Modal"
-import DropDown, { ElementType } from "app/components/DropDown"
+
 import ResizablePanel from "app/components/ResizablePanel"
 import Button from "app/components/Button"
 import GenerateCode from "app/components/GenerateCode"
 import useLocalStorage from "hooks/use-localstorage"
-import { ChangeEvent, useEffect, useRef, useState } from "react"
+import { ChangeEvent, useRef, useState } from "react"
+import { ElementType } from "app/components/DropDown"
+import FooterSection from "./footer-section"
 
 let libElements: ElementType[] = ["React", "Vue", "Angular"]
 let langElements: ElementType[] = ["Typescript", "Javascript"]
 
-export default function Client() {
-  const [smartSelected, setSmartSelected] = useState(true)
-  const [openSecondayNavBar, setOpenSecondayNavBar] = useState(false)
-  const [testSelected, setTestSelected] = useState(false)
-  const [improveSelected, setImproveSelected] = useState(false)
-  const [bugSelected, setBugSelected] = useState(false)
-  const [docSelected, setDocSelected] = useState(false)
+export default function Client({
+  lib,
+  prompt,
+  setLib,
+  langElement,
+  codeSentence,
+  testSelected,
+  bugSelected,
+  smartSelected,
+  docSelected,
+  setLangElement,
+  setCodeSentence,
+  improveSelected,
+}) {
   const [loading, setLoading] = useState(false)
   const [modaIsOpen, setModaIsOpen] = useState(false)
   const [showSavePromptModal, setShowSavePromptModal] = useState(false)
   const [reader, setReader] =
     useState<ReadableStreamDefaultReader<Uint8Array> | null>(null)
-  const [codeSentence, setCodeSentence] = useState("")
-  const [prompt, setPrompt] = useState("")
+
   const [questionName, setQuestionName] = useState("")
-  const [langElement, setLangElement] = useState<ElementType>("Typescript")
-  const [lib, setLib] = useState<ElementType>("React")
+
   const [generatedCode, setGeneratedCode] = useState<String>("")
   const [userId] = useLocalStorage(LSConfig.user.userId, "")
   const controller = new AbortController()
-
-  const textareaRef = useRef<any>(null)
-
-  useEffect(() => {
-    if (smartSelected) {
-      setPrompt(`Generate code written in ${langElement} and ${lib}, clearly labeled "**::", "// 1.", "// 2.", "// 3." and "// 4.". 
-          Context: ${codeSentence}${
-        codeSentence.slice(-1) === "." ? "" : "."
-      } Requirements: Make sure to comment on the folder and file structure at the end and to export default the Application component in the last step.`)
-    }
-    if (testSelected) {
-      setPrompt(
-        `Write unit tests for the following function: \`${codeSentence}\` `,
-      )
-    }
-    if (bugSelected) {
-      setPrompt(
-        `Improve and propose performance boost based on the provided code: \`${codeSentence}\`. Make sure to comment on the improvements at the end, in short code comments.`,
-      )
-    }
-    if (improveSelected) {
-      setPrompt(
-        `Improve and propose performance boost based on the provided code: \`${codeSentence}\`. Make sure to comment on the improvements at the end, in short code comments.`,
-      )
-    }
-    if (docSelected) {
-      setPrompt(
-        `Create documentation for the provided code: "${codeSentence}". Use Markdown syntax for the documented code or add the documentation as a comments above the code.`,
-      )
-    }
-  }, [
-    smartSelected,
-    testSelected,
-    bugSelected,
-    docSelected,
-    codeSentence,
-    improveSelected,
-  ])
-
-  useEffect(() => {
-    if (textareaRef && textareaRef.current) {
-      textareaRef.current.focus()
-    }
-  }, [])
-
-  console.log("prompt: ", prompt)
 
   const onCodeGeneration = () => {
     generateCode()
@@ -88,7 +53,7 @@ export default function Client() {
 
   const generateCode = async () => {
     setLoading(true)
-
+    let response: any
     // const id = setTimeout(() => {
     //   controller.abort()
     //   setLoading(false)
@@ -98,15 +63,37 @@ export default function Client() {
 
     setGeneratedCode("")
 
-    const response = await fetch("/api/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        prompt,
-      }),
-    })
+    if (testSelected) {
+      response = await fetch("/api/generateWithTurbo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: [
+            {
+              role: "system",
+              content:
+                "You are a helpful and specialized AI software assistant with much experience in unit testing, e2e testing, and all possible testing strategies.",
+            },
+            {
+              role: "user",
+              content: prompt,
+            },
+          ],
+        }),
+      })
+    } else {
+      response = await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt,
+        }),
+      })
+    }
 
     // console.log("response", response);
     // clear timeout
@@ -170,8 +157,6 @@ export default function Client() {
     }).then((res) => console.log("res:", res))
   }
 
-  // console.log("generatedCode::", generatedCode);
-
   const stopGeneration = async () => {
     setLoading(false)
     controller.abort()
@@ -194,36 +179,49 @@ export default function Client() {
     if (smartSelected) {
       return (
         <>
-          <p>
-            <strong>Tip</strong>: type a code idea that you want to implement
-          </p>
+          <span>
+            Write your code idea and Code Genius will generate the code
+          </span>
         </>
       )
     } else if (testSelected) {
       return (
         <>
-          <p>
-            <strong>Tip</strong>: Add the function that you would like to
-            generate a test.
-          </p>
+          <span>
+            Paste your function and Code Genius will generate the unit tests
+          </span>
+        </>
+      )
+    } else if (improveSelected) {
+      return (
+        <>
+          <span>
+            Paste your function and Code Genius will generate the code
+          </span>
         </>
       )
     } else if (bugSelected) {
       return (
         <>
-          <p>
-            <strong>Tip</strong>: paste the function with the bug and Code
+          <span>
+            <strong>Mode</strong>: paste the function with the bug and Code
             Genius will try to help
-          </p>
+          </span>
         </>
       )
     } else if (docSelected) {
-      return "DOCUMENTATION MODE"
+      return (
+        <>
+          <span>
+            Paste your code and Code Genius will generate the documentation
+          </span>
+        </>
+      )
     }
   }
 
   return (
-    <>
+    <div className="relative ml-10 h-screen w-full">
       <Modal
         body="Our servers are taking longer than expected. We suggest
         rewording your instruction or input to get a faster result."
@@ -242,84 +240,36 @@ export default function Client() {
         buttonText="Save"
         setIsOpen={setShowSavePromptModal}
       />
-      <SideBar setOpenSecondayNavBar={setOpenSecondayNavBar} />
-      {openSecondayNavBar && (
-        <SecondaryNavBar
-          openSecondayNavBar={openSecondayNavBar}
-          improveSelected={improveSelected}
-          setImproveSelected={setImproveSelected}
-          smartSelected={smartSelected}
-          setSmartSelected={setSmartSelected}
-          testSelected={testSelected}
-          setTestSelected={setTestSelected}
-          bugSelected={bugSelected}
-          setBugSelected={setBugSelected}
-          docSelected={docSelected}
-          setDocSelected={setDocSelected}
-        />
-      )}
-
-      <div id="container" className="relative mx-2 w-full sm:mx-12">
-        <div className="text-1xl left-2 my-4 mt-24 w-full text-center uppercase text-purple-300 sm:text-left">
-          SET YOUR PREFERENCE MODE IN THE SIDEBAR.
-        </div>
-        <p className="text-md hidden h-8 w-full rounded-t-md bg-purple-700 pl-3 pt-2 font-popins leading-4 text-mint  sm:block sm:text-left ">
-          {getCodeGeniusMode()}
-        </p>
-        <div className="h-60 rounded-md">
-          <textarea
-            ref={textareaRef}
-            className="h-60 min-w-full resize-none rounded-b-md border-none bg-purple-700  pb-6 pt-4 text-gray-200 focus:border-none focus:shadow-none  focus:ring-0 focus:ring-purple-700 active:border-purple-700"
-            value={codeSentence}
-            onChange={(e) => setCodeSentence(e.target.value)}
-            rows={4}
-            placeholder={`e.g. export default function App() {
-     return <h1>Hello world</h1>
-}`}
-          />
-          <div className="relative ml-4">
-            <div className="absolute bottom-14 mb-1">
-              <DropDown
-                elements={langElements}
-                element={langElement}
-                setElement={(newElement) => setLangElement(newElement)}
-              />
-            </div>
-            <div className="absolute bottom-14 mb-1 ml-48">
-              <DropDown
-                elements={libElements}
-                element={lib}
-                setElement={(newLib) => setLib(newLib)}
-              />
-            </div>
-            <div className="absolute right-4 bottom-5 hidden sm:block">
-              <Button
-                onClick={onCodeGeneration}
-                loading={loading}
-                variant="mint"
-                text="Generate"
-              />
-            </div>
+      <div id="container" className="ml-8 flex flex-col justify-between">
+        <div className="mr-3">
+          <div className="text-1xl left-2 my-4 ml-1 mt-12 text-center uppercase text-purple-300 sm:text-left">
+            {getCodeGeniusMode()}
           </div>
-        </div>
-        <div className="my-4 mx-4 flex h-auto items-center justify-between sm:hidden">
-          <Button
-            hidden={false}
-            onClick={onSaveCode}
-            variant="mint"
-            loading={false}
-            text="Save Code"
+          <Editor
+            className="mb-4 w-full rounded-lg border-none bg-purple-900 pb-6 pt-4 text-gray-200 focus:border-none focus:shadow-none  focus:ring-0 focus:ring-purple-700 active:border-purple-700 sm:min-h-[80vh]"
+            value={codeSentence}
+            padding={10}
+            highlight={(code) => highlight(code, languages.js)}
+            onValueChange={(code) => setCodeSentence(code)}
           />
-          <Button
-            onClick={onCodeGeneration}
-            loading={loading}
-            variant="mint"
-            text="Generate"
-          />
-        </div>
-        <ResizablePanel>
-          <AnimatePresence mode="sync">
-            <motion.div className="my-10 space-y-10">
+
+          <div className="my-4 mx-4 flex h-auto items-center justify-between sm:hidden">
+            <Button
+              hidden={false}
+              onClick={onSaveCode}
+              variant="mint"
+              loading={false}
+              text="Save Code"
+            />
+            <Button
+              onClick={onCodeGeneration}
+              loading={loading}
+              variant="mint"
+              text="Generate"
+            />
+          </div>
+          <ResizablePanel>
+            <AnimatePresence mode="sync">
               {generatedCode && (
                 <GenerateCode
                   onSaveCode={onSaveCode}
@@ -327,10 +277,20 @@ export default function Client() {
                   generatedCode={generatedCode}
                 />
               )}
-            </motion.div>
-          </AnimatePresence>
-        </ResizablePanel>
+            </AnimatePresence>
+          </ResizablePanel>
+        </div>
       </div>
-    </>
+      <FooterSection
+        langElement={langElement}
+        libElements={libElements}
+        langElements={langElements}
+        loading={loading}
+        setLangElement={setLangElement}
+        lib={lib}
+        setLib={setLib}
+        onCodeGeneration={onCodeGeneration}
+      />
+    </div>
   )
 }

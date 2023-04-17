@@ -11,9 +11,7 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import Link from "next/link"
 
-export default function UserDropdown() {
-  const { data: session } = useSession()
-
+export default function UserDropdown({ session }) {
   const { email, image } = session?.user || {}
   const [colorMode, setColorMode] = useLocalStorage(LSConfig.colorMode, "")
   const [openPopover, setOpenPopover] = useState(false)

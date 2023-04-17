@@ -72,6 +72,7 @@ module.exports = {
       colors: {
         specialBlue: "#6ea9d7",
         mint: "#A1FFE0",
+        lineNumbers: '#8283AD',
         gradient: {
           dark: "#a688ff",
           light: "#d1a8ff",

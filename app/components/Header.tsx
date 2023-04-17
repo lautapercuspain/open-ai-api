@@ -29,7 +29,7 @@ export default function Header({ session, userHasAccount }) {
 
   return (
     <>
-      <SignInModal />
+      {!session && <SignInModal />}
       <div
         className={`absolute top-0 z-30 w-full bg-transparent transition-all`}
       >
@@ -68,7 +68,8 @@ export default function Header({ session, userHasAccount }) {
               Pricing
             </div> */}
             <div
-              className={`my-auto mx-2 mt-2 flex cursor-pointer flex-row items-start justify-center rounded-lg ${
+              onClick={() => setShowSignInModal(true)}
+              className={`my-auto mx-2  mt-2 flex cursor-pointer flex-row items-start justify-center rounded-lg ${
                 !session ? "bg-mint" : "bg-transparent"
               }   p-2 font-mono`}
             >
@@ -80,14 +81,11 @@ export default function Header({ session, userHasAccount }) {
                 alt="Code Blocks"
               />
               {!session ? (
-                <div
-                  className="text-sm  font-bold text-purple-800"
-                  onClick={() => setShowSignInModal(true)}
-                >
+                <div className="text-sm  font-bold text-purple-800">
                   {userHasAccount ? "Login" : "Create Account"}
                 </div>
               ) : (
-                <UserDropdown />
+                <UserDropdown session={session} />
               )}
             </div>
           </div>
