@@ -17,11 +17,16 @@ export default function Navigation({
   setDocSelected,
   setSmartSelected,
 }) {
+  const isCodeModeSelected =
+    smartSelected | improveSelected | testSelected | bugSelected | docSelected
+  console.log("isCodeModeSelected", isCodeModeSelected)
+
   return (
     <>
       <SideBar setOpenSecondayNavBar={setOpenSecondayNavBar} />
       {openSecondayNavBar && (
         <SecondaryNavBar
+          isCodeModeSelected={isCodeModeSelected}
           openSecondayNavBar={openSecondayNavBar}
           improveSelected={improveSelected}
           setImproveSelected={setImproveSelected}

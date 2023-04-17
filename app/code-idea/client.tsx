@@ -14,7 +14,7 @@ import ResizablePanel from "app/components/ResizablePanel"
 import Button from "app/components/Button"
 import GenerateCode from "app/components/GenerateCode"
 import useLocalStorage from "hooks/use-localstorage"
-import { ChangeEvent, useRef, useState } from "react"
+import { ChangeEvent, useState } from "react"
 import { ElementType } from "app/components/DropDown"
 import FooterSection from "./footer-section"
 
@@ -75,6 +75,26 @@ export default function Client({
               role: "system",
               content:
                 "You are a helpful and specialized AI software assistant with much experience in unit testing, e2e testing, and all possible testing strategies.",
+            },
+            {
+              role: "user",
+              content: prompt,
+            },
+          ],
+        }),
+      })
+    } else if (improveSelected) {
+      response = await fetch("/api/generateWithTurbo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: [
+            {
+              role: "system",
+              content:
+                "You are a helpful and specialized AI software assistant which is specialized in code performance and customization.",
             },
             {
               role: "user",
@@ -240,13 +260,14 @@ export default function Client({
         buttonText="Save"
         setIsOpen={setShowSavePromptModal}
       />
-      <div id="container" className="ml-8 flex flex-col justify-between">
+      <div id="container" className="ml-8 mt-8 flex flex-col justify-between">
         <div className="mr-3">
-          <div className="text-1xl left-2 my-4 ml-1 mt-12 text-center uppercase text-purple-300 sm:text-left">
+          <div className="text-1xl left-2 ml-2 mb-6  pt-2 text-center uppercase text-purple-300 sm:text-left">
             {getCodeGeniusMode()}
           </div>
+
           <Editor
-            className="mb-4 w-full rounded-lg border-none bg-purple-900 pb-6 pt-4 text-gray-200 focus:border-none focus:shadow-none  focus:ring-0 focus:ring-purple-700 active:border-purple-700 sm:min-h-[80vh]"
+            className="mb-20 w-full rounded-lg border-none bg-purple-900 pb-6 pt-4 text-gray-200 focus:border-none focus:shadow-none  focus:ring-0 focus:ring-purple-700 active:border-purple-700 sm:min-h-[500px]"
             value={codeSentence}
             padding={10}
             highlight={(code) => highlight(code, languages.js)}
@@ -282,6 +303,8 @@ export default function Client({
         </div>
       </div>
       <FooterSection
+        generatedCode={generatedCode}
+        onSaveCode={onSaveCode}
         langElement={langElement}
         libElements={libElements}
         langElements={langElements}

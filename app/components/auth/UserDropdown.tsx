@@ -85,7 +85,7 @@ export default function UserDropdown({ session }) {
       >
         <button
           onClick={() => setOpenPopover(!openPopover)}
-          className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-full border border-gray-300 transition-all duration-75 focus:outline-none active:scale-95 sm:h-9 sm:w-9"
+          className="-mr-6 mt-2 flex h-8 w-8 items-center justify-center overflow-hidden rounded-full focus:outline-none sm:h-9 sm:w-9"
         >
           <Image
             alt={email}

@@ -7,6 +7,7 @@ import tailwindConfig from "tailwind.config"
 const colors: any = tailwindConfig.theme?.extend?.colors
 
 export default function SecondaryNavBar({
+  isCodeModeSelected,
   openSecondayNavBar,
   improveSelected,
   setImproveSelected,
@@ -22,12 +23,15 @@ export default function SecondaryNavBar({
   const [sidebarOpen, setSidebarOpen] = useState(openSecondayNavBar)
   //   const [searchTerm, setSearchTerm] = useState("")
   //   const userIsSearching = searchTerm !== ""
+  console.log("isCodeModeSelected", isCodeModeSelected)
 
   return (
     <div
       id="secondary-sidebar"
-      className={`"fixed top-0 left-[64px] z-20 hidden h-full flex-col items-start
-        border-r-[1px]  border-purple-700 bg-purple-900 
+      className={`${
+        isCodeModeSelected ? "hidden" : "block"
+      } fixed top-0 left-[64px] z-20 hidden h-full flex-col items-start
+         bg-purple-900 
       px-5 transition-transform duration-700 
        sm:relative sm:flex sm:translate-x-0`}
     >

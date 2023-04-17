@@ -36,6 +36,7 @@ export default function GenerateCode({
               <div className="w-full text-left">
                 <CopyBlock
                   showLineNumbers
+                  wrapLongLines
                   customStyle={{ borderRadius: "0.625rem" }}
                   text={generated}
                   language={langElement === "Typescript" ? "tsx" : "jsx"}
@@ -47,15 +48,6 @@ export default function GenerateCode({
                     metaColor: colors.mint,
                   }}
                 />
-                <div className="absolute bottom-12 right-4 hidden sm:block">
-                  <Button
-                    hidden={true}
-                    onClick={() => onSaveCode && onSaveCode()}
-                    variant="mint"
-                    loading={false}
-                    text="Save Code"
-                  />
-                </div>
               </div>
             )
           })}
