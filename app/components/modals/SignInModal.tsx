@@ -5,9 +5,9 @@ import { useState, Dispatch, SetStateAction, useCallback, useMemo } from "react"
 import Image from "next/image"
 import BaseModal from "app/components/modals/BaseModal"
 import { Poppins } from "next/font/google"
-import GithubLogo from "public/icons/github.svg"
 import GmailLogo from "public/icons/gmail.svg"
 import useWindowSize from "hooks/use-window-size"
+import Git from "../icons/git"
 
 const popins = Poppins({
   variable: "--font-popins",
@@ -16,30 +16,34 @@ const popins = Poppins({
 })
 
 const SignInModal = ({
+  userHasAccount,
   showSignInModal,
   setShowSignInModal,
 }: {
   showSignInModal: boolean
+  userHasAccount: boolean
   setShowSignInModal: Dispatch<SetStateAction<boolean>>
 }) => {
   const [signInClickedGitHub, setSignInClickedGitHub] = useState<boolean>(false)
   const [signInClickedGoogle, setSignInClickedGoogle] = useState<boolean>(false)
-  const { windowSize, isMobile, isDesktop } = useWindowSize()
+  const { isMobile } = useWindowSize()
 
   return (
     <BaseModal showModal={showSignInModal} setShowModal={setShowSignInModal}>
       {/* MAIN DIV - BACKGROUND*/}
-      <div className="rounded-2xl bg-purple-700 p-4 sm:h-[487px] sm:w-[504.01px]">
+      <div className="bg-purple-700 p-4 sm:h-[487px] sm:w-[504.01px] sm:rounded-2xl">
         {/* INNER DIV - FLEX CONTAINER */}
         {/* TITLE + SUBTITLE */}
         <div className="flex flex-col content-center justify-start justify-items-start gap-4 sm:p-12">
           <div className="mb-4 mt-8 flex flex-col content-center justify-start justify-items-start gap-4 sm:mb-8 sm:mt-0">
             <h1
-              className={`${popins.variable} text-center text-[28px] font-[700] leading-6 text-white sm:text-left sm:text-[30px]`}
+              className={`${popins.variable} text-center text-[28px] font-[700] leading-6 text-white  sm:text-[30px]`}
             >
-              Create your Account
+              {userHasAccount
+                ? "Login into your account"
+                : "Create your Account"}
             </h1>
-            <h6 className="text-center font-mono text-[16px] font-[400] leading-10 text-gray-200 sm:text-left sm:text-[20px]">
+            <h6 className="sm:text-xl text-center font-mono text-[16px] font-[400] leading-10  text-gray-200">
               Start coding with Code Genius
             </h6>
           </div>
@@ -51,34 +55,6 @@ const SignInModal = ({
               isMobile ? "flex-row" : "flex-col"
             } mb-8 content-center justify-start justify-items-start gap-4`}
           >
-            {/* GITHUB BUTTON */}
-            <button
-              disabled={signInClickedGitHub}
-              className={
-                "h-[40px] w-full rounded-lg bg-black sm:h-[80px] sm:w-[380px]"
-              }
-              onClick={() => {
-                setSignInClickedGitHub(true)
-                signIn("github", {
-                  callbackUrl: process.env.NEXTAUTH_URL,
-                })
-              }}
-            >
-              {signInClickedGitHub ? (
-                <p className="text-[28px] font-[700] text-white">Loading...</p>
-              ) : (
-                <div className="inline-flex content-center justify-center justify-items-center gap-2">
-                  <Image
-                    width={32}
-                    height={32}
-                    alt="Github Logo"
-                    src={GithubLogo.src} // Should use a logo that includes company font
-                    className="flex h-[25.51px] w-[26.15px] self-center"
-                  />
-                  <p className="text-[28px] font-[700] text-white">GitHub</p>
-                </div>
-              )}
-            </button>
             {/* GOOGLE BUTTON */}
             <button
               disabled={signInClickedGoogle}
@@ -97,13 +73,33 @@ const SignInModal = ({
               ) : (
                 <div className="inline-flex content-center justify-center justify-items-center gap-2">
                   <Image
-                    width={32}
-                    height={32}
-                    alt="Gmail Logo"
-                    src={GmailLogo.src} // Should use a logo that includes company font
-                    className="flex h-[38px] w-[38x] self-center"
+                    height={111}
+                    width={111}
+                    alt="Google Login"
+                    src={GmailLogo}
+                    className="flex self-center"
                   />
-                  <p className="text-[28px] font-[700] text-gray-500">Gmail</p>
+                </div>
+              )}
+            </button>
+            {/* GITHUB BUTTON */}
+            <button
+              disabled={signInClickedGitHub}
+              className={
+                "h-[40px] w-full rounded-lg bg-black sm:h-[80px] sm:w-[380px]"
+              }
+              onClick={() => {
+                setSignInClickedGitHub(true)
+                signIn("github", {
+                  callbackUrl: process.env.NEXTAUTH_URL,
+                })
+              }}
+            >
+              {signInClickedGitHub ? (
+                <p className="text-[28px] font-[700] text-white">Loading...</p>
+              ) : (
+                <div className="inline-flex content-center justify-center justify-items-center gap-2">
+                  <Git />
                 </div>
               )}
             </button>
@@ -114,12 +110,13 @@ const SignInModal = ({
   )
 }
 
-export function useSignInModal() {
+export function useSignInModal(userHasAccount: boolean) {
   const [showSignInModal, setShowSignInModal] = useState(false)
 
   const SignInModalCallback = useCallback(() => {
     return (
       <SignInModal
+        userHasAccount={userHasAccount}
         showSignInModal={showSignInModal}
         setShowSignInModal={setShowSignInModal}
       />

@@ -1,15 +1,14 @@
 "use client"
 
+import { MessageSquare, Code2, Home } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 import tailwindConfig from "tailwind.config"
 
-const colors: any = tailwindConfig.theme?.extend?.colors
-
 export default function SideBar({ setOpenSecondayNavBar }) {
-  const [searchTerm, setSearchTerm] = useState("")
-  const userIsSearching = searchTerm !== ""
+  // const [searchTerm, setSearchTerm] = useState("")
+  // const userIsSearching = searchTerm !== ""
 
   return (
     <div
@@ -18,31 +17,19 @@ export default function SideBar({ setOpenSecondayNavBar }) {
       border-purple-700 bg-purple-900 px-5 pt-3 transition-transform duration-700 sm:fixed sm:flex sm:translate-x-0`}
     >
       <Link href="/" className="mt-7 cursor-pointer ">
-        <Image
-          src={"/icons/home.svg"}
-          width={26}
-          height={26}
-          alt="Chat with Code Genius"
-        />
+        <Home width={26} height={26} className="text-white hover:text-mint" />
       </Link>
       <div
         className="mt-8 cursor-pointer"
         onClick={() => setOpenSecondayNavBar((prevState) => !prevState)}
       >
-        <Image
-          src={"/icons/code-browser.svg"}
-          width={26}
-          height={26}
-          className=""
-          alt="Choose your code mode"
-        />
+        <Code2 width={26} height={26} className="text-white hover:text-mint" />
       </div>
       <Link href="/code-chat" className="mt-8 cursor-pointer">
-        <Image
-          src={"/icons/message-chat-square.svg"}
+        <MessageSquare
           width={26}
           height={26}
-          alt="Chat with Code Genius"
+          className="text-white hover:text-mint"
         />
       </Link>
       {/* <div className="mt-8 cursor-pointer">

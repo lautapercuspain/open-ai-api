@@ -18,7 +18,7 @@ const rubik = Rubik({
 
 export default function Header({ session, userHasAccount }) {
   const pathname = usePathname()
-  const { SignInModal, setShowSignInModal } = useSignInModal()
+  const { SignInModal, setShowSignInModal } = useSignInModal(userHasAccount)
   const [userId, setUserId] = useLocalStorage(LSConfig.user.userId, "")
 
   useEffect(() => {
