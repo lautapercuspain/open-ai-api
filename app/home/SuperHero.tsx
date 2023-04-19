@@ -1,8 +1,8 @@
 "use client"
+
+import { motion } from "framer-motion"
 import { Poppins } from "next/font/google"
 import "../../styles/waterfall.css"
-
-import HomeChat from "./HomeChat"
 
 const popins = Poppins({
   variable: "--font-popins",
@@ -13,19 +13,18 @@ const popins = Poppins({
 export default function SuperHero() {
   return (
     <>
-      <section className={`${popins.variable} mb-5 font-popins`}>
-        <h1
-          className="mx-auto w-[90%] items-center justify-center bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text p-3 text-center font-popins text-6xl
+      <section className={`${popins.variable} mt-48 mb-5 font-popins`}>
+        <motion.h1
+          whileHover={{ scale: 1.1 }}
+          className="mx-auto w-[90%] cursor-pointer items-center justify-center bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text p-3 text-center font-popins text-6xl
 text-transparent sm:flex sm:w-full"
         >
           Create Genius Code
-        </h1>
+        </motion.h1>
         <p className="mt-2 w-[100%] items-center justify-center px-3 text-center font-popins text-2xl text-white">
-          Enhance your coding with AI expertise for improved speed, simplicity,
-          and efficiency.
+          Develop Improved, Rapid, and Streamlined Code with your AI Genius
         </p>
       </section>
-      <HomeChat />
     </>
   )
 }

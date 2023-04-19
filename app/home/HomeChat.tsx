@@ -114,12 +114,12 @@ export default function HomeChat() {
 
   return (
     <>
-      <div className="relative ml-1 mb-9 flex w-full flex-col items-center justify-center sm:mx-auto">
-        <div className="relative mt-2 max-h-12 w-full text-center sm:w-[800px]">
+      <div className="relative mb-[300px] ml-1 flex w-full flex-col items-center justify-center sm:mx-auto">
+        <div className="relative mt-2 h-12 w-full text-center sm:w-[900px]">
           <input
             ref={textareaRef}
-            className="md:placeholder:text-md font-sm w-[95%] resize-none rounded-lg bg-purple-400 
-             py-2.5 pl-3 font-mono text-white outline-0 placeholder:pl-2 placeholder:pt-1  placeholder:font-popins placeholder:text-[13px] placeholder:text-white hover:outline-0 focus:border-transparent focus:ring-black/30 active:outline-0 sm:w-[800px]"
+            className="font-lg h-12 w-[95%] resize-none rounded-lg bg-purple-400 py-2.5 
+             pl-3 font-mono text-white outline-0 placeholder:pl-2 placeholder:pt-1 placeholder:font-popins placeholder:text-[16px] placeholder:text-white hover:outline-0 focus:border-transparent focus:ring-black/30 active:outline-0 sm:w-[900px]"
             value={codeSentence}
             onChange={(e) => setCodeSentence(e.target.value)}
             onKeyDown={(e) => onCodeGeneration(e)}
@@ -127,7 +127,7 @@ export default function HomeChat() {
               generatedMessages.length <= 0 ? "What is your code idea?" : ""
             }
           />
-          <button className="absolute right-4 top-1  rounded-lg bg-gray-900 p-1 disabled:hover:bg-transparent sm:right-1">
+          <button className="absolute right-4 top-[6px]  rounded-lg bg-gray-900 p-1 disabled:hover:bg-transparent sm:right-1">
             <Image
               className="mb-1 mr-2 pt-2 pb-1 pl-2 text-white"
               alt="Send"

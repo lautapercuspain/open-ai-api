@@ -57,3 +57,28 @@ export async function generateCodeWithTurbo(
     setReader(null)
   }
 }
+
+export const fetchWithTurbo = async (
+  assintanceMood: string,
+  prompt: string,
+) => {
+  const response = await fetch("/api/generateWithTurbo", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      messages: [
+        {
+          role: "system",
+          content: assintanceMood,
+        },
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+    }),
+  })
+  return response
+}

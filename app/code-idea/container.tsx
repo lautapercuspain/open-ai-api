@@ -41,7 +41,7 @@ export default function Container() {
     }
     if (docSelected) {
       setPrompt(
-        `Create documentation for the provided code: "${codeSentence}". Use Markdown syntax for the documented code or add the documentation as a comments above the code.`,
+        `Create documentation for the provided code: "${codeSentence}". Document the code as code comments. Don't use long sentences`,
       )
     }
   }, [

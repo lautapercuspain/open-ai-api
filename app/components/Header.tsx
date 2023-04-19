@@ -69,24 +69,23 @@ export default function Header({ session, userHasAccount }) {
             </div> */}
             <div
               onClick={() => setShowSignInModal(true)}
-              className={`my-auto mx-2  mt-2 flex cursor-pointer flex-row items-start justify-center rounded-lg ${
-                !session ? "bg-mint" : "bg-transparent"
-              }   p-2 font-mono`}
+              className={`my-auto mx-2 mt-2 flex cursor-pointer flex-row items-start justify-center rounded-lg  ${
+                !session
+                  ? "bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0]"
+                  : "bg-transparent"
+              }  p-[2px] font-mono`}
             >
-              <Image
-                src={"/icons/code-blocks.svg"}
-                width={15}
-                height={15}
-                className={`mt-1 mr-1 ${session ? "hidden" : "block"}`}
-                alt="Code Blocks"
-              />
-              {!session ? (
-                <div className="text-sm  font-bold text-purple-800">
-                  {userHasAccount ? "Login" : "Create Account"}
-                </div>
-              ) : (
-                <UserDropdown session={session} />
-              )}
+              <div className="relative h-[48px] w-[163px] rounded-lg bg-purple-800">
+                {!session ? (
+                  <div className="text-sm mt-3 text-center text-white">
+                    {userHasAccount ? "Login" : "Create Account"}
+                  </div>
+                ) : (
+                  <div className="absolute right-1">
+                    <UserDropdown session={session} />
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

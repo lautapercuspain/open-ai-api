@@ -14,9 +14,10 @@ import ResizablePanel from "app/components/ResizablePanel"
 import Button from "app/components/Button"
 import GenerateCode from "app/components/GenerateCode"
 import useLocalStorage from "hooks/use-localstorage"
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useEffect, useRef, useState } from "react"
 import { ElementType } from "app/components/DropDown"
 import FooterSection from "./footer-section"
+import { fetchWithTurbo } from "utils/generateCode"
 
 let libElements: ElementType[] = ["React", "Vue", "Angular"]
 let langElements: ElementType[] = ["Typescript", "Javascript"]
@@ -47,6 +48,13 @@ export default function Client({
   const [userId] = useLocalStorage(LSConfig.user.userId, "")
   const controller = new AbortController()
 
+  useEffect(() => {
+    const editorPanel = document.getElementById("code-editor")
+    if (editorPanel) {
+      editorPanel.focus()
+    }
+  }, [])
+
   const onCodeGeneration = () => {
     generateCode()
   }
@@ -64,45 +72,20 @@ export default function Client({
     setGeneratedCode("")
 
     if (testSelected) {
-      response = await fetch("/api/generateWithTurbo", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          messages: [
-            {
-              role: "system",
-              content:
-                "You are a helpful and specialized AI software assistant with much experience in unit testing, e2e testing, and all possible testing strategies.",
-            },
-            {
-              role: "user",
-              content: prompt,
-            },
-          ],
-        }),
-      })
+      response = await fetchWithTurbo(
+        "You are a helpful and specialized AI software assistant with much experience in unit testing, e2e testing, and all possible testing strategies.",
+        prompt,
+      )
     } else if (improveSelected) {
-      response = await fetch("/api/generateWithTurbo", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          messages: [
-            {
-              role: "system",
-              content:
-                "You are a helpful and specialized AI software assistant which is specialized in code performance and customization.",
-            },
-            {
-              role: "user",
-              content: prompt,
-            },
-          ],
-        }),
-      })
+      response = await fetchWithTurbo(
+        "You are a helpful and specialized AI software assistant which is specialized in code performance and customization.",
+        prompt,
+      )
+    } else if (docSelected) {
+      response = await fetchWithTurbo(
+        "You are an AI software assistant which is specialized in providing code documentation. Requeriments: Use short sentences to make it easy to read (max 20 words per line).",
+        prompt,
+      )
     } else {
       response = await fetch("/api/generate", {
         method: "POST",
@@ -119,7 +102,7 @@ export default function Client({
     // clear timeout
     // clearTimeout(id)
 
-    if (!response.ok) {
+    if (response && !response.ok) {
       setLoading(false)
       return
     }
@@ -233,7 +216,7 @@ export default function Client({
       return (
         <>
           <span>
-            Paste your code and Code Genius will generate the documentation
+            Paste your code and Code Genius will generate documentation for it
           </span>
         </>
       )
@@ -267,6 +250,7 @@ export default function Client({
           </div>
 
           <Editor
+            textareaId="code-editor"
             className="mb-20 w-full rounded-lg border-none bg-purple-900 pb-6 pt-4 text-gray-200 focus:border-none focus:shadow-none  focus:ring-0 focus:ring-purple-700 active:border-purple-700 sm:min-h-[500px]"
             value={codeSentence}
             padding={10}

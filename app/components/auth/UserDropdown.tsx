@@ -85,9 +85,10 @@ export default function UserDropdown({ session }) {
       >
         <button
           onClick={() => setOpenPopover(!openPopover)}
-          className="-mr-6 mt-2 flex h-8 w-8 items-center justify-center overflow-hidden rounded-full focus:outline-none sm:h-9 sm:w-9"
+          className="-mr-6 mt-2 flex h-8 w-8 items-end justify-end overflow-hidden rounded-full focus:outline-none sm:h-9 sm:w-9"
         >
           <Image
+            className=""
             alt={email}
             src={image || `https://avatars.dicebear.com/api/micah/${email}.svg`}
             width={40}

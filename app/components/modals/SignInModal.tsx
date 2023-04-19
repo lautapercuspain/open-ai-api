@@ -31,7 +31,7 @@ const SignInModal = ({
   return (
     <BaseModal showModal={showSignInModal} setShowModal={setShowSignInModal}>
       {/* MAIN DIV - BACKGROUND*/}
-      <div className="bg-purple-700 p-4 sm:h-[487px] sm:w-[504.01px] sm:rounded-2xl">
+      <div className="bg-purple-700 p-4 sm:h-[400px] sm:w-[504.01px] sm:rounded-2xl">
         {/* INNER DIV - FLEX CONTAINER */}
         {/* TITLE + SUBTITLE */}
         <div className="flex flex-col content-center justify-start justify-items-start gap-4 sm:p-12">
@@ -59,7 +59,7 @@ const SignInModal = ({
             <button
               disabled={signInClickedGoogle}
               className={
-                "h-[40px] w-full rounded-lg bg-white sm:h-[80px] sm:w-[380px]"
+                "h-[40px] w-full rounded-lg bg-white sm:h-[60px] sm:w-[380px]"
               }
               onClick={() => {
                 setSignInClickedGoogle(true)
@@ -86,7 +86,7 @@ const SignInModal = ({
             <button
               disabled={signInClickedGitHub}
               className={
-                "h-[40px] w-full rounded-lg bg-black sm:h-[80px] sm:w-[380px]"
+                "h-[40px] w-full rounded-lg bg-black sm:h-[60px] sm:w-[380px]"
               }
               onClick={() => {
                 setSignInClickedGitHub(true)

@@ -2,6 +2,7 @@ import Hero from "./home/Hero"
 import Feature from "./home/Feature"
 // import Subscription from "./home/Subscription"
 import SuperHero from "./home/SuperHero"
+import HomeChat from "./home/HomeChat"
 
 export const metadata = {
   title: "Create Genius Code",
@@ -13,6 +14,7 @@ export default function Page() {
   return (
     <main className={`mx-auto max-w-max py-24`}>
       <SuperHero />
+      <HomeChat />
       <Hero />
       <Feature />
     </main>

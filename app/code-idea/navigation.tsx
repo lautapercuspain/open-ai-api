@@ -2,6 +2,7 @@
 
 import SecondaryNavBar from "app/components/shared/SecondaryNavBar"
 import SideBar from "app/components/shared/SideBar"
+import { usePathname } from "next/navigation"
 
 export default function Navigation({
   smartSelected,
@@ -17,13 +18,17 @@ export default function Navigation({
   setDocSelected,
   setSmartSelected,
 }) {
+  const pathname = usePathname()
   const isCodeModeSelected =
     smartSelected | improveSelected | testSelected | bugSelected | docSelected
   console.log("isCodeModeSelected", isCodeModeSelected)
 
   return (
     <>
-      <SideBar setOpenSecondayNavBar={setOpenSecondayNavBar} />
+      <SideBar
+        pathname={pathname}
+        setOpenSecondayNavBar={setOpenSecondayNavBar}
+      />
       {openSecondayNavBar && (
         <SecondaryNavBar
           isCodeModeSelected={isCodeModeSelected}

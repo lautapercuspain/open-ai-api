@@ -3,7 +3,7 @@
 import { MessageSquare, Code2, Home } from "lucide-react"
 import Link from "next/link"
 
-export default function SideBar({ setOpenSecondayNavBar }) {
+export default function SideBar({ setOpenSecondayNavBar, pathname }) {
   // const [searchTerm, setSearchTerm] = useState("")
   // const userIsSearching = searchTerm !== ""
 
@@ -15,12 +15,20 @@ export default function SideBar({ setOpenSecondayNavBar }) {
     >
       <Link href="/" className="mt-7 cursor-pointer ">
         <Home width={26} height={26} className="text-white hover:text-mint" />
+        {/* <p className="font-mono text-[11px] text-white">Home</p> */}
       </Link>
       <div
         className="mt-8 cursor-pointer"
         onClick={() => setOpenSecondayNavBar((prevState) => !prevState)}
       >
-        <Code2 width={26} height={26} className="text-white hover:text-mint" />
+        <Code2
+          width={26}
+          height={26}
+          className={`text-white hover:text-mint ${
+            pathname === "/code-idea" && "text-mint"
+          }`}
+        />
+        {/* <p className="font-mono text-[11px] text-white">Code idea</p> */}
       </div>
       <Link href="/code-chat" className="mt-8 cursor-pointer">
         <MessageSquare
@@ -28,6 +36,7 @@ export default function SideBar({ setOpenSecondayNavBar }) {
           height={26}
           className="text-white hover:text-mint"
         />
+        {/* <p className="font-mono text-[11px] text-white">Chat</p> */}
       </Link>
       {/* <div className="mt-8 cursor-pointer">
         <SearchBar
