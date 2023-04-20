@@ -64,9 +64,6 @@ export default function Header({ session, userHasAccount }) {
             </Link>
           </div>
           <div className="flex h-10 items-end">
-            {/* <div className="text-lg  hidden cursor-pointer font-mono font-bold text-white sm:block">
-              Pricing
-            </div> */}
             <div
               onClick={() => setShowSignInModal(true)}
               className={`my-auto mx-2 mt-2 flex cursor-pointer flex-row items-start justify-center rounded-lg  ${
@@ -75,17 +72,14 @@ export default function Header({ session, userHasAccount }) {
                   : "bg-transparent"
               }  p-[2px] font-mono`}
             >
-              <div className="relative h-[48px] w-[163px] rounded-lg bg-purple-900">
-                {!session ? (
+              {!session && (
+                <div className="relative h-[48px] w-[163px] rounded-lg bg-purple-900">
                   <div className="text-sm mt-3 text-center text-white">
                     {userHasAccount ? "Login" : "Create Account"}
                   </div>
-                ) : (
-                  <div className="absolute right-1">
-                    <UserDropdown session={session} />
-                  </div>
-                )}
-              </div>
+                </div>
+              )}
+              {session && <UserDropdown session={session} />}
             </div>
           </div>
         </div>

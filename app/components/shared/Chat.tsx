@@ -4,10 +4,11 @@ import { Message } from "@chatscope/chat-ui-kit-react"
 import tailwindConfig from "tailwind.config.js"
 import { parseText } from "utils/parseText"
 import GenerateCode from "../GenerateCode"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import ChatContainer from "app/home/ChatContainer"
 import { CodeMessagesProps } from "app/home/HomeChat"
+import PromptCard from "./PromptCard"
 
 export default function Chat({
   generatedResponse,
@@ -17,14 +18,19 @@ export default function Chat({
   onCodeGeneration,
 }) {
   const inputRef = useRef<any>(null)
-
+  const [prompt, setPrompt] = useState("")
   useEffect(() => {
     if (inputRef && inputRef.current) {
       inputRef.current.focus()
     }
   }, [])
+  useEffect(() => {
+    if (prompt !== "") {
+      setCodeSentence(prompt)
+    }
+  }, [prompt])
 
-  const colors: any = tailwindConfig.theme?.extend?.colors
+  // const colors: any = tailwindConfig.theme?.extend?.colors
 
   const CodeMessages = () => {
     return (
@@ -88,6 +94,7 @@ export default function Chat({
       </>
     )
   }
+  console.log("generatedResponse.length::", generatedResponse.length)
 
   return (
     <div className="mx-auto flex w-full flex-row items-center justify-center overflow-scroll rounded-md">
@@ -98,6 +105,40 @@ export default function Chat({
           messages={<LiveDemoMessages generatedMessages={generatedResponse} />}
         />
       )}
+      {generatedResponse.length === 0 && (
+        <div className="mt-24 flex w-[80%] flex-wrap items-center justify-between gap-2">
+          <PromptCard
+            onClick={setPrompt}
+            title="Create React App"
+            text="How to use the Create React App npm package"
+          />
+          <PromptCard
+            onClick={setPrompt}
+            title="Create Next App"
+            text="How to use the  the Create Next App package"
+          />
+          <PromptCard
+            onClick={setPrompt}
+            title="Create React App"
+            text="Explain how to use Typescript with React"
+          />
+          <PromptCard
+            onClick={setPrompt}
+            title="Software Development"
+            text="What are the best practice in software development"
+          />
+          <PromptCard
+            onClick={setPrompt}
+            title="Database"
+            text="What's the best Database with Typescript support"
+          />
+          <PromptCard
+            onClick={setPrompt}
+            title="Testing"
+            text="Explain how to use Jest with React Testing Library"
+          />
+        </div>
+      )}
 
       {/* Chat input container */}
       <div className="fixed bottom-4 left-0 right-0 mx-auto w-full ">
@@ -106,12 +147,12 @@ export default function Chat({
             ref={inputRef}
             className="font-lg h-12 resize-none rounded-lg bg-purple-400 py-2.5 pl-2  
              font-mono text-white outline-0 placeholder:pt-1 placeholder:pl-3 placeholder:font-popins placeholder:text-[16px] placeholder:text-white hover:outline-0 focus:border-transparent focus:ring-black/30 active:outline-0 sm:w-[87%]"
-            value={codeSentence}
+            value={prompt.length > 0 ? prompt : codeSentence}
             onChange={(e) => setCodeSentence(e.target.value)}
             onKeyDown={(e) => onCodeGeneration(e)}
             placeholder={"Ask to Code Genius?"}
           />
-          <button className="absolute right-[92px] top-[6px] rounded-lg bg-gray-900 p-1  disabled:hover:bg-transparent ">
+          <button className="bg-gray-900-1 absolute right-[92px] top-[6px] rounded-lg  disabled:hover:bg-transparent ">
             <Image
               className="mb-1 mr-2 pt-2 pb-1 pl-2 text-white"
               alt="Send"
