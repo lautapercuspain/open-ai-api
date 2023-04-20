@@ -44,8 +44,8 @@ export default function UserDropdown({ session }) {
             </button>
             <button className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-gray-100">
               <Laptop className="h-4 w-4" />
-              <Link href="my-code">
-                <p className="text-sm">My Code</p>
+              <Link href="code-chat">
+                <p className="text-sm">My Chat</p>
               </Link>
             </button>
             <button

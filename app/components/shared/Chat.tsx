@@ -106,7 +106,7 @@ export default function Chat({
         />
       )}
       {generatedResponse.length === 0 && (
-        <div className="mt-24 flex w-[80%] flex-wrap items-center justify-between gap-2">
+        <div className="mt-24 flex max-w-[1000px] flex-wrap items-center justify-between gap-2">
           <PromptCard
             onClick={setPrompt}
             title="Create React App"
@@ -142,17 +142,17 @@ export default function Chat({
 
       {/* Chat input container */}
       <div className="fixed bottom-4 left-0 right-0 mx-auto w-full ">
-        <div className="relative mx-auto mt-2 h-12 sm:w-[90%]">
+        <div className="relative mx-auto mt-2 h-12 sm:w-[990px]">
           <input
             ref={inputRef}
             className="font-lg h-12 resize-none rounded-lg bg-purple-400 py-2.5 pl-2  
-             font-mono text-white outline-0 placeholder:pt-1 placeholder:pl-3 placeholder:font-popins placeholder:text-[16px] placeholder:text-white hover:outline-0 focus:border-transparent focus:ring-black/30 active:outline-0 sm:w-[87%]"
+             font-mono text-white outline-0 placeholder:pt-1 placeholder:pl-3 placeholder:font-popins placeholder:text-[16px] placeholder:text-white hover:outline-0 focus:border-transparent focus:ring-black/30 active:outline-0 sm:w-[990px]"
             value={prompt.length > 0 ? prompt : codeSentence}
             onChange={(e) => setCodeSentence(e.target.value)}
             onKeyDown={(e) => onCodeGeneration(e)}
             placeholder={"Ask to Code Genius?"}
           />
-          <button className="bg-gray-900-1 absolute right-[92px] top-[6px] rounded-lg  disabled:hover:bg-transparent ">
+          <button className="absolute right-2 top-2 rounded-lg bg-gray-900  disabled:hover:bg-transparent ">
             <Image
               className="mb-1 mr-2 pt-2 pb-1 pl-2 text-white"
               alt="Send"
