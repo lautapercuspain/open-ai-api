@@ -30,10 +30,10 @@ export default function SecondaryNavBar({
       id="secondary-sidebar"
       className={`${
         isCodeModeSelected ? "hidden" : "block"
-      } fixed top-0 left-[64px] z-20 hidden h-full flex-col items-start
+      } absolute top-0 left-[64px] z-20 h-auto flex-col items-start
          bg-purple-900 
       px-5 transition-transform duration-700 
-       sm:relative sm:flex sm:translate-x-0`}
+        sm:flex sm:translate-x-0`}
     >
       {/* <SearchBar
         userIsSearching={userIsSearching}
@@ -44,7 +44,7 @@ export default function SecondaryNavBar({
       /> */}
 
       <div
-        className="mt-9 inline-flex h-12"
+        className="mt-10 inline-flex h-12"
         onClick={() => {
           setSidebarOpen(!sidebarOpen)
           if (!smartSelected) {
@@ -64,7 +64,7 @@ export default function SecondaryNavBar({
         <p
           className={`ml-4 w-[200px] ${sidebarOpen ? "block" : "hidden"} ${
             smartSelected ? "text-mint" : "text-white"
-          } -mt-1 cursor-pointer rounded-md pt-2 pl-2 hover:bg-purple-500`}
+          } -mt-2 cursor-pointer rounded-md p-2 hover:bg-purple-500`}
         >
           Code Suggestions
         </p>

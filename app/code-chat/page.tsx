@@ -165,22 +165,14 @@ export default function Page() {
         buttonText="Save"
         setIsOpen={setShowSavePromptModal}
       />
-      <main className="flex w-full min-w-full flex-1 flex-col items-center justify-center px-4 text-center sm:mt-20">
-        <div className="w-[85%] text-white dark:text-white">
-          <Chat
-            generatedResponse={generatedMessages}
-            onArrowPress={onArrowPress}
-            codeSentence={codeSentence}
-            onCodeGeneration={onCodeGeneration}
-            setCodeSentence={setCodeSentence}
-            useArrow
-          />
-          <StopButton
-            onClick={stopGeneration}
-            loading={loading}
-            text="Stop Generating"
-          />
-        </div>
+      <main className="flex w-full flex-1 flex-col items-center justify-center px-4 text-center sm:mt-20">
+        <Chat
+          generatedResponse={generatedMessages}
+          onArrowPress={onArrowPress}
+          codeSentence={codeSentence}
+          onCodeGeneration={onCodeGeneration}
+          setCodeSentence={setCodeSentence}
+        />
       </main>
     </>
   )

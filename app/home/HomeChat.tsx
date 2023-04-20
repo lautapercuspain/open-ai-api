@@ -9,7 +9,7 @@ import { parseText } from "utils/parseText"
 import ChatContainer from "./ChatContainer"
 // import tailwindConfig from "tailwind.config.js"
 
-interface CodeMessagesProps {
+export interface CodeMessagesProps {
   generatedMessages: any
 }
 

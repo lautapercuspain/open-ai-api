@@ -85,7 +85,6 @@ export default function FooterSection({
             />
           </div>
         </div>
-
         <div className="mr-8">
           <Button
             onClick={onCodeGeneration}

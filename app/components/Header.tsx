@@ -75,7 +75,7 @@ export default function Header({ session, userHasAccount }) {
                   : "bg-transparent"
               }  p-[2px] font-mono`}
             >
-              <div className="relative h-[48px] w-[163px] rounded-lg bg-purple-800">
+              <div className="relative h-[48px] w-[163px] rounded-lg bg-purple-900">
                 {!session ? (
                   <div className="text-sm mt-3 text-center text-white">
                     {userHasAccount ? "Login" : "Create Account"}

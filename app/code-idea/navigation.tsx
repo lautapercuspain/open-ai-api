@@ -25,10 +25,7 @@ export default function Navigation({
 
   return (
     <>
-      <SideBar
-        pathname={pathname}
-        setOpenSecondayNavBar={setOpenSecondayNavBar}
-      />
+      <SideBar setOpenSecondayNavBar={setOpenSecondayNavBar} />
       {openSecondayNavBar && (
         <SecondaryNavBar
           isCodeModeSelected={isCodeModeSelected}

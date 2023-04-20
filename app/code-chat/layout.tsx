@@ -1,4 +1,5 @@
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css"
+import SideBar from "app/components/shared/SideBar"
 
 export default async function RootLayout({
   children,
@@ -7,7 +8,10 @@ export default async function RootLayout({
 }) {
   return (
     <>
-      <div className="mx-auto min-w-[80%] dark:bg-slate-400">{children}</div>
+      <div className="mx-auto w-full dark:bg-purple-900">
+        <SideBar setOpenSecondayNavBar={undefined} />
+        {children}
+      </div>
     </>
   )
 }

@@ -22,12 +22,11 @@ export default function Button({
 }: ButtonProps) {
   return !loading ? (
     <button
-      // bg-gradient-to-r from-pink-500  via-purple-500 to-indigo-500
       className={`${
         hidden ? "hidden" : null
       }  "bg-mint"  w-36 rounded-md bg-black px-4 py-2 font-medium ${
-        variant === "mint" ? "text-black" : "text-mint"
-      } hover:bg-mint/80  dark:bg-white  dark:text-slate-600 `}
+        variant === "mint" ? "bg-mint" : "bg-transparent"
+      } hover:bg-mint/80   dark:text-slate-600 `}
       onClick={() => onClick()}
     >
       {text}

@@ -33,7 +33,7 @@ export default function GenerateCode({
 
           .map((generated) => {
             return (
-              <div className="w-full text-left">
+              <div className="w-full text-left [&>button]:h-10 [&>button]:w-10 ">
                 <CopyBlock
                   showLineNumbers
                   wrapLongLines

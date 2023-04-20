@@ -4,7 +4,7 @@
 // import Link from "next/link";
 import React, { useEffect, useRef } from "react"
 
-export default function ChatContainer({ messages }: any) {
+export default function ChatContainer({ messages, width }: any) {
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const [scrollHeight, setScrollHeight] = React.useState(0)
 
@@ -26,7 +26,8 @@ export default function ChatContainer({ messages }: any) {
   return (
     <div
       ref={chatContainerRef}
-      className="mt-3 max-h-80 w-[95%] overflow-hidden overflow-y-scroll rounded-md bg-purple-400 px-3 font-mono text-white sm:w-[900px]"
+      className={`mt-3 max-h-[560px] overflow-hidden overflow-y-scroll rounded-md
+       bg-purple-400 px-3 font-mono text-white w-[${width}] `}
     >
       {messages}
     </div>
