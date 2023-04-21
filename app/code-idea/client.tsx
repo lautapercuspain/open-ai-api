@@ -245,10 +245,10 @@ export default function Client({
       />
       <div id="container" className="ml-8 mt-8 flex flex-col justify-between">
         <div className="mr-3">
-          <div className="text-1xl left-2 ml-2 mb-6  pt-2 text-center uppercase text-purple-300 sm:text-left">
+          <div className="text-1xl left-2 ml-2 mb-6  pb-3 pt-2 text-center uppercase text-purple-300 sm:text-left">
             {getCodeGeniusMode()}
           </div>
-
+          <div className="h-1 border-b-2 border-purple-500 " />
           <Editor
             textareaId="code-editor"
             className="mb-20 w-full rounded-lg border-none bg-purple-900 pb-6 pt-4 text-gray-200 focus:border-none focus:shadow-none  focus:ring-0 focus:ring-purple-700 active:border-purple-700 sm:min-h-[500px]"

@@ -66,13 +66,13 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["var(--font-roboto)"],
-        popins: ["var(--font-popins)"],
+        inter: ["var(--font-inter)"],
         rubik: ["var(--font-rubik)"],
       },
       colors: {
         specialBlue: "#6ea9d7",
         mint: "#A1FFE0",
-        lineNumbers: '#8283AD',
+        lineNumbers: "#8283AD",
         gradient: {
           dark: "#a688ff",
           light: "#d1a8ff",
@@ -85,17 +85,17 @@ module.exports = {
           500: "#525162",
           600: "#2F2E49",
           700: "#272639",
-          800: '#787879'
+          800: "#787879",
         },
         purple: {
           100: "#F3F2F7",
           200: "#DAD9E6",
           300: "#C1C0D6",
           400: "#2A2944",
-          500: "#605F93",
-          600: "#404061",
-          700: "#28273D",
-          800: "#1D1D29",
+          500: "#292B45",
+          600: "#222539",
+          700: "#1E2030",
+          800: "#181A28",
           900: "#101018",
         },
       },

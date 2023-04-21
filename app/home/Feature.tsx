@@ -1,24 +1,18 @@
 "use client"
 
-import {
-  motion,
-  useMotionValue,
-  useMotionValueEvent,
-  useScroll,
-  useTransform,
-} from "framer-motion"
+import { useMotionValueEvent, useScroll } from "framer-motion"
 import suggestions from "../../animations/suggestions.json"
 import generation from "../../animations/generation.json"
 import bugDetection from "../../animations/bugDetection.json"
-import { Poppins } from "next/font/google"
+import { Inter } from "next/font/google"
 
 import Lottie from "lottie-react"
 import { useState } from "react"
 
-const popins = Poppins({
-  variable: "--font-popins",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["100", "300", "600"],
+  weight: ["100", "300", "400", "600", "700"],
 })
 
 const interactivity: any = {
@@ -65,7 +59,7 @@ export default function Feature() {
 
   return (
     <>
-      <section className={`mt-8 text-white ${popins.variable} font-popins`}>
+      <section className={`mt-8 text-white ${inter.variable} font-inter`}>
         <div className="mb-24 grid grid-cols-1 gap-1 sm:grid-cols-2">
           {/* <motion.div
             whileHover={{ scale: 1.5 }}

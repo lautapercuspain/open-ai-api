@@ -1,23 +1,22 @@
 "use client"
 
-import { Poppins } from "next/font/google"
+import { Inter, Poppins } from "next/font/google"
 
 import Image from "next/image"
 
-const popins = Poppins({
-  variable: "--font-popins",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["100", "300", "600"],
+  weight: ["100", "300", "400", "600", "700"],
 })
-
 export default function Hero() {
   return (
-    <div className={`mt-18 ${popins.variable} font-popins`}>
+    <div className={`mt-18 ${inter.variable} font-inter`}>
       <section className="relative mx-auto mt-[10%] flex flex-col items-center justify-center">
-        <h3 className="block w-full px-1 py-3 text-center font-popins text-2xl text-white sm:mx-auto sm:w-2/4 sm:text-4xl">
+        <h3 className="block w-full px-1 py-3 text-center font-inter text-2xl text-white sm:mx-auto sm:w-2/4 sm:text-4xl">
           A smarter, faster way to code with AI assistance.
         </h3>
-        <p className="mx-auto mt-3 mb-10 w-full px-3 text-center font-popins text-2xl text-white sm:w-1/2">
+        <p className="mx-auto mt-3 mb-10 w-full px-3 text-center font-inter text-2xl text-white sm:w-1/2">
           Code writing is tough and time-consuming. Code Genius helps enhance
           your skills. Discover new possibilities!
         </p>

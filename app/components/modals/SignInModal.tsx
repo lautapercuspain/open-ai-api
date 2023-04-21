@@ -4,15 +4,15 @@ import { signIn } from "next-auth/react"
 import { useState, Dispatch, SetStateAction, useCallback, useMemo } from "react"
 import Image from "next/image"
 import BaseModal from "app/components/modals/BaseModal"
-import { Poppins } from "next/font/google"
+import { Inter } from "next/font/google"
 import GmailLogo from "public/icons/gmail.svg"
 import useWindowSize from "hooks/use-window-size"
 import Git from "../icons/git"
 
-const popins = Poppins({
-  variable: "--font-popins",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["100", "300", "600"],
+  weight: ["100", "300", "400", "600", "700"],
 })
 
 const SignInModal = ({
@@ -37,7 +37,7 @@ const SignInModal = ({
         <div className="flex flex-col content-center justify-start justify-items-start gap-4 sm:p-12">
           <div className="mb-4 mt-8 flex flex-col content-center justify-start justify-items-start gap-4 sm:mb-8 sm:mt-0">
             <h1
-              className={`${popins.variable} text-center text-[28px] font-[700] leading-6 text-white  sm:text-[30px]`}
+              className={`${inter.variable} text-center text-[28px] font-[700] leading-6 text-white  sm:text-[30px]`}
             >
               {userHasAccount
                 ? "Login into your account"

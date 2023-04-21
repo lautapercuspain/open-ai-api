@@ -67,7 +67,7 @@ export default function DropDown({
       }  text-left text-white`}
     >
       <div>
-        <Menu.Button className="shadow-smfocus:outline-none inline-flex w-full items-start justify-between  border-none py-2 pl-2 focus:ring-2 focus:ring-black">
+        <Menu.Button className="shadow-smfocus:outline-none inline-flex w-full items-start justify-between   border-none py-2 pl-2 focus:ring-2 focus:ring-black">
           {element === "Javascript" && <JavascriptIcon />}
           {element === "Typescript" && <TypescriptIcon />}
           {element === "React" && <ReactIcon />}

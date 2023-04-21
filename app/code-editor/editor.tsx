@@ -4,7 +4,6 @@ import {
   SandpackPreview,
   SandpackCodeEditor,
   SandpackLayout,
-  SandpackConsole,
   SandpackProvider,
 } from "@codesandbox/sandpack-react"
 import useWindowSize from "hooks/use-window-size"
@@ -21,7 +20,7 @@ export default function Editor({ questionName, prompt, id }) {
   return (
     <>
       <div>
-        <h3 className="my-3 ml-2 font-popins text-gray-200">
+        <h3 className="my-3 ml-2 font-inter text-gray-200">
           {" "}
           Question Name: <span className="italic">{questionName}</span>
         </h3>

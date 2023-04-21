@@ -44,13 +44,12 @@ export default function FooterSection({
       <Toaster />
       <section
         className="fixed bottom-0 left-0 z-50 flex h-16 w-[101%] items-center
-          justify-between 
-          border-t-2 border-gray-600  bg-purple-900"
+          justify-between bg-purple-800"
       >
         <div className="ml-16 mb-10">
           <div className="ml-4">
             <DropDown
-              bgColor="bg-purple-700"
+              bgColor="bg-purple-500"
               elements={langElements}
               element={langElement}
               setElement={(newElement) => setLangElement(newElement)}
@@ -58,7 +57,7 @@ export default function FooterSection({
           </div>
           <div className="ml-52">
             <DropDown
-              bgColor="bg-purple-700"
+              bgColor="bg-purple-500"
               elements={libElements}
               element={lib}
               setElement={(newLib) => setLib(newLib)}

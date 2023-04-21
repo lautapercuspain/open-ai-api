@@ -4,13 +4,13 @@ import Header from "app/components/Header"
 import Footer from "app/components/Footer"
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "pages/api/auth/[...nextauth]"
-import { Poppins } from "next/font/google"
+import { Inter } from "next/font/google"
 import { cookies } from "next/headers"
 
-const popins = Poppins({
-  variable: "--font-popins",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["100", "300", "600"],
+  weight: ["100", "300", "400", "600", "700"],
 })
 export default async function RootLayout({
   children,
@@ -25,7 +25,7 @@ export default async function RootLayout({
 
   return (
     <>
-      <html lang="en" className={`${popins.variable} font-popins`}>
+      <html lang="en" className={`${inter.variable} font-inter`}>
         <head>
           <link rel="icon" href="/favicon.ico" />
         </head>

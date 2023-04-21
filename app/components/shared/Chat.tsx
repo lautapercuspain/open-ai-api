@@ -69,7 +69,7 @@ export default function Chat({
         />
       )}
       {generatedResponse.length === 0 && (
-        <div className="mt-32 flex max-h-[650px] max-w-[1000px] flex-wrap items-center justify-center gap-2 overflow-auto sm:mt-24 sm:justify-between">
+        <div className="flex max-h-[650px] max-w-[1000px] flex-col items-start justify-center sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-1">
           <PromptCard
             onClick={setPrompt}
             title="Create React App"
@@ -100,6 +100,16 @@ export default function Chat({
             title="Testing"
             text="Explain how to use Jest with React Testing Library"
           />
+          <PromptCard
+            onClick={setPrompt}
+            title="Database"
+            text="What's the best Database with Typescript support"
+          />
+          <PromptCard
+            onClick={setPrompt}
+            title="Testing"
+            text="Explain how to use Jest with React Testing Library"
+          />
         </div>
       )}
 
@@ -109,7 +119,7 @@ export default function Chat({
           <input
             ref={inputRef}
             className="font-lg mx-2 h-12 w-[90%] resize-none rounded-lg bg-purple-400 py-2.5 pr-4 pl-2.5  
-              font-mono text-white outline-0 placeholder:pt-1 placeholder:pl-3 placeholder:font-popins placeholder:text-[16px]
+              font-mono text-white outline-0 placeholder:pt-1 placeholder:pl-3 placeholder:font-inter placeholder:text-[16px]
                placeholder:text-white hover:outline-0 focus:border-transparent focus:ring-black/30 active:outline-0 
                sm:w-[990px]"
             value={codeSentence}

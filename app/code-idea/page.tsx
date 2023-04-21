@@ -11,7 +11,7 @@ export default async function Page() {
   }
 
   return (
-    <main className="flex w-full flex-row items-start justify-start bg-purple-800 font-mono">
+    <main className="flex w-full flex-row items-start justify-start bg-purple-900 font-mono">
       <Container />
     </main>
   )

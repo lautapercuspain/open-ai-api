@@ -1,7 +1,7 @@
 "use client"
 
 import { Dialog, Transition } from "@headlessui/react"
-import { Poppins } from "next/font/google"
+import { Inter, Poppins } from "next/font/google"
 import { Fragment, useState } from "react"
 
 interface Props {
@@ -21,10 +21,10 @@ const initialFormValues: FormValues = {
   cvc: "",
 }
 
-const popins = Poppins({
-  variable: "--font-popins",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["100", "300", "600"],
+  weight: ["100", "300", "400", "600", "700"],
 })
 
 export default function PaymentModal({ isOpen, setIsOpen }: Props) {
@@ -57,7 +57,7 @@ export default function PaymentModal({ isOpen, setIsOpen }: Props) {
           <div className="fixed inset-0 bg-black bg-opacity-25" />
         </Transition.Child>
         <div
-          className={`${popins.variable} fixed inset-0 overflow-y-auto font-popins`}
+          className={`${inter.variable} fixed inset-0 overflow-y-auto font-inter`}
         >
           <div className="flex min-h-full items-center justify-center p-4 text-center">
             <Transition.Child
