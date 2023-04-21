@@ -17,7 +17,6 @@ export default function Chat({
   setCodeSentence,
   onCodeGeneration,
 }) {
-  console.log("codeSentence:", codeSentence)
   const inputRef = useRef<any>(null)
   const [prompt, setPrompt] = useState("")
   useEffect(() => {
