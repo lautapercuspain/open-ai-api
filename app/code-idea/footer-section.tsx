@@ -65,7 +65,7 @@ export default function FooterSection({
           </div>
           <div
             onClick={onSaveCode}
-            className="absolute h-[40px] w-[40px] cursor-pointer rounded-md bg-purple-700 sm:left-[470px] sm:bottom-[10.5px]"
+            className="absolute h-[40px] w-[40px] cursor-pointer rounded-md bg-purple-500 sm:left-[470px] sm:bottom-[10.5px]"
           >
             <Save
               width={24}
@@ -75,7 +75,7 @@ export default function FooterSection({
           </div>
           <div
             onClick={() => copyHandler()}
-            className="absolute h-[40px] w-[40px] cursor-pointer rounded-md bg-purple-700 sm:left-[530px] sm:bottom-[10.5px]"
+            className="absolute h-[40px] w-[40px] cursor-pointer rounded-md bg-purple-500 sm:left-[530px] sm:bottom-[10.5px]"
           >
             <Copy
               width={24}
