@@ -16,12 +16,12 @@ export default function SuperHero() {
       <section className={`${popins.variable} mt-48 mb-5 font-popins`}>
         <motion.h1
           whileHover={{ scale: 1.1 }}
-          className="mx-auto w-[90%] cursor-pointer items-center justify-center bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text p-3 text-center font-popins text-6xl
-text-transparent sm:flex sm:w-full"
+          className="mx-auto w-[95%] cursor-pointer items-center justify-center bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text p-3 text-center font-popins text-4xl text-transparent
+sm:flex sm:w-full sm:text-6xl"
         >
           Create Genius Code
         </motion.h1>
-        <p className="mt-2 w-[100%] items-center justify-center px-3 text-center font-popins text-2xl text-white">
+        <p className="text-lg mt-2 w-[100%] items-center justify-center px-3 text-center font-popins text-white sm:text-2xl">
           Develop Improved, Rapid, and Streamlined Code with your AI Genius
         </p>
       </section>

@@ -42,15 +42,15 @@ export default function Header({ session, userHasAccount }) {
             <Link
               href="/"
               className={`mx-auto mt-5 ${
-                pathname === "/code-idea" ? "sm:Pl-4" : "sm:ml-12"
-              }  flex sm:mx-0`}
+                pathname === "/code-idea" ? "sm:pl-4" : "sm:ml-12"
+              } ml-4 flex sm:mx-0`}
             >
               {pathname === "/" && (
                 <Image
                   src={"/code-genius.svg"}
                   width={38}
                   height={38}
-                  className={"mr-2"}
+                  className={"-mr-1"}
                   alt="Code Genius"
                 />
               )}

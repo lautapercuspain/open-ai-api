@@ -69,7 +69,7 @@ export default function Chat({
         />
       )}
       {generatedResponse.length === 0 && (
-        <div className="mt-32 flex max-h-[450px] max-w-[1000px] flex-wrap items-center justify-center gap-2 overflow-auto sm:mt-24 sm:justify-between">
+        <div className="mt-32 flex max-h-[650px] max-w-[1000px] flex-wrap items-center justify-center gap-2 overflow-auto sm:mt-24 sm:justify-between">
           <PromptCard
             onClick={setPrompt}
             title="Create React App"
@@ -104,11 +104,11 @@ export default function Chat({
       )}
 
       {/* Chat input container */}
-      <div className="fixed bottom-4 left-0 right-0 mx-auto w-full ">
+      <div className="fixed bottom-4 left-0 right-0 z-50 mx-auto h-14 w-full bg-transparent">
         <div className="relative mx-auto mt-2 h-12 w-full sm:w-[990px]">
           <input
             ref={inputRef}
-            className="font-lg mx-2 h-12 w-[90%] resize-none rounded-lg bg-purple-400 py-2.5 pl-2.5  
+            className="font-lg mx-2 h-12 w-[90%] resize-none rounded-lg bg-purple-400 py-2.5 pr-4 pl-2.5  
               font-mono text-white outline-0 placeholder:pt-1 placeholder:pl-3 placeholder:font-popins placeholder:text-[16px]
                placeholder:text-white hover:outline-0 focus:border-transparent focus:ring-black/30 active:outline-0 
                sm:w-[990px]"
