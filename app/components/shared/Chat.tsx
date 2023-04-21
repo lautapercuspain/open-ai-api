@@ -17,6 +17,7 @@ export default function Chat({
   setCodeSentence,
   onCodeGeneration,
 }) {
+  console.log("codeSentence:", codeSentence)
   const inputRef = useRef<any>(null)
   const [prompt, setPrompt] = useState("")
   useEffect(() => {
@@ -29,42 +30,6 @@ export default function Chat({
       setCodeSentence(prompt)
     }
   }, [prompt])
-
-  // const colors: any = tailwindConfig.theme?.extend?.colors
-
-  const CodeMessages = () => {
-    return (
-      generatedResponse.length > 0 &&
-      generatedResponse.map((generatedMessage) => {
-        const result = parseText(generatedMessage)
-
-        return result.length
-          ? result.map((item: any) => {
-              if (item.hasOwnProperty("text")) {
-                return (
-                  <Message
-                    className="my-2 text-left leading-7"
-                    model={{
-                      message: item.text,
-                      direction: "incoming",
-                      position: "normal",
-                    }}
-                  />
-                )
-              } else {
-                return (
-                  <GenerateCode
-                    align="start"
-                    blackBackground
-                    generatedCode={item.code}
-                  />
-                )
-              }
-            })
-          : null
-      })
-    )
-  }
 
   const LiveDemoMessages: React.FC<CodeMessagesProps> = ({
     generatedMessages,
@@ -97,16 +62,15 @@ export default function Chat({
   console.log("generatedResponse.length::", generatedResponse.length)
 
   return (
-    <div className="mx-auto flex w-full flex-row items-center justify-center overflow-scroll rounded-md">
+    <div className="flex items-center justify-center overflow-scroll rounded-md sm:mx-auto sm:flex-row">
       {generatedResponse.length > 0 && (
         <ChatContainer
-          width="80%"
           useFullWidth
           messages={<LiveDemoMessages generatedMessages={generatedResponse} />}
         />
       )}
       {generatedResponse.length === 0 && (
-        <div className="mt-24 flex max-w-[1000px] flex-wrap items-center justify-between gap-2">
+        <div className="mt-32 flex max-h-[450px] max-w-[1000px] flex-wrap items-center justify-center gap-2 overflow-auto sm:mt-24 sm:justify-between">
           <PromptCard
             onClick={setPrompt}
             title="Create React App"
@@ -119,7 +83,7 @@ export default function Chat({
           />
           <PromptCard
             onClick={setPrompt}
-            title="Create React App"
+            title="Typescript"
             text="Explain how to use Typescript with React"
           />
           <PromptCard
@@ -142,17 +106,19 @@ export default function Chat({
 
       {/* Chat input container */}
       <div className="fixed bottom-4 left-0 right-0 mx-auto w-full ">
-        <div className="relative mx-auto mt-2 h-12 sm:w-[990px]">
+        <div className="relative mx-auto mt-2 h-12 w-full sm:w-[990px]">
           <input
             ref={inputRef}
-            className="font-lg h-12 resize-none rounded-lg bg-purple-400 py-2.5 pl-2  
-             font-mono text-white outline-0 placeholder:pt-1 placeholder:pl-3 placeholder:font-popins placeholder:text-[16px] placeholder:text-white hover:outline-0 focus:border-transparent focus:ring-black/30 active:outline-0 sm:w-[990px]"
-            value={prompt.length > 0 ? prompt : codeSentence}
+            className="font-lg mx-2 h-12 w-[90%] resize-none rounded-lg bg-purple-400 py-2.5 pl-2.5  
+              font-mono text-white outline-0 placeholder:pt-1 placeholder:pl-3 placeholder:font-popins placeholder:text-[16px]
+               placeholder:text-white hover:outline-0 focus:border-transparent focus:ring-black/30 active:outline-0 
+               sm:w-[990px]"
+            value={codeSentence}
             onChange={(e) => setCodeSentence(e.target.value)}
             onKeyDown={(e) => onCodeGeneration(e)}
             placeholder={"Ask to Code Genius?"}
           />
-          <button className="absolute right-2 top-2 rounded-lg bg-gray-900  disabled:hover:bg-transparent ">
+          <button className="absolute right-8 top-2 rounded-lg bg-gray-900 disabled:hover:bg-transparent  sm:right-1 ">
             <Image
               className="mb-1 mr-2 pt-2 pb-1 pl-2 text-white"
               alt="Send"

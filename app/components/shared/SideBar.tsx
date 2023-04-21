@@ -3,10 +3,12 @@
 import { MessageSquare, Code2, Home } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 export default function SideBar({ setOpenSecondayNavBar }) {
   // const [searchTerm, setSearchTerm] = useState("")
   // const userIsSearching = searchTerm !== ""
+  const path = usePathname()
 
   return (
     <div
@@ -18,25 +20,33 @@ export default function SideBar({ setOpenSecondayNavBar }) {
         <Home width={26} height={26} className="text-white hover:text-mint" />
         {/* <p className="font-mono text-[11px] text-white">Home</p> */}
       </Link>
-      {typeof setOpenSecondayNavBar !== "undefined" && (
-        <div
-          className="mt-8 cursor-pointer"
-          onClick={() => setOpenSecondayNavBar((prevState) => !prevState)}
-        >
-          <Image
-            alt="code-idea"
+
+      <div
+        className="mt-8 cursor-pointer"
+        onClick={() => {
+          if (typeof setOpenSecondayNavBar !== "undefined") {
+            setOpenSecondayNavBar((prevState) => !prevState)
+          }
+        }}
+      >
+        <Link href="/code-idea" className="mt-8 cursor-pointer">
+          <Code2
             width={32}
             height={32}
-            src="/icons/code-idea.svg"
-            className="w-32"
+            className={`text-white hover:text-mint ${
+              path === "/code-idea" ? "text-mint" : ""
+            }`}
           />
-        </div>
-      )}
+        </Link>
+      </div>
+
       <Link href="/code-chat" className="mt-8 cursor-pointer">
         <MessageSquare
           width={26}
           height={26}
-          className="text-white hover:text-mint"
+          className={`text-white hover:text-mint ${
+            path === "/code-chat" ? "text-mint" : ""
+          }`}
         />
         {/* <p className="font-mono text-[11px] text-white">Chat</p> */}
       </Link>
