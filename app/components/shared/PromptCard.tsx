@@ -17,7 +17,7 @@ export default function PromptCard({
     <div
       className={`mt-4 block ${
         size === "large"
-          ? "h-60 w-[45%]"
+          ? "h-60 w-[47%]"
           : "w-[100%] sm:min-h-[200px] sm:w-[23%]"
       } cursor-pointer rounded-lg bg-purple-700 p-6 shadow hover:bg-purple-500`}
       onClick={() => {

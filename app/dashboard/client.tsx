@@ -15,7 +15,6 @@ export default function Client() {
               Welcome {session.data?.user?.name}
             </p>
           </div> */}
-
           <PromptCard
             size="large"
             onClick={undefined}
