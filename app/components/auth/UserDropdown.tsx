@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { signOut, useSession } from "next-auth/react"
-import { SunMedium, Moon } from "lucide-react"
+import { SunMedium, Moon, LayoutDashboard } from "lucide-react"
 import { LampDesk, LogOut, Laptop } from "lucide-react"
 import { FADE_IN_ANIMATION_SETTINGS, LSConfig } from "@/lib/constants"
 import useLocalStorage from "hooks/use-localstorage"
@@ -10,6 +10,7 @@ import Popover from "app/components/shared/Popover"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import Link from "next/link"
+import Dashboard from "app/dashboard/page"
 
 export default function UserDropdown({ session }) {
   const { email, image } = session?.user || {}
@@ -37,14 +38,20 @@ export default function UserDropdown({ session }) {
         content={
           <div className="mt-3 w-full rounded-md bg-white p-2 sm:w-56">
             <button className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-gray-100">
+              <LayoutDashboard className="h-4 w-4" />
+              <Link href="/dashboard">
+                <p className="text-sm">Dashboard</p>
+              </Link>
+            </button>
+            <button className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-gray-100">
               <LampDesk className="h-4 w-4" />
-              <Link href="code-idea">
+              <Link href="/code-idea">
                 <p className="text-sm">Code Idea</p>
               </Link>
             </button>
             <button className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-gray-100">
               <Laptop className="h-4 w-4" />
-              <Link href="code-chat">
+              <Link href="/code-chat">
                 <p className="text-sm">My Chat</p>
               </Link>
             </button>
