@@ -6,7 +6,7 @@ export default async function Dashboard() {
   return (
     <>
       <SideBar setOpenSecondayNavBar={undefined} />
-      <div className="mx-auto w-full dark:bg-purple-900">
+      <div className="mx-auto w-full  dark:bg-purple-900">
         <Client />
       </div>
     </>

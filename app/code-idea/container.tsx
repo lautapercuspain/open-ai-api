@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Client from "./client"
 import Navigation from "./navigation"
 import { ElementType } from "app/components/DropDown"
+import { useSearchParams } from "next/navigation"
 
 export default function Container() {
   const [smartSelected, setSmartSelected] = useState(true)
@@ -16,35 +17,41 @@ export default function Container() {
   const [codeSentence, setCodeSentence] = useState("")
   const [langElement, setLangElement] = useState<ElementType>("Typescript")
   const [lib, setLib] = useState<ElementType>("React")
+  const searchParams = useSearchParams()
 
   useEffect(() => {
-    if (smartSelected) {
-      setPrompt(`Generate code written in ${langElement} and ${lib}, clearly labeled "**::", "// 1.", "// 2.", "// 3." and "// 4.". 
+    if (searchParams) {
+      const search = searchParams.get("mode")
+      console.log("search:", search)
+      if (smartSelected || search === "smart") {
+        setPrompt(`Generate code written in ${langElement} and ${lib}, clearly labeled "**::", "// 1.", "// 2.", "// 3." and "// 4.". 
               Context: ${codeSentence}${
-        codeSentence.slice(-1) === "." ? "" : "."
-      } Requirements: Make sure to comment on the folder and file structure at the end and to export default the Application component in the last step.`)
-    }
-    if (testSelected) {
-      setPrompt(
-        `Write tests for the following function: "${codeSentence}". Make sure to only output code without any additional explanation.`,
-      )
-    }
-    if (bugSelected) {
-      setPrompt(
-        `Improve and propose performance boost based on the provided code: \`${codeSentence}\`. Make sure to comment on the improvements at the end, in short code comments.`,
-      )
-    }
-    if (improveSelected) {
-      setPrompt(
-        `Improve and propose performance boost based on the provided code: \`${codeSentence}\`. Make sure to comment on the improvements at the end, in short code comments.`,
-      )
-    }
-    if (docSelected) {
-      setPrompt(
-        `Create documentation for the provided code: "${codeSentence}". Document the code as code comments. Don't use long sentences`,
-      )
+          codeSentence.slice(-1) === "." ? "" : "."
+        } Requirements: Make sure to comment on the folder and file structure at the end and to export default the Application component in the last step.`)
+      }
+      if (testSelected || search === "test") {
+        setPrompt(
+          `Write tests for the following function: "${codeSentence}". Make sure to only output code without any additional explanation.`,
+        )
+      }
+      if (bugSelected) {
+        setPrompt(
+          `Improve and propose performance boost based on the provided code: \`${codeSentence}\`. Make sure to comment on the improvements at the end, in short code comments.`,
+        )
+      }
+      if (improveSelected || search === "improve") {
+        setPrompt(
+          `Improve and propose performance boost based on the provided code: \`${codeSentence}\`. Make sure to comment on the improvements at the end, in short code comments.`,
+        )
+      }
+      if (docSelected || search === "docs") {
+        setPrompt(
+          `Create documentation for the provided code: "${codeSentence}". Document the code as code comments. Don't use long sentences`,
+        )
+      }
     }
   }, [
+    searchParams,
     smartSelected,
     testSelected,
     bugSelected,

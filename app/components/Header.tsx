@@ -57,7 +57,7 @@ export default function Header({ session, userHasAccount }) {
               <h1
                 className={`${rubik.variable}  ${
                   pathname === "/code-idea" ? "hidden" : "block"
-                } text-lg sm:text-xl sm:text-xl mt-2  ml-3 bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text font-rubik text-2xl font-bold tracking-tight text-transparent max-md:pt-4 max-sm:pt-0 sm:leading-6`}
+                } text-lg sm:text-xl sm:text-xl mt-2 -ml-1 bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text font-rubik text-2xl font-bold tracking-tight text-transparent max-md:pt-4 max-sm:pt-0 sm:leading-6`}
               >
                 Code Genius
               </h1>
@@ -66,14 +66,14 @@ export default function Header({ session, userHasAccount }) {
           <div className="flex h-10 items-end">
             <div
               onClick={() => setShowSignInModal(true)}
-              className={`my-auto mx-2 mt-2 flex cursor-pointer flex-row items-start justify-center rounded-lg  ${
+              className={`my-auto mx-2 mt-2 mr-7 flex cursor-pointer flex-row items-start justify-center rounded-lg  ${
                 !session
                   ? "bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0]"
                   : "bg-transparent"
               }  p-[2px] font-mono`}
             >
               {!session && (
-                <div className="relative h-[48px] w-[163px] rounded-lg bg-purple-900">
+                <div className="relative h-[48px] w-[163px] rounded-lg bg-purple-800">
                   <div className="text-sm mt-3 text-center text-white">
                     {userHasAccount ? "Login" : "Create Account"}
                   </div>
