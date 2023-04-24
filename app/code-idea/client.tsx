@@ -88,15 +88,11 @@ export default function Client({
         prompt,
       )
     } else {
-      response = await fetch("/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          prompt,
-        }),
-      })
+      //Smart
+      response = await fetchWithTurbo(
+        "You are an AI software development assistant which is specialized in providing code ideas/suggestions.",
+        prompt,
+      )
     }
 
     // console.log("response", response);
