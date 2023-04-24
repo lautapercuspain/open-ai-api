@@ -84,7 +84,7 @@ export default function FooterSection({
           <div
             onClick={() => copyHandler()}
             className={`absolute ${
-              mode === "smart" ? "left-56" : "left-4"
+              mode === "smart" ? "left-[170px]" : "left-4"
             }  h-[40px] w-[40px] cursor-pointer rounded-md bg-purple-500 sm:left-[530px] sm:bottom-[10.5px] sm:block`}
           >
             <Copy
