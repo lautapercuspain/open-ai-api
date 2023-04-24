@@ -87,7 +87,7 @@ export default function DropDown({
 
       <Transition
         as={Fragment}
-        enter="transition ease-out duration-100"
+        enter="transition ease-out duration-300"
         enterFrom="transform opacity-0 scale-95"
         enterTo="transform opacity-100 scale-100"
         leave="transition ease-in duration-75"
@@ -95,7 +95,7 @@ export default function DropDown({
         leaveTo="transform opacity-0 scale-95"
       >
         <Menu.Items
-          className="left-0 z-10 w-full rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 hover:bg-none focus:outline-none "
+          className="absolute left-0 -top-2 z-10 w-full origin-top-right -translate-y-full transform divide-y rounded-lg  bg-white shadow-lg ring-1 ring-black ring-opacity-5 hover:bg-none focus:outline-none"
           key={element}
         >
           <div className="">

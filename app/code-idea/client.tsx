@@ -24,6 +24,7 @@ let langElements: ElementType[] = ["Typescript", "Javascript"]
 
 export default function Client({
   lib,
+  mode,
   prompt,
   setLib,
   langElement,
@@ -243,36 +244,25 @@ export default function Client({
         buttonText="Save"
         setIsOpen={setShowSavePromptModal}
       />
-      <div id="container" className="ml-8 mt-8 flex flex-col justify-between">
-        <div className="mr-3">
-          <div className="text-1xl left-2 ml-2 mb-6  pb-3 pt-2 text-center uppercase text-purple-300 sm:text-left">
+      <div
+        id="container"
+        className="ml-0 mt-8 flex flex-col justify-start sm:ml-8 sm:justify-between"
+      >
+        <div className="sm:mr-3">
+          <div className="font-lg sm:text-1xl left-2 mb-6 pt-4 pb-3 text-left uppercase text-purple-300 sm:mt-2 sm:ml-2 sm:pt-2 sm:text-left">
             {getCodeGeniusMode()}
           </div>
-          <div className="h-1 border-b-2 border-purple-500 " />
+          <div className="mb-4 h-1 border-b-[1px] border-purple-500 " />
           <Editor
             textareaId="code-editor"
-            className="mb-20 w-full rounded-lg border-none bg-purple-900 pb-6 pt-4 text-gray-200 focus:border-none focus:shadow-none  focus:ring-0 focus:ring-purple-700 active:border-purple-700 sm:min-h-[500px]"
+            placeholder="e.g. export default function 
+            App() { return <h1>Hello world</h1>
+          }"
+            className="mb-20 min-h-full w-[90%] rounded-lg border-none bg-purple-900 pb-6 pt-4 text-gray-200 focus:border-none focus:shadow-none focus:ring-0 focus:ring-purple-700 active:border-purple-700 sm:min-h-[300px] sm:w-full"
             value={codeSentence}
-            padding={10}
             highlight={(code) => highlight(code, languages.js)}
             onValueChange={(code) => setCodeSentence(code)}
           />
-
-          <div className="my-4 mx-4 flex h-auto items-center justify-between sm:hidden">
-            <Button
-              hidden={false}
-              onClick={onSaveCode}
-              variant="mint"
-              loading={false}
-              text="Save Code"
-            />
-            <Button
-              onClick={onCodeGeneration}
-              loading={loading}
-              variant="mint"
-              text="Generate"
-            />
-          </div>
           <ResizablePanel>
             <AnimatePresence mode="sync">
               {generatedCode && (
@@ -287,6 +277,7 @@ export default function Client({
         </div>
       </div>
       <FooterSection
+        mode={mode}
         generatedCode={generatedCode}
         onSaveCode={onSaveCode}
         langElement={langElement}

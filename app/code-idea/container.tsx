@@ -12,6 +12,7 @@ export default function Container() {
   const [testSelected, setTestSelected] = useState(false)
   const [improveSelected, setImproveSelected] = useState(false)
   const [bugSelected, setBugSelected] = useState(false)
+  const [mode, setMode] = useState("")
   const [docSelected, setDocSelected] = useState(false)
   const [prompt, setPrompt] = useState("")
   const [codeSentence, setCodeSentence] = useState("")
@@ -22,17 +23,19 @@ export default function Container() {
   useEffect(() => {
     if (searchParams) {
       const search = searchParams.get("mode")
-      console.log("search:", search)
+
       if (smartSelected || search === "smart") {
         setPrompt(`Generate code written in ${langElement} and ${lib}, clearly labeled "**::", "// 1.", "// 2.", "// 3." and "// 4.". 
               Context: ${codeSentence}${
           codeSentence.slice(-1) === "." ? "" : "."
         } Requirements: Make sure to comment on the folder and file structure at the end and to export default the Application component in the last step.`)
+        setMode("smart")
       }
       if (testSelected || search === "test") {
         setPrompt(
           `Write tests for the following function: "${codeSentence}". Make sure to only output code without any additional explanation.`,
         )
+        setMode("test")
       }
       if (bugSelected) {
         setPrompt(
@@ -43,11 +46,13 @@ export default function Container() {
         setPrompt(
           `Improve and propose performance boost based on the provided code: \`${codeSentence}\`. Make sure to comment on the improvements at the end, in short code comments.`,
         )
+        setMode("improve")
       }
       if (docSelected || search === "docs") {
         setPrompt(
           `Create documentation for the provided code: "${codeSentence}". Document the code as code comments. Don't use long sentences`,
         )
+        setMode("docs")
       }
     }
   }, [
@@ -77,6 +82,7 @@ export default function Container() {
         setBugSelected={setBugSelected}
       />
       <Client
+        mode={mode}
         setLib={setLib}
         lib={lib}
         setLangElement={setLangElement}

@@ -9,6 +9,7 @@ import { Copy, Save } from "lucide-react"
 const notify = () => toast("Code copied!")
 
 export default function FooterSection({
+  mode,
   onSaveCode,
   generatedCode,
   langElement,
@@ -20,6 +21,8 @@ export default function FooterSection({
   setLib,
   onCodeGeneration,
 }: any) {
+  console.log("mode", mode)
+
   const [copied, toggleCopy] = useState(false)
   const { copy } = useClipboard()
 
@@ -38,6 +41,7 @@ export default function FooterSection({
     toggleCopy(!copied)
     notify()
   }
+  console.log("mode::", mode)
 
   return (
     <>
@@ -46,8 +50,8 @@ export default function FooterSection({
         className="fixed bottom-0 left-0 z-50 flex h-16 w-[101%] items-center
           justify-between bg-purple-800"
       >
-        <div className="ml-16 mb-10">
-          <div className="ml-4">
+        <div className="mb-10 ml-6 sm:ml-16">
+          <div className="hidden sm:ml-4 sm:block">
             <DropDown
               bgColor="bg-purple-500"
               elements={langElements}
@@ -55,7 +59,11 @@ export default function FooterSection({
               setElement={(newElement) => setLangElement(newElement)}
             />
           </div>
-          <div className="ml-52">
+          <div
+            className={`${
+              mode === "smart" ? "block" : "hidden"
+            } ml-0 sm:ml-52 sm:block`}
+          >
             <DropDown
               bgColor="bg-purple-500"
               elements={libElements}
@@ -65,7 +73,7 @@ export default function FooterSection({
           </div>
           <div
             onClick={onSaveCode}
-            className="absolute h-[40px] w-[40px] cursor-pointer rounded-md bg-purple-500 sm:left-[470px] sm:bottom-[10.5px]"
+            className="absolute hidden h-[40px] w-[40px] cursor-pointer rounded-md bg-purple-500 sm:left-[470px] sm:bottom-[10.5px] sm:block"
           >
             <Save
               width={24}
@@ -75,7 +83,9 @@ export default function FooterSection({
           </div>
           <div
             onClick={() => copyHandler()}
-            className="absolute h-[40px] w-[40px] cursor-pointer rounded-md bg-purple-500 sm:left-[530px] sm:bottom-[10.5px]"
+            className={`absolute ${
+              mode === "smart" ? "left-56" : "left-4"
+            }  h-[40px] w-[40px] cursor-pointer rounded-md bg-purple-500 sm:left-[530px] sm:bottom-[10.5px] sm:block`}
           >
             <Copy
               width={24}
