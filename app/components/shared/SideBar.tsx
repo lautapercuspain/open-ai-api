@@ -31,10 +31,9 @@ export default function SideBar({
   // const userIsSearching = searchTerm !== ""
   const path = usePathname()
   const isMobile = useWindowSize()
+  const colors: any = tailwindConfig.theme?.extend?.colors
 
   const CodeIdeaMode = ({ size }) => {
-    const colors: any = tailwindConfig.theme?.extend?.colors
-
     if (mode === "smart") {
       return (
         <Code
@@ -48,7 +47,7 @@ export default function SideBar({
         <CurlyBraces
           size={size}
           color={path === "/code-idea" ? colors.mint : "white"}
-          className="mt-2 ml-1.5 cursor-pointer border-purple-300 "
+          className="ml-1.5 cursor-pointer border-purple-300 sm:mt-2 "
         />
       )
     } else if (mode === "improve") {
@@ -56,7 +55,7 @@ export default function SideBar({
         <Rocket
           size={size}
           color={path === "/code-idea" ? colors.mint : "white"}
-          className="mt-2 ml-1.5 cursor-pointer border-purple-300 "
+          className="ml-1.5 cursor-pointer border-purple-300 sm:mt-2 "
         />
       )
     } else if (mode === "docs") {
@@ -64,7 +63,7 @@ export default function SideBar({
         <FileCode
           size={size}
           color={path === "/code-idea" ? colors.mint : "white"}
-          className="mt-2 ml-1.5 cursor-pointer border-purple-300"
+          className="ml-1.5 cursor-pointer border-purple-300 sm:mt-2"
         />
       )
     }
@@ -76,8 +75,6 @@ export default function SideBar({
       />
     )
   }
-
-  console.log("path:", path)
 
   return !isMobile ? (
     <div
@@ -180,7 +177,12 @@ export default function SideBar({
           } cursor-pointer`}
         >
           <div className="ml-4 mt-4 inline-flex h-[40px]  w-auto items-start justify-start rounded-md pr-2">
-            <Home width={26} height={26} className="ml-1.5 text-white" />
+            <Home
+              width={26}
+              height={26}
+              color={path === "/dashboard" ? colors.mint : "white"}
+              className="ml-1.5"
+            />
             <p className="text-sm ml-4 pt-1 text-white">Dashboard</p>
           </div>
         </Link>
@@ -194,6 +196,7 @@ export default function SideBar({
             <MessageSquare
               width={26}
               height={26}
+              color={path === "/code-chat" ? colors.mint : "white"}
               className="ml-1.5 text-white"
             />
             <p className="text-sm ml-4 pb-1 text-white">Code Chat</p>
