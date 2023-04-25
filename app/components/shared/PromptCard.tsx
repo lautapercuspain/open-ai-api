@@ -23,8 +23,6 @@ export default function PromptCard({
   onClick,
   size,
 }: CardProps & { size?: "large" | "small" }) {
-  console.log("width:", width)
-
   return (
     <div
       className={`${order} mt-4 flex ${

@@ -26,7 +26,7 @@ export default function SideBar({
   mode?: string
 }) {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
-  console.log("showMobileMenu:", showMobileMenu)
+
   // const [searchTerm, setSearchTerm] = useState("")
   // const userIsSearching = searchTerm !== ""
   const path = usePathname()
@@ -151,7 +151,7 @@ export default function SideBar({
     </div>
   ) : (
     <div
-      className={`absolute top-0 left-0 z-50 h-full font-inter ${
+      className={`absolute top-0 left-0 z-50 h-full rounded-r-lg font-inter  ${
         showMobileMenu ? "w-80 bg-purple-600" : "w-16 bg-none"
       } flex-row items-start `}
     >

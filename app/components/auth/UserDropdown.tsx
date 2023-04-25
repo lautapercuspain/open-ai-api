@@ -31,12 +31,12 @@ export default function UserDropdown({ session }) {
 
   return (
     <motion.div
-      className="relative inline-block text-left"
+      className="relative z-auto inline-block text-left"
       {...FADE_IN_ANIMATION_SETTINGS}
     >
       <Popover
         content={
-          <div className="mt-3 w-full rounded-md bg-white p-2 sm:w-56">
+          <div className=" mt-3 w-full rounded-md bg-white p-2 sm:w-56">
             <button className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-gray-100">
               <LayoutDashboard className="h-4 w-4" />
               <Link href="/dashboard">
@@ -55,7 +55,7 @@ export default function UserDropdown({ session }) {
                 <p className="text-sm">My Chat</p>
               </Link>
             </button>
-            <button
+            {/* <button
               onClick={
                 colorMode === "dark"
                   ? () => setColorMode("ligth")
@@ -76,7 +76,7 @@ export default function UserDropdown({ session }) {
                   {colorMode === "dark" ? "Ligth Mode" : "Dark Mode"}
                 </p>
               </Link>
-            </button>
+            </button> */}
             <button
               className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-gray-100"
               onClick={() => signOut()}

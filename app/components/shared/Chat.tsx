@@ -114,7 +114,7 @@ export default function Chat({
       )}
 
       {/* Chat input container */}
-      <div className="fixed bottom-4 left-0 right-0 z-30 mx-auto h-14 w-full bg-transparent">
+      <div className="fixed bottom-4 left-0 right-0 z-20 mx-auto h-14 w-full bg-transparent">
         <div className="relative mx-auto mt-2 h-12 w-full sm:w-[990px]">
           <input
             ref={inputRef}
