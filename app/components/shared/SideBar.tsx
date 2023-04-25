@@ -182,7 +182,7 @@ export default function SideBar({
             path === "/dashboard" ? "bg-purple-500" : "bg-none"
           } cursor-pointer`}
         >
-          <div className="ml-4 mt-4 inline-flex h-[40px]  w-auto items-start justify-start rounded-md pr-2">
+          <div className="ml-4 mt-5 inline-flex h-[50px]  w-auto items-start justify-start rounded-md pr-2">
             <Home
               width={26}
               height={26}
@@ -198,7 +198,7 @@ export default function SideBar({
             path === "/code-chat" ? "bg-purple-500" : "bg-none"
           }`}
         >
-          <div className="ml-4 mt-4 inline-flex h-[40px] w-auto items-start justify-start rounded-md pr-2">
+          <div className="ml-4 mt-5 inline-flex h-[50px] w-auto items-start justify-start rounded-md pr-2">
             <MessageSquare
               width={26}
               height={26}
@@ -215,7 +215,7 @@ export default function SideBar({
             path === "/code-idea" ? "bg-purple-500" : "bg-none"
           } `}
         >
-          <div className="mt-4 ml-4 inline-flex h-[40px] items-start justify-start rounded-md pr-2">
+          <div className="mt-5 ml-4 inline-flex h-[50px] items-start justify-start rounded-md pr-2">
             <CodeIdeaMode size={26} />
             <p className="text-sm ml-4 pb-1 text-white">Code Idea</p>
           </div>
