@@ -12,6 +12,7 @@ import {
   FileCode,
   Menu,
 } from "lucide-react"
+import Image from "next/image"
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -162,7 +163,17 @@ export default function SideBar({
         className="cursor-pointer"
       >
         <div className="p-3">
-          <Menu color="white" className="mt-4 ml-3 border-purple-300 " />
+          {!showMobileMenu ? (
+            <Menu color="white" className="mt-4 ml-3" />
+          ) : (
+            <Image
+              alt="Mobile Menu open"
+              src="/icons/menu-open.svg"
+              width={24}
+              height={24}
+              className="mt-5 ml-4"
+            />
+          )}
         </div>
       </div>
       <div
