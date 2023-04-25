@@ -165,7 +165,7 @@ export default function Page() {
         buttonText="Save"
         setIsOpen={setShowSavePromptModal}
       />
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-4 text-center sm:mt-20">
+      <main className="mt-24 flex w-full flex-1 flex-col items-center justify-center px-4 text-center sm:mt-20">
         <Chat
           generatedResponse={generatedMessages}
           onArrowPress={onArrowPress}

@@ -75,7 +75,7 @@ export default function DropDown({
           {element === "Angular" && <AngularIcon />}
           <span className="absolute left-8 ml-1">{element}</span>
           <ChevronUpIcon
-            className="mr-1 ml-2 h-5 w-5 ui-open:hidden"
+            className="mr-2 ml-2 h-5 w-5 ui-open:hidden sm:mr-1"
             aria-hidden="true"
           />
           <ChevronDownIcon

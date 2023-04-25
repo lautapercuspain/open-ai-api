@@ -5,6 +5,7 @@ import SideBar from "app/components/shared/SideBar"
 import { usePathname } from "next/navigation"
 
 export default function Navigation({
+  mode,
   smartSelected,
   setOpenSecondayNavBar,
   openSecondayNavBar,
@@ -25,9 +26,10 @@ export default function Navigation({
 
   return (
     <>
-      <SideBar setOpenSecondayNavBar={setOpenSecondayNavBar} />
+      <SideBar mode={mode} setOpenSecondayNavBar={setOpenSecondayNavBar} />
       {openSecondayNavBar && (
         <SecondaryNavBar
+          setOpenSecondayNavBar={setOpenSecondayNavBar}
           isCodeModeSelected={isCodeModeSelected}
           openSecondayNavBar={openSecondayNavBar}
           improveSelected={improveSelected}

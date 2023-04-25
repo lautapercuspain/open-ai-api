@@ -7,16 +7,15 @@ import { useRouter } from "next/navigation"
 
 export default function Client() {
   const session = useSession()
-  console.log("session:", session)
 
   const UpgradeAccount = () => (
     <div
       className={`my-auto mx-2 mt-2 flex cursor-pointer flex-row 
-      items-start justify-center rounded-lg bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0]
-    p-[2px] font-mono`}
+      rounded-lg bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] p-[2px] font-mono
+    sm:items-start sm:justify-center`}
     >
       <div className="relative h-[48px] w-auto rounded-lg bg-purple-500">
-        <div className="text-sm mx-auto px-6 py-3 text-center font-bold text-white">
+        <div className="text-sm px-3 py-3 text-center font-bold text-white sm:mx-auto sm:px-6">
           Upgrade Account
         </div>
       </div>
@@ -30,7 +29,7 @@ export default function Client() {
     <>
       <div className="mx-auto h-full w-[95%] dark:bg-purple-900 sm:ml-16">
         <div className="flex flex-row">
-          <span className="absolute top-20 mb-10 ml-2 text-2xl font-bold text-white sm:ml-10">
+          <span className="text-md al absolute top-20 mb-10 ml-2 font-bold text-white sm:ml-10 sm:text-2xl">
             Welcome, {session.data?.user?.name}!
           </span>
         </div>

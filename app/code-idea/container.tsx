@@ -68,6 +68,7 @@ export default function Container() {
   return (
     <>
       <Navigation
+        mode={mode}
         setOpenSecondayNavBar={setOpenSecondayNavBar}
         openSecondayNavBar={openSecondayNavBar}
         improveSelected={improveSelected}

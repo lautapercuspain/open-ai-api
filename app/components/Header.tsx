@@ -59,7 +59,11 @@ export default function Header({ session, userHasAccount }) {
                   pathname === "/code-idea" ? "hidden" : "block"
                 } text-lg sm:text-xl sm:text-xl mt-2 ${
                   pathname === "/" ? "ml-5" : "-ml-1"
-                } bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text font-rubik text-2xl font-bold tracking-tight text-transparent max-md:pt-4 max-sm:pt-0 sm:leading-6`}
+                } ${
+                  pathname === "/dashboard" || pathname === "/code-chat"
+                    ? "hidden"
+                    : "block"
+                }   bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text font-inter text-2xl font-bold tracking-tight text-transparent max-md:pt-4 max-sm:pt-0 sm:leading-6`}
               >
                 Code Genius
               </h1>

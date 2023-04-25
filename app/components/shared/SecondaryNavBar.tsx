@@ -8,6 +8,7 @@ const colors: any = tailwindConfig.theme?.extend?.colors
 
 export default function SecondaryNavBar({
   isCodeModeSelected,
+  setOpenSecondayNavBar,
   openSecondayNavBar,
   improveSelected,
   setImproveSelected,
@@ -23,16 +24,16 @@ export default function SecondaryNavBar({
   const [sidebarOpen, setSidebarOpen] = useState(openSecondayNavBar)
   //   const [searchTerm, setSearchTerm] = useState("")
   //   const userIsSearching = searchTerm !== ""
-  console.log("isCodeModeSelected", isCodeModeSelected)
 
   return (
     <div
       id="secondary-sidebar"
-      className={`${
-        isCodeModeSelected ? "hidden" : "block"
-      } absolute top-0 left-[64px] z-20 h-auto flex-col items-start
-         bg-purple-900 
-      px-5 transition-transform duration-700 
+      className={`${isCodeModeSelected ? "hidden" : "block"}
+      ${sidebarOpen ? "block" : "hidden"}
+      
+      absolute top-0 left-[64px] z-20 h-auto min-h-screen flex-col
+      items-start
+      bg-purple-800 px-5 transition-transform duration-700
         sm:flex sm:translate-x-0`}
     >
       {/* <SearchBar
@@ -47,6 +48,7 @@ export default function SecondaryNavBar({
         className="mt-10 inline-flex h-12"
         onClick={() => {
           setSidebarOpen(!sidebarOpen)
+          setOpenSecondayNavBar((prev) => !prev)
           if (!smartSelected) {
             setSmartSelected(!smartSelected)
           }
@@ -73,6 +75,7 @@ export default function SecondaryNavBar({
         className="mt-0 inline-flex h-12"
         onClick={() => {
           setSidebarOpen(!sidebarOpen)
+          setOpenSecondayNavBar((prev) => !prev)
           if (!improveSelected) {
             setImproveSelected(!improveSelected)
           }
@@ -83,8 +86,8 @@ export default function SecondaryNavBar({
         }}
       >
         <Rocket
-          size={26}
           color={improveSelected ? colors.mint : "white"}
+          size={26}
           className="mt-2 cursor-pointer border-purple-300 "
         />
         <p
@@ -99,6 +102,7 @@ export default function SecondaryNavBar({
         className="mt-2 inline-flex h-12"
         onClick={() => {
           setSidebarOpen(!sidebarOpen)
+          setOpenSecondayNavBar((prev) => !prev)
           if (!testSelected) {
             setTestSelected(!testSelected)
           }
@@ -125,6 +129,7 @@ export default function SecondaryNavBar({
         className="mt-2 inline-flex h-12"
         onClick={() => {
           setSidebarOpen(!sidebarOpen)
+          setOpenSecondayNavBar((prev) => !prev)
           if (!docSelected) {
             setDocSelected(!docSelected)
           }

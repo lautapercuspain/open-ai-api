@@ -180,7 +180,7 @@ export default function Client({
       return (
         <>
           <span>
-            Write your code idea and Code Genius will generate the code
+            Write your code idea and Code Genius will smart suggestions
           </span>
         </>
       )
@@ -221,7 +221,7 @@ export default function Client({
   }
 
   return (
-    <div className="relative ml-10 h-screen w-full">
+    <div className="relative h-screen w-full sm:ml-10">
       <Modal
         body="Our servers are taking longer than expected. We suggest
         rewording your instruction or input to get a faster result."
@@ -242,18 +242,16 @@ export default function Client({
       />
       <div
         id="container"
-        className="ml-0 mt-8 flex flex-col justify-start sm:ml-8 sm:justify-between"
+        className="ml-0 mt-8 flex flex-col items-start justify-start sm:ml-8 sm:justify-between"
       >
         <div className="sm:mr-3">
-          <div className="font-lg sm:text-1xl left-2 mb-6 pt-4 pb-3 text-left uppercase text-purple-300 sm:mt-2 sm:ml-2 sm:pt-2 sm:text-left">
+          <div className="font-lg sm:text-1xl left-0 mx-auto mb-6 mt-8 border-b-[1px] border-gray-400 px-2 pb-3 text-center font-inter uppercase text-purple-300 sm:mr-8 sm:mt-2 sm:ml-0 sm:pt-2 sm:text-left">
             {getCodeGeniusMode()}
           </div>
-          <div className="mb-4 h-1 border-b-[1px] border-purple-500 " />
+          {/* <div className="mt-1  border-b-[1px] border-purple-500 pb-2 " /> */}
           <Editor
             textareaId="code-editor"
-            placeholder="e.g. export default function 
-            App() { return <h1>Hello world</h1>
-          }"
+            placeholder="  e.g. export default function App() { return <h1>Hello world</h1>}"
             className="mb-20 min-h-full w-[90%] rounded-lg border-none bg-purple-900 pb-6 pt-4 text-gray-200 focus:border-none focus:shadow-none focus:ring-0 focus:ring-purple-700 active:border-purple-700 sm:min-h-[300px] sm:w-full"
             value={codeSentence}
             highlight={(code) => highlight(code, languages.js)}
