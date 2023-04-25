@@ -11,6 +11,7 @@ import {
   Code,
   FileCode,
   Menu,
+  ArrowLeft,
 } from "lucide-react"
 import Image from "next/image"
 
@@ -166,13 +167,7 @@ export default function SideBar({
           {!showMobileMenu ? (
             <Menu color="white" className="mt-4 ml-3" />
           ) : (
-            <Image
-              alt="Mobile Menu open"
-              src="/icons/menu-open.svg"
-              width={24}
-              height={24}
-              className="mt-5 ml-4"
-            />
+            <ArrowLeft className="mt-5 ml-4" color="white" />
           )}
         </div>
       </div>
@@ -199,7 +194,7 @@ export default function SideBar({
         </Link>
         <Link
           href="/code-chat"
-          className={`mt-10 w-[100%] cursor-pointer ${
+          className={` w-[100%] cursor-pointer ${
             path === "/code-chat" ? "bg-purple-500" : "bg-none"
           }`}
         >
@@ -216,7 +211,7 @@ export default function SideBar({
 
         <Link
           href="/code-idea"
-          className={`mt-10 w-[100%] cursor-pointer ${
+          className={`w-[100%] cursor-pointer ${
             path === "/code-idea" ? "bg-purple-500" : "bg-none"
           } `}
         >
