@@ -10,7 +10,7 @@ export default function Example() {
         <Disclosure>
           {({ open }) => (
             <>
-              <Disclosure.Button className="text-sm flex w-full justify-between rounded-lg bg-purple-800 px-4 py-2 text-left font-medium text-purple-900 hover:bg-purple-900 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+              <Disclosure.Button className="text-sm flex w-full justify-between rounded-lg border border-purple-900 bg-purple-800 px-4 py-2 text-left font-medium text-purple-900 hover:bg-purple-900 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
                 <span className="text-white">What is your refund policy?</span>
                 <ChevronUp
                   className={`${
@@ -18,7 +18,7 @@ export default function Example() {
                   } h-5 w-5 text-white`}
                 />
               </Disclosure.Button>
-              <Disclosure.Panel className="text-sm px-4 pt-4 pb-2 text-gray-200">
+              <Disclosure.Panel className="text-sm px-4 pt-4 pb-2 text-gray-200 ">
                 If you're unhappy with your purchase for any reason, email us
                 within 90 days and we'll refund you in full, no questions asked.
               </Disclosure.Panel>

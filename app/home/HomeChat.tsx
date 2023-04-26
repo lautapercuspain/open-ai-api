@@ -30,11 +30,11 @@ export default function HomeChat() {
 
   const textareaRef = useRef<any>(null)
 
-  useEffect(() => {
-    if (textareaRef && textareaRef.current) {
-      textareaRef.current.focus()
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (textareaRef && textareaRef.current) {
+  //     textareaRef.current.focus()
+  //   }
+  // }, [])
 
   const onCodeGeneration = (e: KeyboardEvent<HTMLInputElement>) => {
     // console.log("codeSentence", codeSentence)
