@@ -29,7 +29,7 @@ export default async function RootLayout({
         <head>
           <link rel="icon" href="/favicon.ico" />
         </head>
-        <body className="bg-purple-800">
+        <body className="bg-purple-900">
           <SessionProvider>
             <Header session={session} userHasAccount={userHasAccount} />
             <div className="flex min-h-screen flex-nowrap">{children}</div>
