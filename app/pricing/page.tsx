@@ -1,6 +1,7 @@
 "use client"
 
 import GradientButton from "app/components/buttons/gradientButton"
+import PaymentModal from "app/components/modals/PaymentModal"
 import { Check } from "lucide-react"
 import Image from "next/image"
 import React from "react"
@@ -10,10 +11,12 @@ import Faqs from "./faqs"
 
 export default function Page() {
   const colors: any = tailwindConfig.theme?.extend?.colors
-  const [credits, setCredits] = React.useState(10)
+  const [credits, setCredits] = React.useState<number>(10)
+  const [openPayment, setOpenPayment] = React.useState<boolean>(false)
 
   return (
     <>
+      <PaymentModal isOpen={openPayment} setIsOpen={setOpenPayment} />
       <main className="flex w-full flex-col items-center justify-center px-4 text-center sm:mt-12">
         <div className="container mx-auto mb-20 px-4 pt-20 lg:px-0">
           <h1 className="mx-auto mb-3 w-[80%] font-inter text-4xl font-bold text-white dark:text-white sm:w-[100%] sm:text-6xl sm:leading-none sm:tracking-tight">
@@ -81,8 +84,11 @@ export default function Page() {
       rounded-lg bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] p-[2px] font-mono
     sm:items-start sm:justify-center`}
               >
-                <div className="relative h-[48px] w-[100%] items-center justify-center rounded-lg bg-purple-700 ">
-                  <div className="text-sm px-1 py-3 text-center  text-white sm:mx-auto sm:px-2">
+                <div
+                  onClick={() => setOpenPayment(true)}
+                  className="relative h-[48px] w-[100%] items-center justify-center rounded-lg bg-purple-700"
+                >
+                  <div className="text-sm px-1 py-3 text-center font-inter text-white sm:mx-auto sm:px-2">
                     Buy Credits
                   </div>
                 </div>
@@ -131,7 +137,7 @@ export default function Page() {
                 className="mx-auto"
               />
               <h3
-                className={`mt-2 mb-4 bg-gradient-to-r from-[#B095FF] via-[#8ABFE5] to-[#B1EAF1] bg-clip-text font-inter text-2xl font-semibold text-transparent`}
+                className={`mt-2 mb-4 bg-gradient-to-r from-[#B095FF] via-[#8ABFE5] to-[#B1EAF1] bg-clip-text text-2xl font-semibold text-transparent`}
               >
                 Enterprise
               </h3>
