@@ -39,42 +39,42 @@ export default function Page() {
                 Premium
               </h3>
               <div className="my-4 flex items-center justify-center">
-                <span className="mr-2 text-center text-5xl font-extrabold">
+                <span className="text-center text-5xl font-extrabold">
                   $ 4.99 USD
                 </span>
               </div>
-              <div className="my-4">
-                <div
+              <div className="my-4 mx-auto">
+                <button
                   onClick={() => setCredits(25)}
-                  className={`text-xs leading-sm ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white px-3 py-1 font-bold uppercase text-white 
-                  hover:border hover:border-morado hover:bg-purple-500 ${
+                  className={`text-xs leading-sm active:bg-bg-morado ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white px-3 py-1 font-bold uppercase text-white hover:border 
+                  hover:border-morado  hover:bg-purple-500 focus:bg-morado ${
                     credits === 25
-                      ? "border-none bg-[#7477FB]"
+                      ? "border-morado bg-morado"
                       : "bg-transparent"
                   } `}
                 >
                   25
-                </div>
-                <div
+                </button>
+                <button
                   onClick={() => setCredits(50)}
-                  className={`text-xs leading-sm ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white px-3 py-1 font-bold uppercase text-white hover:border hover:border-morado hover:bg-purple-500 ${
+                  className={`text-xs leading-sm ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white px-3 py-1 font-bold uppercase text-white hover:border hover:border-morado hover:bg-purple-500 focus:bg-morado  ${
                     credits === 50
-                      ? "border-none bg-[#7477FB]"
+                      ? "border-morado bg-morado"
                       : "bg-transparent"
                   } `}
                 >
                   50
-                </div>
-                <div
+                </button>
+                <button
                   onClick={() => setCredits(100)}
-                  className={`text-xs leading-sm ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white px-3 py-1 font-bold uppercase text-white hover:border hover:border-morado hover:bg-purple-500 ${
+                  className={`text-xs leading-sm ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white px-3 py-1 font-bold uppercase text-white hover:border hover:border-morado hover:bg-purple-500 focus:bg-morado ${
                     credits === 100
-                      ? "border-none bg-[#7477FB]"
+                      ? "border-morado bg-morado"
                       : "bg-transparent"
                   } `}
                 >
                   100
-                </div>
+                </button>
               </div>
               <div
                 className={`my-4 mx-auto mb-4 mt-2 flex w-[80%] cursor-pointer flex-row items-center justify-center 
@@ -89,27 +89,30 @@ export default function Page() {
               </div>
 
               {/* <!-- List --> */}
-              <ul role="list" className="my-6 space-y-4 text-left">
-                <li className="flex items-center  space-x-3">
+              <ul
+                role="list"
+                className="my-6 flex flex-col items-center space-y-4 sm:ml-11 sm:items-start "
+              >
+                <li className="flex w-64 items-center  space-x-3">
                   {/* <!-- Icon --> */}
                   <Check color={colors.mint} size={20} />
                   <span>Individual configuration</span>
                 </li>
-                <li className="flex items-center space-x-3">
+                <li className="flex w-64 items-center space-x-3">
                   <Check color={colors.mint} size={20} />
                   <span>
                     Team size:{" "}
                     <span className="font-semibold">1 developer</span>
                   </span>
                 </li>
-                <li className="flex items-center space-x-3">
+                <li className="flex w-64 items-center space-x-3">
                   <Check color={colors.mint} size={20} />
                   <span>
                     Premium support:{" "}
                     <span className="font-semibold">6 months</span>
                   </span>
                 </li>
-                <li className="flex items-center space-x-3">
+                <li className="flex w-64 items-center space-x-3">
                   <Check color={colors.mint} size={20} />
                   <span>
                     Free updates:{" "}
@@ -142,31 +145,34 @@ export default function Page() {
               </div>
               <GradientButton text="Contact Us" />
 
-              <ul role="list" className="my-6 space-y-4 text-left">
-                <li className="flex items-center  space-x-3">
+              <ul
+                role="list"
+                className="my-6 flex flex-col items-center space-y-4 text-left sm:ml-11 sm:items-start"
+              >
+                <li className="flex w-64 items-center  space-x-3">
                   <Check color={colors.mint} size={20} />
                   <span className="font-bold">Everything in Premium plus:</span>
                 </li>
-                <li className="flex items-center  space-x-3">
+                <li className="flex w-64 items-center  space-x-3">
                   {/* <!-- Icon --> */}
                   <Check color={colors.mint} size={20} />
                   <span>Individual configuration</span>
                 </li>
-                <li className="flex items-center space-x-3">
+                <li className="flex w-64 items-center space-x-3">
                   <Check color={colors.mint} size={20} />
                   <span>
                     Team size:{" "}
                     <span className="font-semibold">1 developer</span>
                   </span>
                 </li>
-                <li className="flex items-center space-x-3">
+                <li className="flex w-64 items-center space-x-3">
                   <Check color={colors.mint} size={20} />
                   <span>
                     Premium support:{" "}
                     <span className="font-semibold">6 months</span>
                   </span>
                 </li>
-                <li className="flex items-center space-x-3">
+                <li className="flex w-64 items-center space-x-3">
                   <Check color={colors.mint} size={20} />
                   <span>
                     Free updates:{" "}
