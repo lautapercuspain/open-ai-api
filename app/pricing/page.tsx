@@ -45,16 +45,6 @@ export default function Page() {
               </div>
               <div className="my-4">
                 <div
-                  onClick={() => setCredits(10)}
-                  className={`text-xs leading-sm ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white ${
-                    credits === 10
-                      ? "border-none bg-[#7477FB]"
-                      : "bg-transparent"
-                  }  px-3 py-1 font-bold uppercase text-white`}
-                >
-                  10
-                </div>
-                <div
                   onClick={() => setCredits(25)}
                   className={`text-xs leading-sm ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white px-3 py-1 font-bold uppercase text-white ${
                     credits === 25
