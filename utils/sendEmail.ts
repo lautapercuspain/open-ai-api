@@ -1,5 +1,8 @@
 import { createTransport } from "nodemailer"
 
+const from = process.env.EMAIL_FROM
+const server = process.env.EMAIL_SERVER
+
 export async function sendWelcomeEmail(params) {
   const { identifier, url = "http://localhost:3000", provider, name } = params
   const { host } = new URL(url)
@@ -11,6 +14,24 @@ export async function sendWelcomeEmail(params) {
     subject: `Sign in to ${host}`,
     text: text({ url, host }),
     html: html({ url, host, userName: name }),
+  })
+  const failed = result.rejected.concat(result.pending).filter(Boolean)
+  if (failed.length) {
+    throw new Error(`Email(s) (${failed.join(", ")}) could not be sent`)
+  }
+}
+
+export async function sendInfoEmailFromClient(params) {
+  const { name, contactEmail, message } = params
+
+  // NOTE: You are not required to use `nodemailer`, use whatever you want.
+  const transport = createTransport(server)
+  const result = await transport.sendMail({
+    to: "geniuscodeai@gmail.com",
+    subject: `New Client Contact`,
+    from: from,
+    text: textInfo({ name, contactEmail, message }),
+    html: htmlFromClients({ name, contactEmail, message }),
   })
   const failed = result.rejected.concat(result.pending).filter(Boolean)
   if (failed.length) {
@@ -77,4 +98,57 @@ function html(params: { url: string; host: string; userName: string }) {
 /** Email Text body (fallback for email clients that don't render HTML, e.g. feature phones) */
 function text({ url, host }: { url: string; host: string }) {
   return `Sign in to ${host}\n${url}\n\n`
+}
+
+function textInfo({
+  name,
+  contactEmail,
+  message,
+}: {
+  name: string
+  contactEmail: string
+  message: string
+}) {
+  return `New contact email from ${name}\n
+  The contact email is ${contactEmail}\n\n
+  The message is ${message}\n\n`
+}
+
+function htmlFromClients(params: {
+  name: string
+  contactEmail: string
+  message: string
+}) {
+  const { name, contactEmail, message } = params
+
+  const brandColor = "#346df1"
+  const color = {
+    background: "#f9f9f9",
+    text: "#444",
+    mainBackground: "#fff",
+    buttonBackground: brandColor,
+    buttonBorder: brandColor,
+    buttonText: "#fff",
+  }
+
+  return `
+<body style="background: ${color.background};">
+  <table width="100%" border="0" cellspacing="20" cellpadding="0"
+    style="background: ${color.mainBackground}; max-width: 600px; margin: auto; border-radius: 10px;">
+    <tr>
+      <td align="center"
+        style="padding: 10px 0px; font-size: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};">
+        New client contact: Mr/Miss <strong>${name}</strong>
+        The contact email is: ${contactEmail}
+      </td>
+    </tr>
+    <tr>
+      <td align="center"
+        style="padding: 0px 0px 10px 0px; font-size: 16px; line-height: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};">
+        The message of the potential client is: ${message}
+      </td>
+    </tr>
+  </table>
+</body>
+`
 }

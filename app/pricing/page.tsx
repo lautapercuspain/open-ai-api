@@ -1,6 +1,7 @@
 "use client"
 
 import GradientButton from "app/components/buttons/gradientButton"
+import ContactFormModal from "app/components/modals/ContactFormModal"
 import PaymentModal from "app/components/modals/PaymentModal"
 import { Check } from "lucide-react"
 import Image from "next/image"
@@ -13,10 +14,15 @@ export default function Page() {
   const colors: any = tailwindConfig.theme?.extend?.colors
   const [credits, setCredits] = React.useState<number>(10)
   const [openPayment, setOpenPayment] = React.useState<boolean>(false)
+  const [openContactForm, setOpenContactForm] = React.useState<boolean>(false)
 
   return (
     <>
       <PaymentModal isOpen={openPayment} setIsOpen={setOpenPayment} />
+      <ContactFormModal
+        isOpen={openContactForm}
+        setIsOpen={setOpenContactForm}
+      />
       <main className="flex w-full flex-col items-center justify-center px-4 text-center sm:mt-12">
         <div className="container mx-auto mb-20 px-4 pt-20 lg:px-0">
           <h1 className="mx-auto mb-3 w-[80%] font-inter text-4xl font-bold text-white dark:text-white sm:w-[100%] sm:text-6xl sm:leading-none sm:tracking-tight">
@@ -149,7 +155,10 @@ export default function Page() {
                   Per user, per month.
                 </span>
               </div>
-              <GradientButton text="Contact Us" />
+              <GradientButton
+                text="Contact Us"
+                onClick={() => setOpenContactForm(true)}
+              />
 
               <ul
                 role="list"
