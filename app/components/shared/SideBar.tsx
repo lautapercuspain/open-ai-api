@@ -235,7 +235,7 @@ export default function SideBar({
         </Link>
 
         <Link
-          href="/code-idea"
+          href={`/code-idea`}
           className={`w-[100%] cursor-pointer ${
             pathname === "/code-idea" ? "bg-purple-500" : "bg-none"
           } `}
@@ -243,7 +243,11 @@ export default function SideBar({
           <div className="mt-5 ml-4 inline-flex h-[50px] items-start justify-start rounded-md pr-2">
             <CodeIdeaMode size={26} />
             <p className="text-sm ml-4 pt-0 text-white">{selectedMode()}</p>
-            <div className="ml-2 flex  gap-4">
+            <div
+              className={`ml-2 flex gap-4 ${
+                pathname === "/code-idea" ? "block" : "hidden"
+              }`}
+            >
               <Code2
                 size={26}
                 onClick={() => {
