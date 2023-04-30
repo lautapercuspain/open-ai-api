@@ -43,8 +43,8 @@ const SignInModal = ({
                 ? "Login into your account"
                 : "Create your Account"}
             </h1>
-            <h6 className="sm:text-xl text-center font-mono text-[16px] font-[400] leading-10  text-gray-200">
-              Start coding with Code Genius
+            <h6 className="sm:text-xl mx-auto max-w-xs  font-inter text-[16px] font-[400]  leading-10 text-gray-200">
+              Start coding with the help of Code Genius
             </h6>
           </div>
           {/* DIVIDER */}
@@ -63,7 +63,7 @@ const SignInModal = ({
               }
               onClick={() => {
                 setSignInClickedGoogle(true)
-                signIn("google")
+                signIn("google", { callbackUrl: "/code-idea" })
               }}
             >
               {signInClickedGoogle ? (
@@ -91,7 +91,7 @@ const SignInModal = ({
               onClick={() => {
                 setSignInClickedGitHub(true)
                 signIn("github", {
-                  callbackUrl: process.env.NEXTAUTH_URL,
+                  callbackUrl: "/code-idea",
                 })
               }}
             >

@@ -7,7 +7,8 @@ import { usePathname } from "next/navigation"
 export default function Navigation({
   mode,
   smartSelected,
-  setOpenSecondayNavBar,
+  setMode,
+  setOpenSecondaryNavBar,
   openSecondayNavBar,
   improveSelected,
   setImproveSelected,
@@ -22,14 +23,22 @@ export default function Navigation({
   const pathname = usePathname()
   const isCodeModeSelected =
     smartSelected | improveSelected | testSelected | bugSelected | docSelected
-  console.log("isCodeModeSelected", isCodeModeSelected)
 
   return (
     <>
-      <SideBar mode={mode} setOpenSecondayNavBar={setOpenSecondayNavBar} />
+      <SideBar
+        pathname={pathname}
+        setMode={setMode}
+        mode={mode}
+        setSmartSelected={setSmartSelected}
+        setImproveSelected={setImproveSelected}
+        setDocSelected={setDocSelected}
+        setTestSelected={setTestSelected}
+        setOpenSecondaryNavBar={setOpenSecondaryNavBar}
+      />
       {openSecondayNavBar && (
         <SecondaryNavBar
-          setOpenSecondayNavBar={setOpenSecondayNavBar}
+          setOpenSecondayNavBar={setOpenSecondaryNavBar}
           isCodeModeSelected={isCodeModeSelected}
           openSecondayNavBar={openSecondayNavBar}
           improveSelected={improveSelected}

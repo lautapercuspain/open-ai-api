@@ -9,6 +9,7 @@ import useLocalStorage from "hooks/use-localstorage"
 import Image from "next/image"
 import { Rubik } from "next/font/google"
 import { usePathname } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 
 const rubik = Rubik({
   variable: "--font-rubik",
@@ -20,6 +21,17 @@ export default function Header({ session, userHasAccount }) {
   const pathname = usePathname()
   const { SignInModal, setShowSignInModal } = useSignInModal(userHasAccount)
   const [userId, setUserId] = useLocalStorage(LSConfig.user.userId, "")
+  const searchParams = useSearchParams()
+  const action = searchParams && searchParams.get("action")
+
+  useEffect(() => {
+    console.log("action:", action)
+
+    if (action === "authenticate") {
+      console.log("entra aqui")
+      setShowSignInModal(true)
+    }
+  }, [searchParams, action])
 
   useEffect(() => {
     if (session?.user?.id) {

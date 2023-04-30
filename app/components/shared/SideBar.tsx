@@ -21,26 +21,51 @@ import { useState } from "react"
 import tailwindConfig from "tailwind.config"
 
 export default function SideBar({
-  setOpenSecondayNavBar,
+  setSmartSelected,
+  setImproveSelected,
+  setDocSelected,
+  setTestSelected,
+  setOpenSecondaryNavBar,
+  pathname,
   mode,
+  setMode,
 }: {
-  setOpenSecondayNavBar: any
+  setOpenSecondaryNavBar: any
   mode?: string
+  pathname?: any
+  setMode?: any
+  setSmartSelected?: any
+  setImproveSelected?: any
+  setDocSelected?: any
+  setTestSelected?: any
 }) {
   const [showMobileMenu, setShowMobileMenu] = useState(false)
 
   // const [searchTerm, setSearchTerm] = useState("")
   // const userIsSearching = searchTerm !== ""
-  const path = usePathname()
-  const isMobile = useWindowSize()
-  const colors: any = tailwindConfig.theme?.extend?.colors
 
+  const { isMobile } = useWindowSize()
+  const colors: any = tailwindConfig.theme?.extend?.colors
+  const selectedMode = () => {
+    switch (mode) {
+      case "smart":
+        return "Smart"
+      case "improve":
+        return "Improve"
+      case "test":
+        return "Test"
+      case "docs":
+        return "Documentation"
+      default:
+        return "Smart"
+    }
+  }
   const CodeIdeaMode = ({ size }) => {
     if (mode === "smart") {
       return (
         <Code
           size={size}
-          color={path === "/code-idea" ? colors.mint : "white"}
+          color={pathname === "/code-idea" ? colors.mint : "white"}
           className="ml-1.5 cursor-pointer border-purple-300 "
         />
       )
@@ -48,7 +73,7 @@ export default function SideBar({
       return (
         <CurlyBraces
           size={size}
-          color={path === "/code-idea" ? colors.mint : "white"}
+          color={pathname === "/code-idea" ? colors.mint : "white"}
           className="ml-1.5 cursor-pointer border-purple-300 sm:mt-2 "
         />
       )
@@ -56,7 +81,7 @@ export default function SideBar({
       return (
         <Rocket
           size={size}
-          color={path === "/code-idea" ? colors.mint : "white"}
+          color={pathname === "/code-idea" ? colors.mint : "white"}
           className="ml-1.5 cursor-pointer border-purple-300 sm:mt-2 "
         />
       )
@@ -64,7 +89,7 @@ export default function SideBar({
       return (
         <FileCode
           size={size}
-          color={path === "/code-idea" ? colors.mint : "white"}
+          color={pathname === "/code-idea" ? colors.mint : "white"}
           className="ml-1.5 cursor-pointer border-purple-300 sm:mt-2"
         />
       )
@@ -72,7 +97,7 @@ export default function SideBar({
     return (
       <Code2
         size={size}
-        color={path === "/code-idea" ? colors.mint : "white"}
+        color={pathname === "/code-idea" ? colors.mint : "white"}
         className={`ml-1.5 bg-purple-400 text-white`}
       />
     )
@@ -102,7 +127,7 @@ export default function SideBar({
             width={26}
             height={26}
             className={`ml-1.5 text-white ${
-              path === "/dashboard" ? "text-mint" : ""
+              pathname === "/dashboard" ? "text-mint" : ""
             }`}
           />
         </div>
@@ -110,12 +135,12 @@ export default function SideBar({
       </Link>
 
       <div
-        className="mt-8 cursor-pointer"
         onClick={() => {
-          if (typeof setOpenSecondayNavBar !== "undefined") {
-            setOpenSecondayNavBar((prevState) => !prevState)
+          if (typeof setOpenSecondaryNavBar !== "undefined") {
+            setOpenSecondaryNavBar((prevState) => !prevState)
           }
         }}
+        className="mt-8 cursor-pointer"
       >
         <Link href="/code-idea" className="mt-7 cursor-pointer">
           <div
@@ -135,7 +160,7 @@ export default function SideBar({
             width={26}
             height={26}
             className={`ml-1.5  text-white ${
-              path === "/code-chat" ? "text-mint" : ""
+              pathname === "/code-chat" ? "text-mint" : ""
             }`}
           />
         </div>
@@ -179,14 +204,14 @@ export default function SideBar({
         <Link
           href="/dashboard"
           className={`mt-8 w-[100%] ${
-            path === "/dashboard" ? "bg-purple-500" : "bg-none"
+            pathname === "/dashboard" ? "bg-purple-500" : "bg-none"
           } cursor-pointer`}
         >
           <div className="ml-4 mt-5 inline-flex h-[50px]  w-auto items-start justify-start rounded-md pr-2">
             <Home
               width={26}
               height={26}
-              color={path === "/dashboard" ? colors.mint : "white"}
+              color={pathname === "/dashboard" ? colors.mint : "white"}
               className="ml-1.5"
             />
             <p className="text-sm ml-4 pt-1 text-white">Dashboard</p>
@@ -195,14 +220,14 @@ export default function SideBar({
         <Link
           href="/code-chat"
           className={` w-[100%] cursor-pointer ${
-            path === "/code-chat" ? "bg-purple-500" : "bg-none"
+            pathname === "/code-chat" ? "bg-purple-500" : "bg-none"
           }`}
         >
           <div className="ml-4 mt-5 inline-flex h-[50px] w-auto items-start justify-start rounded-md pr-2">
             <MessageSquare
               width={26}
               height={26}
-              color={path === "/code-chat" ? colors.mint : "white"}
+              color={pathname === "/code-chat" ? colors.mint : "white"}
               className="ml-1.5 text-white"
             />
             <p className="text-sm ml-4 pb-1 text-white">Code Chat</p>
@@ -212,12 +237,70 @@ export default function SideBar({
         <Link
           href="/code-idea"
           className={`w-[100%] cursor-pointer ${
-            path === "/code-idea" ? "bg-purple-500" : "bg-none"
+            pathname === "/code-idea" ? "bg-purple-500" : "bg-none"
           } `}
         >
           <div className="mt-5 ml-4 inline-flex h-[50px] items-start justify-start rounded-md pr-2">
             <CodeIdeaMode size={26} />
-            <p className="text-sm ml-4 pb-1 text-white">Code Idea</p>
+            <p className="text-sm ml-4 pt-0 text-white">{selectedMode()}</p>
+            <div className="ml-2 flex  gap-4">
+              <Code2
+                size={26}
+                onClick={() => {
+                  setMode("smart")
+                  setSmartSelected(true)
+                  setImproveSelected(false)
+                  setTestSelected(false)
+                  setDocSelected(false)
+                }}
+                color={"white"}
+                className={`ml-1.5 cursor-pointer border-purple-300 ${
+                  mode === "smart" ? "hidden" : "block"
+                }`}
+              />
+              <Rocket
+                onClick={() => {
+                  setMode("improve")
+                  setImproveSelected(true)
+                  setSmartSelected(false)
+                  setTestSelected(false)
+                  setDocSelected(false)
+                }}
+                color={"white"}
+                size={26}
+                className={` ${
+                  mode === "improve" ? "hidden" : "block"
+                } cursor-pointer border-purple-300`}
+              />
+              <CurlyBraces
+                onClick={() => {
+                  setMode("test")
+                  setTestSelected(true)
+                  setImproveSelected(false)
+                  setSmartSelected(false)
+                  setDocSelected(false)
+                }}
+                size={26}
+                color={"white"}
+                className={`cursor-pointer border-purple-300 ${
+                  mode === "test" ? "hidden" : "block"
+                }`}
+              />
+              <FileCode
+                onClick={() => {
+                  setMode("docs")
+                  setDocSelected(true)
+                  setImproveSelected(false)
+                  setSmartSelected(false)
+                  setTestSelected(false)
+                }}
+                size={26}
+                color={"white"}
+                className={`cursor-pointer border-purple-300 ${
+                  mode === "docs" ? "hidden" : "block"
+                }`}
+              />
+            </div>
           </div>
         </Link>
       </div>

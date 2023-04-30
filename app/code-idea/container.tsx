@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation"
 
 export default function Container() {
   const [smartSelected, setSmartSelected] = useState(true)
-  const [openSecondayNavBar, setOpenSecondayNavBar] = useState(false)
+  const [openSecondayNavBar, setOpenSecondaryNavBar] = useState(false)
   const [testSelected, setTestSelected] = useState(false)
   const [improveSelected, setImproveSelected] = useState(false)
   const [bugSelected, setBugSelected] = useState(false)
@@ -69,7 +69,8 @@ export default function Container() {
     <>
       <Navigation
         mode={mode}
-        setOpenSecondayNavBar={setOpenSecondayNavBar}
+        setMode={setMode}
+        setOpenSecondaryNavBar={setOpenSecondaryNavBar}
         openSecondayNavBar={openSecondayNavBar}
         improveSelected={improveSelected}
         setImproveSelected={setImproveSelected}

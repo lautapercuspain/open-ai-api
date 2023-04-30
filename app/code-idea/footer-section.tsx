@@ -41,7 +41,6 @@ export default function FooterSection({
     toggleCopy(!copied)
     notify()
   }
-  console.log("mode::", mode)
 
   return (
     <>

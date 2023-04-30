@@ -251,7 +251,10 @@ export default function Client({
           {/* <div className="mt-1  border-b-[1px] border-purple-500 pb-2 " /> */}
           <Editor
             textareaId="code-editor"
-            placeholder="  e.g. export default function App() { return <h1>Hello world</h1>}"
+            placeholder="e.g. export default function App() 
+            { 
+                    return <h1>Hello world</h1>
+            }"
             className="mb-20 min-h-full w-[90%] rounded-lg border-none bg-purple-900 pb-6 pt-4 text-gray-200 focus:border-none focus:shadow-none focus:ring-0 focus:ring-purple-700 active:border-purple-700 sm:min-h-[300px] sm:w-full"
             value={codeSentence}
             highlight={(code) => highlight(code, languages.js)}
