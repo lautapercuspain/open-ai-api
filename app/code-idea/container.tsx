@@ -25,10 +25,10 @@ export default function Container() {
       const search = searchParams.get("mode")
 
       if (smartSelected || search === "smart") {
-        setPrompt(`Generate code written in ${langElement} and ${lib}. 
+        setPrompt(`Create code, well written in ${langElement} and ${lib}.  
               Context: ${codeSentence}${
           codeSentence.slice(-1) === "." ? "" : "."
-        } Requirements: Make sure to only output code without any additional explanation and to "export default" the Application component in the last step.`)
+        }  Make sure to prefix all code explanations with "//" so it can be read as code comments.`)
         setMode("smart")
       }
       if (testSelected || search === "test") {

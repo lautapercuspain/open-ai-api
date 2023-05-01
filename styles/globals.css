@@ -75,3 +75,12 @@
 .token.entity {
   cursor: help;
 }
+
+#code-editor::placeholder {
+  color: #8283ad;
+  padding-left: 5px;
+}
+
+#super-textarea::placeholder {
+  height: 200px;
+}

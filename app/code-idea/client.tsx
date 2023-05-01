@@ -18,6 +18,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react"
 import { ElementType } from "app/components/DropDown"
 import FooterSection from "./footer-section"
 import { fetchWithTurbo } from "utils/generateCode"
+import { getCodeGeniusPlaceHolder } from "utils/strings"
 
 let libElements: ElementType[] = ["React", "Vue", "Angular"]
 let langElements: ElementType[] = ["Typescript", "Javascript"]
@@ -181,7 +182,6 @@ export default function Client({
         <>
           <span>
             Write your code idea and Code Genius will give you{" "}
-            <span className="text-mint">ideas</span> and{" "}
             <span className="text-mint">suggestions</span>
           </span>
         </>
@@ -224,7 +224,7 @@ export default function Client({
       )
     }
   }
-
+  const placeHolderText = getCodeGeniusPlaceHolder(mode)
   return (
     <div className="relative h-screen w-full sm:ml-10">
       <Modal
@@ -249,17 +249,15 @@ export default function Client({
         id="container"
         className="ml-0 mt-8 flex flex-col items-start justify-start sm:ml-8 sm:justify-between"
       >
-        <div className="sm:mr-3">
-          <div className="font-lg sm:text-1xl left-0 mx-auto mb-6 mt-8 border-b-[1px] border-gray-400 px-2 pb-3 text-center font-inter uppercase text-purple-300 sm:mr-8 sm:mt-2 sm:ml-0 sm:pt-2 sm:text-left">
+        <div className="w-full sm:mr-3">
+          <div className="font-lg sm:text-1xl left-0 mx-auto mb-6 mt-8 w-full border-b-[1px] border-gray-400 px-2 pb-3 text-center font-inter uppercase text-purple-300 sm:mr-8 sm:mt-2 sm:ml-0 sm:pt-2 sm:text-left">
             {getCodeGeniusMode()}
           </div>
           {/* <div className="mt-1  border-b-[1px] border-purple-500 pb-2 " /> */}
           <Editor
+            padding={20}
             textareaId="code-editor"
-            placeholder="e.g. export default function App() 
-            { 
-                    return <h1>Hello world</h1>
-            }"
+            placeholder={placeHolderText}
             className="mb-20 min-h-full w-[90%] rounded-lg border-none bg-purple-900 pb-6 pt-4 text-gray-200 focus:border-none focus:shadow-none focus:ring-0 focus:ring-purple-700 active:border-purple-700 sm:min-h-[300px] sm:w-full"
             value={codeSentence}
             highlight={(code) => highlight(code, languages.js)}
