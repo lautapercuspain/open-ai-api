@@ -13,7 +13,6 @@ import {
   Menu,
   ArrowLeft,
 } from "lucide-react"
-import Image from "next/image"
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -26,19 +25,19 @@ export default function SideBar({
   setDocSelected,
   setTestSelected,
   setOpenSecondaryNavBar,
-  pathname,
   mode,
   setMode,
 }: {
   setOpenSecondaryNavBar: any
   mode?: string
-  pathname?: any
   setMode?: any
   setSmartSelected?: any
   setImproveSelected?: any
   setDocSelected?: any
   setTestSelected?: any
 }) {
+  const pathname = usePathname()
+
   const [showMobileMenu, setShowMobileMenu] = useState(false)
 
   // const [searchTerm, setSearchTerm] = useState("")
@@ -207,7 +206,7 @@ export default function SideBar({
             pathname === "/dashboard" ? "bg-purple-500" : "bg-none"
           } cursor-pointer`}
         >
-          <div className="ml-4 mt-5 inline-flex h-[50px]  w-auto items-start justify-start rounded-md pr-2">
+          <div className="ml-4 mt-5 inline-flex h-[50px] w-auto items-start justify-start rounded-md pr-2">
             <Home
               width={26}
               height={26}
@@ -219,11 +218,11 @@ export default function SideBar({
         </Link>
         <Link
           href="/code-chat"
-          className={` w-[100%] cursor-pointer ${
+          className={`w-full cursor-pointer  ${
             pathname === "/code-chat" ? "bg-purple-500" : "bg-none"
           }`}
         >
-          <div className="ml-4 mt-5 inline-flex h-[50px] w-auto items-start justify-start rounded-md pr-2">
+          <div className="ml-4 mt-5 inline-flex h-[50px] w-full items-start justify-start rounded-md pr-2">
             <MessageSquare
               width={26}
               height={26}
@@ -256,6 +255,7 @@ export default function SideBar({
                   setImproveSelected(false)
                   setTestSelected(false)
                   setDocSelected(false)
+                  setShowMobileMenu((prevState) => !prevState)
                 }}
                 color={"white"}
                 className={`ml-1.5 cursor-pointer border-purple-300 ${
@@ -269,12 +269,13 @@ export default function SideBar({
                   setSmartSelected(false)
                   setTestSelected(false)
                   setDocSelected(false)
+                  setShowMobileMenu((prevState) => !prevState)
                 }}
                 color={"white"}
                 size={26}
                 className={` ${
                   mode === "improve" ? "hidden" : "block"
-                } cursor-pointer border-purple-300`}
+                } cursor-pointer`}
               />
               <CurlyBraces
                 onClick={() => {
@@ -283,10 +284,11 @@ export default function SideBar({
                   setImproveSelected(false)
                   setSmartSelected(false)
                   setDocSelected(false)
+                  setShowMobileMenu((prevState) => !prevState)
                 }}
                 size={26}
                 color={"white"}
-                className={`cursor-pointer border-purple-300 ${
+                className={`cursor-pointer ${
                   mode === "test" ? "hidden" : "block"
                 }`}
               />
@@ -297,10 +299,11 @@ export default function SideBar({
                   setImproveSelected(false)
                   setSmartSelected(false)
                   setTestSelected(false)
+                  setShowMobileMenu((prevState) => !prevState)
                 }}
                 size={26}
                 color={"white"}
-                className={`cursor-pointer border-purple-300 ${
+                className={`cursor-pointer ${
                   mode === "docs" ? "hidden" : "block"
                 }`}
               />

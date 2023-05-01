@@ -20,14 +20,12 @@ export default function Navigation({
   setDocSelected,
   setSmartSelected,
 }) {
-  const pathname = usePathname()
   const isCodeModeSelected =
     smartSelected | improveSelected | testSelected | bugSelected | docSelected
 
   return (
     <>
       <SideBar
-        pathname={pathname}
         setMode={setMode}
         mode={mode}
         setSmartSelected={setSmartSelected}

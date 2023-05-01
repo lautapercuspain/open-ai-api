@@ -25,10 +25,7 @@ export default function Header({ session, userHasAccount }) {
   const action = searchParams && searchParams.get("action")
 
   useEffect(() => {
-    console.log("action:", action)
-
     if (action === "authenticate") {
-      console.log("entra aqui")
       setShowSignInModal(true)
     }
   }, [searchParams, action])

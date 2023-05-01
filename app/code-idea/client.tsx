@@ -180,7 +180,9 @@ export default function Client({
       return (
         <>
           <span>
-            Write your code idea and Code Genius will smart suggestions
+            Write your code idea and Code Genius will give you{" "}
+            <span className="text-mint">ideas</span> and{" "}
+            <span className="text-mint">suggestions</span>
           </span>
         </>
       )
@@ -188,7 +190,8 @@ export default function Client({
       return (
         <>
           <span>
-            Paste your function and Code Genius will generate the unit tests
+            Paste your function and Code Genius will generate{" "}
+            <span className="text-mint">unit tests</span>
           </span>
         </>
       )
@@ -196,7 +199,8 @@ export default function Client({
       return (
         <>
           <span>
-            Paste your function and Code Genius will generate the code
+            Paste your function and Code Genius will suggest{" "}
+            <span className="text-mint">improvements</span>
           </span>
         </>
       )
@@ -213,7 +217,8 @@ export default function Client({
       return (
         <>
           <span>
-            Paste your code and Code Genius will generate documentation for it
+            Paste your code and Code Genius will generate{" "}
+            <span className="text-mint">documentation</span> for it
           </span>
         </>
       )

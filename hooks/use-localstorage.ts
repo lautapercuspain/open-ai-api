@@ -10,7 +10,6 @@ const useLocalStorage = <T>(
     // Retrieve from localStorage
     const item =
       typeof window !== "undefined" && window.localStorage.getItem(key)
-    // console.log("item", item);
 
     try {
       if (item) {

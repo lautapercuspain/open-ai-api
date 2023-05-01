@@ -29,8 +29,6 @@ export default function UserCodeSnippets({
     })
   }
 
-  console.log("searchResults", searchResults)
-
   return (
     <div
       className={`mx-1 w-[95%] flex-col items-start justify-start text-white ${

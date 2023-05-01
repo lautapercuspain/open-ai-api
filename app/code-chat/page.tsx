@@ -5,7 +5,6 @@ import Client from "./client"
 
 export default async function Page() {
   const session = await getServerSession(authOptions)
-  console.log("session::", session)
 
   if (!session) {
     redirect("/?action=authenticate&referer=chat")

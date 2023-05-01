@@ -23,7 +23,5 @@ export default async function handler(
     sql: `SELECT * FROM Auth.Users WHERE email = "${session.user.email}"`,
   })
 
-  console.log("user:", user)
-
   return res.status(200).json({ remainingCredits: user[0]?.credits })
 }
