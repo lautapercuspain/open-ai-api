@@ -258,7 +258,7 @@ export default function Client({
             padding={20}
             textareaId="code-editor"
             placeholder={placeHolderText}
-            className="mb-20 min-h-full w-[90%] rounded-lg border-none bg-purple-900 pb-6 pt-4 text-gray-200 focus:border-none focus:shadow-none focus:ring-0 focus:ring-purple-700 active:border-purple-700 sm:min-h-[300px] sm:w-full"
+            className="mb-8 w-full rounded-lg border-none bg-purple-900 pb-6  pt-4 text-gray-200 focus:border-none focus:shadow-none focus:ring-0 focus:ring-purple-700 active:border-purple-700 "
             value={codeSentence}
             highlight={(code) => highlight(code, languages.js)}
             onValueChange={(code) => setCodeSentence(code)}
