@@ -7,6 +7,13 @@ import { Check } from "lucide-react"
 import Image from "next/image"
 import React from "react"
 import tailwindConfig from "tailwind.config"
+import { loadStripe } from "@stripe/stripe-js"
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "",
+)
 
 import Faqs from "./faqs"
 
@@ -49,7 +56,7 @@ export default function Page() {
               </h3>
               <div className="my-4 flex items-center justify-center">
                 <span className="text-center text-5xl font-extrabold">
-                  $ 4.99 USD
+                  $ 5.00 USD
                 </span>
               </div>
               <div className="my-4 mx-auto">
@@ -90,14 +97,18 @@ export default function Page() {
       rounded-lg bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] p-[2px] font-mono
     sm:items-start sm:justify-center`}
               >
-                <div
-                  onClick={() => setOpenPayment(true)}
+                <form
+                  action="/api/checkout_sessions"
+                  method="POST"
                   className="relative h-[48px] w-[100%] items-center justify-center rounded-lg bg-purple-700"
                 >
-                  <div className="text-sm px-1 py-3 text-center font-inter text-white sm:mx-auto sm:px-2">
+                  <button
+                    type="submit"
+                    className="text-sm px-1 py-3 text-center font-inter text-white sm:mx-auto sm:px-2"
+                  >
                     Buy Credits
-                  </div>
-                </div>
+                  </button>
+                </form>
               </div>
 
               {/* <!-- List --> */}
