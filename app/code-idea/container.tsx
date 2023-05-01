@@ -28,7 +28,7 @@ export default function Container() {
         setPrompt(`Create code, well written in ${langElement} and ${lib}.  
               Context: ${codeSentence}${
           codeSentence.slice(-1) === "." ? "" : "."
-        }  Make sure to prefix all code explanations with "//" so it can be read as code comments.`)
+        }  Make sure to prefix all code explanations with "//" so it can be read as code comments. Always add code comments above the code. Never add code comments at the end of the line. If a comment has more than 10 words, continue in the next line.`)
         setMode("smart")
       }
       if (testSelected || search === "test") {

@@ -1,3 +1,6 @@
+"use client"
+
+import { useEffect, useRef, useState } from "react"
 import { CopyBlock, dracula } from "react-code-blocks"
 import tailwindConfig from "tailwind.config.js"
 import Button from "./Button"
@@ -19,10 +22,28 @@ export default function GenerateCode({
   generatedCode,
   langElement,
 }: GenerateCode) {
+  const [scrollHeight, setScrollHeight] = useState(0)
+  const chatContainerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (chatContainerRef && chatContainerRef.current) {
+      setScrollHeight(chatContainerRef.current?.scrollHeight)
+      chatContainerRef.current?.scrollTo({
+        top: scrollHeight - chatContainerRef.current.offsetHeight,
+        behavior: "smooth",
+      })
+    }
+  }, [
+    chatContainerRef,
+    chatContainerRef.current,
+    chatContainerRef.current?.scrollHeight,
+    scrollHeight,
+  ])
+
   return (
     <>
       <div
-        className={`my-2 mb-10 flex flex-col items-${align} md:items-${align} lg:items-${align} `}
+        className={`my-2 mb-10 flex flex-col items-${align} md:items-${align} lg:items-${align}`}
       >
         {generatedCode
           .substring(generatedCode.indexOf("**") + 0)
@@ -33,7 +54,10 @@ export default function GenerateCode({
 
           .map((generated) => {
             return (
-              <div className="w-full text-left [&>button]:h-10 [&>button]:w-10 ">
+              <div
+                ref={chatContainerRef}
+                className="max-h-[700px] w-full overflow-x-auto overflow-y-scroll text-left"
+              >
                 <CopyBlock
                   showLineNumbers
                   wrapLongLines

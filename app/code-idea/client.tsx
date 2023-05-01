@@ -43,9 +43,7 @@ export default function Client({
   const [showSavePromptModal, setShowSavePromptModal] = useState(false)
   const [reader, setReader] =
     useState<ReadableStreamDefaultReader<Uint8Array> | null>(null)
-
   const [questionName, setQuestionName] = useState("")
-
   const [generatedCode, setGeneratedCode] = useState<String>("")
   const [userId] = useLocalStorage(LSConfig.user.userId, "")
   const controller = new AbortController()
