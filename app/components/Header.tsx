@@ -46,6 +46,7 @@ export default function Header({
     <>
       {!session && <SignInModal />}
       <div
+        id="site-header"
         className={`absolute top-0 z-30 w-full bg-transparent transition-all ${
           !showSignInModal || session ? "block" : "hidden"
         }`}

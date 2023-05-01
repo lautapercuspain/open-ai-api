@@ -3,7 +3,7 @@
 import { Dialog, Transition } from "@headlessui/react"
 import { ArrowLeft } from "lucide-react"
 import { Inter, Poppins } from "next/font/google"
-import { Fragment, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 
 interface Props {
   isOpen: boolean
@@ -32,6 +32,16 @@ const inter = Inter({
 
 export default function PaymentModal({ isOpen, setIsOpen }: Props) {
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues)
+
+  useEffect(() => {
+    const headerId = document.getElementById("site-header")
+    if (isOpen) {
+      //use the header id to hidde the element
+      headerId?.classList.add("hidden")
+    } else {
+      headerId?.classList.remove("hidden")
+    }
+  }, [isOpen])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
