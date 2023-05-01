@@ -12,10 +12,14 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 import Dashboard from "app/dashboard/page"
 
-export default function UserDropdown({ session }) {
+export default function UserDropdown({ session, setShowSignInModal }) {
   const { email, image } = session?.user || {}
   const [colorMode, setColorMode] = useLocalStorage(LSConfig.colorMode, "")
   const [openPopover, setOpenPopover] = useState(false)
+
+  useEffect(() => {
+    setShowSignInModal(false)
+  }, [])
 
   useEffect(() => {
     try {
@@ -31,58 +35,37 @@ export default function UserDropdown({ session }) {
 
   return (
     <motion.div
-      className="relative z-auto inline-block text-left"
+      className="absolute right-4 top-7 z-auto inline-block text-left"
       {...FADE_IN_ANIMATION_SETTINGS}
     >
       <Popover
         content={
-          <div className=" mt-3 w-full rounded-md bg-white p-2 sm:w-56">
-            <button className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-gray-100">
-              <LayoutDashboard className="h-4 w-4" />
+          <div className="w-full rounded-md bg-purple-700 sm:w-56">
+            <button className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-purple-500">
+              <LayoutDashboard color="white" className="h-4 w-4" />
               <Link href="/dashboard">
-                <p className="text-sm">Dashboard</p>
+                <p className="text-sm text-white">Dashboard</p>
               </Link>
             </button>
-            <button className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-gray-100">
-              <LampDesk className="h-4 w-4" />
+            <button className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-purple-500">
+              <LampDesk color="white" className="h-4 w-4" />
               <Link href="/code-idea">
-                <p className="text-sm">Code Idea</p>
+                <p className="text-sm text-white">Code Idea</p>
               </Link>
             </button>
-            <button className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-gray-100">
-              <Laptop className="h-4 w-4" />
+            <button className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-purple-500">
+              <Laptop color="white" className="h-4 w-4" />
               <Link href="/code-chat">
-                <p className="text-sm">My Chat</p>
+                <p className="text-sm text-white">My Chat</p>
               </Link>
             </button>
-            {/* <button
-              onClick={
-                colorMode === "dark"
-                  ? () => setColorMode("ligth")
-                  : () => setColorMode("dark")
-              }
-              className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-gray-100"
-            >
-              {colorMode === "dark" ? (
-                <SunMedium className="h-4 w-4" color={"black"} />
-              ) : (
-                <Moon
-                  className="h-4 w-4"
-                  color={colorMode === "dark" ? "white" : "black"}
-                />
-              )}
-              <Link href={"#"}>
-                <p className="text-sm ">
-                  {colorMode === "dark" ? "Ligth Mode" : "Dark Mode"}
-                </p>
-              </Link>
-            </button> */}
+
             <button
-              className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-gray-100"
+              className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-purple-500"
               onClick={() => signOut({ callbackUrl: "/" })}
             >
-              <LogOut className="h-4 w-4" />
-              <p className="text-sm">Logout</p>
+              <LogOut color="white" className="h-4 w-4" />
+              <p className="text-sm text-white">Logout</p>
             </button>
           </div>
         }
@@ -105,4 +88,29 @@ export default function UserDropdown({ session }) {
       </Popover>
     </motion.div>
   )
+}
+
+{
+  /* <button
+              onClick={
+                colorMode === "dark"
+                  ? () => setColorMode("ligth")
+                  : () => setColorMode("dark")
+              }
+              className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-gray-100"
+            >
+              {colorMode === "dark" ? (
+                <SunMedium className="h-4 w-4" color={"black"} />
+              ) : (
+                <Moon
+                  className="h-4 w-4"
+                  color={colorMode === "dark" ? "white" : "black"}
+                />
+              )}
+              <Link href={"#"}>
+                <p className="text-sm ">
+                  {colorMode === "dark" ? "Ligth Mode" : "Dark Mode"}
+                </p>
+              </Link>
+            </button> */
 }

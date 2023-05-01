@@ -124,7 +124,11 @@ export function useSignInModal(userHasAccount: boolean) {
   }, [showSignInModal, setShowSignInModal])
 
   return useMemo(
-    () => ({ setShowSignInModal, SignInModal: SignInModalCallback }),
+    () => ({
+      setShowSignInModal,
+      SignInModal: SignInModalCallback,
+      showSignInModal,
+    }),
     [setShowSignInModal, SignInModalCallback],
   )
 }

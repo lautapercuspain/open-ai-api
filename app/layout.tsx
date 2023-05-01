@@ -6,6 +6,9 @@ import { getServerSession } from "next-auth/next"
 import { authOptions } from "pages/api/auth/[...nextauth]"
 import { Inter } from "next/font/google"
 import { cookies } from "next/headers"
+import ModalsWrapper from "./components/shared/ModalsWrapper"
+import { useSignInModal } from "./components/modals/SignInModal"
+import HeaderWrapper from "./components/shared/HeaderWrapper"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -31,7 +34,7 @@ export default async function RootLayout({
         </head>
         <body className="bg-purple-900">
           <SessionProvider>
-            <Header session={session} userHasAccount={userHasAccount} />
+            <HeaderWrapper session={session} userHasAccount={userHasAccount} />
             <div className="flex min-h-screen flex-nowrap">{children}</div>
             {/* <Footer /> */}
           </SessionProvider>

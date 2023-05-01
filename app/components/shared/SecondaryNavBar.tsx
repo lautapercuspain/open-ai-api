@@ -30,7 +30,6 @@ export default function SecondaryNavBar({
       id="secondary-sidebar"
       className={`${isCodeModeSelected ? "hidden" : "block"}
       ${sidebarOpen ? "block" : "hidden"}
-      
       absolute top-0 left-[64px] z-20 h-auto min-h-screen flex-col
       items-start
       bg-purple-800 px-5 transition-transform duration-700
@@ -45,7 +44,7 @@ export default function SecondaryNavBar({
       /> */}
 
       <div
-        className="mt-10 inline-flex h-12"
+        className="mt-12 inline-flex h-12"
         onClick={() => {
           setSidebarOpen(!sidebarOpen)
           setOpenSecondayNavBar((prev) => !prev)
@@ -66,7 +65,7 @@ export default function SecondaryNavBar({
         <p
           className={`ml-4 w-[200px] ${sidebarOpen ? "block" : "hidden"} ${
             smartSelected ? "text-mint" : "text-white"
-          } -mt-2 cursor-pointer rounded-md p-2 hover:bg-purple-500`}
+          } -mt-1 h-12 cursor-pointer rounded-md p-2 hover:bg-purple-500`}
         >
           Code Suggestions
         </p>
@@ -91,7 +90,9 @@ export default function SecondaryNavBar({
           className="mt-2 cursor-pointer border-purple-300 "
         />
         <p
-          className={`ml-4 w-[200px] ${sidebarOpen ? "block" : "hidden"}  ${
+          className={`ml-4 h-12 w-[200px] ${
+            sidebarOpen ? "block" : "hidden"
+          }  ${
             improveSelected ? "text-mint" : "text-white"
           } cursor-pointer rounded-md pt-2 pl-2 hover:bg-purple-500`}
         >
@@ -118,7 +119,7 @@ export default function SecondaryNavBar({
           className="mt-2 cursor-pointer border-purple-300 "
         />
         <p
-          className={`ml-4 w-[200px]  ${sidebarOpen ? "block" : "hidden"} ${
+          className={`ml-4 h-12 w-[200px] ${sidebarOpen ? "block" : "hidden"} ${
             testSelected ? "text-mint" : "text-white"
           } cursor-pointer rounded-md p-2 hover:bg-purple-500`}
         >
@@ -145,7 +146,7 @@ export default function SecondaryNavBar({
           className="mt-2 cursor-pointer border-purple-300"
         />
         <p
-          className={`ml-4 w-[200px] ${
+          className={`ml-4 h-12 w-[200px] ${
             docSelected ? "text-mint" : "text-white"
           } ${
             sidebarOpen ? "block" : "hidden"

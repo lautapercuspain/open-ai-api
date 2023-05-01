@@ -17,9 +17,15 @@ const rubik = Rubik({
   weight: ["400", "300", "600"],
 })
 
-export default function Header({ session, userHasAccount }) {
+export default function Header({
+  session,
+  showSignInModal,
+  userHasAccount,
+  SignInModal,
+  setShowSignInModal,
+}) {
   const pathname = usePathname()
-  const { SignInModal, setShowSignInModal } = useSignInModal(userHasAccount)
+
   const [userId, setUserId] = useLocalStorage(LSConfig.user.userId, "")
   const searchParams = useSearchParams()
   const action = searchParams && searchParams.get("action")
@@ -40,7 +46,9 @@ export default function Header({ session, userHasAccount }) {
     <>
       {!session && <SignInModal />}
       <div
-        className={`absolute top-0 z-30 w-full bg-transparent transition-all`}
+        className={`absolute top-0 z-30 w-full bg-transparent transition-all ${
+          !showSignInModal || session ? "block" : "hidden"
+        }`}
       >
         <div className="ml- mx-0 flex items-center justify-between md:mx-10">
           <div
@@ -85,7 +93,7 @@ export default function Header({ session, userHasAccount }) {
                 !session
                   ? "bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0]"
                   : "bg-transparent"
-              }  p-[2px] font-mono`}
+              }  p-[1.5px] font-inter`}
             >
               {!session && (
                 <div className="relative h-[48px] w-[163px] rounded-lg bg-purple-800">
@@ -94,7 +102,10 @@ export default function Header({ session, userHasAccount }) {
                   </div>
                 </div>
               )}
-              {session && <UserDropdown session={session} />}
+              <UserDropdown
+                session={session}
+                setShowSignInModal={setShowSignInModal}
+              />
             </div>
           </div>
         </div>
