@@ -35,7 +35,7 @@ export default function UserDropdown({ session, setShowSignInModal }) {
 
   return (
     <motion.div
-      className="absolute right-4 top-7 z-auto inline-block text-left"
+      className="absolute right-4 top-4 z-auto inline-block text-left"
       {...FADE_IN_ANIMATION_SETTINGS}
     >
       <Popover

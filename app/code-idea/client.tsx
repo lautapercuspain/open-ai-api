@@ -248,7 +248,7 @@ export default function Client({
         className="ml-0 mt-8 flex flex-col items-start justify-start sm:ml-8 sm:justify-between"
       >
         <div className="w-full sm:mr-3">
-          <div className="font-lg sm:text-1xl left-0 mx-auto mb-6 mt-8 w-full border-b-[1px] border-gray-400 px-2 pb-3 text-center font-inter uppercase text-purple-300 sm:mr-8 sm:mt-2 sm:ml-0 sm:pt-2 sm:text-left">
+          <div className="sm:text-1xl left-0 mx-auto mb-6 mt-8 w-full border-b-[1px] border-gray-400 px-2 py-4 pb-3 text-center font-inter text-[13px] uppercase text-purple-300 sm:mr-8 sm:mt-2 sm:ml-0 sm:pt-2 sm:text-left">
             {getCodeGeniusMode()}
           </div>
           {/* <div className="mt-1  border-b-[1px] border-purple-500 pb-2 " /> */}
