@@ -105,16 +105,18 @@ export default function ContactFormModal({
             >
               <Dialog.Panel
                 className={
-                  "w-[100%] transform overflow-hidden rounded-2xl bg-purple-600 p-4 text-left shadow-xl transition-all md:h-full md:w-[90%] lg:h-fit lg:w-[650px]"
+                  "w-[100%] transform overflow-hidden rounded-2xl bg-purple-500 p-4 text-left shadow-xl transition-all md:h-full md:w-[90%] lg:h-fit lg:w-[650px]"
                 }
               >
-                <div className="flex flex-col content-center justify-start justify-items-start gap-4 sm:p-12">
-                  <div
-                    className="relative block cursor-pointer"
-                    onClick={() => setIsOpen(false)}
-                  >
+                <div
+                  className="relative block cursor-pointer"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <div className="abosolute -top-12 -left-12">
                     <ArrowLeft size={25} color="white" />
                   </div>
+                </div>
+                <div className="flex flex-col content-center justify-start justify-items-start gap-4 sm:p-12">
                   {loading && !thanksMessage && (
                     <>
                       <Dialog.Title
@@ -245,18 +247,14 @@ export default function ContactFormModal({
                     </div>
                   )}
                   {thanksMessage && (
-                    <div className="flex flex-col items-center justify-center">
+                    <div className="flex flex-col items-center justify-center font-inter">
                       <Dialog.Title
                         as="h1"
                         className=" text-2xl leading-6 text-white sm:text-left sm:text-3xl"
                       >
-                        <div className="flex flex-col items-center">
-                          <span className="absolute top-5">
-                            Thanks for your purchase
-                          </span>
-                          <span className="absolute top-12 mt-4">
-                            {clientName}!
-                          </span>
+                        <div className="flex flex-col items-center justify-center">
+                          <span className="">Thanks for your purchase</span>
+                          <span className="mt-2">{clientName}!</span>
                         </div>
                       </Dialog.Title>
                       <p className="text-sm mt-4 w-[65%] text-center text-white">

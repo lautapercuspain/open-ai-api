@@ -58,9 +58,12 @@ export default function Client({
   useEffect(() => {
     if (searchParams && searchParams.has("success")) {
       if (opConfirmation && purchasedCredits > 0) {
+        //THANKS MESSAGE WITH DIALOG
         setThanksMessage(true)
         setOpenContactForm(true)
+        //SEND EMAIL
         SendCongratsEmail(session, purchasedCredits)
+        //SEND CONFETI
         Confetti()
       }
     }
