@@ -28,7 +28,7 @@ export default function PromptCard({
       className={`${order} mt-4 flex ${
         size === "large"
           ? width + " h-60"
-          : "w-[100%] sm:min-h-[230px] sm:w-[23%]"
+          : "h-60 w-[100%] sm:min-h-[230px] sm:w-[23%]"
       } 
       ${mb} cursor-pointer justify-between rounded-lg bg-purple-700 p-6 shadow hover:bg-purple-500`}
       onClick={() => {

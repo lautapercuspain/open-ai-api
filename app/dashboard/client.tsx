@@ -3,14 +3,16 @@
 import PromptCard from "app/components/shared/PromptCard"
 import useWindowSize from "hooks/use-window-size"
 import { useSession } from "next-auth/react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 
-export default function Client() {
+export default function Client({ credits }) {
   const session = useSession()
 
   const UpgradeAccount = () => (
-    <div
-      className={`my-auto mx-2 mt-2 flex cursor-pointer flex-row 
+    <Link
+      href="/pricing"
+      className={`my-auto mx-2 mt-2 flex cursor-pointer flex-row
       rounded-lg bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] p-[2px] font-mono
     sm:items-start sm:justify-center`}
     >
@@ -19,7 +21,7 @@ export default function Client() {
           Upgrade Account
         </div>
       </div>
-    </div>
+    </Link>
   )
 
   const { isMobile } = useWindowSize()
@@ -40,15 +42,16 @@ export default function Client() {
             order="order-2 sm:order-1"
             imageSrc="/dashboard/credits.svg"
             onClick={undefined}
-            title={"30"}
+            title={credits}
             text="Credits Available"
           />
+
           <PromptCard
             size="large"
             order="order-1 sm:order-2"
             width={cardWidth}
             button={<UpgradeAccount />}
-            title="Free"
+            title={credits > 10 ? "Premium" : "Free"}
             text="Subscription Plan"
             imageSrc="/dashboard/code-box.svg"
             onClick={undefined}
@@ -63,6 +66,7 @@ export default function Client() {
             text="Catch errors and optimize your code as you go."
             imageSrc="/dashboard/smart.svg"
           />
+
           <PromptCard
             onClick={() => {
               router.push("/code-idea?mode=imrove")
@@ -72,6 +76,7 @@ export default function Client() {
             text="Improve your code, find alternative ways to make your code more efficient."
             imageSrc="/dashboard/bug.svg"
           />
+
           <PromptCard
             onClick={() => {
               router.push("/code-idea?mode=test")
@@ -81,6 +86,7 @@ export default function Client() {
             text="Generate test cases that cover  your code is thoroughly tested and reliable."
             imageSrc="/dashboard/test.svg"
           />
+
           <PromptCard
             onClick={() => {
               router.push("/code-idea?mode=docs")

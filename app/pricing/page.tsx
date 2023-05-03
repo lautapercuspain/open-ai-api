@@ -1,5 +1,6 @@
 import { harperClient } from "@/lib/harperdb"
 import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 import { authOptions } from "pages/api/auth/[...nextauth]"
 import Client from "./client"
 import Faqs from "./faqs"

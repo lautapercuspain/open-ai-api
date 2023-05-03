@@ -46,14 +46,16 @@ export default function Client({
   console.log("totalCredits: ", totalCredits)
 
   const searchParams = useSearchParams()
-
+  const router = useRouter()
   const initialCreditsValue = purchasedCredits || 25
   const [credits, setCredits] = React.useState<number>(initialCreditsValue)
+  const [seconds, setSeconds] = React.useState<number>(7)
   const [loadingStripe, setLoadingStripe] = React.useState<boolean>(false)
   const [thanksMessage, setThanksMessage] = React.useState<boolean>(false)
   const [priceId, setPrecieId] = React.useState<string>("")
   const [openPayment, setOpenPayment] = React.useState<boolean>(false)
   const [openContactForm, setOpenContactForm] = React.useState<boolean>(false)
+  console.log("seconds: ", seconds)
 
   useEffect(() => {
     if (searchParams && searchParams.has("success")) {
@@ -65,9 +67,24 @@ export default function Client({
         SendCongratsEmail(session, purchasedCredits)
         //SEND CONFETI
         Confetti()
+        setTimeout(() => {
+          router.push("/dashboard")
+        }, 7000)
       }
     }
   }, [searchParams])
+
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout
+
+    if (opConfirmation) {
+      intervalId = setInterval(() => {
+        setSeconds((prevSeconds) => prevSeconds - 1)
+      }, 1000)
+    }
+
+    return () => clearInterval(intervalId)
+  }, [])
 
   useEffect(() => {
     if (credits === 25) {
@@ -137,6 +154,7 @@ export default function Client({
     <>
       <PaymentModal isOpen={openPayment} setIsOpen={setOpenPayment} />
       <ContactFormModal
+        seconds={seconds}
         purchasedCredits={purchasedCredits}
         thanksMessage={thanksMessage}
         clientName={session && session.user && session.user.name}
