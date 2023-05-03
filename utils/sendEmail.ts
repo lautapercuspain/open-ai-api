@@ -29,7 +29,7 @@ export async function sendInfoEmailFromClient(params) {
   const result = await transport.sendMail({
     to: isNewPuchase ? contactEmail : "geniuscodeai@gmail.com",
     subject: isNewPuchase
-      ? `${credits} has been added to your account`
+      ? `${credits} credits has been added to your account`
       : `New Client Contact`,
     from: from,
     text: textInfo({ name, contactEmail, message }),
@@ -51,8 +51,6 @@ export async function sendInfoEmailFromClient(params) {
  */
 function html(params: { url: string; host: string; userName: string }) {
   const { url, host, userName } = params
-
-  const escapedHost = host.replace(/\./g, "&#8203;.")
 
   const brandColor = "#346df1"
   const color = {
@@ -158,7 +156,11 @@ function htmlFromClients(params: {
         style="padding: 0px 0px 10px 0px; font-size: 16px; line-height: 22px; font-family: Helvetica, Arial, sans-serif; color: ${
           color.text
         };">
-        ${!isNewPuchase && `The message of the potential client is: ${message}`}
+        ${
+          !isNewPuchase
+            ? `The message of the potential client is: ${message}`
+            : ""
+        }
       </td>
     </tr>
   </table>
