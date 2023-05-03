@@ -22,16 +22,18 @@ export async function sendWelcomeEmail(params) {
 }
 
 export async function sendInfoEmailFromClient(params) {
-  const { name, contactEmail, message } = params
+  const { name, contactEmail, message, isNewPuchase, credits } = params
 
   // NOTE: You are not required to use `nodemailer`, use whatever you want.
   const transport = createTransport(server)
   const result = await transport.sendMail({
-    to: "geniuscodeai@gmail.com",
-    subject: `New Client Contact`,
+    to: isNewPuchase ? contactEmail : "geniuscodeai@gmail.com",
+    subject: isNewPuchase
+      ? `${credits} has been added to your account`
+      : `New Client Contact`,
     from: from,
     text: textInfo({ name, contactEmail, message }),
-    html: htmlFromClients({ name, contactEmail, message }),
+    html: htmlFromClients({ name, contactEmail, message, isNewPuchase }),
   })
   const failed = result.rejected.concat(result.pending).filter(Boolean)
   if (failed.length) {
@@ -118,8 +120,9 @@ function htmlFromClients(params: {
   name: string
   contactEmail: string
   message: string
+  isNewPuchase: boolean
 }) {
-  const { name, contactEmail, message } = params
+  const { name, contactEmail, message, isNewPuchase = false } = params
 
   const brandColor = "#346df1"
   const color = {
@@ -134,18 +137,28 @@ function htmlFromClients(params: {
   return `
 <body style="background: ${color.background};">
   <table width="100%" border="0" cellspacing="20" cellpadding="0"
-    style="background: ${color.mainBackground}; max-width: 600px; margin: auto; border-radius: 10px;">
+    style="background: ${
+      color.mainBackground
+    }; max-width: 600px; margin: auto; border-radius: 10px;">
     <tr>
       <td align="center"
-        style="padding: 10px 0px; font-size: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};">
-        New client contact: Mr/Miss <strong>${name}</strong>
-        The contact email is: ${contactEmail}
+        style="padding: 10px 0px; font-size: 22px; font-family: Helvetica, Arial, sans-serif; color: ${
+          color.text
+        };">
+          ${
+            isNewPuchase
+              ? `Thank you, <strong>${name}</strong>`
+              : `New client contact: Mr/Miss <strong>${name}</strong>`
+          }
+          ${isNewPuchase ? message : `The contact email is: ${contactEmail}`}
       </td>
     </tr>
     <tr>
       <td align="center"
-        style="padding: 0px 0px 10px 0px; font-size: 16px; line-height: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};">
-        The message of the potential client is: ${message}
+        style="padding: 0px 0px 10px 0px; font-size: 16px; line-height: 22px; font-family: Helvetica, Arial, sans-serif; color: ${
+          color.text
+        };">
+        ${!isNewPuchase && `The message of the potential client is: ${message}`}
       </td>
     </tr>
   </table>

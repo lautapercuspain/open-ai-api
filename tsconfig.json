@@ -33,7 +33,8 @@
     "**/*.tsx",
     "adapters/harperdb.ts",
     ".next/types/**/*.ts",
-    "pages/api/auth/[...nextauth].ts"
+    "pages/api/auth/[...nextauth].ts",
+    "utils/confetti.js"
   ],
   "exclude": ["node_modules"]
 }

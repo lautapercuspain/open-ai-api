@@ -11,73 +11,58 @@ import { PRICE_IDS } from "@/lib/constants"
 import { useRouter, useSearchParams } from "next/navigation"
 import { harperClient } from "@/lib/harperdb"
 import Loading from "app/loading"
+import { Confetti } from "utils/confetti"
 //Theme colors
 const colors: any = tailwindConfig.theme?.extend?.colors
 
 type ClientPropTye = {
   session: any
-  newCredits?: any
-  user: any
+  totalCredits: number
+  purchasedCredits: number
+  opConfirmation: boolean
 }
 
-async function getCheckoutSession(userId) {
-  const checkoutSession = fetch("/api/checkout/getCheckout", {
+async function SendCongratsEmail(session, credits) {
+  //Send congrats email to the user
+  const payload = {
+    name: session.user?.name,
+    credits: credits,
+    isNewPuchase: true,
+    contactEmail: session.user?.email,
+    message: "Congratulations! Your credits have been added to your account.",
+  }
+  await fetch("/api/email/send", {
     method: "POST",
-    cache: "no-cache",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ userId: userId }),
-  }).then((res) => {
-    return res.json()
+    body: JSON.stringify(payload),
   })
-
-  return checkoutSession
 }
 
-export default function Client({ session, user, newCredits }: ClientPropTye) {
-  console.log("user in the client:", user)
-  const [isPending, startTransition] = useTransition()
+export default function Client({
+  session,
+  opConfirmation,
+  purchasedCredits,
+  totalCredits,
+}: ClientPropTye) {
+  console.log("totalCredits: ", totalCredits)
 
   const searchParams = useSearchParams()
-  const [credits, setCredits] = React.useState<number>(newCredits || 25)
+
+  const initialCreditsValue = purchasedCredits || 25
+  const [credits, setCredits] = React.useState<number>(initialCreditsValue)
   const [loadingStripe, setLoadingStripe] = React.useState<boolean>(false)
   const [thanksMessage, setThanksMessage] = React.useState<boolean>(false)
   const [priceId, setPrecieId] = React.useState<string>("")
   const [openPayment, setOpenPayment] = React.useState<boolean>(false)
   const [openContactForm, setOpenContactForm] = React.useState<boolean>(false)
-  const router = useRouter()
-  const userId =
-    searchParams && searchParams.has("referer") && searchParams.get("referer")
-  const updatedCredits = searchParams
-    ? parseInt(searchParams.get("credits") || "", 10)
-    : undefined
-  useEffect(() => {
-    if (
-      searchParams &&
-      searchParams.has("success") &&
-      !searchParams.has("hash") &&
-      searchParams.has("credits")
-    ) {
-      router.replace(
-        `/pricing?success=true&referer=${userId}&credits=${updatedCredits}&hash=${new Date().getTime()}`,
-      )
-      router.refresh()
-      // const validateRequest = getCheckoutSession(userId)
-      // validateRequest.then(async (res) => {
-      //   const { session: checkoutSession } = res
-      //   // console.log("session:", checkoutSession)
-      //   if (!checkoutSession.confirmed && checkoutSession.credits > 0) {
-      //     // location.reload()
-      //   }
-      // })
-    }
-  }, [searchParams])
 
   useEffect(() => {
-    if (searchParams && searchParams.has("hash")) {
-      setThanksMessage(true)
-      setOpenContactForm(true)
+    if (searchParams && searchParams.has("success")) {
+      if (opConfirmation && purchasedCredits > 0) {
+        setThanksMessage(true)
+        setOpenContactForm(true)
+        SendCongratsEmail(session, purchasedCredits)
+        Confetti()
+      }
     }
   }, [searchParams])
 
@@ -125,7 +110,7 @@ export default function Client({ session, user, newCredits }: ClientPropTye) {
 
     // setLoadingStripe(false)
 
-    const saveCheckoutSession = await fetch("/api/checkout/save", {
+    await fetch("/api/checkout/save", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -141,24 +126,23 @@ export default function Client({ session, user, newCredits }: ClientPropTye) {
         confirmed: false,
       }),
     })
+
     location.href = stripeSession.session.url
-    // console.log("saveCheckoutSession:", saveCheckoutSession.json())
   }
-  console.log("credits::", credits)
 
   return (
     <>
       <PaymentModal isOpen={openPayment} setIsOpen={setOpenPayment} />
       <ContactFormModal
-        purchasedCredits={updatedCredits}
+        purchasedCredits={purchasedCredits}
         thanksMessage={thanksMessage}
         clientName={session && session.user && session.user.name}
         isOpen={openContactForm}
         setIsOpen={setOpenContactForm}
       />
-      <section className="grid grid-cols-1 space-y-12 pt-9 sm:mx-20 md:grid-cols-2 md:gap-6 md:gap-x-6 md:space-y-0 lg:grid-cols-2">
+      <section className="grid grid-cols-1 space-y-12 pt-9 md:grid-cols-1 md:gap-6 md:gap-x-6 md:space-y-0 lg:grid-cols-2">
         {/* <!-- Premium  Card --> */}
-        <div className="mx-auto  flex w-full max-w-lg flex-col rounded-lg bg-purple-700 p-6 text-white shadow-sm sm:min-w-[476px] xl:p-8">
+        <div className="mx-auto flex w-full max-w-lg flex-col rounded-lg bg-purple-700 p-6 text-white shadow-sm sm:min-w-[476px]  xl:p-8">
           <Image
             src="/icons/premium.svg"
             alt="Premium membership"
