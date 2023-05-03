@@ -97,7 +97,7 @@ export default function SideBar({
       <Code2
         size={size}
         color={pathname === "/code-idea" ? colors.mint : "white"}
-        className={`ml-1.5 bg-purple-400 text-white`}
+        className={`ml-1.5 text-white`}
       />
     )
   }

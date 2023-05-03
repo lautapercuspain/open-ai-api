@@ -4,87 +4,28 @@ import GradientButton from "app/components/buttons/gradientButton"
 import ContactFormModal from "app/components/modals/ContactFormModal"
 import PaymentModal from "app/components/modals/PaymentModal"
 import Image from "next/image"
-import React, { useEffect, useTransition } from "react"
+import React, { useEffect } from "react"
+import Loading from "app/loading"
 import tailwindConfig from "tailwind.config"
 import { Check } from "lucide-react"
 import { PRICE_IDS } from "@/lib/constants"
-import { useRouter, useSearchParams } from "next/navigation"
-import { harperClient } from "@/lib/harperdb"
-import Loading from "app/loading"
-import { Confetti } from "utils/confetti"
+
 //Theme colors
 const colors: any = tailwindConfig.theme?.extend?.colors
 
 type ClientPropTye = {
   session: any
-  totalCredits: number
-  purchasedCredits: number
-  opConfirmation: boolean
 }
 
-async function SendCongratsEmail(session, credits) {
-  //Send congrats email to the user
-  const payload = {
-    name: session.user?.name,
-    credits: credits,
-    isNewPuchase: true,
-    contactEmail: session.user?.email,
-    message: "Congratulations! Your credits have been added to your account.",
-  }
-  await fetch("/api/email/send", {
-    method: "POST",
-    body: JSON.stringify(payload),
-  })
-}
-
-export default function Client({
-  session,
-  opConfirmation,
-  purchasedCredits,
-  totalCredits,
-}: ClientPropTye) {
-  console.log("totalCredits: ", totalCredits)
-
-  const searchParams = useSearchParams()
-  const router = useRouter()
-  const initialCreditsValue = purchasedCredits || 25
+export default function Client({ session }: ClientPropTye) {
+  const initialCreditsValue = 25
   const [credits, setCredits] = React.useState<number>(initialCreditsValue)
-  const [seconds, setSeconds] = React.useState<number>(7)
+
   const [loadingStripe, setLoadingStripe] = React.useState<boolean>(false)
-  const [thanksMessage, setThanksMessage] = React.useState<boolean>(false)
+
   const [priceId, setPrecieId] = React.useState<string>("")
   const [openPayment, setOpenPayment] = React.useState<boolean>(false)
   const [openContactForm, setOpenContactForm] = React.useState<boolean>(false)
-  console.log("seconds: ", seconds)
-
-  useEffect(() => {
-    if (searchParams && searchParams.has("success")) {
-      if (opConfirmation && purchasedCredits > 0) {
-        //THANKS MESSAGE WITH DIALOG
-        setThanksMessage(true)
-        setOpenContactForm(true)
-        //SEND EMAIL
-        SendCongratsEmail(session, purchasedCredits)
-        //SEND CONFETI
-        Confetti()
-        setTimeout(() => {
-          router.push("/dashboard")
-        }, 7000)
-      }
-    }
-  }, [searchParams])
-
-  useEffect(() => {
-    let intervalId: NodeJS.Timeout
-
-    if (opConfirmation) {
-      intervalId = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds - 1)
-      }, 1000)
-    }
-
-    return () => clearInterval(intervalId)
-  }, [])
 
   useEffect(() => {
     if (credits === 25) {
@@ -154,9 +95,6 @@ export default function Client({
     <>
       <PaymentModal isOpen={openPayment} setIsOpen={setOpenPayment} />
       <ContactFormModal
-        seconds={seconds}
-        purchasedCredits={purchasedCredits}
-        thanksMessage={thanksMessage}
         clientName={session && session.user && session.user.name}
         isOpen={openContactForm}
         setIsOpen={setOpenContactForm}

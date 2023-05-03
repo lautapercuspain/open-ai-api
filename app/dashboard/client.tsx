@@ -2,37 +2,84 @@
 
 import PromptCard from "app/components/shared/PromptCard"
 import useWindowSize from "hooks/use-window-size"
-import { useSession } from "next-auth/react"
+import { useRouter, useSearchParams } from "next/navigation"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import React, { useEffect } from "react"
+import { Confetti } from "utils/confetti"
+import ContactFormModal from "app/components/modals/ContactFormModal"
 
-export default function Client({ credits }) {
-  const session = useSession()
+async function SendCongratsEmail(session, credits) {
+  //Send congrats email to the user
+  const payload = {
+    name: session.user?.name,
+    credits: credits,
+    isNewPuchase: true,
+    contactEmail: session.user?.email,
+    message: "Congratulations! Your credits have been added to your account.",
+  }
+  await fetch("/api/email/send", {
+    method: "POST",
+    body: JSON.stringify(payload),
+  })
+}
 
-  const UpgradeAccount = () => (
-    <Link
-      href="/pricing"
-      className={`my-auto mx-2 mt-2 flex cursor-pointer flex-row
-      rounded-lg bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] p-[2px] font-mono
-    sm:items-start sm:justify-center`}
-    >
-      <div className="relative h-[48px] w-auto rounded-lg bg-purple-500">
-        <div className="text-sm px-3 py-3 text-center font-bold text-white sm:mx-auto sm:px-6">
-          Upgrade Account
-        </div>
+const UpgradeAccount = () => (
+  <Link
+    href="/pricing"
+    className={`my-auto mx-2 mt-2 flex cursor-pointer flex-row
+    rounded-lg bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] p-[2px] font-mono
+  sm:items-start sm:justify-center`}
+  >
+    <div className="relative h-[48px] w-auto rounded-lg bg-purple-500">
+      <div className="text-sm px-3 py-3 text-center font-bold text-white sm:mx-auto sm:px-6">
+        Upgrade Account
       </div>
-    </Link>
-  )
+    </div>
+  </Link>
+)
+
+export default function Client({
+  session,
+  credits,
+  purchasedCredits,
+  opConfirmation,
+}) {
+  const searchParams = useSearchParams()
+  const [thanksMessage, setThanksMessage] = React.useState<boolean>(false)
+  const [openContactForm, setOpenContactForm] = React.useState<boolean>(false)
+
+  useEffect(() => {
+    if (searchParams && searchParams.has("success")) {
+      if (opConfirmation && purchasedCredits > 0) {
+        //THANKS MESSAGE WITH DIALOG
+        setThanksMessage(true)
+        setOpenContactForm(true)
+        //SEND EMAIL
+        SendCongratsEmail(session, purchasedCredits)
+        //SEND CONFETI
+        Confetti()
+      }
+    }
+  }, [searchParams])
 
   const { isMobile } = useWindowSize()
   const cardWidth = isMobile ? "w-[100%]" : "w-[47%]"
   const router = useRouter()
+  //@ts-ignore
+  const clientName = session && session.user && session.user.name
   return (
     <>
+      <ContactFormModal
+        purchasedCredits={purchasedCredits}
+        thanksMessage={thanksMessage}
+        clientName={clientName}
+        isOpen={openContactForm}
+        setIsOpen={setOpenContactForm}
+      />
       <div className="mx-auto h-full w-[95%] dark:bg-purple-900 sm:ml-16">
         <div className="flex flex-row">
           <span className="text-md al absolute top-20 mb-10 ml-2 font-bold text-white sm:ml-10 sm:text-2xl">
-            Welcome, {session.data?.user?.name}!
+            Welcome, {clientName}!
           </span>
         </div>
         <div className="mt-32 flex w-full grow-0 flex-col items-center justify-between gap-4 pt-8 sm:mt-24 sm:flex-row sm:flex-wrap sm:justify-center">

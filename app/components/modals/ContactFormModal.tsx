@@ -11,7 +11,6 @@ interface Props {
   thanksMessage?: boolean
   clientName?: string
   purchasedCredits?: number
-  seconds?: number
   setIsOpen: (arg: boolean) => void
 }
 
@@ -36,7 +35,6 @@ const inter = Inter({
 export default function ContactFormModal({
   isOpen,
   setIsOpen,
-  seconds,
   purchasedCredits,
   clientName,
   thanksMessage,
@@ -262,10 +260,6 @@ export default function ContactFormModal({
                       <p className="text-sm mt-4 w-[65%] text-center text-white">
                         You have now {purchasedCredits} credits extra to create
                         with Code Genius.
-                      </p>
-                      <p className="text-xs mt-4 w-[100%] text-center text-white">
-                        You will be redirected to the Dashboard page in{" "}
-                        {seconds} seconds.
                       </p>
                     </div>
                   )}

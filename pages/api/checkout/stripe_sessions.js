@@ -14,7 +14,7 @@ export default async function handler(req, res) {
         ],
         // set one time payment for Stripe mode checkout
         mode: "payment",
-        success_url: `${req.headers.origin}/pricing?success=true&credits=${req.body.credits}`,
+        success_url: `${req.headers.origin}/dashboard?success=true&credits=${req.body.credits}`,
         cancel_url: `${req.headers.origin}/pricing?canceled=true`,
       })
 

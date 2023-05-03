@@ -8,12 +8,14 @@ import Client from "./client"
 
 export default async function Dashboard() {
   let harperUser
+  let opConfirmation = false
+  let totalCredits: number = 0
+  let purchasedCredits: number = 0
   const session = await getServerSession(authOptions)
-  if (!session) {
-    redirect("/?action=authenticate&referer=dashboard")
-  }
+  let existingCredits: string = ""
   //@ts-ignore
   const userId = session && session.user?.id
+
   //@ts-ignore
   if (session && session.user?.id) {
     harperUser = await harperClient({
@@ -21,12 +23,82 @@ export default async function Dashboard() {
       sql: `SELECT * FROM Auth.Users WHERE id = "${userId}"`,
     })
   }
-  const existingCredits = harperUser[0]?.credits
+  // console.log("user in the server:", user)
+
+  const checkoutSession = await harperClient({
+    operation: "sql",
+    //@ts-ignore
+    sql: `SELECT * FROM Auth.CheckoutSessions WHERE userId = "${userId}" AND credits > 0 ORDER BY __createdtime__ DESC LIMIT 1`,
+  })
+  // console.log("checkoutSession:", checkoutSession[0])
+  if (userId && harperUser[0]) {
+    //Get User from HarperDB
+
+    existingCredits = harperUser[0]?.credits
+    console.log("existingCredits:", existingCredits)
+
+    purchasedCredits =
+      checkoutSession.length > 0 ? checkoutSession[0]?.credits : 0
+
+    totalCredits =
+      purchasedCredits > 0
+        ? parseInt(purchasedCredits + existingCredits, 10)
+        : parseInt(existingCredits, 10)
+
+    console.log("total de creditos ahora::", totalCredits)
+    if (totalCredits > 0) {
+      const updatedUser = {
+        ...harperUser[0],
+        credits: totalCredits,
+      }
+      //UPDATE USER WITH TOTAL CREDITS
+      await harperClient({
+        operation: "update",
+        schema: "Auth",
+        table: "Users",
+        hash_values: [
+          {
+            id: userId,
+          },
+        ],
+        records: [updatedUser],
+      })
+    }
+    //UPDATE CHECKOUT SESSION TO CONFIRMED AND SET CREDITS TO 0
+    const updatedCheckout = {
+      ...checkoutSession[0],
+      confirmed: true,
+      credits: 0,
+    }
+
+    if (checkoutSession[0]) {
+      const updatedOp = await harperClient({
+        operation: "update",
+        schema: "Auth",
+        table: "CheckoutSessions",
+        hash_values: [
+          {
+            id: checkoutSession[0]?.id,
+          },
+        ],
+        records: [updatedCheckout],
+      })
+      if (updatedOp && updatedOp.update_hashes?.[0] !== "") {
+        opConfirmation = true
+      }
+    }
+  }
+
   return (
     <>
       <SideBar setOpenSecondaryNavBar={undefined} />
       <div className="mx-auto w-full  dark:bg-purple-900">
-        <Client credits={existingCredits} />
+        <Client
+          session={session}
+          credits={totalCredits}
+          purchasedCredits={purchasedCredits}
+          opConfirmation={opConfirmation}
+        />
       </div>
     </>
   )
