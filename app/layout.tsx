@@ -32,7 +32,7 @@ export default async function RootLayout({
         <head>
           <link rel="icon" href="/favicon.ico" />
         </head>
-        <body className="bg-purple-900">
+        <body suppressHydrationWarning={true} className="bg-purple-900">
           <SessionProvider>
             <HeaderWrapper session={session} userHasAccount={userHasAccount} />
             <div className="flex min-h-screen flex-nowrap">{children}</div>

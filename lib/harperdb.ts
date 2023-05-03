@@ -16,9 +16,13 @@ export async function harperClient(body) {
   const result = await response.text()
 
   // return result
+  // console.log("result", result)
 
   return JSON.parse(result, (key, value) => {
-    if (!isNaN(Date.parse(value))) {
+    // console.log("key:", key)
+    // console.log("value:", value)
+
+    if (!isNaN(Date.parse(value)) && key !== "credits" && key !== "amount") {
       return new Date(value)
     }
     return value

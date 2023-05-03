@@ -1,35 +1,90 @@
-"use client"
-
-import GradientButton from "app/components/buttons/gradientButton"
-import ContactFormModal from "app/components/modals/ContactFormModal"
-import PaymentModal from "app/components/modals/PaymentModal"
-import { Check } from "lucide-react"
-import Image from "next/image"
-import React from "react"
-import tailwindConfig from "tailwind.config"
-import { loadStripe } from "@stripe/stripe-js"
-
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || "",
-)
-
+import { harperClient } from "@/lib/harperdb"
+import { getServerSession } from "next-auth"
+import { authOptions } from "pages/api/auth/[...nextauth]"
+import Client from "./client"
 import Faqs from "./faqs"
+export const revalidate = 0
+export default async function Page() {
+  let user
 
-export default function Page() {
-  const colors: any = tailwindConfig.theme?.extend?.colors
-  const [credits, setCredits] = React.useState<number>(10)
-  const [openPayment, setOpenPayment] = React.useState<boolean>(false)
-  const [openContactForm, setOpenContactForm] = React.useState<boolean>(false)
+  const session = await getServerSession(authOptions)
+  // console.log("session:", session)
+  //@ts-ignore
+  const userId = session && session.user?.id
+
+  //@ts-ignore
+  if (session && session.user?.id) {
+    user = await harperClient({
+      operation: "sql",
+      sql: `SELECT * FROM Auth.Users WHERE id = "${userId}"`,
+    })
+  }
+  // console.log("user in the server:", user)
+
+  const checkoutSession = await harperClient({
+    operation: "sql",
+    //@ts-ignore
+    sql: `SELECT * FROM Auth.CheckoutSessions WHERE userId = "${userId}" AND credits > 0 ORDER BY __createdtime__ DESC LIMIT 1`,
+  })
+  // console.log("checkoutSession:", checkoutSession[0])
+  if (userId && user[0]) {
+    //Get User from HarperDB
+
+    const existingCredits = user[0]?.credits
+    console.log("existingCredits:", existingCredits)
+    const newCredits =
+      checkoutSession.length > 0 ? checkoutSession[0]?.credits : 0
+    // console.log("newCredits: ", newCredits)
+
+    const totalCredits =
+      newCredits > 0 ? parseInt(newCredits + existingCredits, 10) : null
+
+    // console.log("total de creditos ahora::", totalCredits)
+    if (totalCredits && totalCredits > 0) {
+      const updatedUser = {
+        ...user[0],
+        credits: totalCredits,
+      }
+
+      await harperClient({
+        operation: "update",
+        schema: "Auth",
+        table: "Users",
+        hash_values: [
+          {
+            id: userId,
+          },
+        ],
+        records: [updatedUser],
+      })
+    }
+
+    const updatedCheckout = {
+      ...checkoutSession[0],
+      confirmed: true,
+      credits: 0,
+    }
+    //Update the checkout session to confirmed.
+    if (checkoutSession[0]) {
+      const updatedOp = await harperClient({
+        operation: "update",
+        schema: "Auth",
+        table: "CheckoutSessions",
+        hash_values: [
+          {
+            id: checkoutSession[0]?.id,
+          },
+        ],
+        records: [updatedCheckout],
+      })
+      if (updatedOp && updatedOp.update_hashes?.[0] !== "") {
+        console.log("Send email to user!!")
+      }
+    }
+  }
 
   return (
     <>
-      <PaymentModal isOpen={openPayment} setIsOpen={setOpenPayment} />
-      <ContactFormModal
-        isOpen={openContactForm}
-        setIsOpen={setOpenContactForm}
-      />
       <main className="flex w-full flex-col items-center justify-center px-4 text-center sm:mt-12">
         <div className="container mx-auto mb-20 px-4 pt-20 lg:px-0">
           <h1 className="mx-auto mb-3 w-[80%] font-inter text-4xl font-bold text-white dark:text-white sm:w-[100%] sm:text-6xl sm:leading-none sm:tracking-tight">
@@ -40,179 +95,11 @@ export default function Page() {
             what you use.
           </p>
 
-          {/* <!-- Pricing Cards --> */}
-          <section className="grid grid-cols-1 space-y-12 pt-9 sm:mx-20 md:grid-cols-2 md:gap-6 md:gap-x-6 md:space-y-0 lg:grid-cols-2">
-            {/* <!-- Premium  Card --> */}
-            <div className="mx-auto  flex w-full max-w-lg flex-col rounded-lg bg-purple-700 p-6 text-white shadow-sm sm:min-w-[476px] xl:p-8">
-              <Image
-                src="/icons/premium.svg"
-                alt="Premium membership"
-                width={40}
-                height={40}
-                className="mx-auto"
-              />
-              <h3 className="my-2 mb-2 text-2xl font-semibold text-mint">
-                Premium
-              </h3>
-              <div className="my-4 flex items-center justify-center">
-                <span className="text-center text-5xl font-extrabold">
-                  $ 5.00 USD
-                </span>
-              </div>
-              <div className="my-4 mx-auto">
-                <button
-                  onClick={() => setCredits(25)}
-                  className={`text-xs leading-sm active:bg-bg-morado ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white px-3 py-1 font-bold uppercase text-white hover:border 
-                  hover:border-morado  hover:bg-purple-500 focus:bg-morado ${
-                    credits === 25
-                      ? "border-morado bg-morado"
-                      : "bg-transparent"
-                  } `}
-                >
-                  25
-                </button>
-                <button
-                  onClick={() => setCredits(50)}
-                  className={`text-xs leading-sm ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white px-3 py-1 font-bold uppercase text-white hover:border hover:border-morado hover:bg-purple-500 focus:bg-morado  ${
-                    credits === 50
-                      ? "border-morado bg-morado"
-                      : "bg-transparent"
-                  } `}
-                >
-                  50
-                </button>
-                <button
-                  onClick={() => setCredits(100)}
-                  className={`text-xs leading-sm ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white px-3 py-1 font-bold uppercase text-white hover:border hover:border-morado hover:bg-purple-500 focus:bg-morado ${
-                    credits === 100
-                      ? "border-morado bg-morado"
-                      : "bg-transparent"
-                  } `}
-                >
-                  100
-                </button>
-              </div>
-              <div
-                className={`my-4 mx-auto mb-4 mt-2 flex w-[80%] cursor-pointer flex-row items-center justify-center 
-      rounded-lg bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] p-[2px] font-mono
-    sm:items-start sm:justify-center`}
-              >
-                <form
-                  action="/api/checkout_sessions"
-                  method="POST"
-                  className="relative h-[48px] w-[100%] items-center justify-center rounded-lg bg-purple-700"
-                >
-                  <button
-                    type="submit"
-                    className="text-sm px-1 py-3 text-center font-inter text-white sm:mx-auto sm:px-2"
-                  >
-                    Buy Credits
-                  </button>
-                </form>
-              </div>
-
-              {/* <!-- List --> */}
-              <ul
-                role="list"
-                className="my-6 flex flex-col items-center space-y-4 sm:ml-11 sm:items-start "
-              >
-                <li className="flex w-64 items-center  space-x-3">
-                  {/* <!-- Icon --> */}
-                  <Check color={colors.mint} size={20} />
-                  <span>Individual configuration</span>
-                </li>
-                <li className="flex w-64 items-center space-x-3">
-                  <Check color={colors.mint} size={20} />
-                  <span>
-                    Team size:{" "}
-                    <span className="font-semibold">1 developer</span>
-                  </span>
-                </li>
-                <li className="flex w-64 items-center space-x-3">
-                  <Check color={colors.mint} size={20} />
-                  <span>
-                    Premium support:{" "}
-                    <span className="font-semibold">6 months</span>
-                  </span>
-                </li>
-                <li className="flex w-64 items-center space-x-3">
-                  <Check color={colors.mint} size={20} />
-                  <span>
-                    Free updates:{" "}
-                    <span className="font-semibold">6 months</span>
-                  </span>
-                </li>
-              </ul>
-            </div>
-            {/* <!-- Enterprice Card --> */}
-            <div className="mx-auto flex w-full max-w-lg flex-col rounded-lg bg-purple-700 p-6 text-white shadow-sm sm:min-w-[476px] xl:p-8">
-              <Image
-                src="/icons/enterprice.svg"
-                alt="Premium membership"
-                width={40}
-                height={40}
-                className="mx-auto"
-              />
-              <h3
-                className={`mt-2 mb-4 bg-gradient-to-r from-[#B095FF] via-[#8ABFE5] to-[#B1EAF1] bg-clip-text text-2xl font-semibold text-transparent`}
-              >
-                Enterprise
-              </h3>
-              <div className="my-4 flex flex-col items-center justify-center">
-                <span className="mr-2 text-center text-5xl font-extrabold">
-                  $ 19.99 USD
-                </span>
-                <span className="text-sm mt-7 text-center">
-                  Per user, per month.
-                </span>
-              </div>
-              <GradientButton
-                text="Contact Us"
-                onClick={() => setOpenContactForm(true)}
-              />
-
-              <ul
-                role="list"
-                className="my-6 flex flex-col items-center space-y-4 text-left sm:ml-11 sm:items-start"
-              >
-                <li className="flex w-64 items-center  space-x-3">
-                  <Check color={colors.mint} size={20} />
-                  <span className="font-bold">Everything in Premium plus:</span>
-                </li>
-                <li className="flex w-64 items-center  space-x-3">
-                  {/* <!-- Icon --> */}
-                  <Check color={colors.mint} size={20} />
-                  <span>Individual configuration</span>
-                </li>
-                <li className="flex w-64 items-center space-x-3">
-                  <Check color={colors.mint} size={20} />
-                  <span>
-                    Team size:{" "}
-                    <span className="font-semibold">1 developer</span>
-                  </span>
-                </li>
-                <li className="flex w-64 items-center space-x-3">
-                  <Check color={colors.mint} size={20} />
-                  <span>
-                    Premium support:{" "}
-                    <span className="font-semibold">6 months</span>
-                  </span>
-                </li>
-                <li className="flex w-64 items-center space-x-3">
-                  <Check color={colors.mint} size={20} />
-                  <span>
-                    Free updates:{" "}
-                    <span className="font-semibold">6 months</span>
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </section>
-          <section className="pt-20">
-            <h2 className="mb-3 text-3xl font-bold text-gray-200 dark:text-white sm:text-4xl sm:leading-none sm:tracking-tight">
-              Frequently asked questions
-            </h2>
-          </section>
+          <Client
+            session={session}
+            user={user}
+            newCredits={checkoutSession[0]?.credits}
+          />
 
           <Faqs />
         </div>

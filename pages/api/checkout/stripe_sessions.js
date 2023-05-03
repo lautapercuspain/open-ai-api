@@ -8,16 +8,17 @@ export default async function handler(req, res) {
         line_items: [
           {
             // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-            price: "price_1N33VNKrxiA7kR6cPePbRpyr",
+            price: req.body.priceUID,
             quantity: 1,
           },
         ],
         // set one time payment for Stripe mode checkout
         mode: "payment",
-        success_url: `${req.headers.origin}/?success=true`,
-        cancel_url: `${req.headers.origin}/?canceled=true`,
+        success_url: `${req.headers.origin}/pricing?success=true&credits=${req.body.credits}&referer=${req.body.userId}`,
+        cancel_url: `${req.headers.origin}/pricing?canceled=true`,
       })
-      res.redirect(303, session.url)
+
+      res.json({ session })
     } catch (err) {
       res.status(err.statusCode || 500).json(err.message)
     }

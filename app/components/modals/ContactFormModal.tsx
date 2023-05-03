@@ -8,6 +8,9 @@ import { Fragment, useState } from "react"
 
 interface Props {
   isOpen: boolean
+  thanksMessage?: boolean
+  clientName?: string
+  purchasedCredits?: number
   setIsOpen: (arg: boolean) => void
 }
 
@@ -29,7 +32,13 @@ const inter = Inter({
   weight: ["100", "300", "400", "600", "700"],
 })
 
-export default function ContactFormModal({ isOpen, setIsOpen }: Props) {
+export default function ContactFormModal({
+  isOpen,
+  setIsOpen,
+  purchasedCredits,
+  clientName,
+  thanksMessage,
+}: Props) {
   const [formValues, setFormValues] = useState<FormValues>(initialFormValues)
   const [message, setMessage] = useState<string>("")
   const [loading, setIsLoading] = useState<boolean>(false)
@@ -42,8 +51,6 @@ export default function ContactFormModal({ isOpen, setIsOpen }: Props) {
       [name]: value,
     }))
   }
-
-  console.log("message", message)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -108,7 +115,7 @@ export default function ContactFormModal({ isOpen, setIsOpen }: Props) {
                   >
                     <ArrowLeft size={25} color="white" />
                   </div>
-                  {loading && (
+                  {loading && !thanksMessage && (
                     <>
                       <Dialog.Title
                         as="h1"
@@ -118,7 +125,7 @@ export default function ContactFormModal({ isOpen, setIsOpen }: Props) {
                       </Dialog.Title>
                     </>
                   )}
-                  {!loading && !isDone && (
+                  {!loading && !isDone && !thanksMessage && (
                     <>
                       <Dialog.Title
                         as="h1"
@@ -221,7 +228,7 @@ export default function ContactFormModal({ isOpen, setIsOpen }: Props) {
                     </>
                   )}
                   {loading && <Loading />}
-                  {isDone && (
+                  {isDone && !thanksMessage && (
                     <div className="flex flex-col items-center justify-center">
                       <Dialog.Title
                         as="h1"
@@ -234,6 +241,27 @@ export default function ContactFormModal({ isOpen, setIsOpen }: Props) {
                       </p>
                       <p className="text-sm -mt-1 text-white">
                         An expert will reach you soon.
+                      </p>
+                    </div>
+                  )}
+                  {thanksMessage && (
+                    <div className="flex flex-col items-center justify-center">
+                      <Dialog.Title
+                        as="h1"
+                        className=" text-2xl leading-6 text-white sm:text-left sm:text-3xl"
+                      >
+                        <div className="flex flex-col items-center">
+                          <span className="absolute top-5">
+                            Thanks for your purchase
+                          </span>
+                          <span className="absolute top-12 mt-4">
+                            {clientName}!
+                          </span>
+                        </div>
+                      </Dialog.Title>
+                      <p className="text-sm mt-4 w-[65%] text-center text-white">
+                        You have now {purchasedCredits} credits extra to create
+                        with Code Genius.
                       </p>
                     </div>
                   )}
