@@ -1,5 +1,3 @@
-"use strict"
-
 export function Confetti() {
   // Globals
   var random = Math.random,
@@ -201,21 +199,23 @@ export function Confetti() {
     }
   }
 
+  // Add confetti theme
+  var theme = colorThemes[5]
+  var count = 0
+
+  function addConfetto() {
+    var confetto = new Confetto(theme)
+    confetti.push(confetto)
+    container.appendChild(confetto.outer)
+    timer = setTimeout(addConfetto, spread * random(), 0)
+  }
+
   function poof() {
     if (!frame) {
       // Append the container
       document.body.appendChild(container)
 
-      // Add confetti
-      var theme = colorThemes[0],
-        count = 0
-      ;(function addConfetto() {
-        var confetto = new Confetto(theme)
-        confetti.push(confetto)
-        container.appendChild(confetto.outer)
-        timer = setTimeout(addConfetto, spread * random())
-      })(0)
-
+      addConfetto()
       // Start the loop
       var myAnimationReq
       var prev = undefined
