@@ -22,7 +22,12 @@ export async function harperClient(body) {
     // console.log("key:", key)
     // console.log("value:", value)
 
-    if (!isNaN(Date.parse(value)) && key !== "credits" && key !== "amount") {
+    if (
+      !isNaN(Date.parse(value)) &&
+      key !== "credits" &&
+      key !== "amount" &&
+      key !== "apiCalls"
+    ) {
       return new Date(value)
     }
     return value

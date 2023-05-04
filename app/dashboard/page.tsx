@@ -32,10 +32,8 @@ export default async function Dashboard() {
   })
   // console.log("checkoutSession:", checkoutSession[0])
   if (userId && harperUser[0]) {
-    //Get User from HarperDB
-
+    //Store existing credits
     existingCredits = harperUser[0]?.credits
-    console.log("existingCredits:", existingCredits)
 
     purchasedCredits =
       checkoutSession.length > 0 ? checkoutSession[0]?.credits : 0
@@ -45,7 +43,6 @@ export default async function Dashboard() {
         ? parseInt(purchasedCredits + existingCredits, 10)
         : parseInt(existingCredits, 10)
 
-    console.log("total de creditos ahora::", totalCredits)
     if (totalCredits > 0) {
       const updatedUser = {
         ...harperUser[0],

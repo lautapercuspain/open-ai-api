@@ -58,7 +58,6 @@ export default function Chat({
       </>
     )
   }
-  console.log("generatedResponse.length::", generatedResponse.length)
 
   return (
     <div className="flex items-center justify-center overflow-scroll rounded-md sm:mx-auto sm:flex-row">

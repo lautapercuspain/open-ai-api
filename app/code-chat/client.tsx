@@ -7,7 +7,8 @@ import { LSConfig } from "@/lib/constants"
 import Chat from "app/components/shared/Chat"
 import GenerateCode from "app/components/GenerateCode"
 
-export default function Client() {
+export default function Client({ session }) {
+  console.log("session:", session)
   const [loading, setLoading] = useState(false)
   const [reader, setReader] =
     useState<ReadableStreamDefaultReader<Uint8Array> | null>(null)
@@ -16,9 +17,12 @@ export default function Client() {
   const [modaIsOpen, setModaIsOpen] = useState(false)
   const [showSavePromptModal, setShowSavePromptModal] = useState(false)
   const [questionName, setQuestionName] = useState("")
-  const [userId] = useLocalStorage(LSConfig.user.userId, "")
+  const userId = session && session.user?.id
+  const userCredits = session && session.user?.credits
   const controller = new AbortController()
-
+  if (!userCredits) {
+    //ENGAUGE USER TO BUY CREDITS!!
+  }
   const codeMessages = useRef([
     {
       role: "system",
@@ -90,13 +94,14 @@ export default function Client() {
     setReader(reader)
     const decoder = new TextDecoder()
     let done = false
-
+    let count = 0
     try {
       while (!done) {
         const { value, done: doneReading } = await reader.read()
         done = doneReading
-
+        count++
         let chunkValue = decoder.decode(value)
+        // console.log("chunkValue: ", chunkValue)
 
         setGeneratedCode((prev) => prev + chunkValue)
         if (done) {
@@ -109,6 +114,51 @@ export default function Client() {
     } finally {
       setLoading(false)
       setReader(null)
+
+      //Update API CALLS
+      const response = await fetch("/api/credits/update", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: userId,
+          tokensCount: count,
+        }),
+      })
+      response.json().then(async (data) => {
+        const { credits: oldCredits, apiCalls } = data
+        // check if value is divisible by 5
+        if (apiCalls % 5 === 0) {
+          console.log("Api calls is divisible by 2 or is 2")
+          //Decreament credits by 1
+          const newCredits = oldCredits - 1
+          //Update API CALLS
+          const finalResponse = await fetch("/api/user/update", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userId: userId,
+              updatedUser: {
+                ...data,
+                credits: newCredits,
+              },
+            }),
+          })
+          finalResponse.json().then((data) => {
+            console.log("final data:", data)
+            if (data.creditsLeft === 0) {
+              alert(
+                "You have no more credits left. Please purchase more credits.",
+              )
+            }
+          })
+        }
+      })
+      //RESET TOKENS COUNT.
+      count = 0
     }
   }
 

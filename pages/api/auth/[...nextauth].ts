@@ -40,15 +40,16 @@ export const authOptions: AuthOptions = {
     async signIn({ user, account, ...rest }) {
       return user && user.name ? true : false
     },
-    async session({ session, user, ...rest }) {
+    async session({ session, user }) {
       if (user && user.id) {
         const newSession = {
           ...session,
           user: {
+            ...user,
             id: user.id,
-            ...session.user,
           },
         }
+
         return newSession
       }
       return session
