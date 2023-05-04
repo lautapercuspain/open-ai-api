@@ -1,6 +1,7 @@
 "use client"
 
 import { Dialog, Transition } from "@headlessui/react"
+import Link from "next/link"
 import { ChangeEventHandler, Fragment } from "react"
 type DialogProps = {
   isOpen: boolean
@@ -8,6 +9,7 @@ type DialogProps = {
   isLiveDemoModal?: boolean
   body: string | JSX.Element
   propmptName?: string
+  buttonLink?: string
   handleInputChange?: (e: any) => void
   onSave?: () => void
   savePropmptName?: boolean
@@ -17,6 +19,7 @@ type DialogProps = {
 export default function MyModal({
   isOpen,
   onSave,
+  buttonLink,
   setIsOpen,
   propmptName,
   isPromptModal = false,
@@ -86,18 +89,30 @@ export default function MyModal({
                     </div>
                   )}
                   <div className="mt-4">
-                    <button
-                      type="button"
-                      className="text-sm inline-flex min-w-[145px] justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={() => {
-                        setIsOpen(false)
-                        if (typeof onSave === "function") {
-                          onSave()
-                        }
-                      }}
-                    >
-                      {buttonText}
-                    </button>
+                    {!buttonLink ? (
+                      <button
+                        type="button"
+                        className="text-sm inline-flex min-w-[145px] justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        onClick={() => {
+                          setIsOpen(false)
+                          if (typeof onSave === "function") {
+                            onSave()
+                          }
+                        }}
+                      >
+                        {buttonText}
+                      </button>
+                    ) : (
+                      <Link
+                        href={buttonLink}
+                        className="text-sm inline-flex min-w-[145px] justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        onClick={() => {
+                          setIsOpen(false)
+                        }}
+                      >
+                        {buttonText}
+                      </Link>
+                    )}
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

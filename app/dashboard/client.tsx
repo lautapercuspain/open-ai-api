@@ -86,6 +86,7 @@ export default function Client({
           <PromptCard
             size="large"
             width={cardWidth}
+            hasScale
             order="order-2 sm:order-1"
             imageSrc="/dashboard/credits.svg"
             onClick={undefined}
@@ -95,6 +96,7 @@ export default function Client({
 
           <PromptCard
             size="large"
+            hasScale
             order="order-1 sm:order-2"
             width={cardWidth}
             button={<UpgradeAccount />}

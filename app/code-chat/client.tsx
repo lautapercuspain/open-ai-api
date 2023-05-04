@@ -2,26 +2,35 @@
 
 import Modal from "app/components/Modal"
 import useLocalStorage from "hooks/use-localstorage"
-import { ChangeEvent, KeyboardEvent, useState, useRef } from "react"
+import { ChangeEvent, KeyboardEvent, useState, useRef, useEffect } from "react"
 import { LSConfig } from "@/lib/constants"
 import Chat from "app/components/shared/Chat"
 import GenerateCode from "app/components/GenerateCode"
+import { updateApiCallsAndCredits } from "utils/helpers"
 
 export default function Client({ session }) {
   const [loading, setLoading] = useState(false)
+  const [modaIsOpen, setModaIsOpen] = useState(false)
+  const [creditsModaIsOpen, setCreditsModaIsOpen] = useState(false)
   const [reader, setReader] =
     useState<ReadableStreamDefaultReader<Uint8Array> | null>(null)
   const [codeSentence, setCodeSentence] = useState("")
   const [generatedCode, setGeneratedCode] = useState<string>("")
-  const [modaIsOpen, setModaIsOpen] = useState(false)
   const [showSavePromptModal, setShowSavePromptModal] = useState(false)
   const [questionName, setQuestionName] = useState("")
   const userId = session && session.user?.id
   const userCredits = session && session.user?.credits
   const controller = new AbortController()
-  if (!userCredits) {
-    //ENGAUGE USER TO BUY CREDITS!!
-  }
+
+  console.log("session", session)
+  console.log("userCredits", userCredits)
+
+  useEffect(() => {
+    if (!userCredits || userCredits === 0) {
+      setCreditsModaIsOpen(true)
+    }
+  }, [userCredits])
+
   const codeMessages = useRef([
     {
       role: "system",
@@ -31,6 +40,10 @@ export default function Client({ session }) {
   ])
 
   const onArrowPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (!userCredits || userCredits === 0) {
+      setCreditsModaIsOpen(true)
+      return false
+    }
     codeMessages.current = [
       ...codeMessages.current,
       {
@@ -43,6 +56,11 @@ export default function Client({ session }) {
   }
 
   const onCodeGeneration = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (!userCredits || userCredits === 0) {
+      setCreditsModaIsOpen(true)
+      return false
+    }
+
     if (codeSentence.length === 0 || codeSentence === "") {
       return false
     }
@@ -93,12 +111,12 @@ export default function Client({ session }) {
     setReader(reader)
     const decoder = new TextDecoder()
     let done = false
-    let count = 0
+    let tokensCount = 0
     try {
       while (!done) {
         const { value, done: doneReading } = await reader.read()
         done = doneReading
-        count++
+        tokensCount++
         let chunkValue = decoder.decode(value)
         // console.log("chunkValue: ", chunkValue)
 
@@ -113,54 +131,15 @@ export default function Client({ session }) {
     } finally {
       setLoading(false)
       setReader(null)
+      //✨ Make some credits update Magic ✨
+      const data = await updateApiCallsAndCredits(userId, tokensCount)
 
-      //Update API CALLS
-      const response = await fetch("/api/credits/update", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: userId,
-          tokensCount: count,
-        }),
-      })
-      const apiCallUpdateResponse = await response.json()
-      // WORK THE REST OF THE LOGIC HERE
-
-      const { credits: oldCredits, apiCalls } = apiCallUpdateResponse
-
-      // check if value is divisible by 5
-      if (apiCalls % 2 === 0) {
-        //Decreament credits by 1
-        const newCredits = oldCredits - 1
-
-        //Update API CALLS
-        const finalResponse = await fetch("/api/user/update", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userId: userId,
-            updatedUser: {
-              ...apiCallUpdateResponse,
-              credits: newCredits,
-            },
-          }),
-        })
-        finalResponse.json().then((data) => {
-          console.log("final data:", data)
-          if (data.creditsLeft === 0) {
-            alert(
-              "You have no more credits left. Please purchase more credits.",
-            )
-          }
-        })
+      if (data?.creditsLeft === 0) {
+        alert("You have no more credits left. Please purchase more credits.")
       }
 
       //RESET TOKENS COUNT.
-      count = 0
+      tokensCount = 0
     }
   }
 
@@ -201,6 +180,13 @@ export default function Client({ session }) {
 
   return (
     <>
+      <Modal
+        body="You don't have more Code Genius credits. Please upgrade your account before continuing"
+        isOpen={creditsModaIsOpen}
+        buttonText="Ok"
+        buttonLink="/dashboard"
+        setIsOpen={setCreditsModaIsOpen}
+      />
       <Modal
         body="Our servers are taking longer than expected. We suggest
         rewording your instruction or input to get a faster result."

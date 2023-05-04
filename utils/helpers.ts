@@ -30,3 +30,48 @@ export const usePortal = (selectId: string = getId()): HTMLElement | null => {
 export const getId = () => {
   return Math.random().toString(32).slice(2, 10)
 }
+
+export async function updateApiCallsAndCredits(
+  userId: string,
+  tokensCount: number,
+) {
+  //Update API CALLS
+  const response = await fetch("/api/credits/update", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userId: userId,
+      tokensCount: tokensCount,
+    }),
+  })
+  const apiCallUpdateResponse = await response.json()
+  // WORK THE REST OF THE LOGIC HERE
+
+  const { credits: oldCredits, apiCalls } = apiCallUpdateResponse
+
+  // check if value is divisible by 5
+  if (apiCalls % 2 === 0 && oldCredits > 0) {
+    //Decreament credits by 1
+    const newCredits = oldCredits - 1
+
+    //Update API CALLS
+    const finalResponse = await fetch("/api/user/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userId: userId,
+        updatedUser: {
+          ...apiCallUpdateResponse,
+          credits: newCredits,
+        },
+      }),
+    })
+    const data = await finalResponse.json()
+
+    return data ? data : {}
+  }
+}

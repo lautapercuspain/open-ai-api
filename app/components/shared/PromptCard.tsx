@@ -1,11 +1,12 @@
-import useWindowSize from "hooks/use-window-size"
 import Image from "next/image"
+import { motion } from "framer-motion"
 import { ReactNode } from "react"
 
 type CardProps = {
   title: string
   text: string
   width?: string
+  hasScale?: boolean
   mb?: string
   order?: string
   button?: ReactNode
@@ -13,6 +14,7 @@ type CardProps = {
   onClick?: (text: string) => void
 }
 export default function PromptCard({
+  hasScale,
   title,
   button,
   width,
@@ -36,16 +38,25 @@ export default function PromptCard({
       }}
     >
       <div>
-        {imageSrc && (
-          <Image
-            alt="Dashboard"
-            src={imageSrc}
-            width={40}
-            height={40}
-            className="mb-2"
-          />
-        )}
-
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{
+            scale: hasScale ? 1 : 0,
+            transitionEnd: {
+              scale: 1,
+            },
+          }}
+        >
+          {imageSrc && (
+            <Image
+              alt="Dashboard"
+              src={imageSrc}
+              width={40}
+              height={40}
+              className="mb-2"
+            />
+          )}
+        </motion.div>
         <h5 className="mb-2 pt-2 text-2xl font-bold tracking-tight text-white">
           {title}
         </h5>
