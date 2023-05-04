@@ -11,19 +11,20 @@ import "prismjs/components/prism-javascript"
 import Modal from "app/components/Modal"
 
 import ResizablePanel from "app/components/ResizablePanel"
-import Button from "app/components/Button"
 import GenerateCode from "app/components/GenerateCode"
-import useLocalStorage from "hooks/use-localstorage"
 import { ChangeEvent, useEffect, useRef, useState } from "react"
 import { ElementType } from "app/components/DropDown"
 import FooterSection from "./footer-section"
 import { fetchWithTurbo } from "utils/generateCode"
 import { getCodeGeniusPlaceHolder } from "utils/strings"
+import { updateApiCallsAndCredits } from "utils/helpers"
 
 let libElements: ElementType[] = ["React", "Vue", "Angular"]
 let langElements: ElementType[] = ["Typescript", "Javascript"]
 
 export default function Client({
+  userId,
+  userCredits,
   lib,
   mode,
   prompt,
@@ -40,13 +41,16 @@ export default function Client({
 }) {
   const [loading, setLoading] = useState(false)
   const [modaIsOpen, setModaIsOpen] = useState(false)
+  const [creditsLeft, setCreditsLeft] = useState(userCredits)
+  const [creditsModaIsOpen, setCreditsModaIsOpen] = useState(false)
   const [showSavePromptModal, setShowSavePromptModal] = useState(false)
   const [reader, setReader] =
     useState<ReadableStreamDefaultReader<Uint8Array> | null>(null)
   const [questionName, setQuestionName] = useState("")
   const [generatedCode, setGeneratedCode] = useState<String>("")
-  const [userId] = useLocalStorage(LSConfig.user.userId, "")
   const controller = new AbortController()
+
+  console.log("userCredits: ", userCredits)
 
   useEffect(() => {
     const editorPanel = document.getElementById("code-editor")
@@ -55,7 +59,17 @@ export default function Client({
     }
   }, [])
 
+  useEffect(() => {
+    if (!userCredits || userCredits === 0) {
+      setCreditsModaIsOpen(true)
+    }
+  }, [userCredits])
+
   const onCodeGeneration = () => {
+    if (!creditsLeft || creditsLeft === 0) {
+      setCreditsModaIsOpen(true)
+      return false
+    }
     generateCode()
   }
 
@@ -115,11 +129,12 @@ export default function Client({
     setReader(reader)
     const decoder = new TextDecoder()
     let done = false
+    let tokensCount = 0
     try {
       while (!done) {
         const { value, done: doneReading } = await reader.read()
         done = doneReading
-
+        tokensCount++
         let chunkValue = decoder.decode(value)
         if (
           chunkValue.match(/```/) ||
@@ -134,6 +149,15 @@ export default function Client({
     } finally {
       setLoading(false)
       setReader(null)
+      //✨ Make some credits update Magic ✨
+      const data = await updateApiCallsAndCredits(userId, tokensCount)
+
+      if (data?.creditsLeft === 0) {
+        setCreditsLeft(0)
+        setCreditsModaIsOpen(true)
+      }
+      //RESET TOKENS COUNT.
+      tokensCount = 0
     }
     if (done) {
       setLoading(false)
@@ -225,6 +249,13 @@ export default function Client({
   const placeHolderText = getCodeGeniusPlaceHolder(mode)
   return (
     <div className="relative h-screen w-full sm:ml-10">
+      <Modal
+        body="You don't have more Code Genius credits. Please upgrade your account before continuing"
+        isOpen={creditsModaIsOpen}
+        buttonText="Ok"
+        buttonLink="/dashboard"
+        setIsOpen={setCreditsModaIsOpen}
+      />
       <Modal
         body="Our servers are taking longer than expected. We suggest
         rewording your instruction or input to get a faster result."

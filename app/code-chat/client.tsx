@@ -1,11 +1,8 @@
 "use client"
 
 import Modal from "app/components/Modal"
-import useLocalStorage from "hooks/use-localstorage"
 import { ChangeEvent, KeyboardEvent, useState, useRef, useEffect } from "react"
-import { LSConfig } from "@/lib/constants"
 import Chat from "app/components/shared/Chat"
-import GenerateCode from "app/components/GenerateCode"
 import { updateApiCallsAndCredits } from "utils/helpers"
 
 export default function Client({ session }) {

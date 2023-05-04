@@ -1,7 +1,6 @@
 import DropDown from "app/components/DropDown"
 import Button from "app/components/Button"
 import toast, { Toaster } from "react-hot-toast"
-import Image from "next/image"
 import useClipboard from "utils/useClipboard"
 import { useState } from "react"
 import { Copy, Save } from "lucide-react"
@@ -21,8 +20,6 @@ export default function FooterSection({
   setLib,
   onCodeGeneration,
 }: any) {
-  console.log("mode", mode)
-
   const [copied, toggleCopy] = useState(false)
   const { copy } = useClipboard()
 

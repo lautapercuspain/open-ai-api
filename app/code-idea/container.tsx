@@ -6,7 +6,7 @@ import Navigation from "./navigation"
 import { ElementType } from "app/components/DropDown"
 import { useSearchParams } from "next/navigation"
 
-export default function Container() {
+export default function Container({ session }) {
   const [smartSelected, setSmartSelected] = useState(true)
   const [openSecondayNavBar, setOpenSecondaryNavBar] = useState(false)
   const [testSelected, setTestSelected] = useState(false)
@@ -19,6 +19,8 @@ export default function Container() {
   const [langElement, setLangElement] = useState<ElementType>("Typescript")
   const [lib, setLib] = useState<ElementType>("React")
   const searchParams = useSearchParams()
+  const userId = session && session.user?.id
+  const userCredits = session && session.user?.credits
 
   useEffect(() => {
     if (searchParams) {
@@ -84,6 +86,8 @@ export default function Container() {
         setBugSelected={setBugSelected}
       />
       <Client
+        userCredits={userCredits}
+        userId={userId}
         mode={mode}
         setLib={setLib}
         lib={lib}

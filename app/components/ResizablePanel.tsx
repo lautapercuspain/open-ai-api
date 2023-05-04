@@ -8,8 +8,6 @@ export default function ResizablePanel({
 }) {
   let [ref, { height }] = useMeasure()
 
-  console.log("height:", height)
-
   return (
     <motion.div
       animate={height ? { height } : {}}
