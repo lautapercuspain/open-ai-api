@@ -8,7 +8,6 @@ import Chat from "app/components/shared/Chat"
 import GenerateCode from "app/components/GenerateCode"
 
 export default function Client({ session }) {
-  console.log("session:", session)
   const [loading, setLoading] = useState(false)
   const [reader, setReader] =
     useState<ReadableStreamDefaultReader<Uint8Array> | null>(null)
@@ -126,37 +125,40 @@ export default function Client({ session }) {
           tokensCount: count,
         }),
       })
-      response.json().then(async (data) => {
-        const { credits: oldCredits, apiCalls } = data
-        // check if value is divisible by 5
-        if (apiCalls % 5 === 0) {
-          console.log("Api calls is divisible by 2 or is 2")
-          //Decreament credits by 1
-          const newCredits = oldCredits - 1
-          //Update API CALLS
-          const finalResponse = await fetch("/api/user/update", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+      const apiCallUpdateResponse = await response.json()
+      // WORK THE REST OF THE LOGIC HERE
+
+      const { credits: oldCredits, apiCalls } = apiCallUpdateResponse
+
+      // check if value is divisible by 5
+      if (apiCalls % 2 === 0) {
+        //Decreament credits by 1
+        const newCredits = oldCredits - 1
+
+        //Update API CALLS
+        const finalResponse = await fetch("/api/user/update", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: userId,
+            updatedUser: {
+              ...apiCallUpdateResponse,
+              credits: newCredits,
             },
-            body: JSON.stringify({
-              userId: userId,
-              updatedUser: {
-                ...data,
-                credits: newCredits,
-              },
-            }),
-          })
-          finalResponse.json().then((data) => {
-            console.log("final data:", data)
-            if (data.creditsLeft === 0) {
-              alert(
-                "You have no more credits left. Please purchase more credits.",
-              )
-            }
-          })
-        }
-      })
+          }),
+        })
+        finalResponse.json().then((data) => {
+          console.log("final data:", data)
+          if (data.creditsLeft === 0) {
+            alert(
+              "You have no more credits left. Please purchase more credits.",
+            )
+          }
+        })
+      }
+
       //RESET TOKENS COUNT.
       count = 0
     }

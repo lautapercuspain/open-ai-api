@@ -31,8 +31,7 @@ export default async function handler(req, res) {
       }
     } catch (error) {
       console.log("error updating user credits", error)
+      res.status(500).json({ ok: false, error: error.message })
     }
   }
-
-  res.status(400).json({ ok: false })
 }

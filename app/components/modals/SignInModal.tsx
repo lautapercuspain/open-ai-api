@@ -59,7 +59,7 @@ const SignInModal = ({
             <button
               disabled={signInClickedGoogle}
               className={
-                "h-[40px] w-full rounded-lg bg-white sm:h-[60px] sm:w-[380px]"
+                "h-[45px] w-full rounded-lg border border-black bg-white sm:h-[60px] sm:w-[380px]"
               }
               onClick={() => {
                 setSignInClickedGoogle(true)
@@ -67,11 +67,11 @@ const SignInModal = ({
               }}
             >
               {signInClickedGoogle ? (
-                <p className="text-[28px] font-[700] text-gray-800">
+                <p className="text-sm font-[700] text-gray-800 sm:text-[20px]">
                   Loading...
                 </p>
               ) : (
-                <div className="inline-flex content-center justify-center justify-items-center gap-2">
+                <div className="mt-1 inline-flex content-center justify-center justify-items-center gap-2 ">
                   <Image
                     height={111}
                     width={111}
@@ -86,7 +86,7 @@ const SignInModal = ({
             <button
               disabled={signInClickedGitHub}
               className={
-                "h-[40px] w-full rounded-lg bg-black sm:h-[60px] sm:w-[380px]"
+                "h-[45px] w-full rounded-lg border border-white bg-black sm:h-[60px] sm:w-[380px]"
               }
               onClick={() => {
                 setSignInClickedGitHub(true)
@@ -98,7 +98,7 @@ const SignInModal = ({
               {signInClickedGitHub ? (
                 <p className="text-[28px] font-[700] text-white">Loading...</p>
               ) : (
-                <div className="inline-flex content-center justify-center justify-items-center gap-2">
+                <div className="mt-1 inline-flex content-center justify-center justify-items-center gap-2">
                   <Git />
                 </div>
               )}

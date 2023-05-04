@@ -23,7 +23,6 @@ export default async function handler(req, res) {
   }
   if (existingUser && existingUser[0]) {
     //Update the user API calls
-    //UPDATE USER WITH TOTAL CREDITS
     try {
       const updatedOp = await harperClient({
         operation: "update",
@@ -38,14 +37,12 @@ export default async function handler(req, res) {
       })
       console.log("updatedOp:", updatedOp)
       if (updatedOp.update_hashes[0] !== "") {
-        console.log("Wallaaa")
         console.log("updated payload", updatedUser)
-        res.status(200).json(updatedUser)
+        return res.status(200).json(updatedUser)
       }
     } catch (error) {
       console.log("error updating user credits", error)
+      res.status(500).json({ error: true, message: error.message })
     }
   }
-
-  res.status(400).json({ ok: false })
 }
