@@ -119,7 +119,7 @@ export default function HomeChat() {
           <input
             ref={textareaRef}
             className="font-lg h-12 w-[95%] resize-none rounded-lg bg-purple-400 py-2.5 
-             pl-3 font-mono text-white outline-0 placeholder:pl-2 placeholder:pt-1 placeholder:font-inter placeholder:text-[16px] placeholder:text-white hover:outline-0 focus:border-transparent focus:ring-black/30 active:outline-0 sm:w-[900px]"
+             pl-3 font-mono text-white outline-0 placeholder:pl-2 placeholder:pt-1 placeholder:font-sans placeholder:text-[16px] placeholder:text-white hover:outline-0 focus:border-transparent focus:ring-black/30 active:outline-0 sm:w-[900px]"
             value={codeSentence}
             onChange={(e) => setCodeSentence(e.target.value)}
             onKeyDown={(e) => onCodeGeneration(e)}

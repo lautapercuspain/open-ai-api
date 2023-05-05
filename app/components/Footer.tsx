@@ -14,7 +14,7 @@ export default function Footer({ session }: { session: any }) {
         isOpen={openContactForm}
         setIsOpen={setOpenContactForm}
       />
-      <footer className="mx-auto flex w-[80vw] flex-col font-inter text-white">
+      <footer className="mx-auto flex w-[80vw] flex-col font-sans text-white">
         <div className="w-ful flex flex-col items-center justify-center py-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="justify-center">
             <Link href="/" className={`mt-7 flex sm:mx-0 sm:ml-2`}>
@@ -29,7 +29,7 @@ export default function Footer({ session }: { session: any }) {
               <h1
                 className={`text-lg sm:text-xl sm:text-xl ml-3 mt-2 
                  bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text
-                 font-inter text-2xl font-bold tracking-tight text-transparent max-md:pt-4 max-sm:pt-0 sm:leading-6`}
+                 font-sans text-2xl font-bold tracking-tight text-transparent max-md:pt-4 max-sm:pt-0 sm:leading-6`}
               >
                 Code Genius
               </h1>

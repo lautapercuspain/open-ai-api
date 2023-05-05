@@ -65,9 +65,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-roboto)"],
-        inter: ["var(--font-inter)"],
-        rubik: ["var(--font-rubik)"],
+        sans: ["var(--font-sans)"],
+        mono: ["var(--font-roboto-mono)"],
       },
       colors: {
         specialBlue: "#6ea9d7",

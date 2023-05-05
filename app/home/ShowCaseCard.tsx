@@ -16,7 +16,7 @@ export default function ShowCaseCard({
   button,
 }: ShowCaseCardProps) {
   return (
-    <div className="mx-auto flex min-h-[404px] w-[80%] items-start rounded-2xl bg-purple-500 p-6 text-center font-inter shadow-xl">
+    <div className="mx-auto flex min-h-[404px] w-[80%] items-start rounded-2xl bg-purple-500 p-6 text-center font-sans shadow-xl">
       <div className="flex flex-col sm:flex-row">
         <div className="w-[90%] p-2">
           <h3 className="mx-auto flex w-[100%] bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text pl-3 text-center text-2xl font-bold text-transparent sm:ml-0 sm:w-[85%] sm:justify-start sm:text-left sm:text-5xl sm:leading-[48px]">

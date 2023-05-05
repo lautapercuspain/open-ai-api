@@ -157,7 +157,7 @@ export default function Client({ session }: ClientPropTye) {
             >
               <button
                 type="submit"
-                className="text-sm  px-1 py-3 text-center font-inter text-white sm:mx-auto sm:px-2"
+                className="text-sm  px-1 py-3 text-center font-sans text-white sm:mx-auto sm:px-2"
               >
                 {loadingStripe ? <Loading size={24} /> : "Buy Credits"}
               </button>

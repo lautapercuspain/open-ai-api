@@ -5,7 +5,7 @@ import { Inter } from "next/font/google"
 import "../../styles/waterfall.css"
 
 const inter = Inter({
-  variable: "--font-inter",
+  variable: "--font-sans",
   subsets: ["latin"],
   weight: ["100", "300", "400", "600", "700"],
 })
@@ -13,15 +13,15 @@ const inter = Inter({
 export default function SuperHero() {
   return (
     <>
-      <section className={`${inter.variable} mt-48 mb-5 font-inter`}>
+      <section className={`${inter.variable} mt-48 mb-5 font-sans`}>
         <motion.h1
           whileHover={{ scale: 1.1 }}
-          className="mx-auto w-[95%] cursor-pointer items-center justify-center bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text p-3 text-center font-inter text-4xl text-transparent
+          className="mx-auto w-[95%] cursor-pointer items-center justify-center bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text p-3 text-center font-sans text-4xl text-transparent
 sm:flex sm:w-full sm:text-6xl"
         >
           Create Genius Code
         </motion.h1>
-        <p className="text-lg mt-2 w-[100%] items-center justify-center px-3 text-center font-inter text-white sm:text-2xl">
+        <p className="text-lg mt-2 w-[100%] items-center justify-center px-3 text-center font-sans text-white sm:text-2xl">
           Develop Improved, Rapid, and Streamlined Code with your AI Genius
         </p>
       </section>

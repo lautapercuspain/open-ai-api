@@ -10,7 +10,7 @@ import useWindowSize from "hooks/use-window-size"
 import Git from "../icons/git"
 
 const inter = Inter({
-  variable: "--font-inter",
+  variable: "--font-sans",
   subsets: ["latin"],
   weight: ["100", "300", "400", "600", "700"],
 })
@@ -43,7 +43,7 @@ const SignInModal = ({
                 ? "Login into your account"
                 : "Create your Account"}
             </h1>
-            <h6 className="sm:text-xl mx-auto max-w-xs  font-inter text-[16px] font-[400]  leading-10 text-gray-200">
+            <h6 className="sm:text-xl mx-auto max-w-xs  font-sans text-[16px] font-[400]  leading-10 text-gray-200">
               Start coding with the help of Code Genius
             </h6>
           </div>

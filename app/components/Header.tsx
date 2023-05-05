@@ -81,7 +81,7 @@ export default function Header({
                   pathname === "/dashboard" || pathname === "/code-chat"
                     ? "hidden"
                     : "block"
-                }   bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text font-inter  text-2xl font-bold tracking-tight text-transparent max-md:pt-4 max-sm:pt-0 sm:leading-6`}
+                }   bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text font-sans  text-2xl font-bold tracking-tight text-transparent max-md:pt-4 max-sm:pt-0 sm:leading-6`}
               >
                 Code Genius
               </h1>
@@ -94,7 +94,7 @@ export default function Header({
                 !session
                   ? "bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0]"
                   : "bg-transparent"
-              }  p-[1.5px] font-inter`}
+              }  p-[1.5px] font-sans`}
             >
               {!session && (
                 <div className="relative h-[48px] w-[163px] rounded-lg bg-purple-800">

@@ -1,19 +1,21 @@
 import "../styles/globals.css"
 import SessionProvider from "./provider"
-import Header from "app/components/Header"
-import Footer from "app/components/Footer"
+
 import { getServerSession } from "next-auth/next"
 import { authOptions } from "pages/api/auth/[...nextauth]"
-import { Inter } from "next/font/google"
+import { Inter, Roboto_Mono } from "next/font/google"
 import { cookies } from "next/headers"
-import ModalsWrapper from "./components/shared/ModalsWrapper"
-import { useSignInModal } from "./components/modals/SignInModal"
 import HeaderWrapper from "./components/shared/HeaderWrapper"
 
 const inter = Inter({
-  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["100", "300", "400", "600", "700"],
+  display: "swap",
+  variable: "--font-sans",
+})
+const roboto_mono = Roboto_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-mono",
 })
 export default async function RootLayout({
   children,
@@ -28,7 +30,7 @@ export default async function RootLayout({
 
   return (
     <>
-      <html lang="en" className={`${inter.variable} font-inter`}>
+      <html lang="en" className={`${inter.variable} ${roboto_mono.variable}`}>
         <head>
           <link rel="icon" href="/favicon.ico" />
         </head>
