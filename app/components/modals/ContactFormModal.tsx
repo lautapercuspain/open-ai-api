@@ -238,7 +238,10 @@ export default function ContactFormModal({
                         as="h1"
                         className="text-center text-2xl leading-6 text-white sm:text-left sm:text-3xl"
                       >
-                        <span className="capitalize">{formValues.name}</span>,
+                        <span className="capitalize">
+                          {formValues.name.trim()}
+                        </span>
+                        ,
                       </Dialog.Title>
                       <p className="text-sm mt-4 text-white">
                         Talks for being interested in Code Genius.
