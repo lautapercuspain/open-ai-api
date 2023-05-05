@@ -36,7 +36,6 @@ export default async function RootLayout({
           <SessionProvider>
             <HeaderWrapper session={session} userHasAccount={userHasAccount} />
             <div className="flex min-h-screen flex-nowrap">{children}</div>
-            {/* <Footer /> */}
           </SessionProvider>
         </body>
       </html>

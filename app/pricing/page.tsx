@@ -1,4 +1,5 @@
 import { harperClient } from "@/lib/harperdb"
+import Footer from "app/components/Footer"
 import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
 import { authOptions } from "pages/api/auth/[...nextauth]"
@@ -27,6 +28,7 @@ export default async function Page() {
 
           <Faqs />
         </div>
+        <Footer session={session} />
       </main>
     </>
   )

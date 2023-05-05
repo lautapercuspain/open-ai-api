@@ -4,6 +4,7 @@ type ButtonProps = {
   loading: boolean
   hidden?: boolean
   text?: string
+  buttonTextColor?: string
   variant?: string
   onClick: () => void
 }
@@ -16,6 +17,7 @@ type StopButtonProps = {
 export default function Button({
   loading,
   variant,
+  buttonTextColor,
   onClick,
   text = "",
   hidden = false,
@@ -24,9 +26,11 @@ export default function Button({
     <button
       className={`${
         hidden ? "hidden" : null
-      }  "bg-mint"  w-36 rounded-md bg-black px-4 py-2 font-medium ${
+      }  "bg-mint" w-40 rounded-md bg-black px-4 py-2 font-inter font-medium ${
         variant === "mint" ? "bg-mint" : "bg-transparent"
-      } hover:bg-mint/80   dark:text-slate-600 `}
+      } hover:bg-mint/80   dark:text-slate-600 ${
+        buttonTextColor === "dark" ? "text-gray-600" : "text-white"
+      } font-semibold`}
       onClick={() => onClick()}
     >
       {text}

@@ -154,7 +154,8 @@ export default function ContactFormModal({
                           <input
                             name="name"
                             id="name"
-                            className="w-full rounded-md border border-purple-500 bg-purple-700 p-3 text-white placeholder:text-purple-300 focus:border-purple-500 focus:ring-purple-400"
+                            autoComplete="off"
+                            className="w-full rounded-md border border-purple-500 bg-purple-700 p-3 text-white placeholder:text-purple-300 focus:border-purple-500 focus:outline-0"
                             placeholder=""
                             value={formValues.name}
                             onChange={handleChange}
@@ -171,7 +172,8 @@ export default function ContactFormModal({
                           <input
                             name="workEmail"
                             id="workEmail"
-                            className="w-fullrounded-md border border-purple-500 bg-purple-700 p-3 text-white placeholder:text-purple-300 focus:border-purple-500 focus:ring-purple-400"
+                            autoComplete="off"
+                            className="w-fullrounded-md border border-purple-500 bg-purple-700 p-3 text-white placeholder:text-purple-300 focus:border-purple-500 focus:outline-0 focus:ring-purple-400"
                             placeholder=""
                             value={formValues.workEmail}
                             onChange={handleChange}
@@ -254,7 +256,9 @@ export default function ContactFormModal({
                       >
                         <div className="flex flex-col items-center justify-center">
                           <span className="">Thanks for your purchase</span>
-                          <span className="mt-2">{clientName}!</span>
+                          {clientName && (
+                            <span className="mt-2">{clientName}!</span>
+                          )}
                         </div>
                       </Dialog.Title>
                       <p className="text-sm mt-4 w-[65%] text-center text-white">

@@ -78,11 +78,11 @@ export default function Client({
       />
       <div className="mx-auto h-full w-[95%] dark:bg-purple-900 sm:ml-16">
         <div className="flex flex-row">
-          <span className="text-md al absolute top-20 mb-10 ml-2 font-bold text-white sm:ml-10 sm:text-2xl">
+          <span className="text-md absolute top-24 ml-2 font-bold text-white sm:top-20 sm:ml-10 sm:text-2xl">
             Welcome, {clientName}!
           </span>
         </div>
-        <div className="mt-32 flex w-full grow-0 flex-col items-center justify-between gap-4 pt-8 sm:mt-24 sm:flex-row sm:flex-wrap sm:justify-center">
+        <div className="mt-12 flex w-full grow-0 flex-col items-center justify-between gap-4 pt-8 sm:mt-24 sm:flex-row sm:flex-wrap sm:justify-center">
           <PromptCard
             size="large"
             width={cardWidth}

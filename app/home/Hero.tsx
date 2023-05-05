@@ -11,8 +11,8 @@ const inter = Inter({
 })
 export default function Hero() {
   return (
-    <div className={`mt-18 ${inter.variable} font-inter`}>
-      <section className="relative mx-auto mt-[10%] flex flex-col items-center justify-center">
+    <div className={`mt-12 h-24 ${inter.variable} font-inter`}>
+      {/* <section className="relative mx-auto mt-[10%] flex flex-col items-center justify-center">
         <h3 className="block w-full px-1 py-3 text-center font-inter text-2xl text-white sm:mx-auto sm:w-2/4 sm:text-4xl">
           A smarter, faster way to code with AI assistance.
         </h3>
@@ -46,7 +46,7 @@ export default function Hero() {
           width="143"
           height="197"
         />
-      </section>
+      </section> */}
     </div>
   )
 }

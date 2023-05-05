@@ -8,6 +8,9 @@ import { Inter } from "next/font/google"
 
 import Lottie from "lottie-react"
 import { useState } from "react"
+import ShowCaseCard from "./ShowCaseCard"
+import Image from "next/image"
+import Button from "app/components/Button"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -35,7 +38,7 @@ const interactivity: any = {
     },
   ],
 }
-const AISuggestions = () => {
+export const AISuggestions = () => {
   return (
     <>
       <Lottie interactivity={interactivity} animationData={suggestions} />
@@ -57,29 +60,41 @@ export default function Feature() {
     setVerticalScroll(latest)
   })
 
+  const AIShowCaseImage = (
+    <Image
+      className="my-auto"
+      src="/home/AIGeneration.svg"
+      alt="AI Generation"
+      width={400}
+      height={170}
+    />
+  )
+
+  const CreateAccountButton = (
+    <Button
+      buttonTextColor="dark"
+      variant="mint"
+      loading={false}
+      text="Create Account"
+      onClick={() => {}}
+    />
+  )
+
   return (
     <>
       <section className={`mt-8 text-white ${inter.variable} font-inter`}>
+        <ShowCaseCard
+          title="The AI programming assistant that helps you coding faster, easier,
+            and more efficient!"
+          description="Writing great code can be a challenging and time-consuming task, but
+            with Code Genius you can take your skills to the next level! Explore
+            the possibilities!"
+          image={AIShowCaseImage}
+        />
+
         <div className="mb-24 grid grid-cols-1 gap-1 sm:grid-cols-2">
-          {/* <motion.div
-            whileHover={{ scale: 1.5 }}
-            transition={{ type: "spring", velocity: 1 }}
-            animate={{
-              x:
-                verticalScroll < 500
-                  ? 320
-                  : verticalScroll >= 500 && verticalScroll < 1200
-                  ? verticalScroll - window.screen.height
-                  : verticalScroll - window.screen.height,
-            }}
-            className={`-ml-50 fixed top-[500px] z-0 mx-auto hidden ${
-              verticalScroll > 0 ? "sm:block" : "hidden"
-            }  } brightness-25 h-[550px] w-[1250px] bg-gradient-radial from-gradient-dark/40 via-transparent
-            to-transparent `}
-          ></motion.div> */}
           <div className="mx-auto mb-2 flex w-96 items-start justify-start sm:ml-40 sm:w-full">
             <BugDetection />
-            {/* <div className="brightness-25 absolute left-[-316px] -top-8 h-[750px] w-[750px] rounded-full bg-gradient-radial from-gradient-dark/90 via-transparent to-transparent pb-9" /> */}
           </div>
           <div className="mt-0 p-2 sm:mt-20">
             <h1 className="pl-3 text-center text-5xl font-bold sm:text-left">
@@ -125,7 +140,36 @@ export default function Feature() {
             </p>
           </div>
         </div>
+        <div className="my-20">
+          <ShowCaseCard
+            title="Now you can Chat
+            with Code Genius and ask
+            anything you want!"
+            description="Writing great code can be a challenging and time-consuming task, but with Code Genius you can take your skills to the next level! Explore the possibilities!"
+            image={AIShowCaseImage}
+            button={CreateAccountButton}
+          />
+        </div>
       </section>
     </>
   )
+}
+
+{
+  /* <motion.div
+            whileHover={{ scale: 1.5 }}
+            transition={{ type: "spring", velocity: 1 }}
+            animate={{
+              x:
+                verticalScroll < 500
+                  ? 320
+                  : verticalScroll >= 500 && verticalScroll < 1200
+                  ? verticalScroll - window.screen.height
+                  : verticalScroll - window.screen.height,
+            }}
+            className={`-ml-50 fixed top-[500px] z-0 mx-auto hidden ${
+              verticalScroll > 0 ? "sm:block" : "hidden"
+            }  } brightness-25 h-[550px] w-[1250px] bg-gradient-radial from-gradient-dark/40 via-transparent
+            to-transparent `}
+          ></motion.div> */
 }

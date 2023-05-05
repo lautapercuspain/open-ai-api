@@ -1,4 +1,5 @@
 import { harperClient } from "@/lib/harperdb"
+import Footer from "app/components/Footer"
 import PromptCard from "app/components/shared/PromptCard"
 import SideBar from "app/components/shared/SideBar"
 import { getServerSession } from "next-auth"
@@ -87,9 +88,9 @@ export default async function Dashboard() {
   }
 
   return (
-    <>
+    <div className="flex flex-col">
       <SideBar setOpenSecondaryNavBar={undefined} />
-      <div className="mx-auto w-full  dark:bg-purple-900">
+      <div className="mx-auto my-12 w-full dark:bg-purple-900">
         <Client
           session={session}
           credits={totalCredits}
@@ -97,6 +98,6 @@ export default async function Dashboard() {
           opConfirmation={opConfirmation}
         />
       </div>
-    </>
+    </div>
   )
 }
