@@ -18,7 +18,6 @@ export default async function Page() {
     <main className={`mx-auto max-w-max pb-10`}>
       <SuperHero />
       <HomeChat />
-      <Hero />
       <Feature />
       <Footer session={session} />
     </main>

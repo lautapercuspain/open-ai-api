@@ -3,10 +3,13 @@
 import { motion } from "framer-motion"
 import { ArrowDown } from "lucide-react"
 
-export default function Hero() {
+export default function Hero({ hasContent }) {
+  console.log("hasContent:", hasContent)
   return (
     <div
-      className={`mb-28 flex flex-col items-center justify-center font-sans opacity-60 `}
+      className={`mb-10  ${
+        hasContent ? "pt-16 sm:pt-0" : "pt-0"
+      } flex flex-col items-center justify-center font-sans opacity-60 `}
     >
       <motion.div
         animate={{ y: [-30, 0] }}

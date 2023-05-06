@@ -26,8 +26,8 @@ export default function ChatContainer({ messages, width }: any) {
   return (
     <div
       ref={chatContainerRef}
-      className={`mx-auto mt-8 max-h-[320px] max-w-md overflow-y-scroll rounded-md 
-       bg-purple-400 px-3 font-mono text-white sm:mx-auto  sm:mt-3 sm:w-[900px] sm:max-w-[900px]`}
+      className={`mx-auto mt-8 max-h-[320px] max-w-[370px] overflow-y-scroll rounded-md 
+       bg-purple-400 font-mono text-white sm:mx-auto  sm:mt-3 sm:w-[900px] sm:max-w-[900px]`}
     >
       {messages}
     </div>

@@ -7,6 +7,7 @@ import React, { KeyboardEvent, useEffect, useRef, useState } from "react"
 import { generateCodeWithTurbo } from "utils/generateCode"
 import { parseText } from "utils/parseText"
 import ChatContainer from "./ChatContainer"
+import Hero from "./Hero"
 // import tailwindConfig from "tailwind.config.js"
 
 export interface CodeMessagesProps {
@@ -111,7 +112,7 @@ export default function HomeChat() {
       </>
     )
   }
-
+  const hasContent = generatedMessages.length > 0
   return (
     <>
       <div className="relative ml-1 flex w-full flex-col items-center justify-center sm:mx-auto sm:w-full">
@@ -138,7 +139,7 @@ export default function HomeChat() {
             />
           </button>
         </div>
-        <div className="h-[380px] w-full">
+        <div className="h-[330px] w-full sm:h-[380px]">
           {generatedMessages.length > 0 && (
             <ChatContainer
               messages={
@@ -147,6 +148,7 @@ export default function HomeChat() {
             />
           )}
         </div>
+        <Hero hasContent={hasContent} />
       </div>
     </>
   )
