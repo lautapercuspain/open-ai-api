@@ -2,7 +2,7 @@
 
 import { Dialog, Transition } from "@headlessui/react"
 import Loading from "app/loading"
-import { ArrowLeft, Send } from "lucide-react"
+import { ArrowLeft } from "lucide-react"
 import { Inter } from "next/font/google"
 import { Fragment, useState } from "react"
 

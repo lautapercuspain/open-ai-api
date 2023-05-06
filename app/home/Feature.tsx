@@ -12,12 +12,6 @@ import ShowCaseCard from "./ShowCaseCard"
 import Image from "next/image"
 import Button from "app/components/Button"
 
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "600", "700"],
-})
-
 const interactivity: any = {
   mode: "scroll",
   actions: [
@@ -82,7 +76,7 @@ export default function Feature() {
 
   return (
     <>
-      <section className={`mt-8 text-white ${inter.variable} font-sans`}>
+      <section className={`mt-8 font-sans text-white`}>
         <ShowCaseCard
           title="The AI programming assistant that helps you coding faster, easier,
             and more efficient!"

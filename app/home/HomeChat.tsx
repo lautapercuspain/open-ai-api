@@ -30,11 +30,11 @@ export default function HomeChat() {
 
   const textareaRef = useRef<any>(null)
 
-  // useEffect(() => {
-  //   if (textareaRef && textareaRef.current) {
-  //     textareaRef.current.focus()
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (textareaRef && textareaRef.current) {
+      textareaRef.current.focus()
+    }
+  }, [])
 
   const onCodeGeneration = (e: KeyboardEvent<HTMLInputElement>) => {
     // console.log("codeSentence", codeSentence)
@@ -88,7 +88,7 @@ export default function HomeChat() {
                 if (item.hasOwnProperty("text")) {
                   return (
                     <Message
-                      className="my-2 text-left leading-7"
+                      className="my-2 ml-2 text-left leading-7"
                       model={{
                         message: item.text,
                         direction: "incoming",
@@ -114,7 +114,7 @@ export default function HomeChat() {
 
   return (
     <>
-      <div className="relative mb-[300px] ml-1 flex w-full flex-col items-center justify-center sm:mx-auto">
+      <div className="relative ml-1 flex w-full flex-col items-center justify-center sm:mx-auto sm:w-full">
         <div className="relative mt-2 h-12 w-full text-center sm:w-[900px]">
           <input
             ref={textareaRef}
@@ -138,13 +138,15 @@ export default function HomeChat() {
             />
           </button>
         </div>
-        {generatedMessages.length > 0 && (
-          <ChatContainer
-            messages={
-              <LiveDemoMessages generatedMessages={generatedMessages} />
-            }
-          />
-        )}
+        <div className="h-[380px] w-full">
+          {generatedMessages.length > 0 && (
+            <ChatContainer
+              messages={
+                <LiveDemoMessages generatedMessages={generatedMessages} />
+              }
+            />
+          )}
+        </div>
       </div>
     </>
   )

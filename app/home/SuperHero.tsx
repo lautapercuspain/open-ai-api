@@ -13,7 +13,7 @@ const inter = Inter({
 export default function SuperHero() {
   return (
     <>
-      <section className={`${inter.variable} mt-48 mb-5 font-sans`}>
+      <section className={`${inter.variable} mt-36 mb-5 font-sans`}>
         <motion.h1
           whileHover={{ scale: 1.1 }}
           className="mx-auto w-[95%] cursor-pointer items-center justify-center bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text p-3 text-center font-sans text-4xl text-transparent

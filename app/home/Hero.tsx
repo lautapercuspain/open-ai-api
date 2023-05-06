@@ -1,18 +1,30 @@
 "use client"
 
-import { Inter, Poppins } from "next/font/google"
+import { motion } from "framer-motion"
+import { ArrowDown } from "lucide-react"
 
-import Image from "next/image"
-
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "600", "700"],
-})
 export default function Hero() {
   return (
-    <div className={`mt-12 h-24 ${inter.variable} font-sans`}>
-      {/* <section className="relative mx-auto mt-[10%] flex flex-col items-center justify-center">
+    <div
+      className={`mb-28 flex flex-col items-center justify-center font-sans opacity-60 `}
+    >
+      <motion.div
+        animate={{ y: [-30, 0] }}
+        transition={{
+          ease: "easeOut",
+          duration: 2.5,
+          repeat: Infinity,
+        }}
+      >
+        <ArrowDown size={30} color="white" />
+      </motion.div>
+      <p className="text-[12px] text-white">Scroll</p>
+    </div>
+  )
+}
+
+{
+  /* <section className="relative mx-auto mt-[10%] flex flex-col items-center justify-center">
         <h3 className="block w-full px-1 py-3 text-center font-sans text-2xl text-white sm:mx-auto sm:w-2/4 sm:text-4xl">
           A smarter, faster way to code with AI assistance.
         </h3>
@@ -46,7 +58,5 @@ export default function Hero() {
           width="143"
           height="197"
         />
-      </section> */}
-    </div>
-  )
+      </section> */
 }
