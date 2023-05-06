@@ -30,11 +30,11 @@ export default function Header({
   const searchParams = useSearchParams()
   const action = searchParams && searchParams.get("action")
 
-  useEffect(() => {
-    if (action === "authenticate") {
-      setShowSignInModal(true)
-    }
-  }, [searchParams, action])
+  // useEffect(() => {
+  //   if (action === "authenticate") {
+  //     setShowSignInModal(true)
+  //   }
+  // }, [searchParams, action])
 
   useEffect(() => {
     if (session?.user?.id) {
