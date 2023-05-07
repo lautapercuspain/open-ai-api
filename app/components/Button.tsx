@@ -29,7 +29,9 @@ export default function Button({
       }  "bg-mint" w-40 rounded-md bg-black px-4 py-2 font-sans font-medium ${
         variant === "mint" ? "bg-mint" : "bg-transparent"
       } hover:bg-mint/80   dark:text-slate-600 ${
-        buttonTextColor === "dark" ? "text-gray-600" : "text-white"
+        buttonTextColor === "dark" || typeof buttonTextColor === "undefined"
+          ? "text-gray-600"
+          : "text-white"
       } font-semibold`}
       onClick={() => onClick()}
     >

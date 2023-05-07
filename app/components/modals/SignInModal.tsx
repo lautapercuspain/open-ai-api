@@ -114,13 +114,13 @@ export function useSignInModal(userHasAccount: boolean) {
   const [showSignInModal, setShowSignInModal] = useState(false)
 
   const SignInModalCallback = useCallback(() => {
-    return (
+    return showSignInModal ? (
       <SignInModal
         userHasAccount={userHasAccount}
         showSignInModal={showSignInModal}
         setShowSignInModal={setShowSignInModal}
       />
-    )
+    ) : null
   }, [showSignInModal, setShowSignInModal])
 
   return useMemo(
@@ -129,6 +129,6 @@ export function useSignInModal(userHasAccount: boolean) {
       SignInModal: SignInModalCallback,
       showSignInModal,
     }),
-    [setShowSignInModal, SignInModalCallback],
+    [setShowSignInModal, SignInModalCallback, showSignInModal],
   )
 }

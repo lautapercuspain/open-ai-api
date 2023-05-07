@@ -46,7 +46,7 @@ const BugDetection = () => {
   return <Lottie interactivity={interactivity} animationData={bugDetection} />
 }
 
-export default function Feature() {
+export default function Feature({ setShowSignInModal }) {
   const [verticalScroll, setVerticalScroll] = useState(0)
   const { scrollYProgress, scrollY, scrollX } = useScroll()
 
@@ -70,7 +70,9 @@ export default function Feature() {
       variant="mint"
       loading={false}
       text="Create Account"
-      onClick={() => {}}
+      onClick={() => {
+        setShowSignInModal(true)
+      }}
     />
   )
 

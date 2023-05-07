@@ -1,11 +1,7 @@
-import Hero from "./home/Hero"
-import Feature from "./home/Feature"
-// import Subscription from "./home/Subscription"
-import SuperHero from "./home/SuperHero"
-import HomeChat from "./home/HomeChat"
-import Footer from "./components/Footer"
 import { getServerSession } from "next-auth"
 import { authOptions } from "pages/api/auth/[...nextauth]"
+import { cookies } from "next/headers"
+import Client from "./client"
 
 export const metadata = {
   title: "Create Genius Code",
@@ -14,12 +10,14 @@ export const metadata = {
 }
 export default async function Page() {
   const session = await getServerSession(authOptions)
+
+  const cookieStore = cookies()
+  const csrfTokenValue = cookieStore.get("next-auth.csrf-token")?.value
+
+  const userHasAccount = csrfTokenValue !== "" && csrfTokenValue !== undefined
   return (
     <main className={`mx-auto max-w-max pb-10`}>
-      <SuperHero />
-      <HomeChat />
-      <Feature />
-      <Footer session={session} />
+      <Client session={session} userHasAccount={userHasAccount} />
     </main>
   )
 }

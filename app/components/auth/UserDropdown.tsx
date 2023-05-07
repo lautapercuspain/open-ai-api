@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { signOut, useSession } from "next-auth/react"
-import { SunMedium, Moon, LayoutDashboard } from "lucide-react"
+import { LayoutDashboard } from "lucide-react"
 import { LampDesk, LogOut, Laptop } from "lucide-react"
 import { FADE_IN_ANIMATION_SETTINGS, LSConfig } from "@/lib/constants"
 import useLocalStorage from "hooks/use-localstorage"
@@ -10,7 +10,6 @@ import Popover from "app/components/shared/Popover"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import Link from "next/link"
-import Dashboard from "app/dashboard/page"
 
 export default function UserDropdown({ session, setShowSignInModal }) {
   const { email, image } = session?.user || {}
@@ -75,7 +74,7 @@ export default function UserDropdown({ session, setShowSignInModal }) {
       >
         <button
           onClick={() => setOpenPopover(!openPopover)}
-          className="mr-2.5 mt-2 flex h-8 w-8 items-end justify-end overflow-hidden rounded-full focus:outline-none sm:h-9 sm:w-9"
+          className="mr-1 mt-1 flex h-8 w-8 items-end justify-end overflow-hidden rounded-full focus:outline-none sm:h-9 sm:w-9"
         >
           <Image
             className=""

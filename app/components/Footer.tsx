@@ -37,21 +37,27 @@ export default function Footer({ session }: { session: any }) {
           </div>
           <div className="mt-8 sm:pt-2">
             <Link
+              href="/privacy"
+              className="cursor-pointer px-4 sm:px-2 sm:text-[16px]"
+            >
+              Privacy
+            </Link>
+            <Link
               href="/pricing"
-              className="cursor-pointer px-12 sm:px-2 sm:text-[16px]"
+              className="cursor-pointer px-4 sm:px-2 sm:text-[16px]"
             >
               Pricing
             </Link>
             <Link
               href=""
-              className="cursor-pointer px-12 sm:px-2 sm:text-[16px]"
+              className="cursor-pointer px-4 sm:px-2 sm:text-[16px]"
             >
               Social
             </Link>
             <Link
               href="#"
               onClick={() => setOpenContactForm(true)}
-              className="cursor-pointer px-12 sm:px-2 sm:text-[16px]"
+              className="cursor-pointer px-4 sm:px-2 sm:text-[16px]"
             >
               Contact
             </Link>

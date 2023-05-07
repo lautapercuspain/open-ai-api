@@ -201,13 +201,29 @@ export default function SideBar({
         }`}
       >
         <Link
-          href="/dashboard"
+          href="/"
           className={`mt-8 w-[100%] ${
+            pathname === "/" ? "bg-purple-500" : "bg-none"
+          } cursor-pointer`}
+        >
+          <div className="ml-4 inline-flex h-[50px] w-auto items-start justify-start rounded-md pr-2">
+            <Home
+              width={26}
+              height={26}
+              color={pathname === "/" ? colors.mint : "white"}
+              className="ml-1.5"
+            />
+            <p className="text-sm ml-4 pt-1 text-white">Home</p>
+          </div>
+        </Link>
+        <Link
+          href="/dashboard"
+          className={`w-[100%] ${
             pathname === "/dashboard" ? "bg-purple-500" : "bg-none"
           } cursor-pointer`}
         >
           <div className="ml-4 mt-5 inline-flex h-[50px] w-auto items-start justify-start rounded-md pr-2">
-            <Home
+            <LayoutDashboard
               width={26}
               height={26}
               color={pathname === "/dashboard" ? colors.mint : "white"}

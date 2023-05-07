@@ -22,12 +22,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const session = await getServerSession(authOptions)
-  const cookieStore = cookies()
-  const csrfTokenValue = cookieStore.get("next-auth.csrf-token")?.value
-
-  const userHasAccount = csrfTokenValue !== "" && csrfTokenValue !== undefined
-
   return (
     <>
       <html lang="en" className={`${inter.variable} ${roboto_mono.variable}`}>
@@ -36,7 +30,6 @@ export default async function RootLayout({
         </head>
         <body suppressHydrationWarning={true} className="bg-purple-900">
           <SessionProvider>
-            <HeaderWrapper session={session} userHasAccount={userHasAccount} />
             <div className="flex min-h-screen flex-nowrap">{children}</div>
           </SessionProvider>
         </body>

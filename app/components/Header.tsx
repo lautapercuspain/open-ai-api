@@ -1,27 +1,18 @@
 "use client"
 
 import Link from "next/link"
-import { useSignInModal } from "./modals/SignInModal"
 import { LSConfig } from "@/lib/constants"
 import UserDropdown from "app/components/auth/UserDropdown"
 import { useEffect } from "react"
 import useLocalStorage from "hooks/use-localstorage"
 import Image from "next/image"
-import { Rubik } from "next/font/google"
 import { usePathname } from "next/navigation"
 import { useSearchParams } from "next/navigation"
-
-const rubik = Rubik({
-  variable: "--font-rubik",
-  subsets: ["latin"],
-  weight: ["400", "300", "600"],
-})
 
 export default function Header({
   session,
   showSignInModal,
   userHasAccount,
-  SignInModal,
   setShowSignInModal,
 }) {
   const pathname = usePathname()
@@ -44,44 +35,33 @@ export default function Header({
 
   return (
     <>
-      {!session && <SignInModal />}
       <div
         id="site-header"
         className={`absolute top-0 z-30 w-full bg-transparent transition-all ${
           !showSignInModal || session ? "block" : "hidden"
         }`}
       >
-        <div className="ml- mx-0 flex items-center justify-between md:mx-10">
+        <div className="flex items-center justify-between ">
           <div
-            className={`ml-2 ${
-              pathname === "/code-idea" ? "sm:ml-24" : "sm:ml-7"
-            }`}
+            className={` ${pathname === "/code-idea" ? "sm:ml-24" : "sm:ml-7"}`}
           >
-            <Link
-              href="/"
-              className={`mx-auto mt-5 ${
-                pathname === "/code-idea" ? "sm:pl-4" : "sm:ml-12"
-              } ml-4 flex sm:mx-0`}
-            >
+            <Link href="/" className={`mt-3 ml-2 flex  sm:mx-0`}>
               {pathname === "/" && (
                 <Image
                   src={"/code-genius.svg"}
-                  width={38}
-                  height={38}
-                  className={"-mr-1"}
+                  width={32}
+                  height={32}
                   alt="Code Genius"
                 />
               )}
               <h1
-                className={`${rubik.variable}  ${
+                className={` ${
                   pathname === "/code-idea" ? "hidden" : "block"
-                } text-lg sm:text-xl sm:text-xl mt-2 ${
-                  pathname === "/" ? "ml-5" : "-ml-1"
-                } ${
+                } text-lg sm:text-xl sm:text-xl mt-2  ${
                   pathname === "/dashboard" || pathname === "/code-chat"
                     ? "hidden"
                     : "block"
-                }   bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text font-sans  text-2xl font-bold tracking-tight text-transparent max-md:pt-4 max-sm:pt-0 sm:leading-6`}
+                }  ml-2 bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text  font-sans text-2xl font-bold tracking-tight text-transparent  sm:leading-6`}
               >
                 Code Genius
               </h1>
@@ -97,18 +77,18 @@ export default function Header({
               }  p-[1.5px] font-sans`}
             >
               {!session && (
-                <div className="relative h-[48px] w-[163px] rounded-lg bg-purple-800">
-                  <div className="text-sm mt-3 text-center text-white">
-                    {userHasAccount ? "Login" : "Create Account"}
+                <div className="relative h-[48px] w-auto rounded-lg bg-purple-800 sm:h-[48px] ">
+                  <div className="text-sm mt-3 px-2 text-center text-white">
+                    {!userHasAccount ? "Login" : "Create Account"}
                   </div>
                 </div>
               )}
-              <UserDropdown
-                session={session}
-                setShowSignInModal={setShowSignInModal}
-              />
             </div>
           </div>
+          <UserDropdown
+            session={session}
+            setShowSignInModal={setShowSignInModal}
+          />
         </div>
       </div>
     </>
