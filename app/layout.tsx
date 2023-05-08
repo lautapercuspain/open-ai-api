@@ -1,11 +1,6 @@
 import "../styles/globals.css"
 import SessionProvider from "./provider"
-
-import { getServerSession } from "next-auth/next"
-import { authOptions } from "pages/api/auth/[...nextauth]"
 import { Inter, Roboto_Mono } from "next/font/google"
-import { cookies } from "next/headers"
-import HeaderWrapper from "./components/shared/HeaderWrapper"
 
 const inter = Inter({
   subsets: ["latin"],

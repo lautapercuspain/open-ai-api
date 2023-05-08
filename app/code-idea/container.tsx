@@ -5,9 +5,13 @@ import Client from "./client"
 import Navigation from "./navigation"
 import { ElementType } from "app/components/DropDown"
 import { useSearchParams } from "next/navigation"
+import UserDropdown from "app/components/auth/UserDropdown"
+import { useSignInModal } from "app/components/modals/SignInModal"
+import Header from "app/components/Header"
 
 export default function Container({ session }) {
   const [smartSelected, setSmartSelected] = useState(true)
+  const { setShowSignInModal } = useSignInModal()
   const [openSecondayNavBar, setOpenSecondaryNavBar] = useState(false)
   const [testSelected, setTestSelected] = useState(false)
   const [improveSelected, setImproveSelected] = useState(false)
@@ -69,6 +73,7 @@ export default function Container({ session }) {
 
   return (
     <>
+      <Header session={session} setShowSignInModal={setShowSignInModal} />
       <Navigation
         mode={mode}
         setMode={setMode}

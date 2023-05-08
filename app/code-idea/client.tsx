@@ -50,8 +50,6 @@ export default function Client({
   const [generatedCode, setGeneratedCode] = useState<String>("")
   const controller = new AbortController()
 
-  console.log("userCredits: ", userCredits)
-
   useEffect(() => {
     const editorPanel = document.getElementById("code-editor")
     if (editorPanel) {

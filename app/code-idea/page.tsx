@@ -7,7 +7,7 @@ export default async function Page() {
   const session = await getServerSession(authOptions)
 
   if (!session) {
-    redirect("/?action=authenticate")
+    redirect("/")
   }
 
   return (

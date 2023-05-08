@@ -19,9 +19,6 @@ export default function Client({ session }) {
   const userCredits = session && session.user?.credits
   const controller = new AbortController()
 
-  console.log("session", session)
-  console.log("userCredits", userCredits)
-
   useEffect(() => {
     if (!userCredits || userCredits === 0) {
       setCreditsModaIsOpen(true)

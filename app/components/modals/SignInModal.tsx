@@ -21,7 +21,7 @@ const SignInModal = ({
   setShowSignInModal,
 }: {
   showSignInModal: boolean
-  userHasAccount: boolean
+  userHasAccount?: boolean
   setShowSignInModal: Dispatch<SetStateAction<boolean>>
 }) => {
   const [signInClickedGitHub, setSignInClickedGitHub] = useState<boolean>(false)
@@ -110,7 +110,7 @@ const SignInModal = ({
   )
 }
 
-export function useSignInModal(userHasAccount: boolean) {
+export function useSignInModal(userHasAccount?: boolean) {
   const [showSignInModal, setShowSignInModal] = useState(false)
 
   const SignInModalCallback = useCallback(() => {

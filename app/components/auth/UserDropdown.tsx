@@ -10,15 +10,16 @@ import Popover from "app/components/shared/Popover"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import Link from "next/link"
+import useWindowSize from "hooks/use-window-size"
 
 export default function UserDropdown({ session, setShowSignInModal }) {
   const { email, image } = session?.user || {}
   const [colorMode, setColorMode] = useLocalStorage(LSConfig.colorMode, "")
   const [openPopover, setOpenPopover] = useState(false)
-
-  useEffect(() => {
-    setShowSignInModal(false)
-  }, [])
+  const { isMobile } = useWindowSize()
+  // useEffect(() => {
+  //   setShowSignInModal(false)
+  // }, [])
 
   useEffect(() => {
     try {
@@ -73,8 +74,8 @@ export default function UserDropdown({ session, setShowSignInModal }) {
         setOpenPopover={setOpenPopover}
       >
         <button
-          onClick={() => setOpenPopover(!openPopover)}
-          className="mr-1 mt-1 flex h-8 w-8 items-end justify-end overflow-hidden rounded-full focus:outline-none sm:h-9 sm:w-9"
+          onClick={() => (!isMobile ? setOpenPopover(!openPopover) : null)}
+          className={`mr-1 mt-1 flex h-8 w-8 items-end justify-end overflow-hidden rounded-full focus:outline-none sm:h-9 sm:w-9`}
         >
           <Image
             className=""
@@ -87,29 +88,4 @@ export default function UserDropdown({ session, setShowSignInModal }) {
       </Popover>
     </motion.div>
   )
-}
-
-{
-  /* <button
-              onClick={
-                colorMode === "dark"
-                  ? () => setColorMode("ligth")
-                  : () => setColorMode("dark")
-              }
-              className="text-sm relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left transition-all duration-75 hover:bg-gray-100"
-            >
-              {colorMode === "dark" ? (
-                <SunMedium className="h-4 w-4" color={"black"} />
-              ) : (
-                <Moon
-                  className="h-4 w-4"
-                  color={colorMode === "dark" ? "white" : "black"}
-                />
-              )}
-              <Link href={"#"}>
-                <p className="text-sm ">
-                  {colorMode === "dark" ? "Ligth Mode" : "Dark Mode"}
-                </p>
-              </Link>
-            </button> */
 }

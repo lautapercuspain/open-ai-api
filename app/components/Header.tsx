@@ -14,8 +14,14 @@ export default function Header({
   showSignInModal,
   userHasAccount,
   setShowSignInModal,
+}: {
+  session: any
+  showSignInModal?: any
+  userHasAccount?: any
+  setShowSignInModal: any
 }) {
   const pathname = usePathname()
+  console.log("entra aqui en header")
 
   const [userId, setUserId] = useLocalStorage(LSConfig.user.userId, "")
   const searchParams = useSearchParams()
@@ -37,14 +43,10 @@ export default function Header({
     <>
       <div
         id="site-header"
-        className={`absolute top-0 z-30 w-full bg-transparent transition-all ${
-          !showSignInModal || session ? "block" : "hidden"
-        }`}
+        className={`absolute top-0 z-30 w-full bg-transparent transition-all`}
       >
         <div className="flex items-center justify-between ">
-          <div
-            className={` ${pathname === "/code-idea" ? "sm:ml-24" : "sm:ml-7"}`}
-          >
+          <div className={""}>
             <Link href="/" className={`mt-3 ml-2 flex  sm:mx-0`}>
               {pathname === "/" && (
                 <Image
