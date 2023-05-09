@@ -46,7 +46,7 @@ export default function Header({
         className={`absolute top-0 z-30 w-full bg-transparent transition-all`}
       >
         <div className="flex items-center justify-between ">
-          <div className={""}>
+          <div className="ml-4">
             <Link href="/" className={`mt-3 ml-2 flex  sm:mx-0`}>
               {pathname === "/" && (
                 <Image

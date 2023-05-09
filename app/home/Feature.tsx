@@ -4,7 +4,7 @@ import { useMotionValueEvent, useScroll } from "framer-motion"
 import suggestions from "../../animations/suggestions.json"
 import generation from "../../animations/generation.json"
 import bugDetection from "../../animations/bugDetection.json"
-import { Inter } from "next/font/google"
+import { motion } from "framer-motion"
 
 import Lottie from "lottie-react"
 import { useState } from "react"
@@ -93,39 +93,69 @@ export default function Feature({ setShowSignInModal }) {
             <BugDetection />
           </div>
           <div className="mt-0 p-2 sm:mt-20">
-            <h1 className="pl-3 text-center text-5xl font-bold sm:text-left">
+            <motion.h1
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="pl-3 text-center text-5xl font-bold sm:text-left"
+            >
               Smart suggestions
-            </h1>
-            <p className="mt-2 w-full p-4 text-center sm:w-[80%] sm:text-left">
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="mt-2 w-full p-4 text-center sm:w-[80%] sm:text-left"
+            >
               Our software offers smart generation capabilities, allowing
               developers to generate high-quality code with ease. With this
               feature, developers can save time and effort in writing code,
               resulting in increased productivity and faster development cycles.
-            </p>
+            </motion.p>
           </div>
           <div className="mx-auto mb-2 flex w-96 items-start justify-start sm:ml-40 sm:w-full">
             <BugDetection />
           </div>
           <div className="mt-0 p-2 sm:mt-20">
-            <h1 className="pl-3 text-center text-5xl font-bold sm:text-left">
+            <motion.h1
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="pl-3 text-center text-5xl font-bold sm:text-left"
+            >
               Test Generation
-            </h1>
-            <p className="mt-2 w-full p-4 text-center sm:w-[80%] sm:text-left">
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="mt-2 w-full p-4 text-center sm:w-[80%] sm:text-left"
+            >
               You can generate tests based on the provided function. With this
               feature, developers can quickly and easily generate test cases for
               their functions, ensuring that their code is thoroughly tested and
               reliable. This feature can save developers a significant amount of
               time and effort in manually creating test cases.
-            </p>
+            </motion.p>
           </div>
           <div className="mx-auto flex w-96 items-center justify-start sm:ml-40 sm:w-full">
             <BugDetection />
           </div>
           <div className="mt-0 p-2 sm:mt-20">
-            <h1 className="pl-3 text-center text-5xl font-bold sm:text-left">
+            <motion.h1
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="pl-3 text-center text-5xl font-bold sm:text-left"
+            >
               Code Ideas
-            </h1>
-            <p className="mt-2 w-full p-4 text-center sm:w-[80%] sm:text-left">
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="mt-2 w-full p-4 text-center sm:w-[80%] sm:text-left"
+            >
               Our software includes a feature that provides developers with code
               ideas based on the context of their current project. This feature
               can be especially useful for new developers who may not be as
@@ -133,7 +163,7 @@ export default function Feature({ setShowSignInModal }) {
               With this feature, developers can save time in researching and
               experimenting with new code solutions, resulting in faster
               development cycles and increased productivity.
-            </p>
+            </motion.p>
           </div>
         </div>
         <div className="my-20">

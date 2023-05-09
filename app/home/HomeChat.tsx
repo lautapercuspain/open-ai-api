@@ -88,18 +88,22 @@ export default function HomeChat() {
             ? result.map((item: any) => {
                 if (item.hasOwnProperty("text")) {
                   return (
-                    <Message
-                      className="my-2 ml-2 text-left leading-7"
-                      model={{
-                        message: item.text,
-                        direction: "incoming",
-                        position: "normal",
-                      }}
-                    />
+                    <div className="rounded-lg bg-purple-400 p-2">
+                      <Message
+                        style={{ borderRadius: "0px" }}
+                        className="ml-2  text-left leading-7"
+                        model={{
+                          message: item.text,
+                          direction: "incoming",
+                          position: "normal",
+                        }}
+                      />
+                    </div>
                   )
                 } else {
                   return (
                     <GenerateCode
+                      borderRadius="none"
                       align="start"
                       blackBackground
                       generatedCode={item.code}

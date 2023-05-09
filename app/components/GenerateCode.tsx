@@ -10,6 +10,7 @@ type GenerateCode = {
   langElement?: string
   blackBackground?: boolean
   align?: string
+  borderRadius?: string
   onSaveCode?: () => void
 }
 
@@ -17,6 +18,7 @@ const colors: any = tailwindConfig.theme?.extend?.colors
 
 export default function GenerateCode({
   align = "center",
+  borderRadius = "0.625rem",
   blackBackground = false,
   onSaveCode,
   generatedCode,
@@ -43,7 +45,7 @@ export default function GenerateCode({
   return (
     <>
       <div
-        className={`my-2 mb-10 flex flex-col items-${align} md:items-${align} lg:items-${align}`}
+        className={`my-5 flex flex-col items-${align} md:items-${align} lg:items-${align}`}
       >
         {generatedCode
           .substring(generatedCode.indexOf("**") + 0)
@@ -61,7 +63,7 @@ export default function GenerateCode({
                 <CopyBlock
                   showLineNumbers
                   wrapLongLines
-                  customStyle={{ borderRadius: "0.625rem" }}
+                  customStyle={{ borderRadius }}
                   text={generated}
                   language={langElement === "Typescript" ? "tsx" : "jsx"}
                   codeBlock

@@ -1,6 +1,7 @@
 "use client"
 
 import { ReactNode } from "react"
+import { motion } from "framer-motion"
 
 type ShowCaseCardProps = {
   image: ReactNode
@@ -16,7 +17,12 @@ export default function ShowCaseCard({
   button,
 }: ShowCaseCardProps) {
   return (
-    <div className="mx-auto flex h-auto w-[90%] items-start rounded-2xl bg-purple-500 p-6 text-center font-sans shadow-xl sm:min-h-[404px] sm:w-[80%]">
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      className="mx-auto flex h-auto w-[90%] items-start rounded-2xl bg-purple-500 p-6 text-center font-sans shadow-xl sm:min-h-[404px] sm:w-[80%]"
+    >
       <div className="flex flex-col sm:flex-row">
         <div className="w-full p-2 sm:w-[80%]">
           <h3 className="mx-auto flex w-full bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text text-center text-3xl font-bold text-transparent sm:ml-0 sm:w-[85%] sm:justify-start sm:pl-3 sm:text-left sm:text-5xl sm:leading-[48px]">
@@ -33,6 +39,6 @@ export default function ShowCaseCard({
         </div>
         <div className="my-auto hidden w-[475px] sm:block">{image}</div>
       </div>
-    </div>
+    </motion.div>
   )
 }
