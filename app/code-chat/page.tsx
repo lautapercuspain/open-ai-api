@@ -12,7 +12,7 @@ export default async function Page() {
 
   return (
     <>
-      <main className="mt-24 flex w-full flex-1 flex-col items-center justify-center px-4 text-center sm:mt-20">
+      <main className="mt-24 flex w-full flex-1 flex-col items-center justify-center px-4 text-center sm:mt-10">
         <Client session={session} />
       </main>
     </>

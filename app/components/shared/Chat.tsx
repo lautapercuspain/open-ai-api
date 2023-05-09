@@ -41,15 +41,13 @@ export default function Chat({
             ? result.map((item: any) => {
                 if (item.hasOwnProperty("text")) {
                   return (
-                    <p className="p2 my-2 text-left leading-7">{item.text}</p>
+                    <p className="rounded-lg bg-purple-400 p-2 text-left  leading-7">
+                      {item.text}
+                    </p>
                   )
                 } else {
                   return (
-                    <GenerateCode
-                      align="start"
-                      blackBackground
-                      generatedCode={item.code}
-                    />
+                    <GenerateCode align="start" generatedCode={item.code} />
                   )
                 }
               })
@@ -60,9 +58,10 @@ export default function Chat({
   }
 
   return (
-    <div className="flex items-center justify-center overflow-scroll rounded-md sm:mx-auto sm:flex-row">
+    <div className="flex items-center justify-center overflow-scroll rounded-md pl-5 sm:mx-auto sm:flex-row">
       {generatedResponse.length > 0 && (
         <ChatContainer
+          useFullHeight
           useFullWidth
           messages={<LiveDemoMessages generatedMessages={generatedResponse} />}
         />

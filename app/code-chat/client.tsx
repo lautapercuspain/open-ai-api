@@ -174,6 +174,13 @@ export default function Client({ session }) {
 
   return (
     <>
+      <Chat
+        generatedResponse={generatedMessages}
+        onArrowPress={onArrowPress}
+        codeSentence={codeSentence}
+        onCodeGeneration={onCodeGeneration}
+        setCodeSentence={setCodeSentence}
+      />
       <Modal
         body="You don't have more Code Genius credits. Please upgrade your account before continuing"
         isOpen={creditsModaIsOpen}
@@ -197,13 +204,6 @@ export default function Client({ session }) {
         savePropmptName
         buttonText="Save"
         setIsOpen={setShowSavePromptModal}
-      />
-      <Chat
-        generatedResponse={generatedMessages}
-        onArrowPress={onArrowPress}
-        codeSentence={codeSentence}
-        onCodeGeneration={onCodeGeneration}
-        setCodeSentence={setCodeSentence}
       />
     </>
   )

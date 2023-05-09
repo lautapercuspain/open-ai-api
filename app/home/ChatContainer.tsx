@@ -5,7 +5,7 @@ import Image from "next/image"
 // import Link from "next/link";
 import React, { useEffect, useRef } from "react"
 
-export default function ChatContainer({ messages, width }: any) {
+export default function ChatContainer({ messages, useFullHeight }: any) {
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const [scrollHeight, setScrollHeight] = React.useState(0)
 
@@ -37,7 +37,9 @@ export default function ChatContainer({ messages, width }: any) {
 
       <div
         ref={chatContainerRef}
-        className={`ml-2 max-h-[320px] w-[89%] bg-purple-400 
+        className={`ml-2 ${
+          useFullHeight ? "h-[80vh]" : "max-h-[320px]"
+        } w-[89%] bg-purple-400
        font-mono text-white sm:w-[900px]`}
       >
         {messages}

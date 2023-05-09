@@ -91,7 +91,7 @@ export default function HomeChat() {
                     <div className="rounded-lg bg-purple-400 p-2">
                       <Message
                         style={{ borderRadius: "0px" }}
-                        className="ml-2  text-left leading-7"
+                        className="ml-2 text-left leading-7"
                         model={{
                           message: item.text,
                           direction: "incoming",

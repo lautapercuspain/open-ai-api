@@ -10,6 +10,7 @@ export function parseText(text = "", delimiter = "```") {
         .replace("jsx", "")
         .replace("x", "")
         .replace("java", "")
+        .replace("type", "")
         .replace("vue", "")
         .replace("script", "")
         .replace("typescript", "")
