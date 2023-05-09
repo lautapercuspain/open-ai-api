@@ -22,10 +22,11 @@ export default function ChatContainer({ messages, width }: any) {
     chatContainerRef.current,
     chatContainerRef.current?.scrollHeight,
     scrollHeight,
+    setScrollHeight,
   ])
 
   return (
-    <div className="mx-auto mt-4 flex max-w-full overflow-y-scroll sm:mx-auto sm:mt-3 sm:w-[900px] sm:max-w-[900px]">
+    <div className="mx-auto mt-4 flex max-w-md overflow-y-scroll sm:-ml-5 sm:mt-3 sm:w-[930px] sm:max-w-[930px]">
       <Image
         src={"/code-genius.svg"}
         width={32}
@@ -33,6 +34,7 @@ export default function ChatContainer({ messages, width }: any) {
         className="mt-0"
         alt="Code Genius"
       />
+
       <div
         ref={chatContainerRef}
         className={`ml-2 max-h-[320px] w-[89%] bg-purple-400 

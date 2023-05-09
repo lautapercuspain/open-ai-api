@@ -21,7 +21,7 @@ export default function ShowCaseCard({
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
-      className="mx-auto flex h-auto w-[90%] items-start rounded-2xl bg-purple-500 p-6 text-center font-sans shadow-xl sm:min-h-[404px] sm:w-[80%]"
+      className="mx-auto flex h-auto w-[90%] items-start rounded-2xl bg-purple-700 p-6 text-center font-sans shadow-xl sm:min-h-[404px] sm:w-[80%]"
     >
       <div className="flex flex-col sm:flex-row">
         <div className="w-full p-2 sm:w-[80%]">

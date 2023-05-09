@@ -3,29 +3,30 @@
 import { useEffect, useRef, useState } from "react"
 import { CopyBlock, dracula } from "react-code-blocks"
 import tailwindConfig from "tailwind.config.js"
-import Button from "./Button"
 
 type GenerateCode = {
   generatedCode: String
   langElement?: string
-  blackBackground?: boolean
+  backgroundColor?: string
   align?: string
+  themeColors?: any
   borderRadius?: string
   onSaveCode?: () => void
 }
 
-const colors: any = tailwindConfig.theme?.extend?.colors
+const themeColors: any = tailwindConfig.theme?.extend?.colors
 
 export default function GenerateCode({
   align = "center",
   borderRadius = "0.625rem",
-  blackBackground = false,
+  backgroundColor = "#000000",
   onSaveCode,
   generatedCode,
   langElement,
 }: GenerateCode) {
   const [scrollHeight, setScrollHeight] = useState(0)
   const chatContainerRef = useRef<HTMLDivElement>(null)
+  console.log("dracula", dracula)
 
   useEffect(() => {
     if (chatContainerRef && chatContainerRef.current) {
@@ -50,8 +51,6 @@ export default function GenerateCode({
         {generatedCode
           .substring(generatedCode.indexOf("**") + 0)
           .replace("**", "")
-          .replace("tsx", "")
-          .replace("", "")
           .split("**::")
 
           .map((generated) => {
@@ -63,15 +62,25 @@ export default function GenerateCode({
                 <CopyBlock
                   showLineNumbers
                   wrapLongLines
-                  customStyle={{ borderRadius }}
+                  customStyle={{
+                    borderRadius: 0,
+                    border: `0.5px solid ${themeColors.purple[500]}`,
+                  }}
                   text={generated}
                   language={langElement === "Typescript" ? "tsx" : "jsx"}
                   codeBlock
                   theme={{
                     ...dracula,
-                    lineNumberColor: colors.lineNumbers,
-                    backgroundColor: blackBackground ? "#000000" : "#101018",
-                    metaColor: colors.mint,
+                    textColor: "#ffffff",
+                    stringColor: themeColors.purple[300],
+                    attributeColor: themeColors.purple[300],
+                    functionColor: themeColors.mint,
+                    templateTagColor: themeColors.moradoCode, //H1 or HTML Tags
+                    backgroundColor: themeColors.purple[900],
+                    keywordColor: themeColors.moradoCode,
+                    metaKeywordColor: "#8283ad",
+                    lineNumberColor: themeColors.lineNumbers,
+                    metaColor: themeColors.mint,
                   }}
                 />
               </div>

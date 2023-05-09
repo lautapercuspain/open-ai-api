@@ -8,7 +8,6 @@ import { generateCodeWithTurbo } from "utils/generateCode"
 import { parseText } from "utils/parseText"
 import ChatContainer from "./ChatContainer"
 import Hero from "./Hero"
-// import tailwindConfig from "tailwind.config.js"
 
 export interface CodeMessagesProps {
   generatedMessages: any
@@ -20,6 +19,7 @@ export default function HomeChat() {
     useState<ReadableStreamDefaultReader<Uint8Array> | null>(null)
   const [codeSentence, setCodeSentence] = useState("")
   const [modaIsOpen, setModaIsOpen] = useState(false)
+
   const [generatedCode, setGeneratedCode] = useState<string>("")
   const codeMessages = useRef([
     {
@@ -105,7 +105,6 @@ export default function HomeChat() {
                     <GenerateCode
                       borderRadius="none"
                       align="start"
-                      blackBackground
                       generatedCode={item.code}
                     />
                   )
@@ -143,7 +142,7 @@ export default function HomeChat() {
             />
           </button>
         </div>
-        <div className="h-[330px] w-full sm:h-[380px]">
+        <div className="h-[330px] w-full sm:h-[380px] sm:w-[930px]">
           {generatedMessages.length > 0 && (
             <ChatContainer
               messages={
