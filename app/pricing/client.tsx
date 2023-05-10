@@ -9,6 +9,8 @@ import Loading from "app/loading"
 import tailwindConfig from "tailwind.config"
 import { Check } from "lucide-react"
 import { PRICE_IDS } from "@/lib/constants"
+import Header from "app/components/Header"
+import { useSignInModal } from "app/components/modals/SignInModal"
 
 //Theme colors
 const colors: any = tailwindConfig.theme?.extend?.colors
@@ -20,7 +22,7 @@ type ClientPropTye = {
 export default function Client({ session }: ClientPropTye) {
   const initialCreditsValue = 25
   const [credits, setCredits] = React.useState<number>(initialCreditsValue)
-
+  const { setShowSignInModal } = useSignInModal()
   const [loadingStripe, setLoadingStripe] = React.useState<boolean>(false)
 
   const [priceId, setPrecieId] = React.useState<string>("")
@@ -93,6 +95,7 @@ export default function Client({ session }: ClientPropTye) {
 
   return (
     <>
+      <Header session={session} setShowSignInModal={setShowSignInModal} />
       <PaymentModal isOpen={openPayment} setIsOpen={setOpenPayment} />
       <ContactFormModal
         clientName={session && session.user && session.user.name}

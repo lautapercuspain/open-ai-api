@@ -40,7 +40,11 @@ export default function Header({
         className={`absolute top-0 z-30 w-full bg-transparent transition-all`}
       >
         <div className="flex items-center justify-between">
-          <div className="ml-16 mt-4 sm:ml-14">
+          <div
+            className={` ${
+              pathname === "/pricing" ? "ml-4" : "ml-16"
+            } mt-4 sm:ml-14`}
+          >
             <Link href="/" className={` flex sm:mx-0`}>
               <div
                 className={`flex ${
