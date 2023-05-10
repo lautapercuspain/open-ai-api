@@ -80,7 +80,7 @@ export default function Header({
                 <div
                   className={`relative h-9 ${
                     !userHasAccount ? "w-24" : "w-48"
-                  } rounded-lg bg-purple-800 sm:h-[48px] `}
+                  } rounded-lg bg-purple-800  `}
                 >
                   <p className="text-sm my-auto px-3 pt-1 text-center leading-7 text-white">
                     {!userHasAccount ? "Sign In" : "Create Account"}
