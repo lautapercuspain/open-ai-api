@@ -42,13 +42,13 @@ export default function Header({
         <div className="flex items-center justify-between">
           <div
             className={` ${
-              pathname === "/pricing" ? "ml-4" : "ml-16"
+              pathname === "/pricing" ? "ml-4" : "ml-4"
             } mt-4 sm:ml-14`}
           >
             <Link href="/" className={` flex sm:mx-0`}>
               <div
                 className={`flex ${
-                  pathname !== "/" ? "mt-1 sm:ml-24" : "sm:ml-2"
+                  pathname !== "/" ? "mt-1 sm:ml-24" : "mt-1 sm:ml-2"
                 }`}
               >
                 <Image
@@ -78,13 +78,13 @@ export default function Header({
             >
               {!session && (
                 <div
-                  className={`relative h-[40px] ${
-                    !userHasAccount ? "w-24" : "ww-48"
+                  className={`relative h-9 ${
+                    !userHasAccount ? "w-24" : "w-48"
                   } rounded-lg bg-purple-800 sm:h-[48px] `}
                 >
-                  <div className="text-sm mt-3 px-3 text-center leading-7 text-white">
+                  <p className="text-sm my-auto px-3 pt-1 text-center leading-7 text-white">
                     {!userHasAccount ? "Sign In" : "Create Account"}
-                  </div>
+                  </p>
                 </div>
               )}
             </div>
