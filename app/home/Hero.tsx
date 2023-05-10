@@ -4,7 +4,6 @@ import { motion } from "framer-motion"
 import { ArrowDown } from "lucide-react"
 
 export default function Hero({ hasContent }) {
-  console.log("hasContent:", hasContent)
   return (
     <div
       className={`mb-10  ${

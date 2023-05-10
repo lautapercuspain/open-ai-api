@@ -8,6 +8,7 @@ import React, { useEffect, useRef } from "react"
 export default function ChatContainer({ messages, useFullHeight }: any) {
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const [scrollHeight, setScrollHeight] = React.useState(0)
+  console.log("messages ", messages)
 
   useEffect(() => {
     if (chatContainerRef && chatContainerRef.current) {
@@ -26,21 +27,13 @@ export default function ChatContainer({ messages, useFullHeight }: any) {
   ])
 
   return (
-    <div className="mx-auto mt-4 flex max-w-md overflow-y-scroll sm:-ml-5 sm:mt-3 sm:w-[930px] sm:max-w-[930px]">
-      <Image
-        src={"/code-genius.svg"}
-        width={32}
-        height={32}
-        className="mt-0"
-        alt="Code Genius"
-      />
-
+    <div className="mx-auto mt-4 flex h-[320px] max-w-[100vw] sm:mt-3 sm:w-[900px] sm:max-w-[900px]">
       <div
         ref={chatContainerRef}
-        className={`ml-2 ${
+        className={` mx-auto overflow-y-scroll  ${
           useFullHeight ? "h-[80vh]" : "max-h-[320px]"
-        } w-[89%] bg-purple-400
-       font-mono text-white sm:w-[900px]`}
+        } w-[95%] rounded-md bg-purple-400
+       font-sans text-white sm:w-[900px]`}
       >
         {messages}
       </div>

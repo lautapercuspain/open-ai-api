@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { CopyBlock, dracula } from "react-code-blocks"
 import tailwindConfig from "tailwind.config.js"
 
@@ -16,7 +16,7 @@ type GenerateCode = {
 
 const themeColors: any = tailwindConfig.theme?.extend?.colors
 
-export default function GenerateCode({
+function GenerateCode({
   align = "center",
   borderRadius = "0.625rem",
   backgroundColor = "#000000",
@@ -26,7 +26,7 @@ export default function GenerateCode({
 }: GenerateCode) {
   const [scrollHeight, setScrollHeight] = useState(0)
   const chatContainerRef = useRef<HTMLDivElement>(null)
-  console.log("dracula", dracula)
+  // console.log("dracula", dracula)
 
   useEffect(() => {
     if (chatContainerRef && chatContainerRef.current) {
@@ -57,13 +57,13 @@ export default function GenerateCode({
             return (
               <div
                 ref={chatContainerRef}
-                className="max-h-[700px] w-full overflow-x-auto overflow-y-scroll text-left"
+                className="w-full overflow-x-auto overflow-y-scroll text-left font-mono"
               >
                 <CopyBlock
                   showLineNumbers
                   wrapLongLines
                   customStyle={{
-                    borderRadius: 0,
+                    borderRadius: "0.625rem",
                     border: `0.5px solid ${themeColors.purple[500]}`,
                   }}
                   text={generated}
@@ -90,3 +90,5 @@ export default function GenerateCode({
     </>
   )
 }
+
+export default React.memo(GenerateCode)
