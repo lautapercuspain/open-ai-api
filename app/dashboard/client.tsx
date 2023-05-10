@@ -7,6 +7,8 @@ import Link from "next/link"
 import React, { useEffect } from "react"
 import { Confetti } from "utils/confetti"
 import ContactFormModal from "app/components/modals/ContactFormModal"
+import Header from "app/components/Header"
+import { useSignInModal } from "app/components/modals/SignInModal"
 
 async function SendCongratsEmail(session, credits) {
   //Send congrats email to the user
@@ -44,6 +46,7 @@ export default function Client({
   purchasedCredits,
   opConfirmation,
 }) {
+  const { setShowSignInModal } = useSignInModal()
   const searchParams = useSearchParams()
   const [thanksMessage, setThanksMessage] = React.useState<boolean>(false)
   const [openContactForm, setOpenContactForm] = React.useState<boolean>(false)
@@ -76,9 +79,10 @@ export default function Client({
         isOpen={openContactForm}
         setIsOpen={setOpenContactForm}
       />
+      <Header session={session} setShowSignInModal={setShowSignInModal} />
       <div className="mx-auto h-full w-[95%] dark:bg-purple-900 sm:ml-16">
         <div className="flex flex-row">
-          <span className="text-md absolute top-24 ml-2 font-bold text-white sm:top-20 sm:ml-10 sm:text-2xl">
+          <span className="text-md absolute top-12 ml-2 font-bold text-white sm:top-28 sm:ml-10 sm:text-2xl">
             Welcome, {clientName}!
           </span>
         </div>

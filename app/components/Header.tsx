@@ -27,12 +27,6 @@ export default function Header({
   const searchParams = useSearchParams()
   const action = searchParams && searchParams.get("action")
 
-  // useEffect(() => {
-  //   if (action === "authenticate") {
-  //     setShowSignInModal(true)
-  //   }
-  // }, [searchParams, action])
-
   useEffect(() => {
     if (session?.user?.id) {
       setUserId(session?.user?.id)
@@ -45,52 +39,53 @@ export default function Header({
         id="site-header"
         className={`absolute top-0 z-30 w-full bg-transparent transition-all`}
       >
-        <div className="flex items-center justify-between ">
-          <div className="ml-4">
-            <Link href="/" className={`mt-3 ml-2 flex  sm:mx-0`}>
-              {pathname === "/" && (
+        <div className="flex items-center justify-between">
+          <div className="ml-16 mt-4 sm:ml-14">
+            <Link href="/" className={` flex sm:mx-0`}>
+              <div
+                className={`flex ${
+                  pathname !== "/" ? "mt-1 sm:ml-24" : "sm:ml-2"
+                }`}
+              >
                 <Image
-                  src={"/code-genius.svg"}
+                  src={"/logo/code-genius.svg"}
                   width={32}
                   height={32}
+                  className={"right-8"}
                   alt="Code Genius"
                 />
-              )}
-              <h1
-                className={` ${
-                  pathname === "/code-idea" ? "hidden" : "block"
-                } text-lg sm:text-xl sm:text-xl mt-2  ${
-                  pathname === "/dashboard" || pathname === "/code-chat"
-                    ? "hidden"
-                    : "block"
-                }  ml-2 bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text  font-sans text-2xl font-bold tracking-tight text-transparent  sm:leading-6`}
-              >
-                Code Genius
-              </h1>
+
+                <h1
+                  className={`text-lg sm:text-xl sm:text-xl mt-1 ml-2  bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text font-sans text-2xl font-bold tracking-tight text-transparent  sm:leading-6`}
+                >
+                  Code Genius
+                </h1>
+              </div>
             </Link>
           </div>
-          <div className="flex h-10 items-end">
+          <div className="flex h-8  items-end">
             <div
               onClick={() => setShowSignInModal(true)}
-              className={`my-auto mx-2 mt-2 mr-7 flex cursor-pointer flex-row items-start justify-center rounded-lg  ${
+              className={`my-auto mx-2 mt-2 mr-7 flex  cursor-pointer flex-row items-start justify-center rounded-lg sm:mr-16 ${
                 !session
                   ? "bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0]"
                   : "bg-transparent"
               }  p-[1.5px] font-sans`}
             >
               {!session && (
-                <div className="relative h-[48px] w-auto rounded-lg bg-purple-800 sm:h-[48px] ">
-                  <div className="text-sm mt-3 px-2 text-center text-white">
-                    {!userHasAccount ? "Login" : "Create Account"}
+                <div
+                  className={`relative h-[40px] ${
+                    !userHasAccount ? "w-24" : "ww-48"
+                  } rounded-lg bg-purple-800 sm:h-[48px] `}
+                >
+                  <div className="text-sm mt-3 px-3 text-center leading-7 text-white">
+                    {!userHasAccount ? "Sign In" : "Create Account"}
                   </div>
                 </div>
               )}
             </div>
           </div>
-          <UserDropdown
-            session={session}
-            setShowSignInModal={setShowSignInModal}
-          />
+          <UserDropdown session={session} />
         </div>
       </div>
     </>

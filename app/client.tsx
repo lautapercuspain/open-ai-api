@@ -24,7 +24,6 @@ export default function Client({ session, userHasAccount }) {
       <SuperHero />
       <HomeChat />
       <Feature setShowSignInModal={setShowSignInModal} />
-      <Footer session={session} />
     </>
   )
 }

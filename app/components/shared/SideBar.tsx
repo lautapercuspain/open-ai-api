@@ -106,23 +106,14 @@ export default function SideBar({
     <div
       id="sidebar"
       className={`absolute top-0 left-0 z-20 hidden h-full w-16 translate-x-full flex-col items-start border-r-[1px] border-purple-700
-      bg-purple-800 px-2 pt-3 transition-transform duration-700 sm:fixed sm:flex sm:translate-x-0`}
+      bg-purple-800 px-2 transition-transform duration-700 sm:fixed sm:flex sm:translate-x-0`}
     >
-      <Link href="/" className="mt-7 cursor-pointer">
-        <div
-          className="mx-auto flex h-[40px] w-[40px] items-center justify-center rounded-md pr-2 
- hover:bg-purple-500 "
-        >
-          <Home width={26} height={26} className="ml-1.5 text-white" />
-        </div>
-        {/* <p className="font-mono text-[11px] text-white">Home</p> */}
-      </Link>
       <Link href="/dashboard" className="mt-7 cursor-pointer ">
         <div
           className="mx-auto flex h-[40px] w-[40px] items-center justify-center rounded-md pr-2
  hover:bg-purple-500"
         >
-          <LayoutDashboard
+          <Home
             width={26}
             height={26}
             className={`ml-1.5 text-white ${

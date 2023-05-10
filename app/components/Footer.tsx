@@ -19,7 +19,7 @@ export default function Footer({ session }: { session: any }) {
           <div className="justify-center">
             <Link href="/" className={`mt-7 flex sm:mx-0 sm:ml-2`}>
               <Image
-                src={"/code-genius.svg"}
+                src={"/logo/code-genius.svg"}
                 width={38}
                 height={38}
                 className={"-mr-1"}

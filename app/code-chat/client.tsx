@@ -4,11 +4,14 @@ import Modal from "app/components/Modal"
 import { ChangeEvent, KeyboardEvent, useState, useRef, useEffect } from "react"
 import Chat from "app/components/shared/Chat"
 import { updateApiCallsAndCredits } from "utils/helpers"
+import Header from "app/components/Header"
+import { useSignInModal } from "app/components/modals/SignInModal"
 
 export default function Client({ session }) {
   const [loading, setLoading] = useState(false)
   const [modaIsOpen, setModaIsOpen] = useState(false)
   const [creditsModaIsOpen, setCreditsModaIsOpen] = useState(false)
+  const { setShowSignInModal } = useSignInModal()
   const [reader, setReader] =
     useState<ReadableStreamDefaultReader<Uint8Array> | null>(null)
   const [codeSentence, setCodeSentence] = useState("")
@@ -174,6 +177,7 @@ export default function Client({ session }) {
 
   return (
     <>
+      <Header session={session} setShowSignInModal={setShowSignInModal} />
       <Chat
         generatedResponse={generatedMessages}
         onArrowPress={onArrowPress}

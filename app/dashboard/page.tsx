@@ -14,6 +14,11 @@ export default async function Dashboard() {
   let purchasedCredits: number = 0
   const session = await getServerSession(authOptions)
   let existingCredits: string = ""
+
+  if (!session) {
+    redirect("/")
+  }
+
   //@ts-ignore
   const userId = session && session.user?.id
 
