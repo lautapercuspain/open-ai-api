@@ -13,6 +13,7 @@ import {
   Menu,
   ArrowLeft,
 } from "lucide-react"
+import Image from "next/image"
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -168,8 +169,8 @@ export default function SideBar({
     </div>
   ) : (
     <div
-      className={`absolute top-0 left-0 z-50 h-full rounded-r-lg font-sans  ${
-        showMobileMenu ? "w-80 bg-purple-600" : "w-16 bg-none"
+      className={`absolute top-0 left-0 z-50 h-full rounded-r-lg  font-sans   ${
+        showMobileMenu ? "w-80 bg-purple-700" : "w-16 bg-none"
       } flex-row items-start `}
     >
       <div
@@ -182,7 +183,24 @@ export default function SideBar({
           {!showMobileMenu ? (
             <Menu color="white" className="mt-4 ml-3" />
           ) : (
-            <ArrowLeft className="mt-5 ml-4" color="white" />
+            <div className="flex justify-between">
+              <ArrowLeft className="mt-5 ml-4" color="white" />
+              <div className="mx-auto mt-3 flex">
+                <Image
+                  src={"/logo/code-genius.svg"}
+                  width={32}
+                  height={32}
+                  className={"right-8"}
+                  alt="Code Genius"
+                />
+                <h1
+                  className={`text-lg sm:text-xl sm:text-xl mt-1 ml-2
+                    bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text font-sans text-2xl font-bold tracking-tight text-transparent  sm:leading-6`}
+                >
+                  Code Genius
+                </h1>
+              </div>
+            </div>
           )}
         </div>
       </div>

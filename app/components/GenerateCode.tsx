@@ -63,7 +63,7 @@ function GenerateCode({
                   showLineNumbers
                   wrapLongLines
                   customStyle={{
-                    borderRadius: "0.625rem",
+                    borderRadius: "0.6rem",
                     border: `0.5px solid ${themeColors.purple[500]}`,
                   }}
                   text={generated}

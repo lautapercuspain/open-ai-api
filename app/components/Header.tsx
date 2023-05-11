@@ -33,6 +33,7 @@ export default function Header({
     }
   }, [session, setUserId])
 
+  const shouldHideLogo = pathname === "/code-idea" || pathname === "/code-chat"
   return (
     <>
       <div
@@ -51,38 +52,38 @@ export default function Header({
                   pathname !== "/" ? "mt-1 sm:ml-24" : "mt-1 sm:ml-2"
                 }`}
               >
-                <Image
-                  src={"/logo/code-genius.svg"}
-                  width={32}
-                  height={32}
-                  className={"right-8"}
-                  alt="Code Genius"
-                />
-
-                <h1
-                  className={`text-lg sm:text-xl sm:text-xl mt-1 ml-2  bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text font-sans text-2xl font-bold tracking-tight text-transparent  sm:leading-6`}
-                >
-                  Code Genius
-                </h1>
+                {!shouldHideLogo && (
+                  <>
+                    <Image
+                      src={"/logo/code-genius.svg"}
+                      width={32}
+                      height={32}
+                      className={"right-8"}
+                      alt="Code Genius"
+                    />
+                    <h1
+                      className={`text-lg sm:text-xl sm:text-xl mt-1 ml-2
+                    bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text font-sans text-2xl font-bold tracking-tight text-transparent  sm:leading-6`}
+                    >
+                      Code Genius
+                    </h1>
+                  </>
+                )}
               </div>
             </Link>
           </div>
-          <div className="flex h-8  items-end">
+          <div className="flex h-8">
             <div
               onClick={() => setShowSignInModal(true)}
-              className={`my-auto mx-2 mt-2 mr-7 flex  cursor-pointer flex-row items-start justify-center rounded-lg sm:mr-16 ${
+              className={`my-auto mt-2 mr-4 flex cursor-pointer flex-row items-start justify-center rounded-lg sm:mr-16 ${
                 !session
                   ? "bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0]"
                   : "bg-transparent"
               }  p-[1.5px] font-sans`}
             >
               {!session && (
-                <div
-                  className={`relative h-9 ${
-                    !userHasAccount ? "w-24" : "w-48"
-                  } rounded-lg bg-purple-800  `}
-                >
-                  <p className="text-sm my-auto px-3 pt-1 text-center leading-7 text-white">
+                <div className={`relative h-9 w-auto rounded-lg bg-purple-800`}>
+                  <p className="text-sm my-auto px-2 pt-1 text-center leading-7 text-white">
                     {!userHasAccount ? "Sign In" : "Create Account"}
                   </p>
                 </div>

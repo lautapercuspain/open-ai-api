@@ -1,4 +1,5 @@
 import { Menu, Transition } from "@headlessui/react"
+import useWindowSize from "hooks/use-window-size"
 import { ChevronDown, LayoutDashboard, LogOut } from "lucide-react"
 import { signOut } from "next-auth/react"
 import Image from "next/image"
@@ -6,6 +7,7 @@ import Link from "next/link"
 import { Fragment } from "react"
 
 export default function UserMenu({ session, email, image }) {
+  const { isMobile } = useWindowSize()
   return (
     <div className="absolute top-4 right-2 w-56 text-right sm:right-16">
       <Menu as="div" className="relative inline-block text-left">
@@ -14,7 +16,7 @@ export default function UserMenu({ session, email, image }) {
             <div className="mr-1 flex">
               <Image
                 alt="Profile Picture"
-                className="mr-2 w-8 rounded-full"
+                className="mr-0 w-8 rounded-full sm:mr-2"
                 src={
                   image || `https://avatars.dicebear.com/api/micah/${email}.svg`
                 }
@@ -22,7 +24,7 @@ export default function UserMenu({ session, email, image }) {
                 height={40}
               />
 
-              <span className="mt-1">{session.user.name}</span>
+              {!isMobile && <span className="mt-1">{session.user.name}</span>}
             </div>
             <ChevronDown
               className="ml-2 -mr-1 mt-1 h-6 w-5 font-medium text-violet-200 hover:text-violet-100"
