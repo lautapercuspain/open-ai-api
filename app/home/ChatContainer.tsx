@@ -8,7 +8,6 @@ import React, { useEffect, useRef } from "react"
 export default function ChatContainer({ messages, useFullHeight }: any) {
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const [scrollHeight, setScrollHeight] = React.useState(0)
-  console.log("messages ", messages)
 
   useEffect(() => {
     if (chatContainerRef && chatContainerRef.current) {
@@ -30,7 +29,7 @@ export default function ChatContainer({ messages, useFullHeight }: any) {
     <div className="mx-auto mt-4 flex max-w-[100vw] sm:mt-3 sm:w-[900px] sm:max-w-[900px]">
       <div
         ref={chatContainerRef}
-        className={` mx-auto overflow-y-scroll  ${
+        className={`mx-auto overflow-y-scroll  ${
           useFullHeight ? "m-h-[80vh]" : "max-h-[320px]"
         } w-[95%] rounded-md bg-purple-400
        font-sans text-white sm:w-[900px]`}

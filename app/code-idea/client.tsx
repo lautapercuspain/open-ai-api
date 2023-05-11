@@ -85,7 +85,7 @@ export default function Client({
 
     if (testSelected) {
       response = await fetchWithTurbo(
-        "You are a helpful and specialized AI software assistant with much experience in unit testing, e2e testing, and all possible testing strategies.",
+        "You are a helpful and specialized AI software assistant with experience in unit testing, e2e testing. Requeriments: Write tests using the Jest and React Testing Library when possible.",
         prompt,
       )
     } else if (improveSelected) {
@@ -134,12 +134,12 @@ export default function Client({
         done = doneReading
         tokensCount++
         let chunkValue = decoder.decode(value)
-        if (
-          chunkValue.match(/```/) ||
-          chunkValue.match(/``/) ||
-          chunkValue.match(/`/)
-        )
-          chunkValue = ""
+        // if (
+        //   chunkValue.match(/```/) ||
+        //   chunkValue.match(/``/) ||
+        //   chunkValue.match(/`/)
+        // )
+        //   chunkValue = ""
         setGeneratedCode((prev) => prev + chunkValue)
       }
     } catch (error) {
@@ -201,7 +201,7 @@ export default function Client({
       return (
         <>
           <span>
-            Write your code idea and Code Genius will give you{" "}
+            Share your code idea and let Code Genius provide you with{" "}
             <span className="text-mint">suggestions</span>
           </span>
         </>
@@ -210,8 +210,8 @@ export default function Client({
       return (
         <>
           <span>
-            Paste your function and Code Genius will generate{" "}
-            <span className="text-mint">unit tests</span>
+            Need <span className="text-mint">unit tests?</span> Paste your code
+            and let Code Genius do the work.
           </span>
         </>
       )
@@ -219,17 +219,8 @@ export default function Client({
       return (
         <>
           <span>
-            Paste your function and Code Genius will suggest{" "}
-            <span className="text-mint">improvements</span>
-          </span>
-        </>
-      )
-    } else if (bugSelected) {
-      return (
-        <>
-          <span>
-            <strong>Mode</strong>: paste the function with the bug and Code
-            Genius will try to help
+            Generate better code with Code Genius - paste your function now and
+            get code <span className="text-mint">improvements</span>
           </span>
         </>
       )
@@ -290,17 +281,14 @@ export default function Client({
             highlight={(code) => highlight(code, languages.js)}
             onValueChange={(code) => setCodeSentence(code)}
           />
-          <ResizablePanel>
-            <AnimatePresence mode="sync">
-              {generatedCode && (
-                <GenerateCode
-                  onSaveCode={onSaveCode}
-                  langElement={langElement}
-                  generatedCode={generatedCode}
-                />
-              )}
-            </AnimatePresence>
-          </ResizablePanel>
+
+          {generatedCode && (
+            <GenerateCode
+              onSaveCode={onSaveCode}
+              langElement={langElement}
+              generatedCode={generatedCode}
+            />
+          )}
         </div>
       </div>
       <FooterSection

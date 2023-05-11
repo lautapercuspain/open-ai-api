@@ -18,15 +18,11 @@ const themeColors: any = tailwindConfig.theme?.extend?.colors
 
 function GenerateCode({
   align = "center",
-  borderRadius = "0.625rem",
-  backgroundColor = "#000000",
-  onSaveCode,
   generatedCode,
   langElement,
 }: GenerateCode) {
   const [scrollHeight, setScrollHeight] = useState(0)
   const chatContainerRef = useRef<HTMLDivElement>(null)
-  // console.log("dracula", dracula)
 
   useEffect(() => {
     if (chatContainerRef && chatContainerRef.current) {
@@ -51,13 +47,24 @@ function GenerateCode({
         {generatedCode
           .substring(generatedCode.indexOf("**") + 0)
           .replace("**", "")
+          .replace("javascript", "")
+          .replace("```", "")
+          .replace("js", "")
+          .replace("jsx", "")
+          .replace("x", "")
+          .replace("java", "")
+          .replace("type", "")
+          .replace("vue", "")
+          .replace("script", "")
+          .replace("typescript", "")
+          .replace("html", "")
           .split("**::")
 
           .map((generated) => {
             return (
               <div
                 ref={chatContainerRef}
-                className="w-full overflow-x-auto overflow-y-scroll text-left font-mono"
+                className="max-h-[50vh] overflow-x-auto overflow-y-scroll text-left font-mono sm:min-w-[100%] sm:max-w-[100%]"
               >
                 <CopyBlock
                   showLineNumbers
@@ -66,7 +73,7 @@ function GenerateCode({
                     borderRadius: "0.6rem",
                     border: `0.5px solid ${themeColors.purple[500]}`,
                   }}
-                  text={generated}
+                  text={generated.trim()}
                   language={langElement === "Typescript" ? "tsx" : "jsx"}
                   codeBlock
                   theme={{

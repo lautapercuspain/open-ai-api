@@ -1,17 +1,12 @@
 "use client"
 
 import Link from "next/link"
-import { LSConfig } from "@/lib/constants"
 import UserDropdown from "app/components/auth/UserDropdown"
-import { useEffect } from "react"
-import useLocalStorage from "hooks/use-localstorage"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
-import { useSearchParams } from "next/navigation"
 
 export default function Header({
   session,
-  showSignInModal,
   userHasAccount,
   setShowSignInModal,
 }: {
@@ -21,24 +16,13 @@ export default function Header({
   setShowSignInModal: any
 }) {
   const pathname = usePathname()
-  console.log("entra aqui en header")
-
-  const [userId, setUserId] = useLocalStorage(LSConfig.user.userId, "")
-  const searchParams = useSearchParams()
-  const action = searchParams && searchParams.get("action")
-
-  useEffect(() => {
-    if (session?.user?.id) {
-      setUserId(session?.user?.id)
-    }
-  }, [session, setUserId])
 
   const shouldHideLogo = pathname === "/code-idea" || pathname === "/code-chat"
   return (
     <>
       <div
         id="site-header"
-        className={`absolute top-0 z-30 w-full bg-transparent transition-all`}
+        className={`absolute top-0 w-full bg-transparent transition-all`}
       >
         <div className="flex items-center justify-between">
           <div
@@ -84,7 +68,7 @@ export default function Header({
               {!session && (
                 <div className={`relative h-9 w-auto rounded-lg bg-purple-800`}>
                   <p className="text-sm my-auto px-2 pt-1 text-center leading-7 text-white">
-                    {!userHasAccount ? "Sign In" : "Create Account"}
+                    {!userHasAccount ? "Sign In" : "Sign Up"}
                   </p>
                 </div>
               )}

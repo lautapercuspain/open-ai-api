@@ -31,22 +31,22 @@ const SignInModal = ({
   return (
     <BaseModal showModal={showSignInModal} setShowModal={setShowSignInModal}>
       {/* MAIN DIV - BACKGROUND*/}
-      <div className="bg-purple-700 p-4 sm:h-[400px] sm:w-[504.01px] sm:rounded-2xl">
+      <div className="bg-purple-800 p-4 sm:h-auto sm:w-[504.01px] sm:rounded-2xl">
         {/* INNER DIV - FLEX CONTAINER */}
         {/* TITLE + SUBTITLE */}
         <div className="flex flex-col content-center justify-start justify-items-start gap-4 sm:p-12">
-          <div className="mb-4 mt-8 flex flex-col content-center justify-start justify-items-start gap-4 sm:mb-8 sm:mt-0">
+          <div className="mt-8 flex flex-col content-center justify-start justify-items-start gap-2 sm:mb-4 sm:mt-0">
             <h1
-              className={`${inter.variable} text-center text-[28px] font-[700] leading-6 text-white  sm:text-[30px]`}
+              className={`text-center font-sans text-[28px] font-[700] text-white`}
             >
               {userHasAccount
-                ? "Login into your account"
-                : "Create your Account"}
+                ? "Access to your account"
+                : "To create your account, sign up now"}
             </h1>
-            <h6 className="sm:text-xl mx-auto max-w-xs  font-sans text-[16px] font-[400]  leading-10 text-gray-200">
-              Start coding with the help of Code Genius
-            </h6>
           </div>
+          <h6 className="sm:text-xl mx-auto w-full text-center font-sans text-[16px] font-medium text-gray-200">
+            Begin your coding journey with the assistance of Code Genius
+          </h6>
           {/* DIVIDER */}
           <hr className="border-1 border-purple-500 sm:w-[384.01px]" />
           {/* BUTTONS */}

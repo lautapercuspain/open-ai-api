@@ -69,7 +69,7 @@ export default function Feature({ setShowSignInModal }) {
       buttonTextColor="dark"
       variant="mint"
       loading={false}
-      text="Create Account"
+      text="Sign Up"
       onClick={() => {
         setShowSignInModal(true)
       }}

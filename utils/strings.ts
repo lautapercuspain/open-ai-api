@@ -1,11 +1,11 @@
 export function getCodeGeniusPlaceHolder(mode: string) {
   switch (mode) {
     case "smart":
-      return "Write your code idea here"
+      return "Share your code idea and let Code Genius provide you with suggestions"
     case "test":
-      return "Paste the code and code Genius will provide unit tests"
+      return "Need unit tests? Paste your code and let Code Genius do the work"
     case "improve":
-      return "Paste the code and code Genius will provide code improvements"
+      return "Generate better code with Code Genius - paste your function now and get code improvements"
     case "docs":
       return "Paste your code here and Code Genius will document it for you"
     default:

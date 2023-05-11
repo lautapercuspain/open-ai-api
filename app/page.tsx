@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "pages/api/auth/[...nextauth]"
 import { cookies } from "next/headers"
 import Client from "./client"
+import Footer from "./components/Footer"
 
 export const metadata = {
   title: "Create Genius Code",
@@ -16,9 +17,12 @@ export default async function Page() {
 
   const userHasAccount = csrfTokenValue !== "" && csrfTokenValue !== undefined
   return (
-    <main className={`mx-auto max-w-max pb-10`}>
-      <Client session={session} userHasAccount={userHasAccount} />
-    </main>
+    <>
+      <main className={`mx-auto max-w-max pb-10`}>
+        <Client session={session} userHasAccount={userHasAccount} />
+        <Footer session={session} />
+      </main>
+    </>
   )
 }
 
