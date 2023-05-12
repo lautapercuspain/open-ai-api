@@ -20,7 +20,7 @@ export default function UserDropdown({ session }) {
   if (!email) return null
 
   return (
-    <motion.div className="flex items-end justify-end transition-all duration-75 hover:bg-purple-500">
+    <motion.div className="flex items-end justify-end hover:bg-purple-500">
       <UserMenu session={session} email={email} image={image} />
     </motion.div>
   )

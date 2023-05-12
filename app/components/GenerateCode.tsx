@@ -7,6 +7,7 @@ import tailwindConfig from "tailwind.config.js"
 type GenerateCode = {
   generatedCode: String
   langElement?: string
+  isCodeIdea?: boolean
   backgroundColor?: string
   align?: string
   themeColors?: any
@@ -29,12 +30,13 @@ function GenerateCode({
         {generatedCode
           .substring(generatedCode.indexOf("**") + 0)
           .replace("javascript", "")
+          .replace("```", "")
           .replace("typescript", "")
           .replace("jsx", "")
           .split("**::")
           .map((generated) => {
             return (
-              <div className="max-h-[50vh] overflow-x-auto overflow-y-scroll text-left font-mono sm:min-w-[100%] sm:max-w-[100%]">
+              <div className="overflow-x-auto overflow-y-scroll text-left font-mono sm:min-w-[100%] sm:max-w-[100%]">
                 <CopyBlock
                   showLineNumbers
                   wrapLongLines

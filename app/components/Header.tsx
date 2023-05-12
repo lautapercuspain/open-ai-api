@@ -19,13 +19,13 @@ export default function Header({
   const pathname = usePathname()
   const { isMobile } = useWindowSize()
   const shouldHideLogo =
-    isMobile && (pathname === "/code-idea" || pathname === "/code-chat")
+    isMobile &&
+    (pathname === "/code-idea" ||
+      pathname === "/code-chat" ||
+      pathname === "/dashboard")
   return (
     <>
-      <div
-        id="site-header"
-        className={`absolute top-0 w-full bg-transparent transition-all`}
-      >
+      <div id="site-header" className={`absolute top-0 w-full`}>
         <div className="flex items-center justify-between">
           <div
             className={` ${
@@ -33,11 +33,7 @@ export default function Header({
             } mt-4 sm:ml-14`}
           >
             <Link href="/" className={` flex sm:mx-0`}>
-              <div
-                className={`flex ${
-                  pathname !== "/" ? "mt-1 sm:ml-24" : "mt-1 sm:ml-2"
-                }`}
-              >
+              <div className={`mt-1 flex sm:ml-7`}>
                 {!shouldHideLogo && (
                   <>
                     <Image

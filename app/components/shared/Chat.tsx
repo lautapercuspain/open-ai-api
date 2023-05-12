@@ -54,7 +54,7 @@ export default function Chat({
   }
 
   return (
-    <div className="flex items-center justify-center overflow-scroll rounded-md pl-5 sm:mx-auto sm:flex-row">
+    <div className="flex items-center justify-center overflow-scroll rounded-md sm:mx-auto sm:flex-row">
       {generatedResponse.length > 0 && (
         <ChatContainer
           useFullHeight
@@ -63,7 +63,7 @@ export default function Chat({
         />
       )}
       {generatedResponse.length === 0 && (
-        <div className="flex max-h-[650px] max-w-[1000px] flex-col items-start justify-center sm:mt-10 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-1">
+        <div className="mx-auto flex max-h-[75vh] w-full flex-col items-center justify-center sm:mt-10 sm:max-w-[1000px] sm:flex-row sm:flex-wrap sm:justify-between sm:gap-1">
           <PromptCard
             onClick={setPrompt}
             title="Create React App"

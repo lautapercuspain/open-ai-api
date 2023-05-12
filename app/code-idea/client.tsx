@@ -1,16 +1,12 @@
 "use client"
 
-import { LSConfig } from "@/lib/constants"
-import { AnimatePresence } from "framer-motion"
 import Editor from "react-simple-code-editor"
 import { highlight, languages } from "prismjs/components/prism-core"
 import "prismjs/components/prism-clike"
 import "prismjs/components/prism-javascript"
-// import "prismjs/themes/prism.css" //Example style, you can use another
 
 import Modal from "app/components/Modal"
 
-import ResizablePanel from "app/components/ResizablePanel"
 import GenerateCode from "app/components/GenerateCode"
 import { ChangeEvent, useEffect, useRef, useState } from "react"
 import { ElementType } from "app/components/DropDown"
@@ -49,6 +45,23 @@ export default function Client({
   const [questionName, setQuestionName] = useState("")
   const [generatedCode, setGeneratedCode] = useState<String>("")
   const controller = new AbortController()
+  const [scrollHeight, setScrollHeight] = useState(0)
+  const chatContainerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (chatContainerRef && chatContainerRef.current) {
+      setScrollHeight(chatContainerRef.current?.scrollHeight)
+      chatContainerRef.current?.scrollTo({
+        top: scrollHeight - chatContainerRef.current.offsetHeight,
+        behavior: "smooth",
+      })
+    }
+  }, [
+    chatContainerRef,
+    chatContainerRef.current,
+    chatContainerRef.current?.scrollHeight,
+    scrollHeight,
+  ])
 
   useEffect(() => {
     const editorPanel = document.getElementById("code-editor")
@@ -264,8 +277,9 @@ export default function Client({
         setIsOpen={setShowSavePromptModal}
       />
       <div
+        ref={chatContainerRef}
         id="container"
-        className="ml-0 mt-8 flex flex-col items-start justify-start sm:ml-8 sm:justify-between"
+        className="ml-0 mt-20 flex max-h-[90vh] flex-col items-start justify-start overflow-y-scroll sm:ml-8 sm:justify-between"
       >
         <div className="w-full sm:mr-3">
           <div className="sm:text-1xl left-0 mx-auto mb-6 mt-10 w-full border-b-[1px] border-gray-400 px-2 py-4 pb-3 text-center font-sans text-[13px] uppercase text-purple-300 sm:mr-8 sm:mt-6 sm:ml-0 sm:pt-2 ">
@@ -276,12 +290,11 @@ export default function Client({
             padding={20}
             textareaId="code-editor"
             placeholder={placeHolderText}
-            className="mb-8 w-full rounded-lg border-none bg-purple-900 pb-6  pt-4 text-gray-200 focus:border-none focus:shadow-none focus:ring-0 focus:ring-purple-700 active:border-purple-700 "
+            className="max-h[500px] mb-8 w-full rounded-lg border-none bg-purple-900 pb-6 pt-4 text-gray-200 focus:border-none focus:shadow-none focus:ring-0 focus:ring-purple-700 active:border-purple-700 "
             value={codeSentence}
             highlight={(code) => highlight(code, languages.js)}
             onValueChange={(code) => setCodeSentence(code)}
           />
-
           {generatedCode && (
             <GenerateCode
               onSaveCode={onSaveCode}

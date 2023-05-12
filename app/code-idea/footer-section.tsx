@@ -44,7 +44,7 @@ export default function FooterSection({
       <Toaster />
       <section
         className="fixed bottom-0 left-0 z-40 flex h-16 w-[101%] items-center
-          justify-between bg-purple-800"
+          justify-between border-t-[1px] border-purple-500 bg-purple-800"
       >
         <div className="mb-10 ml-6 sm:ml-16">
           <div className="hidden sm:ml-4 sm:block">

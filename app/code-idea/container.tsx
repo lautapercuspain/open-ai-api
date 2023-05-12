@@ -5,7 +5,6 @@ import Client from "./client"
 import Navigation from "./navigation"
 import { ElementType } from "app/components/DropDown"
 import { useSearchParams } from "next/navigation"
-import UserDropdown from "app/components/auth/UserDropdown"
 import { useSignInModal } from "app/components/modals/SignInModal"
 import Header from "app/components/Header"
 

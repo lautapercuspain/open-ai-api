@@ -82,7 +82,7 @@ export default function Client({
       <Header session={session} setShowSignInModal={setShowSignInModal} />
       <div className="mx-auto h-full w-[95%] dark:bg-purple-900 sm:ml-16">
         <div className="flex flex-row">
-          <span className="text-md absolute top-12 ml-2 font-bold text-white sm:top-28 sm:ml-10 sm:text-2xl">
+          <span className="text-md absolute top-24 ml-2 font-bold text-white sm:top-28 sm:ml-10 sm:text-2xl">
             Welcome, {clientName}!
           </span>
         </div>
