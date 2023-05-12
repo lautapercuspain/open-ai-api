@@ -32,7 +32,7 @@ export default function PromptCard({
           ? width + " h-60"
           : "h-60 w-[100%] sm:min-h-[230px] sm:w-[23%]"
       } 
-      ${mb} cursor-pointer justify-between rounded-lg bg-purple-700 p-6 shadow hover:bg-purple-500`}
+      ${mb} cursor-pointer justify-between rounded-lg border-[1px] border-purple-500 bg-purple-700 p-6 shadow hover:bg-purple-500`}
       onClick={() => {
         if (onClick) onClick(text)
       }}

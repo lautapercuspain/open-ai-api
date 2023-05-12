@@ -12,7 +12,7 @@ export default function UserMenu({ session, email, image }) {
     <div className="absolute top-4 right-2 w-56 text-right sm:right-4">
       <Menu as="div" className="relative inline-block text-left">
         <div className="flex items-start justify-between">
-          <Menu.Button className="text-sm inline-flex w-full justify-center rounded-full bg-purple-500 px-4 py-2 font-sans font-medium text-white hover:bg-opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+          <Menu.Button className="text-sm inline-flex w-full justify-center rounded-full border-[1px] border-purple-500 bg-purple-500 px-4 py-2 font-sans font-medium text-white hover:bg-purple-500 hover:bg-opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
             <div className="mr-1 flex">
               <Image
                 alt="Profile Picture"
@@ -41,7 +41,7 @@ export default function UserMenu({ session, email, image }) {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y-[1.5px] divide-purple-400 rounded-md  bg-purple-600 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <Menu.Items className="absolute  right-0 mt-2 w-56 origin-top-right divide-y-[1.5px] divide-purple-400 rounded-md border-[1px] border-purple-500  bg-purple-600 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="h-11">
               <Menu.Item>
                 {({ active }) => (
