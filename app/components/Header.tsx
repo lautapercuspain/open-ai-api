@@ -4,6 +4,7 @@ import Link from "next/link"
 import UserDropdown from "app/components/auth/UserDropdown"
 import Image from "next/image"
 import { usePathname } from "next/navigation"
+import useWindowSize from "hooks/use-window-size"
 
 export default function Header({
   session,
@@ -16,8 +17,9 @@ export default function Header({
   setShowSignInModal: any
 }) {
   const pathname = usePathname()
-
-  const shouldHideLogo = pathname === "/code-idea" || pathname === "/code-chat"
+  const { isMobile } = useWindowSize()
+  const shouldHideLogo =
+    isMobile && (pathname === "/code-idea" || pathname === "/code-chat")
   return (
     <>
       <div
