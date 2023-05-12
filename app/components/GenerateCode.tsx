@@ -21,24 +21,6 @@ function GenerateCode({
   generatedCode,
   langElement,
 }: GenerateCode) {
-  const [scrollHeight, setScrollHeight] = useState(0)
-  const chatContainerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (chatContainerRef && chatContainerRef.current) {
-      setScrollHeight(chatContainerRef.current?.scrollHeight)
-      chatContainerRef.current?.scrollTo({
-        top: scrollHeight - chatContainerRef.current.offsetHeight,
-        behavior: "smooth",
-      })
-    }
-  }, [
-    chatContainerRef,
-    chatContainerRef.current,
-    chatContainerRef.current?.scrollHeight,
-    scrollHeight,
-  ])
-
   return (
     <>
       <div
@@ -46,26 +28,13 @@ function GenerateCode({
       >
         {generatedCode
           .substring(generatedCode.indexOf("**") + 0)
-          .replace("**", "")
           .replace("javascript", "")
-          .replace("```", "")
-          .replace("js", "")
-          .replace("jsx", "")
-          .replace("x", "")
-          .replace("java", "")
-          .replace("type", "")
-          .replace("vue", "")
-          .replace("script", "")
           .replace("typescript", "")
-          .replace("html", "")
+          .replace("jsx", "")
           .split("**::")
-
           .map((generated) => {
             return (
-              <div
-                ref={chatContainerRef}
-                className="max-h-[50vh] overflow-x-auto overflow-y-scroll text-left font-mono sm:min-w-[100%] sm:max-w-[100%]"
-              >
+              <div className="max-h-[50vh] overflow-x-auto overflow-y-scroll text-left font-mono sm:min-w-[100%] sm:max-w-[100%]">
                 <CopyBlock
                   showLineNumbers
                   wrapLongLines

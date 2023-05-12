@@ -3,9 +3,10 @@
 import Modal from "app/components/Modal"
 import { ChangeEvent, KeyboardEvent, useState, useRef, useEffect } from "react"
 import Chat from "app/components/shared/Chat"
-import { updateApiCallsAndCredits } from "utils/helpers"
 import Header from "app/components/Header"
 import { useSignInModal } from "app/components/modals/SignInModal"
+import { generateCode } from "utils/generateCode"
+import InputChat from "app/components/shared/InputChat"
 
 export default function Client({ session }) {
   const [loading, setLoading] = useState(false)
@@ -21,7 +22,12 @@ export default function Client({ session }) {
   const userId = session && session.user?.id
   const userCredits = session && session.user?.credits
   const controller = new AbortController()
-
+  const inputRef = useRef<any>(null)
+  useEffect(() => {
+    if (inputRef && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [])
   useEffect(() => {
     if (!userCredits || userCredits === 0) {
       setCreditsModaIsOpen(true)
@@ -49,7 +55,7 @@ export default function Client({ session }) {
       },
     ]
     setCodeSentence("")
-    generateCode()
+    generateCode(setLoading, setReader, setGeneratedCode, codeMessages, userId)
   }
 
   const onCodeGeneration = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -70,109 +76,47 @@ export default function Client({ session }) {
         },
       ]
       setCodeSentence("")
-      generateCode()
+      //Generate Code funciton
+      generateCode(
+        setLoading,
+        setReader,
+        setGeneratedCode,
+        codeMessages,
+        userId,
+      )
     }
   }
 
-  const generateCode = async () => {
-    setLoading(true)
+  // const onSaveCode = () => {
+  //   setShowSavePromptModal(true)
+  // }
 
-    const response = await fetch("/api/generateWithTurbo", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        messages: [...codeMessages.current],
-      }),
-    })
+  // const onSaveQuestionModal = () => {
+  //   const payload = {
+  //     userId,
+  //     questionName,
+  //     prompt: generatedCode,
+  //   }
+  //   fetch("/api/prompt/save", {
+  //     method: "POST",
+  //     body: JSON.stringify(payload),
+  //   }).then((res) => console.log("res:", res))
+  // }
 
-    // console.log("response", response);
-    // clear timeout
-    // clearTimeout(id)
+  // const stopGeneration = async () => {
+  //   setLoading(false)
+  //   controller.abort()
+  //   if (!reader) {
+  //     return
+  //   }
+  //   try {
+  //     await reader.cancel()
+  //   } catch (error: any) {
+  //   } finally {
+  //     setReader(null)
+  //   }
+  // }
 
-    if (!response.ok) {
-      setLoading(false)
-      return
-    }
-
-    // This data is a ReadableStream
-    const data = response.body
-
-    if (!data) {
-      setLoading(false)
-      return
-    }
-
-    const reader = data.getReader()
-    setReader(reader)
-    const decoder = new TextDecoder()
-    let done = false
-    let tokensCount = 0
-    try {
-      while (!done) {
-        const { value, done: doneReading } = await reader.read()
-        done = doneReading
-        tokensCount++
-        let chunkValue = decoder.decode(value)
-        // console.log("chunkValue: ", chunkValue)
-
-        setGeneratedCode((prev) => prev + chunkValue)
-        if (done) {
-          setGeneratedCode((prev) => prev + "<>")
-          setLoading(false)
-        }
-      }
-    } catch (error) {
-      return `There was an error with your request ${error}`
-    } finally {
-      setLoading(false)
-      setReader(null)
-      //✨ Make some credits update Magic ✨
-      const data = await updateApiCallsAndCredits(userId, tokensCount)
-
-      if (data?.creditsLeft === 0) {
-        alert("You have no more credits left. Please purchase more credits.")
-      }
-
-      //RESET TOKENS COUNT.
-      tokensCount = 0
-    }
-  }
-
-  const onSaveCode = () => {
-    setShowSavePromptModal(true)
-  }
-
-  const onSaveQuestionModal = () => {
-    const payload = {
-      userId,
-      questionName,
-      prompt: generatedCode,
-    }
-    fetch("/api/prompt/save", {
-      method: "POST",
-      body: JSON.stringify(payload),
-    }).then((res) => console.log("res:", res))
-  }
-
-  const stopGeneration = async () => {
-    setLoading(false)
-    controller.abort()
-    if (!reader) {
-      return
-    }
-    try {
-      await reader.cancel()
-    } catch (error: any) {
-    } finally {
-      setReader(null)
-    }
-  }
-
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setQuestionName(event.target.value)
-  }
   const generatedMessages = generatedCode.split("<>").filter((i) => i !== "")
 
   return (
@@ -185,6 +129,15 @@ export default function Client({ session }) {
         onCodeGeneration={onCodeGeneration}
         setCodeSentence={setCodeSentence}
       />
+
+      {/* Chat input container */}
+      <InputChat
+        inputRef={inputRef}
+        codeSentence={codeSentence}
+        setCodeSentence={setCodeSentence}
+        onCodeGeneration={onCodeGeneration}
+        onArrowPress={onArrowPress}
+      />
       <Modal
         body="You don't have more Code Genius credits. Please upgrade your account before continuing"
         isOpen={creditsModaIsOpen}
@@ -192,7 +145,7 @@ export default function Client({ session }) {
         buttonLink="/dashboard"
         setIsOpen={setCreditsModaIsOpen}
       />
-      <Modal
+      {/* <Modal
         body="Our servers are taking longer than expected. We suggest
         rewording your instruction or input to get a faster result."
         isOpen={modaIsOpen}
@@ -208,7 +161,7 @@ export default function Client({ session }) {
         savePropmptName
         buttonText="Save"
         setIsOpen={setShowSavePromptModal}
-      />
+      /> */}
     </>
   )
 }

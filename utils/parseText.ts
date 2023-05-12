@@ -1,10 +1,13 @@
 export function parseText(text = "", delimiter = "```") {
   const parts = text.split(delimiter)
+  console.log("parts with delimiter:", parts)
   const result: any = []
   let isInCodeBlock = false
   for (let i = 0; i < parts.length; i++) {
+    const cleanedParts = parts[i]
+
     if (isInCodeBlock) {
-      const cleanedParts = parts[i]
+      cleanedParts
         .replace("js", "")
         .replace("jsx", "")
         .replace("x", "")
@@ -16,10 +19,10 @@ export function parseText(text = "", delimiter = "```") {
         .replace("javascript", "")
         .replace("html", "")
         .trim()
-
       result.push({ code: cleanedParts })
       isInCodeBlock = false
     } else {
+      console.log("Text Parts", parts[i])
       result.push({ text: parts[i] })
       isInCodeBlock = true
     }

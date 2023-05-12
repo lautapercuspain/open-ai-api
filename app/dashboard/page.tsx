@@ -16,7 +16,7 @@ export default async function Dashboard() {
   let existingCredits: string = ""
 
   if (!session) {
-    redirect("/")
+    redirect("/?referer=/dashboard")
   }
 
   //@ts-ignore

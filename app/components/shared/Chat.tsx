@@ -1,11 +1,8 @@
 import "./chat.css"
-import { Message } from "@chatscope/chat-ui-kit-react"
 
-import tailwindConfig from "tailwind.config.js"
 import { parseText } from "utils/parseText"
 import GenerateCode from "../GenerateCode"
-import { useEffect, useRef, useState } from "react"
-import Image from "next/image"
+import { useEffect, useState } from "react"
 import ChatContainer from "app/home/ChatContainer"
 import { CodeMessagesProps } from "app/home/HomeChat"
 import PromptCard from "./PromptCard"
@@ -17,13 +14,8 @@ export default function Chat({
   setCodeSentence,
   onCodeGeneration,
 }) {
-  const inputRef = useRef<any>(null)
   const [prompt, setPrompt] = useState("")
-  useEffect(() => {
-    if (inputRef && inputRef.current) {
-      inputRef.current.focus()
-    }
-  }, [])
+
   useEffect(() => {
     if (prompt !== "") {
       setCodeSentence(prompt)
@@ -36,22 +28,26 @@ export default function Chat({
     return (
       <>
         {generatedMessages.map((generatedMessage) => {
+          console.log("generatedMessage:", generatedMessage)
+
           const result = parseText(generatedMessage)
-          return result.length
-            ? result.map((item: any) => {
-                if (item.hasOwnProperty("text")) {
-                  return (
-                    <p className="rounded-lg bg-purple-400 p-2 text-left  leading-7">
-                      {item.text}
-                    </p>
-                  )
-                } else {
-                  return (
-                    <GenerateCode align="start" generatedCode={item.code} />
-                  )
-                }
-              })
-            : null
+
+          return (
+            result.length &&
+            result.map((item: any) => {
+              if (item.hasOwnProperty("code")) {
+                return <GenerateCode align="start" generatedCode={item.code} />
+              }
+
+              if (item.hasOwnProperty("text")) {
+                return (
+                  <p className="rounded-lg bg-purple-400 p-2 text-left  leading-7">
+                    {item.text}
+                  </p>
+                )
+              }
+            })
+          )
         })}
       </>
     )
@@ -110,33 +106,6 @@ export default function Chat({
           />
         </div>
       )}
-
-      {/* Chat input container */}
-      <div className="fixed bottom-4 left-0 right-0 z-20 mx-auto h-14 w-full bg-transparent">
-        <div className="relative mx-auto mt-2 h-12 w-full sm:w-[990px]">
-          <input
-            ref={inputRef}
-            className="font-lg mx-2 h-12 w-[90%] resize-none rounded-lg bg-purple-400 py-2.5 pr-4 pl-2.5  
-              font-mono text-white outline-0 placeholder:pt-1 placeholder:pl-3 placeholder:font-sans placeholder:text-[16px]
-               placeholder:text-white hover:outline-0 focus:border-transparent focus:ring-black/30 active:outline-0 
-               sm:w-[990px]"
-            value={codeSentence}
-            onChange={(e) => setCodeSentence(e.target.value)}
-            onKeyDown={(e) => onCodeGeneration(e)}
-            placeholder={"Ask to Code Genius?"}
-          />
-          <button className="absolute right-8 top-2 rounded-lg bg-gray-900 disabled:hover:bg-transparent  sm:right-1 ">
-            <Image
-              className="mb-1 mr-2 pt-2 pb-1 pl-2 text-white"
-              alt="Send"
-              width={24}
-              height={24}
-              src="/home/send.svg"
-              onClick={() => onArrowPress()}
-            />
-          </button>
-        </div>
-      </div>
     </div>
   )
 }

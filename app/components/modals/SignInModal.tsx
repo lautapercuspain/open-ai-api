@@ -1,19 +1,21 @@
 "use client"
 
 import { signIn } from "next-auth/react"
-import { useState, Dispatch, SetStateAction, useCallback, useMemo } from "react"
+import {
+  useState,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useMemo,
+  useEffect,
+} from "react"
 import Image from "next/image"
 import BaseModal from "app/components/modals/BaseModal"
 import { Inter } from "next/font/google"
 import GmailLogo from "public/icons/gmail.svg"
 import useWindowSize from "hooks/use-window-size"
 import Git from "../icons/git"
-
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "600", "700"],
-})
+import { useSearchParams } from "next/navigation"
 
 const SignInModal = ({
   userHasAccount,
@@ -24,9 +26,18 @@ const SignInModal = ({
   userHasAccount?: boolean
   setShowSignInModal: Dispatch<SetStateAction<boolean>>
 }) => {
+  const searchParams = useSearchParams()
   const [signInClickedGitHub, setSignInClickedGitHub] = useState<boolean>(false)
+  const [referer, setReferer] = useState<string>("/code-idea")
   const [signInClickedGoogle, setSignInClickedGoogle] = useState<boolean>(false)
   const { isMobile } = useWindowSize()
+
+  useEffect(() => {
+    if (searchParams && searchParams.get("referer")) {
+      const referer = (searchParams.get("referer") as string) || "/code-idea"
+      setReferer(referer)
+    }
+  }, [searchParams])
 
   return (
     <BaseModal showModal={showSignInModal} setShowModal={setShowSignInModal}>
@@ -63,7 +74,7 @@ const SignInModal = ({
               }
               onClick={() => {
                 setSignInClickedGoogle(true)
-                signIn("google", { callbackUrl: "/code-idea" })
+                signIn("google", { callbackUrl: referer })
               }}
             >
               {signInClickedGoogle ? (
@@ -90,9 +101,7 @@ const SignInModal = ({
               }
               onClick={() => {
                 setSignInClickedGitHub(true)
-                signIn("github", {
-                  callbackUrl: "/code-idea",
-                })
+                signIn("github", { callbackUrl: referer })
               }}
             >
               {signInClickedGitHub ? (

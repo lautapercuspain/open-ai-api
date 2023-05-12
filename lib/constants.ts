@@ -19,8 +19,7 @@ export const OPEN_API = {
 }
 
 export const ASSISTANT = {
-  software:
-    "You are an experienced software engineer. Don't use ``` followed by the programming language, before outputting code.",
+  software: "You are an experienced software engineer.",
   recomendation:
     "You are an specialized recommendation algorithm, who gives code snippets to the user.",
 }

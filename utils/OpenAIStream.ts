@@ -53,13 +53,13 @@ export async function OpenAIStream(payload: OpenAIStreamPayload) {
           try {
             const json = JSON.parse(data)
             const text = json.choices[0].text
-            if (
-              (counter < 2 && (text.match(/\n/) || []).length) ||
-              text.match(/::/)
-            ) {
-              // this is a prefix character (i.e., "\n\n"), do nothing
-              return
-            }
+            // if (
+            //   (counter < 2 && (text.match(/\n/) || []).length) ||
+            //   text.match(/::/)
+            // ) {
+            //   // this is a prefix character (i.e., "\n\n"), do nothing
+            //   return
+            // }
             const queue = encoder.encode(text)
             controller.enqueue(queue)
             counter++
@@ -87,7 +87,7 @@ export async function OpenAITurboStream(payload: OpenAITurboPayload) {
   const encoder = new TextEncoder()
   const decoder = new TextDecoder()
 
-  let counter = 0
+  // let counter = 0
 
   const res: any = await fetch("https://api.openai.com/v1/chat/completions", {
     headers: {
@@ -114,7 +114,7 @@ export async function OpenAITurboStream(payload: OpenAITurboPayload) {
             const text = json.choices[0].delta.content
             const queue = encoder.encode(text)
             controller.enqueue(queue)
-            counter++
+            // counter++
           } catch (e) {
             // maybe parse error
             controller.error(e)
