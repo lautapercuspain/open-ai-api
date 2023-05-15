@@ -11,7 +11,7 @@ export default function Header({
   userHasAccount,
   setShowSignInModal,
 }: {
-  session: any
+  session?: any
   showSignInModal?: any
   userHasAccount?: any
   setShowSignInModal: any

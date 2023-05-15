@@ -10,7 +10,7 @@ export default function Footer({ session }: { session: any }) {
   return (
     <>
       <ContactFormModal
-        clientName={session && session.user && session.user.name}
+        clientName={(session && session.user && session.user.name) || ""}
         isOpen={openContactForm}
         setIsOpen={setOpenContactForm}
       />
@@ -36,6 +36,12 @@ export default function Footer({ session }: { session: any }) {
             </Link>
           </div>
           <div className="mt-8 sm:pt-2">
+            <Link
+              href="/terms-and-conditions"
+              className="cursor-pointer px-4 sm:px-2 sm:text-[16px]"
+            >
+              Terms
+            </Link>
             <Link
               href="/privacy"
               className="cursor-pointer px-4 sm:px-2 sm:text-[16px]"
