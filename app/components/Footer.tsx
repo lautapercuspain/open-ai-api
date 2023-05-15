@@ -54,19 +54,12 @@ export default function Footer({ session }: { session: any }) {
             >
               Pricing
             </Link>
-            <Link
-              href=""
-              className="cursor-pointer px-4 sm:px-2 sm:text-[16px]"
-            >
-              Social
-            </Link>
-            <Link
-              href="#"
+            <div
               onClick={() => setOpenContactForm(true)}
               className="cursor-pointer px-4 sm:px-2 sm:text-[16px]"
             >
               Contact
-            </Link>
+            </div>
           </div>
         </div>
         <div className="w-ful m-auto content-center border-t border-gray-400 py-4">
