@@ -20,7 +20,7 @@ export default function Hero({ hasContent }) {
       >
         <ArrowDown size={30} color="white" />
       </motion.div>
-      <p className="text-[12px] text-white">Scroll</p>
+      <p className="text-[13px] text-white">Scroll</p>
     </div>
   )
 }

@@ -112,7 +112,7 @@ export default function PaymentModal({ isOpen, setIsOpen }: Props) {
                     <div className="flex flex-col gap-2">
                       <label
                         htmlFor="nameOnCard"
-                        className="font-sans text-[12px] text-purple-300"
+                        className="font-sans text-[13px] text-purple-300"
                       >
                         Name on Card
                       </label>
@@ -130,7 +130,7 @@ export default function PaymentModal({ isOpen, setIsOpen }: Props) {
                     <div className="flex flex-col gap-2">
                       <label
                         htmlFor="cardNumber"
-                        className="font-sans text-[12px] text-purple-300"
+                        className="font-sans text-[13px] text-purple-300"
                       >
                         Card Number
                       </label>
@@ -149,7 +149,7 @@ export default function PaymentModal({ isOpen, setIsOpen }: Props) {
                       <div className="flex-grow-1 flex flex-col gap-2">
                         <label
                           htmlFor="expires"
-                          className="font-sans text-[12px] text-purple-300"
+                          className="font-sans text-[13px] text-purple-300"
                         >
                           Expires
                         </label>
@@ -167,7 +167,7 @@ export default function PaymentModal({ isOpen, setIsOpen }: Props) {
                       <div className="flex-grow-1 flex flex-col gap-2">
                         <label
                           htmlFor="cvc"
-                          className="font-sans text-[12px] text-purple-300"
+                          className="font-sans text-[13px] text-purple-300"
                         >
                           CVC
                         </label>

@@ -207,7 +207,7 @@ export default function ContactFormModal({
                           <textarea
                             name="howCanWeHelp"
                             id="howCanWeHelp"
-                            className="block w-full rounded-md border border-purple-500 bg-purple-700 p-3 text-white placeholder:text-[12px] placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-400"
+                            className="block w-full rounded-md border border-purple-500 bg-purple-700 p-3 text-white placeholder:text-[13px] placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-400"
                             placeholder="Tell us about your business needs"
                             value={message}
                             onChange={(e) => {

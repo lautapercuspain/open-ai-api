@@ -6,6 +6,7 @@ type CardProps = {
   title: string
   text: string
   width?: string
+  size?: "large" | "small"
   hasScale?: boolean
   mb?: string
   order?: string
@@ -24,7 +25,7 @@ export default function PromptCard({
   text,
   onClick,
   size,
-}: CardProps & { size?: "large" | "small" }) {
+}: CardProps) {
   return (
     <div
       className={`${order} mt-4 flex ${
