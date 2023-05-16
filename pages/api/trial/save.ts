@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     operation: "sql",
     sql: `SELECT * FROM Auth.Trials WHERE ip = "${bodyRequest.userIP}"`,
   })
-  console.log("existingRecord:", existingRecord)
+  console.log("existingRecord length:", existingRecord.length)
 
   if (
     req.method === "POST" &&
@@ -41,29 +41,28 @@ export default async function handler(req, res) {
       console.log("error updating user trial", error)
       res.status(500).json({ ok: false, error: error.message })
     }
-  } else {
-    if (!existingRecord && req.method === "POST" && bodyRequest.userIP) {
-      // console.log("Entra aqui:", bodyRequest)
+  } else if (
+    existingRecord.length === 0 &&
+    req.method === "POST" &&
+    bodyRequest.userIP
+  ) {
+    // console.log("Entra aqui:", bodyRequest)
 
-      //Define a new record with the initial api call.
-      const newRecord = {
-        ip: bodyRequest.userIP,
-        apiCalls: 1,
-      }
-
-      const result = await harperClient({
-        operation: "insert",
-        schema: "Auth",
-        table: "Trials",
-        records: [newRecord],
-      })
-
-      console.log("result:", result)
-
-      return res.status(200).json({ ok: true })
-
-      // console.error("Error inserting record", error)
-      // return res.status(400).json({ ok: false, message: error.message })
+    //Define a new record with the initial api call.
+    const newRecord = {
+      ip: bodyRequest.userIP,
+      apiCalls: 1,
     }
+
+    const result = await harperClient({
+      operation: "insert",
+      schema: "Auth",
+      table: "Trials",
+      records: [newRecord],
+    })
+
+    console.log("result:", result)
+
+    return res.status(200).json({ ...newRecord, ok: true })
   }
 }
