@@ -27,7 +27,7 @@ export default function Chat({
   }) => {
     return (
       <>
-        {generatedMessages.map((generatedMessage) => {
+        {generatedMessages.map((generatedMessage, idx) => {
           console.log("generatedMessage:", generatedMessage)
 
           const result = parseText(generatedMessage)
@@ -36,12 +36,21 @@ export default function Chat({
             result.length &&
             result.map((item: any) => {
               if (item.hasOwnProperty("code")) {
-                return <GenerateCode align="start" generatedCode={item.code} />
+                return (
+                  <GenerateCode
+                    align="start"
+                    key={idx}
+                    generatedCode={item.code}
+                  />
+                )
               }
 
               if (item.hasOwnProperty("text")) {
                 return (
-                  <p className="rounded-lg bg-purple-400 p-2 text-left  leading-7">
+                  <p
+                    key={idx}
+                    className="rounded-lg bg-purple-400 p-2 text-left leading-7"
+                  >
                     {item.text}
                   </p>
                 )

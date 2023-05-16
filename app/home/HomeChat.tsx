@@ -10,25 +10,27 @@ import React, {
   useRef,
   useState,
 } from "react"
-import { useUserIp } from "utils/useUserIp"
+
 import { generateCodeWithTurbo } from "utils/generateCode"
 import { parseText } from "utils/parseText"
 import ChatContainer from "./ChatContainer"
 import Hero from "./Hero"
-import { updateAnonymousUserUsage } from "utils/helpers"
+
 import { useSignInModal } from "app/components/modals/SignInModal"
+import { updateAnonymousUserUsage } from "utils/harperDBhelpers"
 
 export interface CodeMessagesProps {
   generatedMessages: any
 }
 
-export default function HomeChat({ ip }) {
+export default function HomeChat({ ip, apiCalls }) {
   const textareaRef = useRef<any>(null)
   const [loading, setLoading] = useState(false)
+  const [userApiCalls, setUserApiCalls] = useState<number>(apiCalls)
   const [reader, setReader] =
     useState<ReadableStreamDefaultReader<Uint8Array> | null>(null)
   const [codeSentence, setCodeSentence] = useState("")
-
+  console.log("userCalls:::", userApiCalls)
   const { SignInModal, setShowSignInModal, showSignInModal } = useSignInModal({
     tip: "Get 25 🏆 credits for free by signing in",
   })
@@ -53,12 +55,9 @@ export default function HomeChat({ ip }) {
     if (codeSentence.length === 0 || codeSentence === "") {
       return false
     }
-    if (e.key === "Enter") {
-      //Update free trial usage
-      const response = await updateAnonymousUserUsage(ip)
 
-      if (response?.apiCalls >= 5) {
-        console.log("response:", response)
+    if (e.key === "Enter") {
+      if (userApiCalls >= 5) {
         setShowSignInModal(true)
         return false
       } else {
@@ -76,15 +75,15 @@ export default function HomeChat({ ip }) {
           setReader,
           setGeneratedCode,
         )
+        //Update free trial usage
+        const response = await updateAnonymousUserUsage(ip)
+        setUserApiCalls(response.apiCalls)
       }
     }
   }
 
   const onArrowPress = async () => {
-    const response = await updateAnonymousUserUsage(ip)
-
-    if (response?.apiCalls >= 5) {
-      console.log("response:", response)
+    if (userApiCalls >= 5) {
       setShowSignInModal(true)
       return false
     }
@@ -100,7 +99,8 @@ export default function HomeChat({ ip }) {
     setCodeSentence("")
     generateCodeWithTurbo(codeMessages, setLoading, setReader, setGeneratedCode)
     //Update free trial usage
-    updateAnonymousUserUsage(ip)
+    const response = await updateAnonymousUserUsage(ip)
+    setUserApiCalls(response.apiCalls)
   }
 
   const generatedMessages = useMemo(

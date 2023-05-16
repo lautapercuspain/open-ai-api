@@ -26,6 +26,7 @@ export async function harperClient(body) {
       !isNaN(Date.parse(value)) &&
       key !== "credits" &&
       key !== "amount" &&
+      key !== "ip" &&
       key !== "apiCalls"
     ) {
       return new Date(value)

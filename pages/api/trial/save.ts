@@ -6,7 +6,6 @@ export default async function handler(req, res) {
     operation: "sql",
     sql: `SELECT * FROM Auth.Trials WHERE ip = "${bodyRequest.userIP}"`,
   })
-  console.log("existingRecord length:", existingRecord.length)
 
   if (
     req.method === "POST" &&
