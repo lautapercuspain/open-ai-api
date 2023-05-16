@@ -5,7 +5,9 @@ import HeaderWrapper from "app/components/shared/HeaderWrapper"
 import Footer from "app/components/Footer"
 
 export default function Page() {
-  const { SignInModal, setShowSignInModal, showSignInModal } = useSignInModal()
+  const { SignInModal, setShowSignInModal, showSignInModal } = useSignInModal(
+    {},
+  )
   return (
     <div className="flex min-h-screen flex-nowrap">
       <div className="mx-auto max-w-max pb-10">

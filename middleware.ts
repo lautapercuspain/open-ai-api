@@ -6,8 +6,6 @@ export async function middleware(request: NextRequest) {
   if (!ip && forwardedFor) {
     ip = forwardedFor.split(",").at(0) ?? "Unknown"
   }
-  console.log("ip::", ip)
-  console.log("request", request)
 
   const response = NextResponse.next()
 

@@ -2,7 +2,6 @@
 
 import { useSearchParams } from "next/navigation"
 import { useEffect } from "react"
-import { useSignInModal } from "../modals/SignInModal"
 
 export default function ModalsWrapper({
   session,

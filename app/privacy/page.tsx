@@ -5,7 +5,9 @@ import { useSignInModal } from "app/components/modals/SignInModal"
 import HeaderWrapper from "app/components/shared/HeaderWrapper"
 
 export default function Page() {
-  const { SignInModal, setShowSignInModal, showSignInModal } = useSignInModal()
+  const { SignInModal, setShowSignInModal, showSignInModal } = useSignInModal(
+    {},
+  )
 
   return (
     <>

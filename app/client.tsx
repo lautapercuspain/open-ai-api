@@ -8,8 +8,9 @@ import Feature from "./home/Feature"
 import { useSignInModal } from "./components/modals/SignInModal"
 
 export default function Client({ session, userHasAccount }) {
-  const { SignInModal, setShowSignInModal, showSignInModal } =
-    useSignInModal(userHasAccount)
+  const { SignInModal, setShowSignInModal, showSignInModal } = useSignInModal({
+    userHasAccount,
+  })
 
   return (
     <>

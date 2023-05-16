@@ -18,12 +18,14 @@ import Git from "../icons/git"
 import { useSearchParams } from "next/navigation"
 
 const SignInModal = ({
+  tip,
   userHasAccount,
   showSignInModal,
   setShowSignInModal,
 }: {
   showSignInModal: boolean
   userHasAccount?: boolean
+  tip?: string
   setShowSignInModal: Dispatch<SetStateAction<boolean>>
 }) => {
   const searchParams = useSearchParams()
@@ -58,6 +60,11 @@ const SignInModal = ({
           <h6 className="sm:text-xl mx-auto w-full text-center font-sans text-[16px] font-medium text-gray-200">
             Begin your coding journey with the assistance of Code Genius
           </h6>
+          {tip && (
+            <p className="text-md mx-auto w-full text-center font-sans text-gray-200">
+              {tip}
+            </p>
+          )}
           {/* DIVIDER */}
           <hr className="border-1 border-purple-500 sm:w-[384.01px]" />
           {/* BUTTONS */}
@@ -119,12 +126,19 @@ const SignInModal = ({
   )
 }
 
-export function useSignInModal(userHasAccount?: boolean) {
+export function useSignInModal({
+  userHasAccount,
+  tip,
+}: {
+  userHasAccount?: boolean
+  tip?: string
+}) {
   const [showSignInModal, setShowSignInModal] = useState(false)
 
   const SignInModalCallback = useCallback(() => {
     return showSignInModal ? (
       <SignInModal
+        tip={tip}
         userHasAccount={userHasAccount}
         showSignInModal={showSignInModal}
         setShowSignInModal={setShowSignInModal}

@@ -1,6 +1,6 @@
 export function parseText(text = "", delimiter = "```") {
   const parts = text.split(delimiter)
-  console.log("parts with delimiter:", parts)
+  // console.log("parts with delimiter:", parts)
   const result: any = []
   let isInCodeBlock = false
   for (let i = 0; i < parts.length; i++) {
@@ -22,7 +22,7 @@ export function parseText(text = "", delimiter = "```") {
       result.push({ code: cleanedParts })
       isInCodeBlock = false
     } else {
-      console.log("Text Parts", parts[i])
+      // console.log("Text Parts", parts[i])
       result.push({ text: parts[i] })
       isInCodeBlock = true
     }

@@ -12,7 +12,7 @@ export default function Client({ session }) {
   const [loading, setLoading] = useState(false)
   const [modaIsOpen, setModaIsOpen] = useState(false)
   const [creditsModaIsOpen, setCreditsModaIsOpen] = useState(false)
-  const { setShowSignInModal } = useSignInModal()
+  const { setShowSignInModal } = useSignInModal({})
   const [reader, setReader] =
     useState<ReadableStreamDefaultReader<Uint8Array> | null>(null)
   const [codeSentence, setCodeSentence] = useState("")

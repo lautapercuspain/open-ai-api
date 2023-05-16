@@ -46,7 +46,7 @@ export default function Client({
   purchasedCredits,
   opConfirmation,
 }) {
-  const { setShowSignInModal } = useSignInModal()
+  const { setShowSignInModal } = useSignInModal({})
   const searchParams = useSearchParams()
   const [thanksMessage, setThanksMessage] = React.useState<boolean>(false)
   const [openContactForm, setOpenContactForm] = React.useState<boolean>(false)

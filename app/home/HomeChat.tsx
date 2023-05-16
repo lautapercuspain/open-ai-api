@@ -10,22 +10,29 @@ import React, {
   useRef,
   useState,
 } from "react"
+import { useUserIp } from "utils/useUserIp"
 import { generateCodeWithTurbo } from "utils/generateCode"
 import { parseText } from "utils/parseText"
 import ChatContainer from "./ChatContainer"
 import Hero from "./Hero"
+import { updateAnonymousUserUsage } from "utils/helpers"
+import { useSignInModal } from "app/components/modals/SignInModal"
 
 export interface CodeMessagesProps {
   generatedMessages: any
 }
 
 export default function HomeChat() {
+  const ip = useUserIp()
+  const textareaRef = useRef<any>(null)
   const [loading, setLoading] = useState(false)
   const [reader, setReader] =
     useState<ReadableStreamDefaultReader<Uint8Array> | null>(null)
   const [codeSentence, setCodeSentence] = useState("")
-  const [modaIsOpen, setModaIsOpen] = useState(false)
 
+  const { SignInModal, setShowSignInModal, showSignInModal } = useSignInModal({
+    tip: "Get 25 🏆 credits for free by signing in",
+  })
   const [generatedCode, setGeneratedCode] = useState<string>("")
   const codeMessages = useRef([
     {
@@ -35,7 +42,7 @@ export default function HomeChat() {
     },
   ])
 
-  const textareaRef = useRef<any>(null)
+  // console.log("ip::", ip)
 
   useEffect(() => {
     if (textareaRef && textareaRef.current) {
@@ -43,32 +50,47 @@ export default function HomeChat() {
     }
   }, [])
 
-  const onCodeGeneration = (e: KeyboardEvent<HTMLInputElement>) => {
-    // console.log("codeSentence", codeSentence)
-
+  const onCodeGeneration = async (e: KeyboardEvent<HTMLInputElement>) => {
     if (codeSentence.length === 0 || codeSentence === "") {
       return false
     }
     if (e.key === "Enter") {
-      codeMessages.current = [
-        ...codeMessages.current,
-        {
-          role: "user",
-          content: codeSentence,
-        },
-      ]
-      setCodeSentence("")
-      generateCodeWithTurbo(
-        codeMessages,
-        setLoading,
-        setReader,
-        setGeneratedCode,
-      )
-      setModaIsOpen(true)
+      //Update free trial usage
+      const response = await updateAnonymousUserUsage(ip)
+
+      if (response?.apiCalls >= 5) {
+        console.log("response:", response)
+        setShowSignInModal(true)
+        return false
+      } else {
+        codeMessages.current = [
+          ...codeMessages.current,
+          {
+            role: "user",
+            content: codeSentence,
+          },
+        ]
+        setCodeSentence("")
+        generateCodeWithTurbo(
+          codeMessages,
+          setLoading,
+          setReader,
+          setGeneratedCode,
+        )
+      }
     }
   }
 
-  const onArrowPress = () => {
+  const onArrowPress = async () => {
+    const response = await updateAnonymousUserUsage(ip)
+
+    if (response?.apiCalls >= 5) {
+      console.log("response:", response)
+      setShowSignInModal(true)
+      return false
+    }
+
+    //Store the code sentence in the current code-messages ref.
     codeMessages.current = [
       ...codeMessages.current,
       {
@@ -78,6 +100,8 @@ export default function HomeChat() {
     ]
     setCodeSentence("")
     generateCodeWithTurbo(codeMessages, setLoading, setReader, setGeneratedCode)
+    //Update free trial usage
+    updateAnonymousUserUsage(ip)
   }
 
   const generatedMessages = useMemo(
@@ -126,8 +150,10 @@ export default function HomeChat() {
   )
 
   const hasContent = generatedMessages.length > 0
+
   return (
     <>
+      <SignInModal />
       <div className="relative ml-1 flex w-full flex-col items-center justify-center font-sans sm:mx-auto sm:w-full">
         <div className="relative mt-2 h-12 w-full text-center sm:w-[900px]">
           <input
