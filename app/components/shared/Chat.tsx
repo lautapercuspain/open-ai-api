@@ -7,13 +7,7 @@ import ChatContainer from "app/home/ChatContainer"
 import { CodeMessagesProps } from "app/home/HomeChat"
 import PromptCard from "./PromptCard"
 
-export default function Chat({
-  generatedResponse,
-  onArrowPress,
-  codeSentence,
-  setCodeSentence,
-  onCodeGeneration,
-}) {
+export default function Chat({ generatedResponse, setCodeSentence }) {
   const [prompt, setPrompt] = useState("")
 
   useEffect(() => {
