@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   <mj-body background-color="#101018">
     <mj-section>
       <mj-column>
-        <mj-image width="248px" height="40px" src="https://${process.env.NEXTAUTH_URL}/email/logo-genius-code.png"></mj-image>
+        <mj-image width="248px" height="40px" src="${process.env.NEXTAUTH_URL}/email/logo-genius-code.png"></mj-image>
       </mj-column>
     </mj-section>
     <mj-section>
@@ -37,7 +37,7 @@ export default async function handler(req, res) {
         <mj-button background-color="#A1FFE0" color="#1D1D29" align="left" border-radius="10px" font-family="helvetica" font-weight="bold" font-size="18px">Go to code Idea</mj-button>
       </mj-column>
       <mj-column>
-        <mj-image width="165px" src="https://${process.env.NEXTAUTH_URL}/email/code-idea.jpg"></mj-image>
+        <mj-image width="165px" src="${process.env.NEXTAUTH_URL}/email/code-idea.jpg"></mj-image>
       </mj-column>
     </mj-section>
     <mj-section>
@@ -52,7 +52,7 @@ export default async function handler(req, res) {
         <mj-button background-color="#A1FFE0" color="#1D1D29" align="left" border-radius="10px" font-family="helvetica" font-weight="bold" font-size="18px">Go to Chat</mj-button>
       </mj-column>
       <mj-column>
-        <mj-image width="165px" src="https://${process.env.NEXTAUTH_URL}/email/code-idea.jpg"></mj-image>
+        <mj-image width="165px" src="${process.env.NEXTAUTH_URL}/email/code-idea.jpg"></mj-image>
       </mj-column>
     </mj-section>
     <mj-section>
