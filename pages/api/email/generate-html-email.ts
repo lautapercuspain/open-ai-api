@@ -12,7 +12,7 @@ export default async function handler(req, res) {
   <mj-body background-color="#101018">
     <mj-section>
       <mj-column>
-        <mj-image width="500px" height="90px" src="${process.env.NEXTAUTH_URL}/email/logo-genius-code.png"></mj-image>
+        <mj-image width="248px" height="40px" src="${process.env.NEXTAUTH_URL}/email/logo-genius-code.png"></mj-image>
       </mj-column>
     </mj-section>
     <mj-section>
