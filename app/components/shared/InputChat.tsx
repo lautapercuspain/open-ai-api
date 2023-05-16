@@ -14,7 +14,7 @@ export default function InputChat({
           ref={inputRef}
           className="font-lg mx-2 h-12 w-[90%] resize-none rounded-lg bg-purple-400 py-2.5 pr-12 pl-3  
               font-mono text-white outline-0 placeholder:pt-1 placeholder:pl-3 placeholder:font-sans placeholder:text-[16px]
-               placeholder:text-white hover:outline-0 focus:border-transparent focus:ring-black/30 active:outline-0 
+               placeholder:text-gray-300 hover:outline-0 focus:border-transparent focus:ring-black/30 active:outline-0 
                sm:w-[900px]"
           value={codeSentence}
           onChange={(e) => setCodeSentence(e.target.value)}

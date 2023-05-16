@@ -30,13 +30,16 @@ function GenerateCode({
         {generatedCode
           .substring(generatedCode.indexOf("**") + 0)
           .replace("javascript", "")
-          .replace("```", "")
+          // .replace("```", "")
           .replace("typescript", "")
           .replace("jsx", "")
           .split("**::")
-          .map((generated) => {
+          .map((generated, idx) => {
             return (
-              <div className="overflow-x-auto overflow-y-scroll text-left font-mono sm:min-w-[100%] sm:max-w-[100%]">
+              <div
+                key={idx}
+                className="overflow-x-auto overflow-y-scroll text-left font-mono sm:min-w-[100%] sm:max-w-[100%]"
+              >
                 <CopyBlock
                   showLineNumbers
                   wrapLongLines

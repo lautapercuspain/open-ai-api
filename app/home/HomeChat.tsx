@@ -116,10 +116,10 @@ export default function HomeChat({ ip, apiCalls }) {
             const result = parseText(generatedMessage)
 
             return result.length
-              ? result.map((item: any) => {
+              ? result.map((item: any, idx) => {
                   if (item.hasOwnProperty("text")) {
                     return (
-                      <div className="rounded-lg bg-purple-400 p-2">
+                      <div key={idx} className="rounded-lg bg-purple-400 p-2">
                         <Message
                           style={{ borderRadius: "0px" }}
                           className="ml-2 text-left leading-7"
@@ -134,6 +134,7 @@ export default function HomeChat({ ip, apiCalls }) {
                   } else {
                     return (
                       <GenerateCode
+                        key={idx}
                         borderRadius="none"
                         align="start"
                         generatedCode={item.code}

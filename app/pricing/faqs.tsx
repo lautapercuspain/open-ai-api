@@ -19,8 +19,9 @@ export default function Example() {
                 />
               </Disclosure.Button>
               <Disclosure.Panel className="text-sm px-4 pt-4 pb-2 text-gray-200 ">
-                If you're unhappy with your purchase for any reason, email us
-                within 90 days and we'll refund you in full, no questions asked.
+                If you&apos;re unhappy with your purchase for any reason, email
+                us within 90 days and we&apos;ll refund you in full, no
+                questions asked.
               </Disclosure.Panel>
             </>
           )}

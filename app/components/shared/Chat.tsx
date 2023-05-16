@@ -36,21 +36,14 @@ export default function Chat({
             result.length &&
             result.map((item: any) => {
               if (item.hasOwnProperty("code")) {
-                return (
-                  <GenerateCode
-                    align="start"
-                    key={idx}
-                    generatedCode={item.code}
-                  />
-                )
+                // eslint-disable-next-line react/jsx-key
+                return <GenerateCode align="start" generatedCode={item.code} />
               }
 
               if (item.hasOwnProperty("text")) {
                 return (
-                  <p
-                    key={idx}
-                    className="rounded-lg bg-purple-400 p-2 text-left leading-7"
-                  >
+                  // eslint-disable-next-line react/jsx-key
+                  <p className="rounded-lg bg-purple-400 p-2 text-left leading-7">
                     {item.text}
                   </p>
                 )

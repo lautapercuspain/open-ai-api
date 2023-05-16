@@ -1,4 +1,4 @@
-import { useActiveCode, useSandpack } from "@codesandbox/sandpack-react"
+import { useSandpack } from "@codesandbox/sandpack-react"
 import { useEffect } from "react"
 
 export default function SaveCode({
@@ -36,7 +36,7 @@ export default function SaveCode({
   }, [isReseting])
 
   if (isSaving) {
-    return <p>"Saving.."</p>
+    return <p>Saving..</p>
   }
   if (isReseting) {
     resetFile("/App.tsx")

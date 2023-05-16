@@ -38,6 +38,7 @@ export default function DropDown({
   const VueJSIcon = React.memo(() => (
     <Image alt="Vue JS" src={"/icons/vue.png"} width={24} height={24} />
   ))
+
   const AngularIcon = React.memo(() => (
     <Image
       alt="Angular JS"
@@ -46,6 +47,7 @@ export default function DropDown({
       height={24}
     />
   ))
+
   const TypescriptIcon = React.memo(() => (
     <Image
       alt="Typescript"
