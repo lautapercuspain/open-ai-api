@@ -32,15 +32,28 @@ export default function DropDown({
   setElement,
 }: DropDownProps) {
   const ReactIcon = React.memo(() => (
-    <Image alt="React JS" src={"/icons/react.png"} width={24} height={24} />
+    <Image
+      loading="eager"
+      alt="React JS"
+      src={"/icons/react.png"}
+      width={24}
+      height={24}
+    />
   ))
 
   const VueJSIcon = React.memo(() => (
-    <Image alt="Vue JS" src={"/icons/vue.png"} width={24} height={24} />
+    <Image
+      loading="eager"
+      alt="Vue JS"
+      src={"/icons/vue.png"}
+      width={24}
+      height={24}
+    />
   ))
 
   const AngularIcon = React.memo(() => (
     <Image
+      loading="eager"
       alt="Angular JS"
       src={"/icons/angular.webp"}
       width={24}
@@ -50,6 +63,7 @@ export default function DropDown({
 
   const TypescriptIcon = React.memo(() => (
     <Image
+      loading="eager"
       alt="Typescript"
       src={"/icons/typescript.png"}
       width={24}
@@ -58,7 +72,13 @@ export default function DropDown({
   ))
 
   const JavascriptIcon = () => (
-    <Image alt="Javascript" src={"/icons/JS.svg"} width={24} height={24} />
+    <Image
+      loading="eager"
+      alt="Javascript"
+      src={"/icons/JS.svg"}
+      width={24}
+      height={24}
+    />
   )
 
   return (
@@ -115,6 +135,7 @@ export default function DropDown({
                     {item === "Javascript" && <JavascriptIcon />}
                     {item === "Typescript" && (
                       <Image
+                        loading="eager"
                         alt="Typescript"
                         src={"/icons/typescript.png"}
                         width={24}

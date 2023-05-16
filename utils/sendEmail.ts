@@ -4,16 +4,22 @@ const from = process.env.EMAIL_FROM
 const server = process.env.EMAIL_SERVER
 
 export async function sendWelcomeEmail(params) {
-  const { identifier, url = "http://localhost:3000", provider, name } = params
+  const {
+    identifier,
+    url = "http://localhost:3000",
+    provider,
+    name,
+    html,
+  } = params
   const { host } = new URL(url)
   // NOTE: You are not required to use `nodemailer`, use whatever you want.
   const transport = createTransport(provider.server)
   const result = await transport.sendMail({
     to: identifier,
     from: provider.from,
-    subject: `Sign in to ${host}`,
+    subject: `Welcome to Code Genius!`,
     text: text({ url, host }),
-    html: html({ url, host, userName: name }),
+    html: html,
   })
   const failed = result.rejected.concat(result.pending).filter(Boolean)
   if (failed.length) {

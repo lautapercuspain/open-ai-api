@@ -25,14 +25,27 @@ export const authOptions: AuthOptions = {
   ],
   events: {
     async signIn({ user }) {
+      const response = await fetch(
+        `${process.env.NEXTAUTH_URL}/api/email/generate-html-email`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user }),
+        },
+      )
+      const { html } = await response.json()
+      console.log("html response json ", html)
       //@ts-ignore
-      if (user.registered) {
-        await sendWelcomeEmail({
-          name: user.name,
-          identifier: user.email,
-          provider: { server, from },
-        })
-      }
+      // if (user.registered) {
+      await sendWelcomeEmail({
+        name: user.name,
+        html: html,
+        identifier: user.email,
+        provider: { server, from },
+      })
+      // }
     },
   },
 

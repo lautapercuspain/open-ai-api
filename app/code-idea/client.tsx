@@ -250,7 +250,7 @@ export default function Client({
   }
   const placeHolderText = getCodeGeniusPlaceHolder(mode)
   return (
-    <div className="relative h-screen w-full sm:ml-10">
+    <div className="w-full sm:ml-10">
       <Modal
         body="You don't have more Code Genius credits. Please upgrade your account before continuing"
         isOpen={creditsModaIsOpen}

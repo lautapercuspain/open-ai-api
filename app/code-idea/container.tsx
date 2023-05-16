@@ -10,7 +10,7 @@ import Header from "app/components/Header"
 
 export default function Container({ session }) {
   const [smartSelected, setSmartSelected] = useState(true)
-  const { setShowSignInModal } = useSignInModal({})
+  const { setShowSignInModal, showSignInModal } = useSignInModal({})
   const [openSecondayNavBar, setOpenSecondaryNavBar] = useState(false)
   const [testSelected, setTestSelected] = useState(false)
   const [improveSelected, setImproveSelected] = useState(false)
