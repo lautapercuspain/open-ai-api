@@ -124,9 +124,6 @@ export default function Client({ session }) {
       <Header session={session} setShowSignInModal={setShowSignInModal} />
       <Chat
         generatedResponse={generatedMessages}
-        onArrowPress={onArrowPress}
-        codeSentence={codeSentence}
-        onCodeGeneration={onCodeGeneration}
         setCodeSentence={setCodeSentence}
       />
 
