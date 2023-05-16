@@ -7,8 +7,7 @@ export default async function handler(req, res) {
   console.log("process.env.NEXTAUTH_URL", process.env.NEXTAUTH_URL)
 
   const html = compileMjml(
-    `
-  <mjml>
+    `<mjml>
   <mj-body background-color="#101018">
     <mj-section>
       <mj-column>
@@ -32,11 +31,14 @@ export default async function handler(req, res) {
     </mj-section>
     <mj-section>
       <mj-column>
-        <mj-text font-style="bold" font-size="20px" font-weight="bold" font-family="Helvetica Neue" color="#FFF" line-height="1"> 💡 Code Idea</mj-text>
-        <mj-text font-style="normal" font-size="18px" font-weight="" font-family="Helvetica Neue" color="#FFF" line-height="1.5">If you need to improve a function, document code, test code or you simply want to get suggestions for a code idea, then this is feature you are looking for.</mj-text>
-        <mj-button background-color="#A1FFE0" color="#1D1D29" align="left" border-radius="10px" font-family="helvetica" font-weight="bold" font-size="18px">Go to code Idea</mj-button>
+        <mj-text font-style="bold" font-size="20px" font-weight="bold" font-family="Helvetica Neue" color="#FFF" line-height="1">💡 Code Idea</mj-text>
+        <mj-text font-style="normal" font-size="18px" font-weight="normal" font-family="Helvetica Neue" color="#FFF" line-height="1.5">
+        If you need to improve a function, document code, 
+        test code or you simply want to get suggestions for a code idea, then this is feature you are looking for.</mj-text>
+        <mj-button href="${process.env.NEXTAUTH_URL}/code-idea" background-color="#A1FFE0" color="#1D1D29" align="left" border-radius="10px" font-family="helvetica" font-weight="bold" font-size="18px">Go to code Idea</mj-button>
       </mj-column>
       <mj-column>
+        <mj-text height="40px"></mj-text>
         <mj-image width="248px" height="138px" src="${process.env.NEXTAUTH_URL}/email/code-idea.png"></mj-image>
       </mj-column>
     </mj-section>
@@ -48,8 +50,9 @@ export default async function handler(req, res) {
     <mj-section>
       <mj-column>
         <mj-text font-style="bold" font-size="20px" font-weight="bold" font-family="Helvetica Neue" color="#FFF" line-height="1"> 💬 Chat</mj-text>
-        <mj-text font-style="normal" font-size="18px" font-weight="" font-family="Helvetica Neue" color="#FFF" line-height="1.5">Need some inspiration? go to Genius Code and get the answers you are looking for.</mj-text>
-        <mj-button background-color="#A1FFE0" color="#1D1D29" align="left" border-radius="10px" font-family="helvetica" font-weight="bold" font-size="18px">Go to Chat</mj-button>
+        <mj-text font-style="normal" font-size="18px" font-weight="normal" font-family="Helvetica Neue" color="#FFF" line-height="1.5">
+        Need some inspiration? go to Genius Code and get the answers you are looking for.</mj-text>
+        <mj-button href="${process.env.NEXTAUTH_URL}/code-chat" background-color="#A1FFE0" color="#1D1D29" align="left" border-radius="10px" font-family="helvetica" font-weight="bold" font-size="18px">Go to Chat</mj-button>
       </mj-column>
       <mj-column>
         <mj-image width="248px" height="138px" src="${process.env.NEXTAUTH_URL}/email/code-idea.png"></mj-image>
@@ -76,9 +79,7 @@ export default async function handler(req, res) {
       </mj-column>
     </mj-section>
   </mj-body>
-</mjml>
-  `,
-    { minify: true },
+</mjml>`,
   )
   return res.send(html)
 }
