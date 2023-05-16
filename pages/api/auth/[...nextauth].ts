@@ -36,7 +36,7 @@ export const authOptions: AuthOptions = {
         },
       )
       const { html } = await response.json()
-      console.log("html response json ", html)
+
       //@ts-ignore
       // if (user.registered) {
       await sendWelcomeEmail({
