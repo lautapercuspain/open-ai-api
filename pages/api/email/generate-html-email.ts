@@ -42,7 +42,7 @@ export default async function handler(req, res) {
     </mj-section>
     <mj-section>
       <mj-column>
-        <mj-divider border-width="1px" border-color="#292B45"></mj-divider>
+        <mj-divider border-width="0.5px" border-color="#292B45"></mj-divider>
       </mj-column>
     </mj-section>
     <mj-section>
