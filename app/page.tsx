@@ -21,7 +21,7 @@ export default async function Page() {
     sql: `SELECT * FROM Auth.Trials WHERE ip = "${userIp}"`,
   })
   // console.log("userUsage:", userUsage)
-  const userUsage = anonymousUserData && anonymousUserData[0]
+  const userUsage = (anonymousUserData && anonymousUserData[0]) || {}
   const csrfTokenValue = cookieStore.get("next-auth.csrf-token")?.value
 
   const userHasAccount = csrfTokenValue !== "" && csrfTokenValue !== undefined
@@ -32,7 +32,7 @@ export default async function Page() {
           session={session}
           userHasAccount={userHasAccount}
           ip={userIp}
-          apiCalls={userUsage.apiCalls}
+          apiCalls={userUsage?.apiCalls}
         />
         <Footer session={session} />
       </main>
