@@ -22,8 +22,7 @@ export interface CodeMessagesProps {
   generatedMessages: any
 }
 
-export default function HomeChat() {
-  const ip = useUserIp()
+export default function HomeChat({ ip }) {
   const textareaRef = useRef<any>(null)
   const [loading, setLoading] = useState(false)
   const [reader, setReader] =
