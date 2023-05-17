@@ -18,13 +18,20 @@ import Hero from "./Hero"
 
 import { useSignInModal } from "app/components/modals/SignInModal"
 import { updateAnonymousUserUsage } from "utils/harperDBhelpers"
+import Modal from "app/components/Modal"
+import { CREDITS_MODAL_COPY } from "@/lib/constants"
+import { harperClient } from "@/lib/harperdb"
 
 export interface CodeMessagesProps {
   generatedMessages: any
 }
 
-export default function HomeChat({ ip, apiCalls, session }) {
+export default function HomeChat({ ip, apiCalls, session, loggedUserData }) {
+  const existingCredits = loggedUserData && loggedUserData[0]?.credits
   const textareaRef = useRef<any>(null)
+  const [creditsModaIsOpen, setCreditsModaIsOpen] = useState(
+    existingCredits === 0 ? true : false,
+  )
   const userId = session && session.user?.id
   const [loading, setLoading] = useState(false)
   const [userApiCalls, setUserApiCalls] = useState<number>(apiCalls)
@@ -44,8 +51,6 @@ export default function HomeChat({ ip, apiCalls, session }) {
     },
   ])
 
-  // console.log("ip::", ip)
-
   useEffect(() => {
     if (textareaRef && textareaRef.current) {
       textareaRef.current.focus()
@@ -62,6 +67,10 @@ export default function HomeChat({ ip, apiCalls, session }) {
         setShowSignInModal(true)
         return false
       } else {
+        if (existingCredits === 0) {
+          setCreditsModaIsOpen(true)
+          return false
+        }
         codeMessages.current = [
           ...codeMessages.current,
           {
@@ -76,6 +85,7 @@ export default function HomeChat({ ip, apiCalls, session }) {
           setReader,
           setGeneratedCode,
           userId,
+          setCreditsModaIsOpen,
         )
 
         //Update free trial usage
@@ -88,7 +98,10 @@ export default function HomeChat({ ip, apiCalls, session }) {
   }
 
   const onArrowPress = async () => {
-    console.log("userApiCalls:", userApiCalls)
+    if (existingCredits === 0) {
+      setCreditsModaIsOpen(true)
+      return false
+    }
 
     if (!session && userApiCalls >= 5) {
       setShowSignInModal(true)
@@ -110,6 +123,7 @@ export default function HomeChat({ ip, apiCalls, session }) {
       setReader,
       setGeneratedCode,
       userId,
+      setCreditsModaIsOpen,
     )
 
     //Update free trial usage
@@ -170,6 +184,15 @@ export default function HomeChat({ ip, apiCalls, session }) {
   return (
     <>
       <SignInModal />
+      <Modal
+        title={CREDITS_MODAL_COPY.title}
+        isCreditsModal
+        body={CREDITS_MODAL_COPY.description}
+        isOpen={creditsModaIsOpen}
+        buttonText={CREDITS_MODAL_COPY.callToAction}
+        buttonLink="/pricing"
+        setIsOpen={setCreditsModaIsOpen}
+      />
       <div className="relative ml-1 flex w-full flex-col items-center justify-center font-sans sm:mx-auto sm:w-full">
         <div className="relative mt-2 h-12 w-full text-center sm:w-[900px]">
           <input

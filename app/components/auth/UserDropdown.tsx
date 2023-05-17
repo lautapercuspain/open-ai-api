@@ -19,9 +19,5 @@ export default function UserDropdown({ session }) {
 
   if (!email) return null
 
-  return (
-    <motion.div className="flex items-end justify-end rounded-full">
-      <UserMenu session={session} email={email} image={image} />
-    </motion.div>
-  )
+  return <UserMenu session={session} email={email} image={image} />
 }

@@ -6,6 +6,7 @@ export async function generateCodeWithTurbo(
   setReader,
   setGeneratedCode,
   userId = null,
+  setCreditsModaIsOpen,
 ) {
   setLoading(true)
   const response = await fetch("/api/generateWithTurbo", {
@@ -59,7 +60,7 @@ export async function generateCodeWithTurbo(
       const data = await updateApiCallsAndCredits(userId, tokensCount)
 
       if (data?.creditsLeft === 0) {
-        alert("You have no more credits left. Please purchase more credits.")
+        setCreditsModaIsOpen(true)
       }
 
       //RESET TOKENS COUNT.

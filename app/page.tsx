@@ -12,6 +12,7 @@ export const metadata = {
     "A tool that will help you find quick and more innovative solutions using AI and specifically trained models to make the developer's life easier.",
 }
 export default async function Page() {
+  let loggedUserData
   const cookieStore = cookies()
   const session = await getServerSession(authOptions)
   const userIp = cookieStore.get("user-ip")?.value || ""
@@ -20,7 +21,15 @@ export default async function Page() {
     operation: "sql",
     sql: `SELECT * FROM Auth.Trials WHERE ip = "${userIp}"`,
   })
-  // console.log("userUsage:", userUsage)
+  //@ts-ignore
+  if (session && session.user?.id) {
+    loggedUserData = await harperClient({
+      operation: "sql",
+      //@ts-ignore
+      sql: `SELECT * FROM Auth.Users WHERE id = "${session.user?.id}"`,
+    })
+  }
+
   const userUsage = (anonymousUserData && anonymousUserData[0]) || {}
   const csrfTokenValue = cookieStore.get("next-auth.csrf-token")?.value
 
@@ -29,6 +38,7 @@ export default async function Page() {
     <>
       <main className={`mx-auto max-w-max pb-10`}>
         <Client
+          loggedUserData={loggedUserData}
           session={session}
           userHasAccount={userHasAccount}
           ip={userIp}

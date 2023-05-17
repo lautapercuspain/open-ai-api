@@ -1,15 +1,18 @@
 "use client"
 
 import { Dialog, Transition } from "@headlessui/react"
+import { Rocket } from "lucide-react"
 import Link from "next/link"
-import { ChangeEventHandler, Fragment } from "react"
+import { Fragment } from "react"
 type DialogProps = {
   isOpen: boolean
   isPromptModal?: boolean
+  isCreditsModal?: boolean
   isLiveDemoModal?: boolean
   body: string | JSX.Element
   propmptName?: string
   buttonLink?: string
+  title?: string
   handleInputChange?: (e: any) => void
   onSave?: () => void
   savePropmptName?: boolean
@@ -19,6 +22,8 @@ type DialogProps = {
 export default function MyModal({
   isOpen,
   onSave,
+  title,
+  isCreditsModal,
   buttonLink,
   setIsOpen,
   propmptName,
@@ -49,7 +54,7 @@ export default function MyModal({
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-y-auto bg-gray-500/60 ">
+          <div className="fixed inset-0 z-50 overflow-y-auto bg-gray-500/60">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
@@ -62,12 +67,20 @@ export default function MyModal({
               >
                 <Dialog.Panel
                   className={`w-full ${
-                    isLiveDemoModal ? "w-[65%]" : "max-w-md"
-                  } transform  overflow-hidden rounded-2xl bg-purple-700 p-6 text-center align-middle shadow-xl transition-all`}
+                    isLiveDemoModal ? "w-[65%]" : "max-w-xl"
+                  } transform overflow-hidden rounded-2xl bg-purple-700 p-10 text-center align-middle shadow-xl transition-all`}
                 >
+                  {isCreditsModal && (
+                    <Dialog.Title
+                      as="h1"
+                      className="mx-auto w-[80%] p-4 font-sans text-2xl font-medium text-white"
+                    >
+                      {title}
+                    </Dialog.Title>
+                  )}
                   <Dialog.Title
-                    as="h3"
-                    className="text-md font-popins font-sans font-medium leading-6 text-white"
+                    as="p"
+                    className="text-md mx-auto w-full p-4 font-sans leading-6 text-white"
                   >
                     {body}
                   </Dialog.Title>
@@ -88,29 +101,32 @@ export default function MyModal({
                       </p>
                     </div>
                   )}
-                  <div className="mt-4">
+                  <div className="mt-4 flex justify-end">
                     {!buttonLink ? (
                       <button
                         type="button"
-                        className="text-sm inline-flex min-w-[145px] justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        className="text-sm inline-flex min-w-[145px] justify-end rounded-md border border-transparent bg-mint px-10 py-3 font-sans font-medium text-black  focus:outline-none  "
                         onClick={() => {
                           setIsOpen(false)
                           if (typeof onSave === "function") {
                             onSave()
                           }
                         }}
-                      >
-                        {buttonText}
-                      </button>
+                      ></button>
                     ) : (
                       <Link
                         href={buttonLink}
-                        className="text-sm inline-flex min-w-[145px] justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                        className="text-sm w-auto rounded-md border border-transparent bg-mint/80 px-5 py-3 font-medium text-black/90 hover:bg-mint hover:text-purple-900 focus:outline-none "
                         onClick={() => {
                           setIsOpen(false)
                         }}
                       >
                         {buttonText}
+                        {/* <Rocket
+                          color="#000"
+                          className="ml-2 inline-block"
+                          size={20}
+                        /> */}
                       </Link>
                     )}
                   </div>

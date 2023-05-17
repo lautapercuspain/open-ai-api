@@ -28,6 +28,13 @@ export const PREMIUM_SUBSCRIPTION_AMOUNT = 6
 
 export const promptResponseTimeout = 6000
 
+export const CREDITS_MODAL_COPY = {
+  title: "Keep the Momentum Going Refill Your Credits",
+  description:
+    "To ensure uninterrupted access to our amazing features and services, it's time to refill your credits. Don't miss out on the fantastic opportunities waiting for you!",
+  callToAction: "Buy Credits",
+}
+
 export const PRICE_IDS = {
   25: "price_1N33VNKrxiA7kR6cPePbRpyr",
   50: "price_1N36C1KrxiA7kR6cykNsuT7L",

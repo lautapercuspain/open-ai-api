@@ -17,9 +17,6 @@ const stripePromise = loadStripe(stripePublishableKey)
 //read stripe env key
 const clientSecret = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY || ""
 
-console.log("publicRuntimeConfig:", stripePublishableKey)
-console.log("clientSecret:", clientSecret)
-
 export default function Subscription() {
   const appearance = {
     theme: "stripe",

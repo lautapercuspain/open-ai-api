@@ -7,7 +7,13 @@ import Feature from "./home/Feature"
 
 import { useSignInModal } from "./components/modals/SignInModal"
 
-export default function Client({ session, userHasAccount, ip, apiCalls }) {
+export default function Client({
+  session,
+  userHasAccount,
+  ip,
+  apiCalls,
+  loggedUserData,
+}) {
   const { SignInModal, setShowSignInModal, showSignInModal } = useSignInModal({
     userHasAccount,
   })
@@ -22,7 +28,12 @@ export default function Client({ session, userHasAccount, ip, apiCalls }) {
         userHasAccount={userHasAccount}
       />
       <SuperHero />
-      <HomeChat ip={ip} apiCalls={apiCalls} session={session} />
+      <HomeChat
+        ip={ip}
+        apiCalls={apiCalls}
+        session={session}
+        loggedUserData={loggedUserData}
+      />
       <Feature setShowSignInModal={setShowSignInModal} />
     </>
   )

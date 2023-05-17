@@ -1,12 +1,13 @@
 "use client"
 
 import Modal from "app/components/Modal"
-import { ChangeEvent, KeyboardEvent, useState, useRef, useEffect } from "react"
+import { KeyboardEvent, useState, useRef, useEffect } from "react"
 import Chat from "app/components/shared/Chat"
 import Header from "app/components/Header"
 import { useSignInModal } from "app/components/modals/SignInModal"
 import { generateCode } from "utils/generateCode"
 import InputChat from "app/components/shared/InputChat"
+import { CREDITS_MODAL_COPY } from "@/lib/constants"
 
 export default function Client({ session }) {
   const [loading, setLoading] = useState(false)
@@ -17,8 +18,8 @@ export default function Client({ session }) {
     useState<ReadableStreamDefaultReader<Uint8Array> | null>(null)
   const [codeSentence, setCodeSentence] = useState("")
   const [generatedCode, setGeneratedCode] = useState<string>("")
-  const [showSavePromptModal, setShowSavePromptModal] = useState(false)
-  const [questionName, setQuestionName] = useState("")
+  // const [showSavePromptModal, setShowSavePromptModal] = useState(false)
+  // const [questionName, setQuestionName] = useState("")
   const userId = session && session.user?.id
   const userCredits = session && session.user?.credits
   const controller = new AbortController()
@@ -136,10 +137,12 @@ export default function Client({ session }) {
         onArrowPress={onArrowPress}
       />
       <Modal
-        body="You don't have more Code Genius credits. Please upgrade your account before continuing"
+        title={CREDITS_MODAL_COPY.title}
+        isCreditsModal
+        body={CREDITS_MODAL_COPY.description}
         isOpen={creditsModaIsOpen}
-        buttonText="Ok"
-        buttonLink="/dashboard"
+        buttonText={CREDITS_MODAL_COPY.callToAction}
+        buttonLink="/pricing"
         setIsOpen={setCreditsModaIsOpen}
       />
       {/* <Modal

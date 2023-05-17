@@ -14,6 +14,7 @@ import FooterSection from "./footer-section"
 import { fetchWithTurbo } from "utils/generateCode"
 import { getCodeGeniusPlaceHolder } from "utils/strings"
 import { updateApiCallsAndCredits } from "utils/helpers"
+import { CREDITS_MODAL_COPY } from "@/lib/constants"
 
 let libElements: ElementType[] = ["React", "Vue", "Angular"]
 let langElements: ElementType[] = ["Typescript", "Javascript"]
@@ -252,10 +253,12 @@ export default function Client({
   return (
     <div className="w-full sm:ml-10">
       <Modal
-        body="You don't have more Code Genius credits. Please upgrade your account before continuing"
+        title={CREDITS_MODAL_COPY.title}
+        isCreditsModal
+        body={CREDITS_MODAL_COPY.description}
         isOpen={creditsModaIsOpen}
-        buttonText="Ok"
-        buttonLink="/dashboard"
+        buttonText={CREDITS_MODAL_COPY.callToAction}
+        buttonLink="/pricing"
         setIsOpen={setCreditsModaIsOpen}
       />
       <Modal
