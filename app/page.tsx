@@ -7,9 +7,9 @@ import Footer from "./components/Footer"
 import { harperClient } from "@/lib/harperdb"
 
 export const metadata = {
-  title: "Create Genius Code",
+  title: "Create Genius Code with AI",
   description:
-    "A tool that will help you find quick and more innovative solutions using AI and specifically trained models to make the developer's life easier.",
+    "Code Genius is the developer's best friend. A tool that will help find solutions quickly and avoid repetitive tasks. Use it to enhance code quality and chat with an expert coding assistant.",
 }
 export default async function Page() {
   let loggedUserData

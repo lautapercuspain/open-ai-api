@@ -35,7 +35,7 @@ export default function Footer({ session }: { session: any }) {
               </h1>
             </Link>
           </div>
-          <div className="mt-8 sm:pt-2">
+          <div className="mt-8 flex sm:pt-2">
             <Link
               href="/terms-and-conditions"
               className="cursor-pointer px-4 sm:px-2 sm:text-[16px]"
