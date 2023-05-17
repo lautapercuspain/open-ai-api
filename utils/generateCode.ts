@@ -5,6 +5,7 @@ export async function generateCodeWithTurbo(
   setLoading,
   setReader,
   setGeneratedCode,
+  userId = null,
 ) {
   setLoading(true)
   const response = await fetch("/api/generateWithTurbo", {
@@ -16,10 +17,6 @@ export async function generateCodeWithTurbo(
       messages: [...codeMessages.current],
     }),
   })
-
-  // console.log("response", response);
-  // clear timeout
-  // clearTimeout(id)
 
   if (!response.ok) {
     setLoading(false)
@@ -38,7 +35,7 @@ export async function generateCodeWithTurbo(
   setReader(reader)
   const decoder = new TextDecoder()
   let done = false
-
+  let tokensCount = 0
   try {
     while (!done) {
       const { value, done: doneReading } = await reader.read()
@@ -57,6 +54,17 @@ export async function generateCodeWithTurbo(
   } finally {
     setLoading(false)
     setReader(null)
+    //✨ Make some credits update Magic ✨
+    if (userId) {
+      const data = await updateApiCallsAndCredits(userId, tokensCount)
+
+      if (data?.creditsLeft === 0) {
+        alert("You have no more credits left. Please purchase more credits.")
+      }
+
+      //RESET TOKENS COUNT.
+      tokensCount = 0
+    }
   }
 }
 

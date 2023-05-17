@@ -35,6 +35,7 @@ export async function updateApiCallsAndCredits(
   userId: string,
   tokensCount: number,
 ) {
+  let data: any = {}
   //Update API CALLS
   const response = await fetch("/api/credits/update", {
     method: "POST",
@@ -47,8 +48,8 @@ export async function updateApiCallsAndCredits(
     }),
   })
   const apiCallUpdateResponse = await response.json()
-  // WORK THE REST OF THE LOGIC HERE
 
+  //Current Credits for the user
   const { credits: oldCredits, apiCalls } = apiCallUpdateResponse
 
   // check if value is divisible by 5
@@ -70,8 +71,9 @@ export async function updateApiCallsAndCredits(
         },
       }),
     })
-    const data = await finalResponse.json()
-
-    return data ? data : {}
+    data = await finalResponse.json()
+  } else {
+    data = apiCallUpdateResponse
   }
+  return data ? data : {}
 }

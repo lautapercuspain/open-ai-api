@@ -27,6 +27,7 @@ export async function harperClient(body) {
       key !== "credits" &&
       key !== "amount" &&
       key !== "ip" &&
+      key !== "tokensCount" &&
       key !== "apiCalls"
     ) {
       return new Date(value)

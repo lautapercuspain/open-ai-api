@@ -22,7 +22,7 @@ export default function Client({ session, userHasAccount, ip, apiCalls }) {
         userHasAccount={userHasAccount}
       />
       <SuperHero />
-      <HomeChat ip={ip} apiCalls={apiCalls} />
+      <HomeChat ip={ip} apiCalls={apiCalls} session={session} />
       <Feature setShowSignInModal={setShowSignInModal} />
     </>
   )

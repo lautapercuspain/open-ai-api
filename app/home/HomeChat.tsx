@@ -23,8 +23,9 @@ export interface CodeMessagesProps {
   generatedMessages: any
 }
 
-export default function HomeChat({ ip, apiCalls }) {
+export default function HomeChat({ ip, apiCalls, session }) {
   const textareaRef = useRef<any>(null)
+  const userId = session && session.user?.id
   const [loading, setLoading] = useState(false)
   const [userApiCalls, setUserApiCalls] = useState<number>(apiCalls)
   const [reader, setReader] =
@@ -57,7 +58,7 @@ export default function HomeChat({ ip, apiCalls }) {
     }
 
     if (e.key === "Enter") {
-      if (userApiCalls >= 5) {
+      if (userApiCalls >= 5 && !session) {
         setShowSignInModal(true)
         return false
       } else {
@@ -74,16 +75,22 @@ export default function HomeChat({ ip, apiCalls }) {
           setLoading,
           setReader,
           setGeneratedCode,
+          userId,
         )
+
         //Update free trial usage
-        const response = await updateAnonymousUserUsage(ip)
-        setUserApiCalls(response.apiCalls)
+        if (!session) {
+          const response = await updateAnonymousUserUsage(ip)
+          setUserApiCalls(response.apiCalls)
+        }
       }
     }
   }
 
   const onArrowPress = async () => {
-    if (userApiCalls >= 5) {
+    console.log("userApiCalls:", userApiCalls)
+
+    if (!session && userApiCalls >= 5) {
       setShowSignInModal(true)
       return false
     }
@@ -97,10 +104,19 @@ export default function HomeChat({ ip, apiCalls }) {
       },
     ]
     setCodeSentence("")
-    generateCodeWithTurbo(codeMessages, setLoading, setReader, setGeneratedCode)
+    generateCodeWithTurbo(
+      codeMessages,
+      setLoading,
+      setReader,
+      setGeneratedCode,
+      userId,
+    )
+
     //Update free trial usage
-    const response = await updateAnonymousUserUsage(ip)
-    setUserApiCalls(response.apiCalls)
+    if (!session) {
+      const response = await updateAnonymousUserUsage(ip)
+      setUserApiCalls(response.apiCalls)
+    }
   }
 
   const generatedMessages = useMemo(

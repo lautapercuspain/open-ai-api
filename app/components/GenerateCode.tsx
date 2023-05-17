@@ -30,6 +30,7 @@ function GenerateCode({
         {generatedCode
           .substring(generatedCode.indexOf("**") + 0)
           .replace("javascript", "")
+          .replace("js", "")
           // .replace("```", "")
           .replace("typescript", "")
           .replace("jsx", "")
