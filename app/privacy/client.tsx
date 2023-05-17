@@ -10,7 +10,7 @@ export default function Client() {
 
   return (
     <>
-      <div className="flex min-h-screen flex-nowrap">
+      <div className="flex min-h-screen flex-nowrap font-sans">
         <div className="mx-auto max-w-max pb-10">
           <SignInModal />
           <HeaderWrapper
@@ -19,18 +19,19 @@ export default function Client() {
             session={undefined}
             userHasAccount={undefined}
           />
-          <div className="mx-auto mt-14 w-[80%]">
+          <div className="mx-auto mt-28 w-[80%]">
+            <h1 className="my-3 ml-4 text-3xl text-white">Privacy Policy</h1>
             <p className="p-4 text-white">
-              At Code Genius, accessible from https://code-genius.dev, one of
-              our main priorities is the privacy of our visitors. This Privacy
-              Policy document contains types of information that is collected
-              and recorded by Code Genius and how we use it. If you have
-              additional questions or require more information about our Privacy
-              Policy, do not hesitate to contact us. This Privacy Policy applies
-              only to our online activities and is valid for visitors to our
-              website with regards to the information that they shared and/or
-              collect in Code Genius. This policy is not applicable to any
-              information collected offline or via channels other than this
+              We, at Code Genius, accessible from https://code-genius.dev, one
+              of our main priorities is the privacy of our visitors. This
+              Privacy Policy document contains types of information that is
+              collected and recorded by Code Genius and how we use it. If you
+              have additional questions or require more information about our
+              Privacy Policy, do not hesitate to contact us. This Privacy Policy
+              applies only to our online activities and is valid for visitors to
+              our website with regards to the information that they shared
+              and/or collect in Code Genius. This policy is not applicable to
+              any information collected offline or via channels other than this
               website. Content By using our website, you hereby consent to our
               Privacy Policy and agree to its terms. Information we collect The
               personal information that you are asked to provide, and the
