@@ -19,9 +19,7 @@ export default function ErrorLog({
   const session = useSession()
   const [openContactForm, setOpenContactForm] = React.useState<boolean>(false)
   console.log("session:", session)
-  const { SignInModal, setShowSignInModal, showSignInModal } = useSignInModal(
-    {},
-  )
+  const { setShowSignInModal, showSignInModal } = useSignInModal({})
   useEffect(() => {
     // Log the error to an error reporting service
     console.error(error)

@@ -31,6 +31,8 @@ function GenerateCode({
           .substring(generatedCode.indexOf("**") + 0)
           .replace("javascript", "")
           .replace("js", "")
+          .replace("x", "")
+          .replace("python", "")
           .replace("```", "")
           .replace("typescript", "")
           .replace("jsx", "")

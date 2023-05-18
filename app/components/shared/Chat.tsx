@@ -21,9 +21,7 @@ export default function Chat({ generatedResponse, setCodeSentence }) {
   }) => {
     return (
       <>
-        {generatedMessages.map((generatedMessage, idx) => {
-          console.log("generatedMessage:", generatedMessage)
-
+        {generatedMessages.map((generatedMessage) => {
           const result = parseText(generatedMessage)
 
           return (
@@ -52,14 +50,18 @@ export default function Chat({ generatedResponse, setCodeSentence }) {
   return (
     <div className="flex items-center justify-center overflow-scroll rounded-md sm:mx-auto sm:flex-row">
       {generatedResponse.length > 0 && (
-        <ChatContainer
-          useFullHeight
-          useFullWidth
-          messages={<LiveDemoMessages generatedMessages={generatedResponse} />}
-        />
+        <div className="mt-8">
+          <ChatContainer
+            useFullHeight
+            useFullWidth
+            messages={
+              <LiveDemoMessages generatedMessages={generatedResponse} />
+            }
+          />
+        </div>
       )}
       {generatedResponse.length === 0 && (
-        <div className="mx-auto flex max-h-[75vh] w-full flex-col items-center justify-center sm:mt-10 sm:max-w-[1000px] sm:flex-row sm:flex-wrap sm:justify-between sm:gap-1">
+        <div className="mx-auto flex max-h-[75vh] w-full flex-col items-center justify-center sm:mt-20 sm:max-w-[1000px] sm:flex-row sm:flex-wrap sm:justify-between sm:gap-1">
           <PromptCard
             onClick={setPrompt}
             title="Create React App"
@@ -67,8 +69,8 @@ export default function Chat({ generatedResponse, setCodeSentence }) {
           />
           <PromptCard
             onClick={setPrompt}
-            title="Create Next App"
-            text="How to use the  the Create Next App package"
+            title="Create React App"
+            text="How to use the the Create React App package"
           />
           <PromptCard
             onClick={setPrompt}
@@ -77,7 +79,7 @@ export default function Chat({ generatedResponse, setCodeSentence }) {
           />
           <PromptCard
             onClick={setPrompt}
-            title="Software Development"
+            title="Development"
             text="What are the best practice in software development"
           />
           <PromptCard

@@ -17,7 +17,7 @@ export async function sendWelcomeEmail(params) {
   const result = await transport.sendMail({
     to: identifier,
     from: provider.from,
-    subject: `Welcome to Code Genius!`,
+    subject: `🧞‍♂️ Welcome to Code Genius!`,
     text: text({ url, host }),
     html: html,
   })

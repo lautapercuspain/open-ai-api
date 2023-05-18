@@ -7,6 +7,15 @@ const nextConfig = {
       "avatars.githubusercontent.com",
       "lh3.googleusercontent.com",
       "tailwindui.com",
+      "avatars.dicebear.com",
+    ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "avatars.dicebear.com",
+        port: "",
+        pathname: "/api/**",
+      },
     ],
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",

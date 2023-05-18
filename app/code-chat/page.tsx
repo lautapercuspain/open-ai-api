@@ -3,6 +3,11 @@ import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
 import Client from "./client"
 
+export const metadata = {
+  title: "Code Genius | Code Chat",
+  description: "Code Chat is a fun way to learn to code.",
+}
+
 export default async function Page() {
   const session = await getServerSession(authOptions)
 
@@ -12,7 +17,7 @@ export default async function Page() {
 
   return (
     <>
-      <main className="mt-24 flex w-full flex-1 flex-col items-center justify-center px-4 text-center sm:mt-10">
+      <main className="flex w-full flex-col items-center justify-center px-4 text-center sm:mt-10">
         <Client session={session} />
       </main>
     </>
