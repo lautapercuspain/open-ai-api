@@ -9,7 +9,7 @@ import GradientButton from "./components/buttons/gradientButton"
 import ContactFormModal from "./components/modals/ContactFormModal"
 import Footer from "./components/Footer"
 
-export default function Error({
+export default function ErrorLog({
   error,
   reset,
 }: {
