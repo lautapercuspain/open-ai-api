@@ -9,7 +9,11 @@ import { Fragment, useState } from "react"
 interface Props {
   isOpen: boolean
   thanksMessage?: boolean
+  isClientFeedback?: boolean
   clientName?: string
+  errorMessage?: Error
+  title?: string
+  name?: string
   purchasedCredits?: number
   setIsOpen: (arg: boolean) => void
 }
@@ -33,6 +37,10 @@ const inter = Inter({
 })
 
 export default function ContactFormModal({
+  title,
+  name,
+  isClientFeedback,
+  errorMessage,
   isOpen,
   setIsOpen,
   purchasedCredits,
@@ -133,90 +141,96 @@ export default function ContactFormModal({
                         as="h1"
                         className="font-poppins text-center text-2xl leading-6 text-white sm:text-left sm:text-3xl"
                       >
-                        Talk to an expert
+                        {title ? title : `Talk to an expert`}
                       </Dialog.Title>
                       <Dialog.Title
                         as="h1"
                         className={`text-sm sm:text-md text-center font-sans leading-10 text-gray-200 sm:text-left`}
                       >
-                        We will be happy to answer all your questions
+                        {isClientFeedback
+                          ? `This is the error message descriptoin:`
+                          : `We will be happy to answer all your questions`}
                       </Dialog.Title>
+
                       <hr className="border-1 border-purple-500" />
                       {/* Contact Form */}
                       <form className="flex flex-col gap-4">
-                        <div className="flex flex-col gap-2">
-                          <label
-                            htmlFor="name"
-                            className="font-sans text-[13px] text-purple-300"
-                          >
-                            Name
-                          </label>
-                          <input
-                            name="name"
-                            id="name"
-                            autoComplete="off"
-                            className="w-full rounded-md border border-purple-500 bg-purple-700 p-3 text-white placeholder:text-purple-300 focus:border-purple-500 focus:outline-0"
-                            placeholder=""
-                            value={formValues.name}
-                            onChange={handleChange}
-                            required
-                          />
-                        </div>
-                        <div className="flex flex-col gap-2">
-                          <label
-                            htmlFor="workEmail"
-                            className="font-sans text-[13px] text-purple-300"
-                          >
-                            Work E-mail
-                          </label>
-                          <input
-                            name="workEmail"
-                            id="workEmail"
-                            autoComplete="off"
-                            className="w-fullrounded-md border border-purple-500 bg-purple-700 p-3 text-white placeholder:text-purple-300 focus:border-purple-500 focus:outline-0 focus:ring-purple-400"
-                            placeholder=""
-                            value={formValues.workEmail}
-                            onChange={handleChange}
-                            required
-                          />
-                        </div>
-                        {/* <div className="flex-grow-1 flex flex-col gap-2">
-                      <label
-                        htmlFor="numberOfLicenses"
-                        className="font-sans text-[13px] text-purple-300"
-                      >
-                        Number of employees who will use Code Genius:
-                      </label>
-                      <input
-                        name="numberOfLicenses"
-                        id="numberOfLicenses"
-                        className="block w-24 rounded-md border border-purple-500 bg-purple-700 p-3 font-sans text-white placeholder:text-purple-300 focus:border-purple-500 focus:ring-purple-400"
-                        type="number"
-                        value={formValues.numberOfLicenses}
-                        onChange={handleChange}
-                        required
-                      />
-                    </div> */}
-                        <div className="flex-grow-1 flex flex-col gap-2">
-                          <label
-                            htmlFor="howCanWeHelp"
-                            className="font-sans text-[13px] text-purple-300"
-                          >
-                            How we can help?
-                          </label>
-                          <textarea
-                            name="howCanWeHelp"
-                            id="howCanWeHelp"
-                            className="block w-full rounded-md border border-purple-500 bg-purple-700 p-3 text-white placeholder:text-[13px] placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-400"
-                            placeholder="Tell us about your business needs"
-                            value={message}
-                            onChange={(e) => {
-                              setMessage(e.target.value)
-                            }}
-                            required
-                          />
-                        </div>
+                        {!isClientFeedback && (
+                          <>
+                            <div className="flex flex-col gap-2">
+                              <label
+                                htmlFor="name"
+                                className="font-sans text-[13px] text-purple-300"
+                              >
+                                Name
+                              </label>
+                              <input
+                                name="name"
+                                id="name"
+                                autoComplete="off"
+                                className="w-full rounded-md border border-purple-500 bg-purple-700 p-3 text-white placeholder:text-purple-300 focus:border-purple-500 focus:outline-0"
+                                placeholder={name}
+                                value={name ? name : formValues.name}
+                                onChange={handleChange}
+                                required
+                              />
+                            </div>
 
+                            <div className="flex flex-col gap-2">
+                              <label
+                                htmlFor="workEmail"
+                                className="font-sans text-[13px] text-purple-300"
+                              >
+                                Work E-mail
+                              </label>
+                              <input
+                                name="workEmail"
+                                id="workEmail"
+                                autoComplete="off"
+                                className="w-fullrounded-md border border-purple-500 bg-purple-700 p-3 text-white placeholder:text-purple-300 focus:border-purple-500 focus:outline-0 focus:ring-purple-400"
+                                placeholder=""
+                                value={formValues.workEmail}
+                                onChange={handleChange}
+                                required
+                              />
+                            </div>
+
+                            <div className="flex-grow-1 flex flex-col gap-2">
+                              <label
+                                htmlFor="howCanWeHelp"
+                                className="font-sans text-[13px] text-purple-300"
+                              >
+                                How we can help?
+                              </label>
+                              <textarea
+                                name="howCanWeHelp"
+                                id="howCanWeHelp"
+                                className="block w-full rounded-md border border-purple-500 bg-purple-700 p-3 text-white placeholder:text-[13px] placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-400"
+                                placeholder="Tell us about your business needs"
+                                value={message}
+                                onChange={(e) => {
+                                  setMessage(e.target.value)
+                                }}
+                                required
+                              />
+                            </div>
+                          </>
+                        )}
+
+                        {isClientFeedback && (
+                          <div className="font-mono text-gray-200">
+                            <textarea
+                              name="howCanWeHelp"
+                              id="howCanWeHelp"
+                              className="block w-full rounded-md border border-purple-500 bg-purple-700 p-3 text-white placeholder:text-[13px] placeholder:text-gray-400 focus:border-purple-500 focus:ring-purple-400"
+                              value={errorMessage && errorMessage.toString()}
+                              onChange={(e) => {
+                                setMessage(e.target.value)
+                              }}
+                              required
+                            />
+                          </div>
+                        )}
                         <div className="mt-4 flex flex-row justify-end gap-4 sm:items-center ">
                           <div className="basis-5/4">
                             <button
@@ -239,16 +253,30 @@ export default function ContactFormModal({
                         className="text-center text-2xl leading-6 text-white sm:text-left sm:text-3xl"
                       >
                         <span className="capitalize">
-                          {formValues.name.trim()}
+                          {formValues.name.trim() !== ""
+                            ? formValues.name
+                            : clientName}
                         </span>
-                        ,
                       </Dialog.Title>
-                      <p className="text-sm mt-4 text-white">
-                        Talks for being interested in Code Genius.
-                      </p>
-                      <p className="text-sm -mt-1 text-white">
-                        An expert will reach you soon.
-                      </p>
+                      {!isClientFeedback ? (
+                        <>
+                          <p className="text-sm mt-4 text-white">
+                            Talks for being interested in Code Genius.
+                          </p>
+                          <p className="text-sm -mt-1 text-white">
+                            An expert will reach you soon.
+                          </p>
+                        </>
+                      ) : (
+                        <>
+                          <p className="text-sm mt-4 text-white">
+                            Talks for being part of the Code Genius community.
+                          </p>
+                          <p className="text-sm -mt-1 text-white">
+                            We appreciate your help and interest.
+                          </p>
+                        </>
+                      )}
                     </div>
                   )}
                   {thanksMessage && (

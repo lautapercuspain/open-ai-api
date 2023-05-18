@@ -9,9 +9,6 @@ export default async function handler(req, res) {
     sql: `SELECT * FROM Auth.Users WHERE id = "${bodyRequest.userId}"`,
   })
 
-  console.log("type of apiCalls ", typeof existingUser[0]?.apiCalls)
-  console.log("apiCalls ", existingUser[0]?.apiCalls)
-
   const updatedUser = {
     ...existingUser[0],
     apiCalls: existingUser[0]?.apiCalls
@@ -35,9 +32,8 @@ export default async function handler(req, res) {
         ],
         records: [updatedUser],
       })
-      console.log("updatedOp:", updatedOp)
+
       if (updatedOp.update_hashes[0] !== "") {
-        console.log("updated payload", updatedUser)
         return res.status(200).json(updatedUser)
       }
     } catch (error) {

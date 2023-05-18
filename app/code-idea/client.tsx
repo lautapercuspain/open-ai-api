@@ -288,7 +288,6 @@ export default function Client({
           <div className="sm:text-1xl left-0 mx-auto mb-6 mt-10 w-full border-b-[1px] border-gray-400 px-2 py-4 pb-3 text-center font-sans text-[13px] uppercase text-purple-300 sm:mr-8 sm:mt-6 sm:ml-0 sm:pt-2 ">
             {getCodeGeniusMode()}
           </div>
-          {/* <div className="mt-1  border-b-[1px] border-purple-500 pb-2 " /> */}
           <Editor
             padding={20}
             textareaId="code-editor"

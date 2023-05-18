@@ -16,6 +16,7 @@ export default function Header({
   userHasAccount?: any
   setShowSignInModal: any
 }) {
+  console.log("session:", session)
   const pathname = usePathname()
   const { isMobile } = useWindowSize()
   const shouldHideLogo =

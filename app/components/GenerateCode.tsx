@@ -31,7 +31,7 @@ function GenerateCode({
           .substring(generatedCode.indexOf("**") + 0)
           .replace("javascript", "")
           .replace("js", "")
-          // .replace("```", "")
+          .replace("```", "")
           .replace("typescript", "")
           .replace("jsx", "")
           .split("**::")

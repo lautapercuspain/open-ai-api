@@ -1,7 +1,6 @@
 import "../styles/globals.css"
 import SessionProvider from "./provider"
 import { Inter, Roboto_Mono } from "next/font/google"
-import Error from "./ErrorBoundary"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,9 +25,7 @@ export default async function RootLayout({
         </head>
         <body suppressHydrationWarning={true} className="bg-purple-900">
           <SessionProvider>
-            <Error>
-              <div className="flex min-h-screen flex-nowrap">{children}</div>
-            </Error>
+            <div className="flex min-h-screen flex-nowrap">{children}</div>
           </SessionProvider>
         </body>
       </html>
