@@ -57,14 +57,14 @@ export default function Header({
           <div className="flex h-8">
             <div
               onClick={() => setShowSignInModal(true)}
-              className={`my-auto mt-2 mr-4 flex cursor-pointer flex-row items-start justify-center rounded-lg sm:mr-16 ${
+              className={`my-auto mt-2 mr-4 flex w-32 cursor-pointer flex-row items-start justify-center rounded-lg sm:mr-16 ${
                 !session
                   ? "bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0]"
                   : "bg-transparent"
               }  p-[1.5px] font-sans`}
             >
               {!session && (
-                <div className={`relative h-9 w-auto rounded-lg bg-purple-800`}>
+                <div className={`relative h-9 w-32 rounded-lg bg-purple-900`}>
                   <p className="text-sm my-auto px-2 pt-1 text-center leading-7 text-white">
                     {!userHasAccount ? "Sign In" : "Sign Up"}
                   </p>
