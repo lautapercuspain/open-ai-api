@@ -2,6 +2,7 @@
 
 import { useSignInModal } from "app/components/modals/SignInModal"
 import HeaderWrapper from "app/components/shared/HeaderWrapper"
+import Link from "next/link"
 
 export default function Client() {
   const { SignInModal, setShowSignInModal, showSignInModal } = useSignInModal(
@@ -20,107 +21,254 @@ export default function Client() {
             userHasAccount={undefined}
           />
           <div className="mx-auto mt-28 w-[80%]">
-            <h1 className="my-3 ml-4 text-3xl text-white">Privacy Policy</h1>
+            <h1 className="my-3 ml-4 text-3xl font-medium text-white">
+              Privacy Policy
+            </h1>
             <p className="p-4 text-white">
-              We, at Code Genius, accessible from https://code-genius.dev, one
-              of our main priorities is the privacy of our visitors. This
-              Privacy Policy document contains types of information that is
-              collected and recorded by Code Genius and how we use it. If you
-              have additional questions or require more information about our
-              Privacy Policy, do not hesitate to contact us. This Privacy Policy
-              applies only to our online activities and is valid for visitors to
-              our website with regards to the information that they shared
-              and/or collect in Code Genius. This policy is not applicable to
-              any information collected offline or via channels other than this
-              website. Content By using our website, you hereby consent to our
-              Privacy Policy and agree to its terms. Information we collect The
-              personal information that you are asked to provide, and the
-              reasons why you are asked to provide it, will be made clear to you
-              at the point we ask you to provide your personal information. If
-              you contact us directly, we may receive additional information
-              about you such as your name, email address, phone number, the
-              contents of the message and/or attachments you may send us, and
-              any other information you may choose to provide. When you register
-              for an Account, we may ask for your contact information, including
-              items such as name, company name, address, email address, and
-              telephone number. How we use your information We use the
-              information we collect in various ways, including to: Provide,
-              operate, and maintain our website Improve, personalise, and expand
-              our website Understand and analyze how you use our website Develop
-              new products, services, features, and functionality Communicate
-              with you, either directly or through one of our partners,
-              including for customer service, to provide you with updates and
-              other information relating to the website, and for marketing and
-              promotional purposes Send you emails Find and prevent fraud Log
-              Files Code Genius follows a standard procedure of using log files.
-              These files log visitors when they visit websites. All hosting
-              companies do this and a part of hosting services&apos; analytics.
-              The information collected by log files include internet protocol
-              (IP) addresses, browser type, Internet Service Provider (ISP),
-              date and time stamp, referring/exit pages, and possibly the number
-              of clicks. These are not linked to any information that is
-              personally identifiable. The purpose of the information is for
-              analyzing trends, administering the site, tracking users&apos;
-              movement on the website, and gathering demographic information.
-              Advertising Partners Privacy Policies You may consult this list to
-              find the Privacy Policy for each of the advertising partners of
-              Code Genius. Third-party ad servers or ad networks uses
-              technologies like cookies, JavaScript, or Web Beacons that are
-              used in their respective advertisements and links that appear on
-              Code Genius, which are sent directly to users&apos; browser. They
-              automatically receive your IP address when this occurs. These
-              technologies are used to measure the effectiveness of their
-              advertising campaigns and/or to personalize the advertising
-              content that you see on websites that you visit. Note that Code
-              Genius has no access to or control over these cookies that are
-              used by third-party advertisers. Third Party Privacy Policies Code
-              Genius&apos;s Privacy Policy does not apply to other advertisers
-              or websites. Thus, we are advising you to consult the respective
-              Privacy Policies of these third-party ad servers for more detailed
-              information. It may include their practices and instructions about
-              how to opt-out of certain options. You can choose to disable
-              cookies through your individual browser options. To know more
-              detailed information about cookie management with specific web
-              browsers, it can be found at the browsers&apos; respective
-              websites. CCPA Privacy Rights Under the CCPA, among other rights,
-              California consumers have the right to: Request that a business
-              that collects a consumer&apos;s personal data disclose the
-              categories and specific pieces of personal data that a business
-              has collected about consumers. Request that a business delete any
-              personal data about the consumer that a business has collected.
-              Request that a business that sells a consumer&apos;s personal
-              data, not sell the consumer&apos;s personal data. If you make a
-              request, we have one month to respond to you. If you would like to
-              exercise any of these rights, please contact us. GDPR Data
-              Protection Rights We would like to make sure you are fully aware
-              of all of your data protection rights. Every user is entitled to
-              the following: The right to access – You have the right to request
-              copies of your personal data. We may charge you a small fee for
-              this service. The right to rectification – You have the right to
-              request that we correct any information you believe is inaccurate.
-              You also have the right to request that we complete the
-              information you believe is incomplete. The right to erasure – You
-              have the right to request that we erase your personal data, under
-              certain conditions. The right to restrict processing – You have
-              the right to request that we restrict the processing of your
-              personal data, under certain conditions. The right to object to
-              processing – You have the right to object to our processing of
-              your personal data, under certain conditions. The right to data
-              portability – You have the right to request that we transfer the
-              data that we have collected to another organization, or directly
-              to you, under certain conditions. If you make a request, we have
-              one month to respond to you. If you would like to exercise any of
-              these rights, please contact us Changes to the privacy policy Code
-              Genius may make changes to this privacy policy at any time by
-              giving a notice on the website and/or by other applicable means.
-              The data subjects are highly recommended to review the privacy
-              policy on our website every now and then. If the data subject
-              objects to any of the changes to this privacy policy, the data
-              subject should cease using the services, where applicable, and
-              they can request that we remove the personal data, unless
-              applicable laws require us to retain such personal data. Unless
-              stated otherwise, the then-current privacy policy applies to all
-              personal data we process at the time.
+              We, at Code Genius, (together with our affiliates, “CodeGenius”,
+              “we”, “our” or “us”), and accessible from https://code-genius.dev,
+              respect your privacy and are strongly committed to keeping secure
+              any information we obtain from you or about you. One of our main
+              priorities is the privacy of our visitors. This Privacy Policy
+              document contains types of information that is collected and
+              recorded by Code Genius and how we use it. If you have additional
+              questions or require more information about our Privacy Policy, do
+              not hesitate to{" "}
+              <Link href="mailto:info@code-genius.dev">contact us</Link>. This
+              Privacy Policy applies only to our online activities and is valid
+              for visitors to our website with regards to the information that
+              they shared and/or collect in Code Genius. This policy is not
+              applicable to any information collected offline or via channels
+              other than this website. Content By using our website, you hereby
+              consent to our Privacy Policy and agree to its terms.
+            </p>
+
+            <h2 className="m-4 text-2xl font-medium text-white">
+              1. Personal Information
+            </h2>
+
+            <p className="p-4 text-white">
+              We collect information that alone or in combination with other
+              information could be used to identify you as follows: We may
+              collect Personal Information if you{" "}
+              <span className="font-medium">create an account</span> to use our
+              Services or communicate with us as follows:
+              <ul className="ml-5 mt-5 list-disc">
+                <li className="mt-2">
+                  User Information: When you create an account with us, we will
+                  collect information associated with your account, including
+                  your full name, email and avatar from the OAuth provider.
+                  (collectively, “Account Information”).
+                </li>
+                <li className="mt-2">
+                  {" "}
+                  We do not collect other type of information such as your
+                  personal credentials to access our site or your payment card
+                  information.
+                </li>
+                <li className="mt-2">
+                  User Content: When you use our Services, we may collect
+                  Personal Information that is included in the input, file
+                  uploads, or feedback that you provide to our Services.
+                </li>
+                <li className="mt-2">
+                  Communication Information: If you communicate with us, we may
+                  collect your name, contact information, and the contents of
+                  any messages you send (“Communication Information”).
+                </li>
+                <li className="mt-2">
+                  Usage Data: We may automatically collect information about
+                  your use of the Services, such as the types of content that
+                  you view or engage with, the features you use and the actions
+                  you take, as well as your time zone, country, the dates and
+                  times of access, user agent and version, type of computer or
+                  mobile device, computer connection, and IP address.
+                </li>
+                <li className="mt-2">
+                  We use cookies to operate and administer our Services, and
+                  improve your experience on it. A “cookie” is a piece of
+                  information sent to your browser by a website you visit. You
+                  can set your browser to accept all cookies, to reject all
+                  cookies, or to notify you whenever a cookie is offered so that
+                  you can decide each time whether to accept it. However,
+                  refusing a cookie may in some cases prevent you from using, or
+                  negatively affect the functionallity or certain areas or
+                  features of a website. For more details on cookies please
+                  visit{" "}
+                  <Link
+                    className="underline"
+                    href="https://allaboutcookies.org/"
+                  >
+                    All About Cookies website
+                  </Link>
+                </li>
+              </ul>
+            </p>
+            <h2 className="m-4 text-2xl font-medium text-white">
+              2. How we use personal information
+            </h2>
+
+            <p className="p-4 text-white">
+              We may use Personal Information for the following purposes:
+              <ul className="ml-5 mt-5 list-disc">
+                <li className="mt-2">
+                  To provide, administer, maintain and/or analyze the Services
+                </li>
+                <li className="mt-2">To improve our Services and Products</li>
+                <li className="mt-2">To communicate with you</li>
+                <li className="mt-2">
+                  To prevent fraud, criminal activity, or misuses of our
+                  Services, and to ensure the security of our IT systems,
+                  architecture, and networks
+                </li>
+
+                <li className="mt-2">
+                  To comply with legal obligations and legal process and to
+                  protect our rights, privacy, safety, or property, and/or that
+                  of our affiliates, you, or other third parties.
+                </li>
+              </ul>
+            </p>
+            <h2 className="m-4 text-2xl font-medium text-white">
+              3. Disclosure of personal information
+            </h2>
+
+            <p className="p-4 text-white">
+              In some circumstances we may provide your Personal Information to
+              third parties without further notice to you, unless required by
+              the law:
+              <ul className="ml-5 mt-5 list-disc">
+                <li className="mt-2">
+                  Vendors and Service Providers: To assist us in meeting
+                  business operations needs and to perform certain services and
+                  functions, we may provide Personal Information to vendors and
+                  service providers, including providers of cloud services, and
+                  other information technology services providers, event
+                  management services, email communication software and email
+                  newsletter services, and web analytics services. Pursuant to
+                  our instructions, these parties will access, process, or store
+                  Personal Information only in the course of performing their
+                  duties to us.
+                </li>
+                <li className="mt-2">
+                  Business Transfers: If we are involved in strategic
+                  transactions, reorganization, bankruptcy, receivership, or
+                  transition of service to another provider (collectively a
+                  “Transaction”), your Personal Information and other
+                  information may be disclosed in the diligence process with
+                  counterparties and others assisting with the Transaction and
+                  transferred to a successor or affiliate as part of that
+                  Transaction along with other assets.
+                </li>
+                <li className="mt-2">
+                  Legal Requirements: If required to do so by law or in the good
+                  faith belief that such action is necessary to (i) comply with
+                  a legal obligation, including to meet national security or law
+                  enforcement requirements, (ii) protect and defend our rights
+                  or property, (iii) prevent fraud, (iv) act in urgent
+                  circumstances to protect the personal safety of users of the
+                  Services, or the public, or (v) protect against legal
+                  liability.
+                </li>
+                <li className="mt-2">
+                  Affiliates: We may disclose Personal Information to our
+                  affiliates, meaning an entity that controls, is controlled by,
+                  or is under common control with Code Genius. Our affiliates
+                  may use the Personal Information we share in a manner
+                  consistent with this Privacy Policy.
+                </li>
+              </ul>
+            </p>
+            <h2 className="m-4 text-2xl font-medium text-white">
+              4. Your data and rights
+            </h2>
+            <p className="p-4 text-white">
+              Depending on location, individuals in the EEA, the UK, and across
+              the globe may have certain regulations in relation to their
+              Personal Information. For example, you may have the right to:
+              <ul className="ml-5 mt-5 list-disc">
+                <li className="mt-2">Access your Personal Information.</li>
+                <li className="mt-2">Delete your Personal Information.</li>
+                <li className="mt-2">
+                  Correct or update your Personal Information.
+                </li>
+                <li className="mt-2">
+                  Transfer your Personal Information elsewhere.
+                </li>
+                <li className="mt-2">
+                  Withdraw your consent to the processing of your Personal
+                  Information where we rely on consent as the legal basis for
+                  processing.
+                </li>
+                <li className="mt-2">
+                  Object to or restrict the processing of your Personal
+                  Information where we rely on legitimate interests as the legal
+                  basis for processing.
+                </li>
+              </ul>
+            </p>
+            <h2 className="m-4 text-2xl font-medium text-white">
+              5. Links and other websites
+            </h2>
+            <p className="p-4 text-white">
+              The Service may contain links to other websites not operated or
+              controlled by Code Genius, including social media services (“Third
+              Party Sites”). The information that you share with Third Party
+              Sites will be governed by the specific privacy policies and terms
+              of service of the Third Party Sites and not by this Privacy
+              Policy. By providing these links we do not imply that we endorse
+              or have reviewed these sites. Please contact the Third Party Sites
+              directly for information on their privacy practices and policies.
+            </p>
+            <h2 className="m-4 text-2xl font-medium text-white">
+              6. Security and Retention
+            </h2>
+            <p className="p-4 text-white">
+              We implement commercially reasonable technical, administrative,
+              and organizational measures to protect Personal Information both
+              online and offline from loss, misuse, and unauthorized access,
+              disclosure, alteration, or destruction. However, no Internet or
+              email transmission is ever fully secure or error free. In
+              particular, email sent to or from us may not be secure. Therefore,
+              you should take special care in deciding what information you send
+              to us via the Service or email. In addition, we are not
+              responsible for circumvention of any privacy settings or security
+              measures contained on the Service, or third party websites. We’ll
+              retain your Personal Information for only as long as we need in
+              order to provide our Service to you, or for other legitimate
+              business purposes such as resolving disputes, safety and security
+              reasons, or complying with our legal obligations. How long we
+              retain Personal Information will depend on a number of factors,
+              such as the amount, nature, and sensitivity of the information,
+              the potential risk of harm from unauthorized use or disclosure,
+              our purpose for processing the information, and any legal
+              requirements. We may also anonymize or de-identify your Personal
+              Information (so that it can no longer be associated with you) for
+              research, improvement or statistical purposes, as described above,
+              in which case we may use this information indefinitely without
+              further notice to you.
+            </p>
+            <h2 className="m-4 text-2xl font-medium text-white">
+              7. Changes to the privacy policy
+            </h2>
+            <p className="p-4 text-white">
+              We may change this Privacy Policy at any time. When we do, we will
+              post an updated version on this page, unless another type of
+              notice is required by applicable law. By continuing to use our
+              Service or providing us with Personal Information after we have
+              posted an updated Privacy Policy, or notified you by other means,
+              you consent to the revised Privacy Policy.
+            </p>
+            <h2 className="m-4 text-2xl font-medium text-white">
+              8. How to contact us
+            </h2>
+            <p className="p-4 text-white">
+              Please{" "}
+              <Link className="underline" href="mailto:info@code-genius.dev">
+                contact support
+              </Link>{" "}
+              if you have any questions or concerns not already addressed in
+              this Privacy Policy.
             </p>
           </div>
         </div>

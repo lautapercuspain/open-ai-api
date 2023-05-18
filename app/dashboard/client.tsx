@@ -147,7 +147,7 @@ export default function Client({
             order="order-5"
             title="Documentation"
             imageSrc="/dashboard/documentation.svg"
-            text="Generate clear and concise documentation for your code, helping you saving you time."
+            text="Generate clear and concise documentation for your code, helping you saving precious time."
           />
         </div>
       </div>

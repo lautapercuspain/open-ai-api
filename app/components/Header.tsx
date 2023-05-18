@@ -44,8 +44,8 @@ export default function Header({
                       alt="Code Genius"
                     />
                     <h1
-                      className={`text-lg sm:text-xl sm:text-xl mt-1 ml-2
-                    bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text font-sans text-2xl font-bold tracking-tight text-transparent  sm:leading-6`}
+                      className={`sm:text-xl sm:text-xl mt-1 ml-2 bg-gradient-to-r
+                    from-[#A1FFE0] to-[#2C9DC0] bg-clip-text font-sans text-3xl font-bold tracking-tight text-transparent  sm:leading-6`}
                     >
                       Code Genius
                     </h1>

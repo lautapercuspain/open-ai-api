@@ -38,14 +38,14 @@ export const authOptions: AuthOptions = {
       const { html } = await response.json()
 
       //@ts-ignore
-      if (user.registered) {
-        await sendWelcomeEmail({
-          name: user.name,
-          html: html,
-          identifier: user.email,
-          provider: { server, from },
-        })
-      }
+      // if (user.registered) {
+      await sendWelcomeEmail({
+        name: user.name,
+        html: html,
+        identifier: user.email,
+        provider: { server, from },
+      })
+      // }
     },
   },
 

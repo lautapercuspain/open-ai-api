@@ -31,9 +31,9 @@ module.exports = {
         },
       ],
       "3xl": [
-        "32px",
+        "28px",
         {
-          lineHeight: "38px",
+          lineHeight: "35px",
           fontWeight: "500",
           letterSpacing: "1.8px",
         },
