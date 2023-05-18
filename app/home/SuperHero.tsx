@@ -18,13 +18,13 @@ export default function SuperHero() {
           whileHover={{ scale: 1.1 }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="mx-auto w-[95%] items-center justify-center bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text p-3 text-center font-sans text-4xl text-transparent
+          className="mx-auto w-[95%] items-center justify-center bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text p-3 text-center font-sans text-4xl font-semibold text-transparent
 sm:flex sm:w-full sm:text-6xl"
         >
           Create Genius Code
         </motion.h1>
         <p className="text-lg mt-2 w-[100%] items-center justify-center px-3 text-center font-sans text-white sm:text-2xl">
-          Develop Improved, Rapid, and Streamlined Code with your AI Genius
+          Take your code ideas to the next level with Code Genius
         </p>
       </section>
     </>

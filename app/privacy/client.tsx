@@ -26,14 +26,17 @@ export default function Client() {
             </h1>
             <p className="p-4 text-white">
               We, at Code Genius, (together with our affiliates, “CodeGenius”,
-              “we”, “our” or “us”), and accessible from https://code-genius.dev,
-              respect your privacy and are strongly committed to keeping secure
-              any information we obtain from you or about you. One of our main
-              priorities is the privacy of our visitors. This Privacy Policy
-              document contains types of information that is collected and
-              recorded by Code Genius and how we use it. If you have additional
-              questions or require more information about our Privacy Policy, do
-              not hesitate to{" "}
+              “we”, “our” or “us”), and accessible from{" "}
+              <Link href="https://code-genius.dev">
+                https://code-genius.dev
+              </Link>
+              , respect your privacy and are strongly committed to keeping
+              secure any information we obtain from you or about you. One of our
+              main priorities is the privacy of our visitors. This Privacy
+              Policy document contains types of information that is collected
+              and recorded by Code Genius and how we use it. If you have
+              additional questions or require more information about our Privacy
+              Policy, do not hesitate to{" "}
               <Link href="mailto:info@code-genius.dev">contact us</Link>. This
               Privacy Policy applies only to our online activities and is valid
               for visitors to our website with regards to the information that
@@ -47,7 +50,7 @@ export default function Client() {
               1. Personal Information
             </h2>
 
-            <p className="p-4 text-white">
+            <div className="p-4 text-white">
               We collect information that alone or in combination with other
               information could be used to identify you as follows: We may
               collect Personal Information if you{" "}
@@ -103,12 +106,12 @@ export default function Client() {
                   </Link>
                 </li>
               </ul>
-            </p>
+            </div>
             <h2 className="m-4 text-2xl font-medium text-white">
               2. How we use personal information
             </h2>
 
-            <p className="p-4 text-white">
+            <div className="p-4 text-white">
               We may use Personal Information for the following purposes:
               <ul className="ml-5 mt-5 list-disc">
                 <li className="mt-2">
@@ -128,12 +131,12 @@ export default function Client() {
                   of our affiliates, you, or other third parties.
                 </li>
               </ul>
-            </p>
+            </div>
             <h2 className="m-4 text-2xl font-medium text-white">
               3. Disclosure of personal information
             </h2>
 
-            <p className="p-4 text-white">
+            <div className="p-4 text-white">
               In some circumstances we may provide your Personal Information to
               third parties without further notice to you, unless required by
               the law:
@@ -178,11 +181,11 @@ export default function Client() {
                   consistent with this Privacy Policy.
                 </li>
               </ul>
-            </p>
+            </div>
             <h2 className="m-4 text-2xl font-medium text-white">
               4. Your data and rights
             </h2>
-            <p className="p-4 text-white">
+            <div className="p-4 text-white">
               Depending on location, individuals in the EEA, the UK, and across
               the globe may have certain regulations in relation to their
               Personal Information. For example, you may have the right to:
@@ -206,7 +209,7 @@ export default function Client() {
                   basis for processing.
                 </li>
               </ul>
-            </p>
+            </div>
             <h2 className="m-4 text-2xl font-medium text-white">
               5. Links and other websites
             </h2>

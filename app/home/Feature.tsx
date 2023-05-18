@@ -1,15 +1,16 @@
 "use client"
 
+import Lottie from "lottie-react"
+import Image from "next/image"
+import { useState } from "react"
 import { useMotionValueEvent, useScroll } from "framer-motion"
+
 import suggestions from "../../animations/suggestions.json"
 import generation from "../../animations/generation.json"
-import bugDetection from "../../animations/bugDetection.json"
+import codeDocumentation from "../../animations/codeDocumentation.json"
 import { motion } from "framer-motion"
 
-import Lottie from "lottie-react"
-import { useState } from "react"
 import ShowCaseCard from "./ShowCaseCard"
-import Image from "next/image"
 import Button from "app/components/Button"
 
 const interactivity: any = {
@@ -42,8 +43,10 @@ export const AISuggestions = () => {
 const AIGeneration = () => {
   return <Lottie interactivity={interactivity} animationData={generation} />
 }
-const BugDetection = () => {
-  return <Lottie interactivity={interactivity} animationData={bugDetection} />
+const CodeDocumentation = () => {
+  return (
+    <Lottie interactivity={interactivity} animationData={codeDocumentation} />
+  )
 }
 
 export default function Feature({ setShowSignInModal }) {
@@ -79,90 +82,92 @@ export default function Feature({ setShowSignInModal }) {
   return (
     <>
       <section className={`mt-8 font-sans text-white`}>
-        <ShowCaseCard
-          title="The AI programming assistant that helps you coding faster, easier,
-            and more efficient!"
-          description="Writing great code can be a challenging and time-consuming task, but
-            with Code Genius you can take your skills to the next level! Explore
-            the possibilities!"
+        {/* <ShowCaseCard
+          title="The AI programming genius that helps you coding faster, easier, and more efficient!"
+          description="Writing great code can be a challenging and time-consuming task, but with Code Genius you can take your skills to the next level! Explore the possibilities!"
           image={AIShowCaseImage}
-        />
-
+        /> */}
+        <div className="mx-auto mt-28 mb-8 w-full p-4 text-center sm:w-[60%]">
+          <motion.h2 className="mx-auto bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text text-center text-3xl font-bold text-transparent sm:text-4xl">
+            The AI programming genius that helps you coding faster, easier, and
+            more efficient!
+          </motion.h2>
+          <motion.p className="text-xl my-8 text-gray-200 sm:text-2xl">
+            Writing great code can be a challenging and time-consuming task, but
+            with Code Genius you can take your skills to the next level! Explore
+            the possibilities!
+          </motion.p>
+        </div>
         <div className="mb-24 grid grid-cols-1 gap-1 sm:grid-cols-2">
-          <div className="mx-auto mb-2 flex w-96 items-start justify-start sm:ml-40 sm:w-full">
-            <BugDetection />
+          <div className="mx-auto mb-2 mt-12 flex w-96 items-start justify-start sm:ml-40 sm:w-full">
+            <CodeDocumentation />
           </div>
-          <div className="mt-0 p-2 sm:mt-20">
-            <motion.h1
+          <div className="my-auto mt-0 flex flex-col sm:mt-16 sm:h-[280px]">
+            <motion.h2
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="pl-3 text-center text-5xl font-bold sm:text-left"
+              className="mx-auto w-[90%] text-center text-4xl font-bold text-white sm:ml-0 sm:w-[80%] sm:pl-3 sm:text-left"
             >
-              Smart suggestions
-            </motion.h1>
+              Improve your code and get suggestions
+            </motion.h2>
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="mt-2 w-full p-4 text-center sm:w-[80%] sm:text-left"
+              className="my-auto mt-2 w-full p-4 text-center text-gray-200 sm:w-[80%] sm:text-left"
             >
-              Our software offers smart generation capabilities, allowing
-              developers to generate high-quality code with ease. With this
-              feature, developers can save time and effort in writing code,
-              resulting in increased productivity and faster development cycles.
+              Code Genius analyzes your code in real-time, offering smart
+              suggestions and code improvements. From enhancing syntax to
+              optimizing algorithms, Code Genius ensures your code is clean,
+              efficient, and error-free.
             </motion.p>
           </div>
-          <div className="mx-auto mb-2 flex w-96 items-start justify-start sm:ml-40 sm:w-full">
-            <BugDetection />
+          <div className="mx-auto mb-2 mt-12 flex w-96 items-start justify-start sm:ml-40 sm:w-full">
+            <CodeDocumentation />
           </div>
-          <div className="mt-0 p-2 sm:mt-20">
-            <motion.h1
+          <div className="my-auto mt-0 flex flex-col sm:mt-16 sm:h-[280px]">
+            <motion.h2
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="pl-3 text-center text-5xl font-bold sm:text-left"
+              className="w-[80%] pl-3 text-center text-4xl font-bold sm:text-left"
             >
-              Test Generation
-            </motion.h1>
+              Save time generating code tests
+            </motion.h2>
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="mt-2 w-full p-4 text-center sm:w-[80%] sm:text-left"
+              className="mt-2 w-full p-4 text-center text-gray-200 sm:w-[80%] sm:text-left"
             >
-              You can generate tests based on the provided function. With this
-              feature, developers can quickly and easily generate test cases for
-              their functions, ensuring that their code is thoroughly tested and
-              reliable. This feature can save developers a significant amount of
-              time and effort in manually creating test cases.
+              Writing tests can be a tedious and time-consuming task. With Code
+              Genius you can automatically generate test cases that cover a wide
+              range of scenarios, ensuring that your code is thoroughly tested
+              and reliable.
             </motion.p>
           </div>
-          <div className="mx-auto flex w-96 items-center justify-start sm:ml-40 sm:w-full">
-            <BugDetection />
+          <div className="mx-auto mt-12 flex w-96 items-center justify-start sm:ml-40 sm:w-full">
+            <CodeDocumentation />
           </div>
-          <div className="mt-0 p-2 sm:mt-20">
-            <motion.h1
+          <div className="my-auto mt-0 flex flex-col sm:mt-16 sm:h-[280px]">
+            <motion.h2
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="pl-3 text-center text-5xl font-bold sm:text-left"
+              className="w-[80%] pl-3 text-center text-4xl font-bold sm:mt-4 sm:text-left"
             >
-              Code Ideas
-            </motion.h1>
+              Create documentation in seconds
+            </motion.h2>
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="mt-2 w-full p-4 text-center sm:w-[80%] sm:text-left"
+              className="mt-2 w-full p-4 text-center text-gray-200 sm:w-[80%] sm:text-left"
             >
-              Our software includes a feature that provides developers with code
-              ideas based on the context of their current project. This feature
-              can be especially useful for new developers who may not be as
-              familiar with the language or libraries they are working with.
-              With this feature, developers can save time in researching and
-              experimenting with new code solutions, resulting in faster
-              development cycles and increased productivity.
+              Good documentation is key to writing maintainable code. With Code
+              Genius, you can automatically generate clear and concise
+              documentation for your code.
             </motion.p>
           </div>
         </div>
