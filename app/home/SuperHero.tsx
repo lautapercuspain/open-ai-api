@@ -14,7 +14,7 @@ export default function SuperHero() {
   return (
     <>
       <section className={`${inter.variable} mt-36 mb-5 font-sans`}>
-        <motion.h1
+        <motion.h2
           whileHover={{ scale: 1.1 }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -22,7 +22,7 @@ export default function SuperHero() {
 sm:flex sm:w-full sm:text-6xl"
         >
           Create Genius Code
-        </motion.h1>
+        </motion.h2>
         <p className="text-lg mt-2 w-[100%] items-center justify-center px-3 text-center font-sans text-white sm:text-2xl">
           Take your code ideas to the next level with Code Genius
         </p>

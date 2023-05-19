@@ -6,7 +6,7 @@ import { useState } from "react"
 import { useMotionValueEvent, useScroll } from "framer-motion"
 
 import suggestions from "../../animations/suggestions.json"
-import generation from "../../animations/generation.json"
+import testGeneration from "../../animations/generation.json"
 import codeDocumentation from "../../animations/codeDocumentation.json"
 import { motion } from "framer-motion"
 
@@ -41,7 +41,7 @@ export const AISuggestions = () => {
   )
 }
 const AIGeneration = () => {
-  return <Lottie interactivity={interactivity} animationData={generation} />
+  return <Lottie interactivity={interactivity} animationData={testGeneration} />
 }
 const CodeDocumentation = () => {
   return (
@@ -49,7 +49,8 @@ const CodeDocumentation = () => {
   )
 }
 
-export default function Feature({ setShowSignInModal }) {
+export default function Feature({ setShowSignInModal, session }) {
+  console.log("session:", session)
   const [verticalScroll, setVerticalScroll] = useState(0)
   const { scrollYProgress, scrollY, scrollX } = useScroll()
 
@@ -88,10 +89,10 @@ export default function Feature({ setShowSignInModal }) {
           image={AIShowCaseImage}
         /> */}
         <div className="mx-auto mt-28 mb-8 w-full p-4 text-center sm:w-[60%]">
-          <motion.h2 className="mx-auto bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text text-center text-3xl font-bold text-transparent sm:text-4xl">
+          <motion.h3 className="mx-auto bg-gradient-to-r from-[#A1FFE0] to-[#2C9DC0] bg-clip-text text-center text-3xl font-bold text-transparent sm:text-4xl">
             The AI programming genius that helps you coding faster, easier, and
             more efficient!
-          </motion.h2>
+          </motion.h3>
           <motion.p className="text-xl my-8 text-gray-200 sm:text-2xl">
             Writing great code can be a challenging and time-consuming task, but
             with Code Genius you can take your skills to the next level! Explore
@@ -100,17 +101,18 @@ export default function Feature({ setShowSignInModal }) {
         </div>
         <div className="mb-24 grid grid-cols-1 gap-1 sm:grid-cols-2">
           <div className="mx-auto mb-2 mt-12 flex w-96 items-start justify-start sm:ml-40 sm:w-full">
+            {/* <AISuggestions /> */}
             <CodeDocumentation />
           </div>
           <div className="my-auto mt-0 flex flex-col sm:mt-16 sm:h-[280px]">
-            <motion.h2
+            <motion.h3
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               className="mx-auto w-[90%] text-center text-4xl font-bold text-white sm:ml-0 sm:w-[80%] sm:pl-3 sm:text-left"
             >
               Improve your code and get suggestions
-            </motion.h2>
+            </motion.h3>
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -124,17 +126,18 @@ export default function Feature({ setShowSignInModal }) {
             </motion.p>
           </div>
           <div className="mx-auto mb-2 mt-12 flex w-96 items-start justify-start sm:ml-40 sm:w-full">
+            {/* <AIGeneration /> */}
             <CodeDocumentation />
           </div>
           <div className="my-auto mt-0 flex flex-col sm:mt-16 sm:h-[280px]">
-            <motion.h2
+            <motion.h3
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               className="w-[80%] pl-3 text-center text-4xl font-bold sm:text-left"
             >
               Save time generating code tests
-            </motion.h2>
+            </motion.h3>
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -151,14 +154,14 @@ export default function Feature({ setShowSignInModal }) {
             <CodeDocumentation />
           </div>
           <div className="my-auto mt-0 flex flex-col sm:mt-16 sm:h-[280px]">
-            <motion.h2
+            <motion.h3
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="w-[80%] pl-3 text-center text-4xl font-bold sm:mt-4 sm:text-left"
+              className="w-[90%] pl-3 text-center text-4xl font-bold sm:mt-4 sm:text-left"
             >
-              Create documentation in seconds
-            </motion.h2>
+              Create code documentation in seconds
+            </motion.h3>
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -178,7 +181,7 @@ export default function Feature({ setShowSignInModal }) {
             anything you want!"
             description="Writing great code can be a challenging and time-consuming task, but with Code Genius you can take your skills to the next level! Explore the possibilities!"
             image={AIShowCaseImage}
-            button={CreateAccountButton}
+            button={!session ? CreateAccountButton : undefined}
           />
         </div>
       </section>

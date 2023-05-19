@@ -34,7 +34,7 @@ export default function Client({
         session={session}
         loggedUserData={loggedUserData}
       />
-      <Feature setShowSignInModal={setShowSignInModal} />
+      <Feature session={session} setShowSignInModal={setShowSignInModal} />
     </>
   )
 }
