@@ -4,7 +4,7 @@ import { useSignInModal } from "app/components/modals/SignInModal"
 import HeaderWrapper from "app/components/shared/HeaderWrapper"
 import Link from "next/link"
 
-export default function Client() {
+export default function Client({ session }) {
   const { SignInModal, setShowSignInModal, showSignInModal } = useSignInModal(
     {},
   )
@@ -17,7 +17,7 @@ export default function Client() {
           <HeaderWrapper
             setShowSignInModal={setShowSignInModal}
             showSignInModal={showSignInModal}
-            session={undefined}
+            session={session}
             userHasAccount={undefined}
           />
           <div className="mx-auto mt-28 w-[80%]">
