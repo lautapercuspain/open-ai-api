@@ -36,9 +36,9 @@ export const CREDITS_MODAL_COPY = {
 }
 
 export const PRICE_IDS = {
-  25: "price_1N33VNKrxiA7kR6cPePbRpyr",
-  50: "price_1N36C1KrxiA7kR6cykNsuT7L",
-  100: "price_1N36YjKrxiA7kR6c2bJpd1NN",
+  50: "price_1N36XLKrxiA7kR6c7vLV9wgJ",
+  100: "price_1N9L7vKrxiA7kR6cauPCI281",
+  150: "price_1N9L93KrxiA7kR6cJvbFzuBX",
 }
 
 export const LSConfig = {

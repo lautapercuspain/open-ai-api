@@ -24,7 +24,7 @@ sm:flex sm:w-full sm:text-6xl"
           Create Genius Code
         </motion.h2>
         <p className="text-lg mt-2 w-[100%] items-center justify-center px-3 text-center font-sans text-white sm:text-2xl">
-          Take your code ideas to the next level with Code Genius
+          Take your code ideas to the next level with the power of AI
         </p>
       </section>
     </>

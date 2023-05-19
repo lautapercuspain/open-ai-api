@@ -20,9 +20,9 @@ type ClientPropTye = {
 }
 
 export default function Client({ session }: ClientPropTye) {
-  const initialCreditsValue = 25
+  const initialCreditsValue = 50
   const [credits, setCredits] = React.useState<number>(initialCreditsValue)
-  const { setShowSignInModal } = useSignInModal({})
+  const { setShowSignInModal, SignInModal } = useSignInModal({})
   const [loadingStripe, setLoadingStripe] = React.useState<boolean>(false)
 
   const [priceId, setPrecieId] = React.useState<string>("")
@@ -30,28 +30,30 @@ export default function Client({ session }: ClientPropTye) {
   const [openContactForm, setOpenContactForm] = React.useState<boolean>(false)
 
   useEffect(() => {
-    if (credits === 25) {
-      setPrecieId(PRICE_IDS[25])
-    } else if (credits === 50) {
+    if (credits === 50) {
       setPrecieId(PRICE_IDS[50])
     } else if (credits === 100) {
       setPrecieId(PRICE_IDS[100])
+    } else if (credits === 150) {
+      setPrecieId(PRICE_IDS[150])
     }
   }, [credits])
 
   const getCreditPrice = () => {
     switch (credits) {
-      case 25:
-        return 5.0
       case 50:
-        return 8.0
+        return 5.0
       case 100:
+        return 8.0
+      case 150:
         return 15.0
     }
   }
 
   const submitPaymentInstruction = async (e) => {
     e.preventDefault()
+    console.log("priceId", priceId)
+
     setLoadingStripe(true)
     if (!session) {
       console.log("Log the user in")
@@ -83,7 +85,7 @@ export default function Client({ session }: ClientPropTye) {
         email: session.user.email,
         userId: session.user.id,
         name: session.user.name,
-        checkoutURL: stripeSession.session.url,
+        checkoutURL: stripeSession?.session?.url,
         created: stripeSession.session.created,
         amount: stripeSession.session.amount_total,
         confirmed: false,
@@ -95,6 +97,7 @@ export default function Client({ session }: ClientPropTye) {
 
   return (
     <>
+      <SignInModal />
       <Header session={session} setShowSignInModal={setShowSignInModal} />
       <PaymentModal isOpen={openPayment} setIsOpen={setOpenPayment} />
       <ContactFormModal
@@ -122,31 +125,31 @@ export default function Client({ session }: ClientPropTye) {
           </div>
           <div className="my-4 mx-auto">
             <button
-              onClick={() => setCredits(25)}
+              onClick={() => setCredits(50)}
               className={`text-xs leading-sm active:bg-bg-morado ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white px-3 py-1 font-bold uppercase text-white hover:border 
                   hover:border-morado  hover:bg-purple-500 focus:bg-morado ${
-                    credits === 25
+                    credits === 50
                       ? "border-morado bg-morado"
                       : "bg-transparent"
                   } `}
-            >
-              25
-            </button>
-            <button
-              onClick={() => setCredits(50)}
-              className={`text-xs leading-sm ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white px-3 py-1 font-bold uppercase text-white hover:border hover:border-morado hover:bg-purple-500 focus:bg-morado  ${
-                credits === 50 ? "border-morado bg-morado" : "bg-transparent"
-              } `}
             >
               50
             </button>
             <button
               onClick={() => setCredits(100)}
-              className={`text-xs leading-sm ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white px-3 py-1 font-bold uppercase text-white hover:border hover:border-morado hover:bg-purple-500 focus:bg-morado ${
+              className={`text-xs leading-sm hover:bg-purple-1000 ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white px-3 py-1 font-bold uppercase text-white hover:border hover:border-morado focus:bg-morado  ${
                 credits === 100 ? "border-morado bg-morado" : "bg-transparent"
               } `}
             >
               100
+            </button>
+            <button
+              onClick={() => setCredits(150)}
+              className={`text-xs leading-sm ml-4 inline-flex w-16 cursor-pointer items-center justify-center rounded-full border border-white px-3 py-1 font-bold uppercase text-white hover:border hover:border-morado hover:bg-purple-500 focus:bg-morado ${
+                credits === 150 ? "border-morado bg-morado" : "bg-transparent"
+              } `}
+            >
+              150
             </button>
           </div>
           <div
@@ -162,7 +165,7 @@ export default function Client({ session }: ClientPropTye) {
                 type="submit"
                 className="text-sm  px-1 py-3 text-center font-sans text-white sm:mx-auto sm:px-2"
               >
-                {loadingStripe ? <Loading size={24} /> : "Buy Credits"}
+                {loadingStripe ? <Loading size={20} /> : "Buy Credits"}
               </button>
             </div>
           </div>

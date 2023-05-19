@@ -5,8 +5,8 @@ import Image from "next/image"
 import { useState } from "react"
 import { useMotionValueEvent, useScroll } from "framer-motion"
 
-import suggestions from "../../animations/suggestions.json"
-import testGeneration from "../../animations/generation.json"
+import Suggestions from "../../animations/Code-improvements.json"
+import TestGeneration from "../../animations/generating-tests.json"
 import codeDocumentation from "../../animations/codeDocumentation.json"
 import { motion } from "framer-motion"
 
@@ -36,12 +36,12 @@ const interactivity: any = {
 export const AISuggestions = () => {
   return (
     <>
-      <Lottie interactivity={interactivity} animationData={suggestions} />
+      <Lottie interactivity={interactivity} animationData={Suggestions} />
     </>
   )
 }
 const AIGeneration = () => {
-  return <Lottie interactivity={interactivity} animationData={testGeneration} />
+  return <Lottie interactivity={interactivity} animationData={TestGeneration} />
 }
 const CodeDocumentation = () => {
   return (
@@ -66,6 +66,16 @@ export default function Feature({ setShowSignInModal, session }) {
       width={400}
       height={170}
     />
+  )
+  const ChatIlustration = (
+    <div className="hidden sm:absolute sm:right-40 sm:mt-6 sm:block">
+      <Image
+        src="/home/chat.svg"
+        alt="Chat with Code Genius"
+        width={427}
+        height={301}
+      />
+    </div>
   )
 
   const CreateAccountButton = (
@@ -101,15 +111,15 @@ export default function Feature({ setShowSignInModal, session }) {
         </div>
         <div className="mb-24 grid grid-cols-1 gap-1 sm:grid-cols-2">
           <div className="mx-auto mb-2 mt-12 flex w-96 items-start justify-start sm:ml-40 sm:w-full">
-            {/* <AISuggestions /> */}
-            <CodeDocumentation />
+            <AISuggestions />
+            {/* <CodeDocumentation /> */}
           </div>
           <div className="my-auto mt-0 flex flex-col sm:mt-16 sm:h-[280px]">
             <motion.h3
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="mx-auto w-[90%] text-center text-4xl font-bold text-white sm:ml-0 sm:w-[80%] sm:pl-3 sm:text-left"
+              className="mx-auto w-[100%] text-center text-4xl font-bold text-white sm:ml-0 sm:w-[80%] sm:pl-3 sm:text-left"
             >
               Improve your code and get suggestions
             </motion.h3>
@@ -126,15 +136,15 @@ export default function Feature({ setShowSignInModal, session }) {
             </motion.p>
           </div>
           <div className="mx-auto mb-2 mt-12 flex w-96 items-start justify-start sm:ml-40 sm:w-full">
-            {/* <AIGeneration /> */}
-            <CodeDocumentation />
+            <AIGeneration />
+            {/* <CodeDocumentation /> */}
           </div>
           <div className="my-auto mt-0 flex flex-col sm:mt-16 sm:h-[280px]">
             <motion.h3
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="w-[80%] pl-3 text-center text-4xl font-bold sm:text-left"
+              className="mx-auto w-[90%] pl-3 text-center text-4xl font-bold sm:mx-0 sm:mt-4 sm:text-left md:w-[85%]"
             >
               Save time generating code tests
             </motion.h3>
@@ -158,7 +168,7 @@ export default function Feature({ setShowSignInModal, session }) {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="w-[90%] pl-3 text-center text-4xl font-bold sm:mt-4 sm:text-left"
+              className="mx-auto w-[80%] pl-3 text-center text-4xl font-bold sm:mx-0 sm:mt-0 sm:text-left"
             >
               Create code documentation in seconds
             </motion.h3>
@@ -176,11 +186,9 @@ export default function Feature({ setShowSignInModal, session }) {
         </div>
         <div className="my-20">
           <ShowCaseCard
-            title="Now you can Chat
-            with Code Genius and ask
-            anything you want!"
+            title="Chat with Code Genius and ask anything you want!"
             description="Writing great code can be a challenging and time-consuming task, but with Code Genius you can take your skills to the next level! Explore the possibilities!"
-            image={AIShowCaseImage}
+            image={ChatIlustration}
             button={!session ? CreateAccountButton : undefined}
           />
         </div>

@@ -29,7 +29,7 @@ export default function PromptCard({
   return (
     <div
       className={`${order} mt-4 flex ${
-        size === "large" ? width + " h-60" : "h-48 w-[100%] sm:w-[23%]"
+        size === "large" ? width + " h-60" : "h-52 w-[100%] sm:w-[23%]"
       } 
       ${mb} cursor-pointer justify-between rounded-lg border-[1px] border-purple-500 bg-purple-700 p-6 shadow hover:bg-purple-500`}
       onClick={() => {

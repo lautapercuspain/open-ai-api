@@ -35,7 +35,7 @@ module.exports = {
         {
           lineHeight: "35px",
           fontWeight: "500",
-          letterSpacing: "1.8px",
+          letterSpacing: "-0.02em",
         },
       ],
       "4xl": [
