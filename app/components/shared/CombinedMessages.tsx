@@ -1,5 +1,5 @@
 import GenerateCode from "../GenerateCode"
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import Image from "next/image"
 import Markdown from "react-markdown"
 import { parseText, parseTextHome } from "utils/parseText"
@@ -36,8 +36,15 @@ export const CombinedMessages = React.memo(
     generatedMessages: Message[]
     fontColor?: string
   }) => {
+    const listRef = useRef<HTMLDivElement>(null)
+    useEffect(() => {
+      //3️⃣ bring the last item into view
+      listRef.current?.lastElementChild?.scrollIntoView({
+        block: "end",
+      })
+    }, [generatedMessages])
     return (
-      <>
+      <div className="overflow-y-scrol" ref={listRef}>
         {generatedMessages.map((generatedMessage: any) => {
           const result = isLegacy
             ? parseTextHome(generatedMessage)
@@ -50,7 +57,7 @@ export const CombinedMessages = React.memo(
             ? result.map((message: any, idx) => {
                 if (message.hasOwnProperty("text") && message?.text !== "") {
                   return (
-                    <div key={idx} className="mt-1 flex overflow-y-scroll">
+                    <div key={idx} className="my-8 flex  ">
                       <div className="mt-2 flex items-start justify-start sm:ml-6">
                         {role === "user" ? (
                           <UserAvatar username={userName?.substring(0, 1)} />
@@ -59,7 +66,7 @@ export const CombinedMessages = React.memo(
                         )}
                       </div>
                       <div
-                        className={`mx-auto ml-3 w-[92%] rounded-lg bg-purple-800 p-2`}
+                        className={`mx-auto ml-3 w-[92%] rounded-lg border border-gray-500 bg-purple-800 p-2`}
                       >
                         <p
                           style={{ borderRadius: "0px" }}
@@ -85,7 +92,7 @@ export const CombinedMessages = React.memo(
               })
             : null
         })}
-      </>
+      </div>
     )
   },
 )

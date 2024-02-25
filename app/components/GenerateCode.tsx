@@ -25,13 +25,11 @@ function GenerateCode({
   langElement,
 }: GenerateCode) {
   const { isMobile } = useWindowSize()
-  const minWidth = isMobile ? "90vw" : "92%"
+  const minWidth = isMobile ? "90vw" : "100%"
 
   return (
     <>
-      <div
-        className={`my-5 flex flex-col items-${align} md:items-${align} lg:items-${align}`}
-      >
+      <div className={`my-5 flex flex-col sm:ml-16`}>
         {generatedCode &&
           generatedCode
             .replace("typescript", "")
@@ -48,7 +46,7 @@ function GenerateCode({
               return (
                 <div
                   key={idx}
-                  className="mx-auto flex w-full items-center justify-center text-left font-mono sm:items-end sm:justify-end"
+                  className="mx-auto flex w-full justify-start text-left font-mono sm:w-full sm:items-end sm:justify-end"
                 >
                   <CopyBlock
                     onCopy={() => null}
@@ -56,10 +54,9 @@ function GenerateCode({
                     showLineNumbers
                     wrapLongLines
                     customStyle={{
-                      minWidth: minWidth,
-                      with: "100vw",
+                      minWidth,
                       borderRadius: "0.6rem",
-                      border: `0.5px solid ${themeColors.purple[500]}`,
+                      border: `0.5px solid ${themeColors.gray[500]}`,
                     }}
                     text={generated.trim()}
                     language={langElement === "Typescript" ? "tsx" : "jsx"}
