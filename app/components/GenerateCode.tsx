@@ -25,7 +25,7 @@ function GenerateCode({
   langElement,
 }: GenerateCode) {
   const { isMobile } = useWindowSize()
-  const minWidth = isMobile ? "90vw" : "100%"
+  const minWidth = isMobile ? "90vw" : "92%"
 
   return (
     <>
@@ -48,7 +48,7 @@ function GenerateCode({
               return (
                 <div
                   key={idx}
-                  className="mx-auto flex w-full items-center justify-center text-left font-mono sm:items-start sm:justify-start"
+                  className="mx-auto flex w-full items-center justify-center text-left font-mono sm:items-end sm:justify-end"
                 >
                   <CopyBlock
                     onCopy={() => null}
