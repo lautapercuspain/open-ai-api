@@ -55,11 +55,11 @@ OPEN-AI-API/
 
 ## Bugs and feature requests
 
-Have a bug or a feature request? Please first read the [issue guidelines](https://reponame/blob/master/CONTRIBUTING.md) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/lautapercuspain/open-ai-api/issues/new).
+Have a bug or a feature request? Please first read the [issue guidelines](https://github.com/lautapercuspain/open-ai-api/blob/readme-update/CONTRIBUTING.md) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://github.com/lautapercuspain/open-ai-api/issues/new).
 
 ## Contributing
 
-Please read through our [contributing guidelines](https://reponame/blob/master/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
+Please read through our [contributing guidelines](https://github.com/lautapercuspain/open-ai-api/blob/readme-update/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
 
 Moreover, all HTML, CSS and TSX files should conform to the [Code Guide](https://github.com/mdo/code-guide), maintained by [@lautapercuspain](https://www.github.com/lautapercuspain).
 
