@@ -1,9 +1,9 @@
 <p align="center">
-  <a href="https://example.com/">
+  <a href="https://code-genius.dev">
     <img src="https://www.code-genius.dev/_next/image?url=%2Flogo%2Fcode-genius.svg&w=32&q=75" alt="Logo" width=72 height=72>
   </a>
 
-  <h3 align="center">Codegenius</h3>
+  <h3 align="center">Code Genius</h3>
 
   <p align="center">
     This project aims to generate code suggestions to help the developer code faster and smarther.
@@ -52,7 +52,7 @@ yarn dev
 - We are using the [Next.js App directory](https://nextjs.org/docs/app) to provide a solid skeleton for our project.
 - The aforementioned [RSC](https://nextjs.org/docs/app/building-your-application/rendering/server-components) is a key part of our website.
 - [OpenAI API](https://openai.com/blog/openai-api) is a must, being the base of Codegenius since day one!
-- Every one of our routes includes a page.tsx and client.tsx file
+- Every one of our routes includes a page.tsx and client.tsx file. Page.tsx is a RSC by default, usually Client.tsx is a client component and it should use the use client directive at the top of the file.
 
 ```Example of our repo's internal structure
 OPEN-AI-API/
