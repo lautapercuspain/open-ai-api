@@ -18,16 +18,40 @@ How to set up the project to run it locally.
 yarn dev
 ```
 
+## Environmental variables
+
+```
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=uJ8hpI13bgKty7XviBWh3fNUluWxeetbkpqR2RUgbuI=
+GOOGLE_CLIENT_ID=[get-one-from-google]
+GOOGLE_CLIENT_SECRET=[get-one-from-google]
+GITHUB_ID=[get-one-from-github]
+GITHUB_SECRET=[get-one-from-github]
+OPENAI_API_KEY=[your-provide-an-open-ai-key]
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=[please-contact-us-for-stripe-credentials]
+STRIPE_SECRET_KEY=[please-contact-us-for-stripe-credentials]
+RESEND_API_KEY=[resend-api-key]
+
+#SUPABASE DEV CREDS
+DATABASE_URL=[please-contact-us-for-db-credentials]
+DIRECT_URL=[please-contact-us-for-db-credentials]
+NEXT_PUBLIC_SUPABASE_URL=[please-contact-us-for-db-credentials]
+SUPABASE_SERVICE_ROLE[please-contact-us-for-db-credentials]
+SUPABASE_JWT_SECRET=[please-contact-us-for-db-credentials]
+```
+
 ## Pull Request Process
 
 1. Ensure any install or build dependencies are removed before the end of the layer when doing a 
    build.
-2. Update the README.md with details of changes to the interface, this includes new environment 
+2. Update the [README.md](https://github.com/lautapercuspain/open-ai-api/blob/readme-update/README.md) with details of changes to the interface, this includes new environment 
    variables, exposed ports, useful file locations and container parameters.
-3. Increase the version numbers in any examples files and the README.md to the new version that this
+3. Increase the version numbers in any examples files and the [README.md](https://github.com/lautapercuspain/open-ai-api/blob/readme-update/README.md) to the new version that this
    Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
 4. You may merge the Pull Request in once you have the sign-off of two other developers, or if you 
    do not have permission to do that, you may request the second reviewer to merge it for you.
+
+- **Important**: when submitting a Pull Request, please tag [@lautapercuspain](https://www.github.com/lautapercuspain) for review!
 
 ## Code of Conduct
 
@@ -86,7 +110,7 @@ further defined and clarified by project maintainers.
 ### Enforcement
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the project team at [INSERT EMAIL ADDRESS]. All
+reported by contacting the project team at [lautarogruss@gmail.com](lautarogruss@gmail.com). All
 complaints will be reviewed and investigated and will result in a response that
 is deemed necessary and appropriate to the circumstances. The project team is
 obligated to maintain confidentiality with regard to the reporter of an incident.
