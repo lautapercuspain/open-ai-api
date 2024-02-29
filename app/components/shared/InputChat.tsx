@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils"
 import { ArrowRight } from "lucide-react"
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 
 export default function InputChat({
   reload,
@@ -10,6 +10,7 @@ export default function InputChat({
   handleInputChange,
   handleSubmit,
 }) {
+  const textAreaRef = useRef<any>(null)
   const [newLine, setNewLine] = useState(0)
   const [count, setCount] = React.useState(0)
   console.log("count:", count)
@@ -19,6 +20,10 @@ export default function InputChat({
     if (initialQuery !== "") {
       reload()
     }
+  }, [])
+
+  React.useEffect(() => {
+    textAreaRef.current.focus()
   }, [])
 
   const handleUserKeyPress = (e) => {
@@ -48,7 +53,7 @@ export default function InputChat({
   const height = !hasAquestion ? 56 : totalRows > 1 ? totalRows * 24 + 14 : 56
 
   return (
-    <div className="fixed bottom-4 left-0 right-0 z-50 mx-auto h-14 w-[95%] bg-transparent  sm:mx-auto sm:w-full">
+    <div className="fixed bottom-4 left-0 right-0 z-50 mx-auto h-14 w-[95%] bg-transparent sm:mx-auto sm:w-full">
       <div className="relative mx-auto mt-2 h-12 w-full sm:w-[900px]">
         <form
           id="chat-form"
@@ -65,10 +70,12 @@ export default function InputChat({
               height: height + newLine * 14,
             }}
             className={cn(
-              "absolute bottom-0 flex w-full flex-grow flex-col overflow-hidden rounded-2xl border border-gray-300 bg-purple-900 [&:has(textarea:focus)]:shadow-[0_2px_6px_rgba(0,0,0,.05)]",
+              "absolute bottom-0 flex w-full flex-grow flex-col overflow-hidden rounded-2xl border border-gray-600 bg-purple-900 [&:has(textarea:focus)]:shadow-[0_2px_6px_rgba(0,0,0,.05)]",
+              { "border-gray-400": hasAquestion },
             )}
           >
             <textarea
+              ref={textAreaRef}
               id="chat-input"
               rows={totalRows}
               onKeyUp={handleKeyUp}
