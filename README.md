@@ -16,7 +16,6 @@
 
 ## Table of contents
 
-- [Quick start](#quick-start)
 - [Status](#status)
 - [Folder Structure](#folder-structure)
 - [Bugs and feature requests](#bugs-and-feature-requests)
@@ -24,20 +23,6 @@
 - [Creators and contributors](#creators-and-contributors)
 - [Thanks](#thanks)
 - [Copyright and license](#copyright-and-license)
-
-
-## Quick start
-
-How to set up the project to run it locally.
-
-- Go to [OpenAI](https://beta.openai.com/) and make an account if you don't have one yet.
-- OpenAI will provide a [personal API key](https://beta.openai.com/account/api-keys); copy it and put it in a file called `.env` at the root level inside the project directory.
-- On your local host, run `yarn` and after dependencies installation.
-- Run the application in the command line and it will be available at `http://localhost:3000`.
-
-```bash
-yarn dev
-```
 
 ## Status
 
