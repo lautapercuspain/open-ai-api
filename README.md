@@ -16,13 +16,13 @@
 
 ## Table of contents
 
+- [Table of contents](#table-of-contents)
 - [Status](#status)
-- [Folder Structure](#folder-structure)
+- [Folder structure](#folder-structure)
 - [Bugs and feature requests](#bugs-and-feature-requests)
 - [Contributing](#contributing)
 - [Creators and contributors](#creators-and-contributors)
 - [Thanks](#thanks)
-- [Copyright and license](#copyright-and-license)
 
 ## Status
 
@@ -75,15 +75,4 @@ Moreover, all HTML, CSS and TSX files should conform to the [Code Guide](https:/
 
 ## Thanks
 
-Thanks for reading!
-
-## Copyright and license
-
-Codegenius and documentation copyright 2022-2024 the authors. Code released under the [MIT License](https://reponame/blob/master/LICENSE).
-
-[README template](https://github.com/Ismaestro/markdown-template/tree/master) provided by [@Ismaestro](https://www.github.com/Ismaestro).
-
-[CONTRIBUTING template](https://gist.github.com/PurpleBooth/b24679402957c63ec426) provided by [@PurpleBooth](https://www.github.com/PurpleBooth).
-
-
-Enjoy :metal:
+Thanks for reading and happy coding!
