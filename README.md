@@ -81,6 +81,9 @@ Thanks for reading!
 
 Codegenius and documentation copyright 2022-2024 the authors. Code released under the [MIT License](https://reponame/blob/master/LICENSE).
 
-[Markdown template](https://github.com/Ismaestro/markdown-template/tree/master) provided by [@Ismaestro](https://www.github.com/Ismaestro).
+[README template](https://github.com/Ismaestro/markdown-template/tree/master) provided by [@Ismaestro](https://www.github.com/Ismaestro).
+
+[CONTRIBUTING template](https://gist.github.com/PurpleBooth/b24679402957c63ec426) provided by [@PurpleBooth](https://www.github.com/PurpleBooth).
+
 
 Enjoy :metal:
