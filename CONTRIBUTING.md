@@ -14,9 +14,13 @@ How to set up the project to run it locally.
 - On your local host, run `yarn` and after dependencies installation.
 - Run the application in the command line and it will be available at `http://localhost:3000`.
 
-## Google Login in Dev
+## Google Auth
 
-Please go to the [NextAuth docs](https://next-auth.js.org/providers/google) and follow the instructions for setting up the Google provider in order to use Google as an auth provider.
+Please go to the [NextAuth docs](https://next-auth.js.org/providers/google) for Google and follow the instructions for setting up the Google provider in order to use Google as the auth provider.
+
+## Github Auth
+
+Please go to the [NextAuth docs](https://next-auth.js.org/providers/github) for Github and follow the instructions for setting up the Github provider in order to use Github as the auth provider.
 
 Once you're all set, execute the dev command to start local development.
 
