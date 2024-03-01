@@ -59,7 +59,7 @@ Have a bug or a feature request? Please first read the [issue guidelines](https:
 
 ## Contributing
 
-Please read through our [contributing guidelines](https://github.com/lautapercuspain/open-ai-api/blob/readme-update/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
+Please read through our [contributing guidelines](https://github.com/lautapercuspain/open-ai-api/blob/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
 
 Moreover, all HTML, CSS and TSX files should conform to the [Code Guide](https://github.com/mdo/code-guide), maintained by [@lautapercuspain](https://www.github.com/lautapercuspain).
 
