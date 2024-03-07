@@ -14,7 +14,6 @@ import {
 interface User {
   id: number
   name: string
-  credits?: string
   email: string
 }
 
@@ -42,9 +41,7 @@ export default function UsersTable({ users }: { users: User[] }) {
         {users.map((user) => (
           <TableRow key={user.id}>
             <TableCell>{user.name}</TableCell>
-            <TableCell>
-              <Text>{user.credits}</Text>
-            </TableCell>
+            <TableCell>{/* <Text>{user.credits}</Text> */}</TableCell>
             <TableCell>
               <Text>{user.email}</Text>
             </TableCell>
