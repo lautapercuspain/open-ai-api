@@ -25,6 +25,8 @@ const relevantEvents = new Set([
   "checkout.session.completed",
   "customer.subscription.updated",
   "customer.subscription.deleted",
+  "payment_intent.payment_failed",
+  "charge.failed",
 ])
 // POST /api/stripe/webhook – listen to Stripe webhooks
 export default async function webhookHandler(
@@ -57,17 +59,13 @@ export default async function webhookHandler(
       try {
         if (event.type === "checkout.session.completed") {
           subscription = event.data.object as Stripe.Checkout.Session
-          console.log("subscription:", subscription)
-          // status = subscription.status
-          // console.log("status:", status)
-          console.log("customer subscription:", subscription.customer)
           //Update the user
           if (subscription.status === "complete") {
             const userId = subscription?.metadata?.user_id
             const subscriptionId = subscription?.subscription
-            console.log("subscriptionId:", subscriptionId)
 
-            const response = await prisma.users.update({
+            //Update the user
+            await prisma.users.update({
               where: {
                 id: userId,
               },
@@ -76,7 +74,6 @@ export default async function webhookHandler(
                 subscriptionId: subscriptionId,
               },
             })
-            console.log("webhook prisma call:", response)
 
             return res.status(200)
           }
@@ -84,6 +81,9 @@ export default async function webhookHandler(
           //Send EMAIL to CLIENT
 
           // for subscription updates
+        } else if (event.type === "customer.subscription.updated") {
+          console.log(event.data.object as Stripe.Checkout.Session)
+          return res.status(200).json({ message: event.data.object })
         } else {
           return res.status(200).json({ ok: false })
         }
