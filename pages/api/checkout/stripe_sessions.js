@@ -49,7 +49,6 @@ export default async function handler(req, res) {
           user_id: req.body.userId,
         },
         subscription_data: {
-          trial_period_days: 7,
           metadata: {
             user_id: req.body.userId,
           },

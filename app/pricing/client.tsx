@@ -131,7 +131,7 @@ export default function Client({
         <section className="flex w-full items-center justify-center py-12">
           <div className="container px-4 md:px-6">
             <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
-              <div className="my-16 flex cursor-pointer flex-col justify-between rounded-lg bg-purple-700 p-8 shadow-lg ">
+              <div className="my-16 flex cursor-pointer flex-col justify-between rounded-lg bg-black p-8 shadow-lg ">
                 <div>
                   <Image
                     src="/icons/starter.svg"
@@ -148,10 +148,10 @@ export default function Client({
                   </h3>
 
                   <div className="mt-4 text-center text-white">
-                    <span className="text-4xl font-bold">
+                    {/* <span className="text-4xl font-bold">
                       {translations?.basic?.subtitle}
-                    </span>
-                    <p>{translations?.basic?.perfect}</p>
+                    </span> */}
+                    <p className="">{translations?.basic?.perfect}</p>
                   </div>
                   <p className="mt-6 flex justify-center font-semibold text-white">
                     {translations.included}
@@ -236,7 +236,7 @@ export default function Client({
                     <div className="relative h-[38px] w-[100%] items-center justify-center rounded-lg border border-mint bg-transparent">
                       <button
                         type="submit"
-                        className="text-sm  px-1 py-1.5 text-center font-sans text-gray-300 sm:mx-auto "
+                        className="text-sm  px-1 py-1.5 text-center font-sans text-gray-100 sm:mx-auto "
                       >
                         {session?.user?.isPremium
                           ? translations.free
@@ -246,7 +246,7 @@ export default function Client({
                   </div>
                 </div>
               </div>
-              <div className="relative my-8 flex cursor-pointer flex-col  rounded-lg border border-mint bg-purple-700 p-8 shadow-md shadow-mint/30 hover:shadow-lg hover:shadow-mint/30">
+              <div className="relative my-8 flex cursor-pointer flex-col  rounded-lg border border-mint bg-black p-8 shadow-md shadow-mint/30 hover:shadow-lg hover:shadow-mint/30">
                 <Image
                   src="/icons/premium.svg"
                   alt="Premium plan"
@@ -277,7 +277,7 @@ export default function Client({
                         : translations.premium.month}
                     </p>
                   </div>
-                  <div className="mx-auto flex h-12 w-52 items-center justify-center rounded-lg bg-purple-500 py-2">
+                  <div className="mx-auto flex h-12 w-52 items-center justify-center rounded-lg border border-gray-100 bg-black py-2">
                     <span
                       className={`${
                         !anual ? "text-white" : "text-gray-300"
@@ -439,7 +439,7 @@ export default function Client({
                   </Button>
                 </div>
               </div>
-              <div className="my-16 flex cursor-pointer flex-col justify-between rounded-lg bg-purple-700 p-8 shadow-lg">
+              <div className="my-16 flex cursor-pointer flex-col justify-between rounded-lg bg-black p-8 shadow-lg">
                 <div className="text-white">
                   <Image
                     src="/icons/enterprice.svg"
@@ -454,13 +454,13 @@ export default function Client({
                   >
                     {translations?.enterprice?.title}
                   </h3>
-                  <h2 className="mx-auto my-3 w-full font-semibold text-white sm:w-[100%] sm:text-4xl sm:leading-none sm:tracking-tight">
-                    {translations?.enterprice?.cta}
-                  </h2>
-                  <p className="text-white">
+                  <p className="my-3 text-white">
                     {" "}
                     {translations?.enterprice?.perfect}
                   </p>
+                  {/* <h2 className="mx-auto my-3 w-full font-semibold text-white sm:w-[100%] sm:text-3xl sm:leading-none sm:tracking-tight">
+                    {translations?.enterprice?.cta}
+                  </h2> */}
                   <p className="mt-6 flex justify-center font-semibold text-white">
                     {translations?.included}?{" "}
                   </p>
@@ -560,10 +560,10 @@ export default function Client({
       rounded-lg bg-gradient-to-r from-mint to-mint p-[1px] 
     sm:items-start sm:justify-center`}
                   >
-                    <div className="relative h-[38px] w-[100%] cursor-pointer items-center justify-center rounded-lg bg-purple-700 text-white hover:font-semibold">
+                    <div className="relative h-[38px] w-[100%] cursor-pointer items-center justify-center rounded-lg bg-black text-white hover:font-semibold">
                       <button
                         type="submit"
-                        className="text-sm font-sanssm:mx-auto px-1 py-2 text-center "
+                        className="text-sm px-1 py-2 text-center font-sans sm:mx-auto "
                       >
                         {translations?.enterprice?.contactUs}
                       </button>

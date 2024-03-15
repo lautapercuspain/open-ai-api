@@ -17,7 +17,7 @@ export default async function Page() {
 
   return (
     <>
-      <main className="flex w-full flex-col items-center justify-center bg-purple-900 text-center">
+      <main className="flex w-full flex-col items-center justify-center bg-[radial-gradient(at_bottom_center,_var(--tw-gradient-stops))] from-black to-violet-950 text-center">
         <Client
           host={process.env.NEXTAUTH_URL || ""}
           translations={dictionary.pricing}
