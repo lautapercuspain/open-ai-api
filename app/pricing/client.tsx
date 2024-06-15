@@ -417,6 +417,7 @@ export default function Client({
                 <div className="mt-6">
                   <Button
                     onClick={submitPaymentInstruction}
+                    disabled
                     className="group w-full cursor-pointer bg-mint font-sans font-medium outline-none hover:bg-mint/90 hover:font-semibold hover:text-purple-900 active:outline-none"
                   >
                     {loadingStripe ? (
